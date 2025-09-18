@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EjecutaPagoDLL.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ROOT_URL_GENERAL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://[ipserver]:8000/webrequests/</Value>
+    </Setting>
+    <Setting Name="EF_LOG" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Log\POSInserts\|yyyy-|MM-|dd.txt</Value>
+    </Setting>
+    <Setting Name="EFLOG_PATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
