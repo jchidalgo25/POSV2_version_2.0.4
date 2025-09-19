@@ -1,0 +1,2208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="POSEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="pos_customer" EntityType="POSModel.pos_customer" />
+    <EntitySet Name="pos_item" EntityType="POSModel.pos_item" />
+    <EntitySet Name="pos_itembarra" EntityType="POSModel.pos_itembarra" />
+    <EntitySet Name="core_documento" EntityType="POSModel.core_documento" />
+    <EntitySet Name="core_documentosecuencia" EntityType="POSModel.core_documentosecuencia" />
+    <AssociationSet Name="FK__core_docu__docum__2B0A656D" Association="POSModel.FK__core_docu__docum__2B0A656D">
+      <End Role="core_documento" EntitySet="core_documento" />
+      <End Role="core_documentosecuencia" EntitySet="core_documentosecuencia" />
+    </AssociationSet>
+    <EntitySet Name="core_establecimiento" EntityType="POSModel.core_establecimiento" />
+    <EntitySet Name="core_puntoemision" EntityType="POSModel.core_puntoemision" />
+    <AssociationSet Name="FK__core_docu__punto__2BFE89A6" Association="POSModel.FK__core_docu__punto__2BFE89A6">
+      <End Role="core_puntoemision" EntitySet="core_puntoemision" />
+      <End Role="core_documentosecuencia" EntitySet="core_documentosecuencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_punt__estab__208CD6FA" Association="POSModel.FK__core_punt__estab__208CD6FA">
+      <End Role="core_establecimiento" EntitySet="core_establecimiento" />
+      <End Role="core_puntoemision" EntitySet="core_puntoemision" />
+    </AssociationSet>
+    <EntitySet Name="core_banco" EntityType="POSModel.core_banco" />
+    <EntitySet Name="core_tarjetacredito" EntityType="POSModel.core_tarjetacredito" />
+    <AssociationSet Name="FK__core_tarj__banco__3A4CA8FD" Association="POSModel.FK__core_tarj__banco__3A4CA8FD">
+      <End Role="core_banco" EntitySet="core_banco" />
+      <End Role="core_tarjetacredito" EntitySet="core_tarjetacredito" />
+    </AssociationSet>
+    <EntitySet Name="core_giftcard" EntityType="POSModel.core_giftcard" />
+    <EntitySet Name="core_giftcardtransaccion" EntityType="POSModel.core_giftcardtransaccion" />
+    <EntitySet Name="core_factura" EntityType="POSModel.core_factura" />
+    <EntitySet Name="core_facturadetalle" EntityType="POSModel.core_facturadetalle" />
+    <EntitySet Name="core_facturapago" EntityType="POSModel.core_facturapago" />
+    <AssociationSet Name="FK__core_fact__factu__47A6A41B" Association="POSModel.FK__core_fact__factu__47A6A41B">
+      <End Role="core_factura" EntitySet="core_factura" />
+      <End Role="core_facturadetalle" EntitySet="core_facturadetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_fact__factu__4D5F7D71" Association="POSModel.FK__core_fact__factu__4D5F7D71">
+      <End Role="core_factura" EntitySet="core_factura" />
+      <End Role="core_facturapago" EntitySet="core_facturapago" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_fact__item___489AC854" Association="POSModel.FK__core_fact__item___489AC854">
+      <End Role="pos_item" EntitySet="pos_item" />
+      <End Role="core_facturadetalle" EntitySet="core_facturadetalle" />
+    </AssociationSet>
+    <EntitySet Name="pos_paymentmode" EntityType="POSModel.pos_paymentmode" />
+    <EntitySet Name="core_autorizacionsri" EntityType="POSModel.core_autorizacionsri" />
+    <EntitySet Name="core_parametro" EntityType="POSModel.core_parametro" />
+    <EntitySet Name="core_recibo" EntityType="POSModel.core_recibo" />
+    <EntitySet Name="core_tarjetacreditointerno" EntityType="POSModel.core_tarjetacreditointerno" />
+    <EntitySet Name="core_tarjetacreditointernotransaccion" EntityType="POSModel.core_tarjetacreditointernotransaccion" />
+    <EntitySet Name="core_promocionticket" EntityType="POSModel.core_promocionticket" />
+    <EntitySet Name="core_tarjetacreditopromocionticket" EntityType="POSModel.core_tarjetacreditopromocionticket" />
+    <AssociationSet Name="FK__core_tarj__promo__31B762FC" Association="POSModel.FK__core_tarj__promo__31B762FC">
+      <End Role="core_promocionticket" EntitySet="core_promocionticket" />
+      <End Role="core_tarjetacreditopromocionticket" EntitySet="core_tarjetacreditopromocionticket" />
+    </AssociationSet>
+    <AssociationSet Name="tarjeta_id_refs_id_0b442392" Association="POSModel.tarjeta_id_refs_id_0b442392">
+      <End Role="core_tarjetacredito" EntitySet="core_tarjetacredito" />
+      <End Role="core_tarjetacreditopromocionticket" EntitySet="core_tarjetacreditopromocionticket" />
+    </AssociationSet>
+    <EntitySet Name="pos_autorizacionsri" EntityType="POSModel.pos_autorizacionsri" />
+    <EntitySet Name="ViewFacturasUsuarios" EntityType="POSModel.ViewFacturasUsuario" />
+    <EntitySet Name="ViewPagoDetalleUsuarios" EntityType="POSModel.ViewPagoDetalleUsuario" />
+    <EntitySet Name="ViewFacturaPagoUsuarios" EntityType="POSModel.ViewFacturaPagoUsuario" />
+    <EntitySet Name="auth_user" EntityType="POSModel.auth_user" />
+    <EntitySet Name="auth_group" EntityType="POSModel.auth_group" />
+    <EntitySet Name="auth_user_groups" EntityType="POSModel.auth_user_groups" />
+    <AssociationSet Name="FK__auth_user__group__04E4BC85" Association="POSModel.FK__auth_user__group__04E4BC85">
+      <End Role="auth_group" EntitySet="auth_group" />
+      <End Role="auth_user_groups" EntitySet="auth_user_groups" />
+    </AssociationSet>
+    <AssociationSet Name="user_id_refs_id_40c41112" Association="POSModel.user_id_refs_id_40c41112">
+      <End Role="auth_user" EntitySet="auth_user" />
+      <End Role="auth_user_groups" EntitySet="auth_user_groups" />
+    </AssociationSet>
+    <EntitySet Name="core_promocionticket_items" EntityType="POSModel.core_promocionticket_items" />
+    <EntitySet Name="core_facturadetalle_carnicero" EntityType="POSModel.core_facturadetalle_carnicero" />
+    <EntitySet Name="View_CarnicerosAX" EntityType="POSModel.View_CarnicerosAX" />
+    <AssociationSet Name="core_facturacore_facturadetalle_carnicero" Association="POSModel.core_facturacore_facturadetalle_carnicero">
+      <End Role="core_factura" EntitySet="core_factura" />
+      <End Role="core_facturadetalle_carnicero" EntitySet="core_facturadetalle_carnicero" />
+    </AssociationSet>
+    <EntitySet Name="View_AlmacenProductoPeso" EntityType="POSModel.View_AlmacenProductoPeso" />
+    <EntitySet Name="vw_DescuentosCabeceraAX" EntityType="POSModel.vw_DescuentosCabeceraAX" />
+    <EntitySet Name="vw_DescuentosDetalleAX" EntityType="POSModel.vw_DescuentosDetalleAX" />
+    <EntitySet Name="ax_viewCorteCredito" EntityType="POSModel.ax_viewCorteCredito" />
+    <EntitySet Name="core_factura_view" EntityType="POSModel.core_factura_view" />
+    <EntitySet Name="core_facturadetalle_view" EntityType="POSModel.core_facturadetalle_view" />
+    <EntitySet Name="core_facturapago_view" EntityType="POSModel.core_facturapago_view" />
+    <EntitySet Name="ViewDetalleAcumuladoes" EntityType="POSModel.ViewDetalleAcumulado" />
+    <EntitySet Name="ViewEstablecimientoTotals" EntityType="POSModel.ViewEstablecimientoTotal" />
+    <EntitySet Name="ViewFacturasPagoCreditoes" EntityType="POSModel.ViewFacturasPagoCredito" />
+    <EntitySet Name="ViewPagosCreditoes" EntityType="POSModel.ViewPagosCredito" />
+    <EntitySet Name="ViewTicketsCarniceros" EntityType="POSModel.ViewTicketsCarnicero" />
+    <EntitySet Name="vw_PreciosPOS" EntityType="POSModel.vw_PreciosPOS" />
+    <EntitySet Name="auth_group_permissions" EntityType="POSModel.auth_group_permissions" />
+    <EntitySet Name="auth_permission" EntityType="POSModel.auth_permission" />
+    <EntitySet Name="auth_user_user_permissions" EntityType="POSModel.auth_user_user_permissions" />
+    <EntitySet Name="core_descuentotipo" EntityType="POSModel.core_descuentotipo" />
+    <EntitySet Name="core_empresacredito" EntityType="POSModel.core_empresacredito" />
+    <EntitySet Name="core_empresacreditocorte" EntityType="POSModel.core_empresacreditocorte" />
+    <EntitySet Name="core_empresacreditopago" EntityType="POSModel.core_empresacreditopago" />
+    <EntitySet Name="core_giftcard_migracion" EntityType="POSModel.core_giftcard_migracion" />
+    <EntitySet Name="core_poscustomergroup" EntityType="POSModel.core_poscustomergroup" />
+    <EntitySet Name="django_admin_log" EntityType="POSModel.django_admin_log" />
+    <EntitySet Name="django_content_type" EntityType="POSModel.django_content_type" />
+    <EntitySet Name="django_session" EntityType="POSModel.django_session" />
+    <EntitySet Name="django_site" EntityType="POSModel.django_site" />
+    <EntitySet Name="MSpeer_lsns" EntityType="POSModel.MSpeer_lsns" />
+    <EntitySet Name="pos_customer_group" EntityType="POSModel.pos_customer_group" />
+    <EntitySet Name="sitetree_tree" EntityType="POSModel.sitetree_tree" />
+    <EntitySet Name="sitetree_treeitem" EntityType="POSModel.sitetree_treeitem" />
+    <EntitySet Name="sitetree_treeitem_access_permissions" EntityType="POSModel.sitetree_treeitem_access_permissions" />
+    <EntitySet Name="core_autorizacionsri2" EntityType="POSModel.core_autorizacionsri2" />
+    <EntitySet Name="CORE_PROMOCIONTICKET2" EntityType="POSModel.CORE_PROMOCIONTICKET2" />
+    <EntitySet Name="CORE_PROMOCIONTICKET2_items" EntityType="POSModel.CORE_PROMOCIONTICKET2_items" />
+    <EntitySet Name="MSpeer_originatorid_history" EntityType="POSModel.MSpeer_originatorid_history" />
+    <EntitySet Name="mt_FacturasRezagadas" EntityType="POSModel.mt_FacturasRezagadas" />
+    <EntitySet Name="pos_customer2" EntityType="POSModel.pos_customer2" />
+    <EntitySet Name="ProduccionAxes" EntityType="POSModel.ProduccionAx" />
+    <EntitySet Name="tblNavidadLMATs" EntityType="POSModel.tblNavidadLMAT" />
+    <AssociationSet Name="group_id_refs_id_f4b32aac" Association="POSModel.group_id_refs_id_f4b32aac">
+      <End Role="auth_group" EntitySet="auth_group" />
+      <End Role="auth_group_permissions" EntitySet="auth_group_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__auth_grou__permi__0F624AF8" Association="POSModel.FK__auth_grou__permi__0F624AF8">
+      <End Role="auth_permission" EntitySet="auth_permission" />
+      <End Role="auth_group_permissions" EntitySet="auth_group_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="content_type_id_refs_id_d043b34a" Association="POSModel.content_type_id_refs_id_d043b34a">
+      <End Role="django_content_type" EntitySet="django_content_type" />
+      <End Role="auth_permission" EntitySet="auth_permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__auth_user__permi__0D7A0286" Association="POSModel.FK__auth_user__permi__0D7A0286">
+      <End Role="auth_permission" EntitySet="auth_permission" />
+      <End Role="auth_user_user_permissions" EntitySet="auth_user_user_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sitetree___permi__06CD04F7" Association="POSModel.FK__sitetree___permi__06CD04F7">
+      <End Role="auth_permission" EntitySet="auth_permission" />
+      <End Role="sitetree_treeitem_access_permissions" EntitySet="sitetree_treeitem_access_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__django_ad__user___03F0984C" Association="POSModel.FK__django_ad__user___03F0984C">
+      <End Role="auth_user" EntitySet="auth_user" />
+      <End Role="django_admin_log" EntitySet="django_admin_log" />
+    </AssociationSet>
+    <AssociationSet Name="user_id_refs_id_4dc23c39" Association="POSModel.user_id_refs_id_4dc23c39">
+      <End Role="auth_user" EntitySet="auth_user" />
+      <End Role="auth_user_user_permissions" EntitySet="auth_user_user_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_empr__codig__797309D9" Association="POSModel.FK__core_empr__codig__797309D9">
+      <End Role="core_empresacredito" EntitySet="core_empresacredito" />
+      <End Role="core_empresacreditocorte" EntitySet="core_empresacreditocorte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_tarj__empre__7A672E12" Association="POSModel.FK__core_tarj__empre__7A672E12">
+      <End Role="core_empresacredito" EntitySet="core_empresacredito" />
+      <End Role="core_tarjetacreditointerno" EntitySet="core_tarjetacreditointerno" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_empr__codig__0A9D95DB" Association="POSModel.FK__core_empr__codig__0A9D95DB">
+      <End Role="core_empresacreditocorte" EntitySet="core_empresacreditocorte" />
+      <End Role="core_empresacreditopago" EntitySet="core_empresacreditopago" />
+    </AssociationSet>
+    <AssociationSet Name="FK__django_ad__conte__02FC7413" Association="POSModel.FK__django_ad__conte__02FC7413">
+      <End Role="django_content_type" EntitySet="django_content_type" />
+      <End Role="django_admin_log" EntitySet="django_admin_log" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sitetree___tree___00200768" Association="POSModel.FK__sitetree___tree___00200768">
+      <End Role="sitetree_tree" EntitySet="sitetree_tree" />
+      <End Role="sitetree_treeitem" EntitySet="sitetree_treeitem" />
+    </AssociationSet>
+    <AssociationSet Name="parent_id_refs_id_04063ce5" Association="POSModel.parent_id_refs_id_04063ce5">
+      <End Role="sitetree_treeitem" EntitySet="sitetree_treeitem" />
+      <End Role="sitetree_treeitem1" EntitySet="sitetree_treeitem" />
+    </AssociationSet>
+    <AssociationSet Name="treeitem_id_refs_id_dc62ad92" Association="POSModel.treeitem_id_refs_id_dc62ad92">
+      <End Role="sitetree_treeitem" EntitySet="sitetree_treeitem" />
+      <End Role="sitetree_treeitem_access_permissions" EntitySet="sitetree_treeitem_access_permissions" />
+    </AssociationSet>
+    <FunctionImport Name="dss_function_CREDITO_EmpresaFechaCorte" IsComposable="true" ReturnType="Collection(POSModel.dss_function_CREDITO_EmpresaFechaCorte_Result)">
+      <Parameter Name="empresa" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="dss_get_saldo_creditodelportal">
+      <Parameter Name="tarjeta" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="job_CREDITO_CorteAutomatico" />
+    <FunctionImport Name="sp_getPrecioLocalMT" ReturnType="Collection(Int32)">
+      <Parameter Name="Itemid" Mode="In" Type="String" />
+      <Parameter Name="Almacen" Mode="In" Type="String" />
+      <Parameter Name="Precio" Mode="InOut" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getPreciosPos">
+      <Parameter Name="Almacen" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SECUENCIAS_IG" ReturnType="Collection(POSModel.SP_SECUENCIAS_IG_Result)">
+      <Parameter Name="OPTION" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_setPrecioPos">
+      <Parameter Name="ALMACEN" Mode="In" Type="String" />
+      <Parameter Name="PRODUCTO" Mode="In" Type="String" />
+      <Parameter Name="VALOR" Mode="In" Type="Decimal" />
+      <Parameter Name="TIPO" Mode="In" Type="Int32" />
+      <Parameter Name="RANGOFECHA" Mode="In" Type="Boolean" />
+      <Parameter Name="FECHADESDE" Mode="In" Type="DateTime" />
+      <Parameter Name="FECHAHASTA" Mode="In" Type="DateTime" />
+      <Parameter Name="USUARIO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_TARJETA_CREDITO">
+      <Parameter Name="ID" Mode="In" Type="String" />
+      <Parameter Name="NOMBRE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spCargarFacturasAX">
+      <Parameter Name="INVENTLOCATIONID" Mode="In" Type="String" />
+      <Parameter Name="USERID" Mode="In" Type="String" />
+      <Parameter Name="DATAAREAID" Mode="In" Type="String" />
+      <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spEnviarMailFacturas" />
+    <FunctionImport Name="spGetFacturasPendientes" ReturnType="Collection(POSModel.spGetFacturasPendientes_Result)" />
+    <FunctionImport Name="spGetNavidadLMAT">
+      <Parameter Name="ALMACEN" Mode="In" Type="String" />
+      <Parameter Name="USUARIO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spHabilitarFacturasRezagadas" />
+    <FunctionImport Name="spNotificacionDescuentosFin" />
+    <FunctionImport Name="spNotificacionDescuentosPrevio" />
+    <FunctionImport Name="spSetNavidadLMAT">
+      <Parameter Name="ALMACEN" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="VW_ITEMBARCODEQTY" EntityType="POSModel.VW_ITEMBARCODEQTY" />
+    <EntitySet Name="core_descuento" EntityType="POSModel.core_descuento" />
+    <EntitySet Name="vw_CreditoLocalesCabecera" EntityType="POSModel.vw_CreditoLocalesCabecera" />
+    <EntitySet Name="vw_CreditoLocalesMensajes" EntityType="POSModel.vw_CreditoLocalesMensajes" />
+    <EntitySet Name="vw_CreditoLocalesPagos" EntityType="POSModel.vw_CreditoLocalesPagos" />
+    <EntitySet Name="VW_CombosCaja" EntityType="POSModel.VW_CombosCaja" />
+    <EntitySet Name="TblAuthorizeDeleteProducts" EntityType="POSModel.TblAuthorizeDeleteProduct" />
+    <EntitySet Name="TblDeletedProducts" EntityType="POSModel.TblDeletedProduct" />
+    <EntitySet Name="VW_SEARCHPRODUCT" EntityType="POSModel.VW_SEARCHPRODUCT" />
+    <EntitySet Name="TblFeriados" EntityType="POSModel.TblFeriado" />
+    <EntitySet Name="VW_BLOCK_PRODUCTS" EntityType="POSModel.VW_BLOCK_PRODUCTS" />
+    <EntitySet Name="TblInvoiceCounters" EntityType="POSModel.TblInvoiceCounter" />
+    <EntitySet Name="TblInvoiceRandoms" EntityType="POSModel.TblInvoiceRandom" />
+    <EntitySet Name="TblInvoiceWinners" EntityType="POSModel.TblInvoiceWinner" />
+    <EntitySet Name="TblDiscountCards" EntityType="POSModel.TblDiscountCard" />
+    <EntitySet Name="TblDiscountCardTrans" EntityType="POSModel.TblDiscountCardTran" />
+    <EntitySet Name="ax_viewConsumoCreditoCliente" EntityType="POSModel.ax_viewConsumoCreditoCliente" />
+    <FunctionImport Name="SP_GENERABARCODE" ReturnType="Collection(POSModel.SP_GENERABARCODE_Result)">
+      <Parameter Name="VALOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <EntitySet Name="VW_PromoChoose" EntityType="POSModel.VW_PromoChoose" />
+    <EntitySet Name="BG_Apertura" EntityType="POSModel.BG_Apertura" />
+    <FunctionImport Name="ActualizarTarjetaDescuentoEspanola">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="bono" Mode="In" Type="Boolean" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="diasActivo" Mode="In" Type="Int32" />
+      <Parameter Name="saldo" Mode="In" Type="Decimal" />
+      <Parameter Name="numeroFactura" Mode="In" Type="Int64" />
+      <Parameter Name="codigoCliente" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="BG_Lst_POS_no_sub_AX" EntityType="POSModel.BG_Lst_POS_no_sub_AX" />
+    <EntitySet Name="core_retencion" EntityType="POSModel.core_retencion" />
+    <AssociationSet Name="FK__core_retencion__factura" Association="POSModel.FK__core_retencion__factura">
+      <End Role="core_factura" EntitySet="core_factura" />
+      <End Role="core_retencion" EntitySet="core_retencion" />
+    </AssociationSet>
+    <EntitySet Name="core_TarjetaDescuento" EntityType="POSModel.core_TarjetaDescuento" />
+    <FunctionImport Name="spTarjetaDescuentoEspanola">
+      <Parameter Name="codigo" Mode="In" Type="String" />
+      <Parameter Name="bono" Mode="In" Type="Boolean" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="diasActivo" Mode="In" Type="Int32" />
+      <Parameter Name="saldo" Mode="In" Type="Decimal" />
+      <Parameter Name="numeroFactura" Mode="In" Type="Int64" />
+      <Parameter Name="codigoCliente" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="vw_RETIVA" EntityType="POSModel.vw_RETIVA" />
+    <EntitySet Name="VW_NC_Motivo" EntityType="POSModel.VW_NC_Motivo" />
+    <EntitySet Name="core_notacredito" EntityType="POSModel.core_notacredito" />
+    <EntitySet Name="core_notacreditodetalle" EntityType="POSModel.core_notacreditodetalle" />
+    <AssociationSet Name="FK__core_nc__nc__7C4F7684" Association="POSModel.FK__core_nc__nc__7C4F7684">
+      <End Role="core_notacredito" EntitySet="core_notacredito" />
+      <End Role="core_notacreditodetalle" EntitySet="core_notacreditodetalle" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="pos_customer">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="DATAAREAID" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+    <Property Name="ADDRESS" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="PHONE" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="TELEFAX" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="CUSTGROUP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="CREDITMAX" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="MANDATORYCREDITLIMIT" Type="Int32" Nullable="false" />
+    <Property Name="DIMENSION" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="DIMENSION2_" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="DIMENSION3_" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="VATNUM" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="COUNTRYREGIONID" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
+    <Property Name="CELLULARPHONE" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="PHONELOCAL" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="STREET" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="MODIFIEDDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CREATEDDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pos_item">
+    <Key>
+      <PropertyRef Name="ITEMID" />
+    </Key>
+    <Property Name="ITEMGROUPID" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="ITEMID" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="ITEMNAME" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+    <Property Name="PRIMARYVENDORID" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="NAMEALIAS" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+    <Property Name="TAXVALUE" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="COST" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="PRICE" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="UNITID" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="core_facturadetalle" Relationship="POSModel.FK__core_fact__item___489AC854" FromRole="pos_item" ToRole="core_facturadetalle" />
+    <Property Type="Int32" Name="ITEMTYPE" Nullable="false" />
+    <Property Name="BLOQUEADOPOS" Type="Int32" Nullable="false" />
+    <Property Name="CATEGORIA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="pos_itembarra">
+    <Key>
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+    <Property Name="ITEMBARCODE" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
+    <Property Name="ITEMID" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="INVENTDIMID" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="BARCODESETUPID" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="MODIFIEDDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DEL_MODIFIEDTIME" Type="Int32" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="core_documento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="descripcion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="codigo" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_documentosecuencia" Relationship="POSModel.FK__core_docu__docum__2B0A656D" FromRole="core_documento" ToRole="core_documentosecuencia" />
+  </EntityType>
+  <EntityType Name="core_documentosecuencia">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="documento_id" Nullable="false" />
+    <Property Type="Int32" Name="punto_emision_id" Nullable="false" />
+    <Property Type="Int64" Name="siguiente" Nullable="false" />
+    <NavigationProperty Name="core_documento" Relationship="POSModel.FK__core_docu__docum__2B0A656D" FromRole="core_documentosecuencia" ToRole="core_documento" />
+    <NavigationProperty Name="core_puntoemision" Relationship="POSModel.FK__core_docu__punto__2BFE89A6" FromRole="core_documentosecuencia" ToRole="core_puntoemision" />
+  </EntityType>
+  <Association Name="FK__core_docu__docum__2B0A656D">
+    <End Type="POSModel.core_documento" Role="core_documento" Multiplicity="1" />
+    <End Type="POSModel.core_documentosecuencia" Role="core_documentosecuencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_documento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_documentosecuencia">
+        <PropertyRef Name="documento_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="core_establecimiento">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+    </Key>
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="establecimiento" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="direccion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="telefono" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="administrador" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="administrador_email" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MID" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_puntoemision" Relationship="POSModel.FK__core_punt__estab__208CD6FA" FromRole="core_establecimiento" ToRole="core_puntoemision" />
+    <Property Type="String" Name="almacen" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_puntoemision">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="establecimiento_id" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="punto_emision" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ip_address" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="activo" Nullable="false" />
+    <Property Type="Int32" Name="secuencia_broadnet" Nullable="false" />
+    <Property Type="String" Name="TID" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_documentosecuencia" Relationship="POSModel.FK__core_docu__punto__2BFE89A6" FromRole="core_puntoemision" ToRole="core_documentosecuencia" />
+    <NavigationProperty Name="core_establecimiento" Relationship="POSModel.FK__core_punt__estab__208CD6FA" FromRole="core_puntoemision" ToRole="core_establecimiento" />
+    <Property Type="Boolean" Name="usa_balanza" Nullable="false" />
+    <Property Type="Boolean" Name="scanner_integrado" Nullable="false" />
+    <Property Type="String" Name="marca_balanza" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="puerto_balanza" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__core_docu__punto__2BFE89A6">
+    <End Type="POSModel.core_puntoemision" Role="core_puntoemision" Multiplicity="1" />
+    <End Type="POSModel.core_documentosecuencia" Role="core_documentosecuencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_puntoemision">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_documentosecuencia">
+        <PropertyRef Name="punto_emision_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_punt__estab__208CD6FA">
+    <End Type="POSModel.core_establecimiento" Role="core_establecimiento" Multiplicity="1" />
+    <End Type="POSModel.core_puntoemision" Role="core_puntoemision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_establecimiento">
+        <PropertyRef Name="establecimiento" />
+      </Principal>
+      <Dependent Role="core_puntoemision">
+        <PropertyRef Name="establecimiento_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="core_banco">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_tarjetacredito" Relationship="POSModel.FK__core_tarj__banco__3A4CA8FD" FromRole="core_banco" ToRole="core_tarjetacredito" />
+  </EntityType>
+  <EntityType Name="core_tarjetacredito">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="banco_id" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="tipo" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_banco" Relationship="POSModel.FK__core_tarj__banco__3A4CA8FD" FromRole="core_tarjetacredito" ToRole="core_banco" />
+    <NavigationProperty Name="core_tarjetacreditopromocionticket" Relationship="POSModel.tarjeta_id_refs_id_0b442392" FromRole="core_tarjetacredito" ToRole="core_tarjetacreditopromocionticket" />
+    <Property Name="operador" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__core_tarj__banco__3A4CA8FD">
+    <End Type="POSModel.core_banco" Role="core_banco" Multiplicity="1" />
+    <End Type="POSModel.core_tarjetacredito" Role="core_tarjetacredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_banco">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_tarjetacredito">
+        <PropertyRef Name="banco_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="core_giftcard">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="codigo" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="fecha_activacion" Precision="3" />
+    <Property Type="DateTime" Name="fecha_expiracion" Precision="3" />
+    <Property Type="Decimal" Name="saldo" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Boolean" Name="activo" Nullable="false" />
+    <Property Type="Boolean" Name="bono" Nullable="false" />
+    <Property Type="DateTime" Name="fecha_desactivacion" Precision="3" />
+  </EntityType>
+  <EntityType Name="core_giftcardtransaccion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="tarjeta" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="tipo" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="valor" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="String" Name="descripcion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="establecimiento" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_factura">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="establecimiento" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="punto_emision" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="Int64" Name="numero" Nullable="false" />
+    <Property Type="String" Name="documento" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="cliente" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="razon_social" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="direccion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="base0" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="base12" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="subtotal" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="descuento" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="descuento2" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="iva" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="total" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="String" Name="autorizacion" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ip" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="usuario" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_facturadetalle" Relationship="POSModel.FK__core_fact__factu__47A6A41B" FromRole="core_factura" ToRole="core_facturadetalle" />
+    <NavigationProperty Name="core_facturapago" Relationship="POSModel.FK__core_fact__factu__4D5F7D71" FromRole="core_factura" ToRole="core_facturapago" />
+    <Property Type="String" Name="cliente_ax" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="orderID" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="loadinvoice" Nullable="false" />
+    <Property Type="Boolean" Name="loadpaym" Nullable="false" />
+    <Property Type="String" Name="msgError" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="paymID" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_facturadetalle_carnicero" Relationship="POSModel.core_facturacore_facturadetalle_carnicero" FromRole="core_factura" ToRole="core_facturadetalle_carnicero" />
+    <NavigationProperty Name="core_retencion" Relationship="POSModel.FK__core_retencion__factura" FromRole="core_factura" ToRole="core_retencion" />
+  </EntityType>
+  <EntityType Name="core_facturadetalle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="factura_id" Nullable="false" />
+    <Property Type="Int32" Name="linea" Nullable="false" />
+    <Property Type="String" Name="item_id" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="item_nombre" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="cantidad" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="unidades" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="subtotal" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="descuento" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="iva" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="total" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="String" Name="unidad" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_factura" Relationship="POSModel.FK__core_fact__factu__47A6A41B" FromRole="core_facturadetalle" ToRole="core_factura" />
+    <NavigationProperty Name="pos_item" Relationship="POSModel.FK__core_fact__item___489AC854" FromRole="core_facturadetalle" ToRole="pos_item" />
+    <Property Type="Decimal" Name="costo" Nullable="false" Precision="12" Scale="4" />
+    <Property Type="Decimal" Name="precio" Nullable="false" Precision="12" Scale="4" />
+  </EntityType>
+  <EntityType Name="core_facturapago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="factura_id" Nullable="false" />
+    <Property Type="String" Name="tipo_id" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="valor" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="String" Name="cliente" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="datos" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_factura" Relationship="POSModel.FK__core_fact__factu__4D5F7D71" FromRole="core_facturapago" ToRole="core_factura" />
+    <Property Type="String" Name="JournalNum" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="voucher" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__core_fact__factu__47A6A41B">
+    <End Type="POSModel.core_factura" Role="core_factura" Multiplicity="1" />
+    <End Type="POSModel.core_facturadetalle" Role="core_facturadetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_factura">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_facturadetalle">
+        <PropertyRef Name="factura_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_fact__factu__4D5F7D71">
+    <End Type="POSModel.core_factura" Role="core_factura" Multiplicity="1" />
+    <End Type="POSModel.core_facturapago" Role="core_facturapago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_factura">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_facturapago">
+        <PropertyRef Name="factura_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_fact__item___489AC854">
+    <End Type="POSModel.pos_item" Role="pos_item" Multiplicity="1" />
+    <End Type="POSModel.core_facturadetalle" Role="core_facturadetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pos_item">
+        <PropertyRef Name="ITEMID" />
+      </Principal>
+      <Dependent Role="core_facturadetalle">
+        <PropertyRef Name="item_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="pos_paymentmode">
+    <Key>
+      <PropertyRef Name="PAYMMODE" />
+    </Key>
+    <Property Type="String" Name="NAME" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PAYMMODE" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DATAAREAID" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_autorizacionsri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Precision="3" />
+    <Property Type="String" Name="autorizacion" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="fecha_inicio" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="3" />
+    <Property Type="Boolean" Name="activo" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_parametro">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="identificador" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="valor" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="parametro2" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_recibo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="descripcion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="cuerpo" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="identificador" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_tarjetacreditointerno">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="empresa_id" Nullable="false" />
+    <Property Type="String" Name="codigo" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="identificacion" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="nombre_tarjeta" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="fecha_activacion" Precision="3" />
+    <Property Type="DateTime" Name="fecha_expiracion" Precision="3" />
+    <Property Type="DateTime" Name="fecha_desactivacion" Precision="3" />
+    <Property Type="Decimal" Name="saldo" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Boolean" Name="activo" Nullable="false" />
+    <Property Type="Decimal" Name="cupo" Precision="10" Scale="2" />
+    <NavigationProperty Name="core_empresacredito" Relationship="POSModel.FK__core_tarj__empre__7A672E12" FromRole="core_tarjetacreditointerno" ToRole="core_empresacredito" />
+  </EntityType>
+  <EntityType Name="core_tarjetacreditointernotransaccion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="String" Name="tarjeta" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="tipo" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="valor" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="String" Name="descripcion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_promocionticket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_desde" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_hasta" Nullable="false" Precision="3" />
+    <Property Type="Decimal" Name="valor" Nullable="false" Precision="5" Scale="2" />
+    <Property Type="String" Name="descripcion" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="descripcion_larga" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="establecimiento" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="impresion_unitario" Nullable="false" />
+    <Property Type="String" Name="division" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="core_tarjetacreditopromocionticket" Relationship="POSModel.FK__core_tarj__promo__31B762FC" FromRole="core_promocionticket" ToRole="core_tarjetacreditopromocionticket" />
+    <Property Type="Boolean" Name="ismoneda" />
+  </EntityType>
+  <EntityType Name="core_tarjetacreditopromocionticket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_modificacion" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="promocion_id" Nullable="false" />
+    <Property Type="Int32" Name="tarjeta_id" Nullable="false" />
+    <Property Type="Int32" Name="multiplicador" Nullable="false" />
+    <NavigationProperty Name="core_promocionticket" Relationship="POSModel.FK__core_tarj__promo__31B762FC" FromRole="core_tarjetacreditopromocionticket" ToRole="core_promocionticket" />
+    <NavigationProperty Name="core_tarjetacredito" Relationship="POSModel.tarjeta_id_refs_id_0b442392" FromRole="core_tarjetacreditopromocionticket" ToRole="core_tarjetacredito" />
+  </EntityType>
+  <Association Name="FK__core_tarj__promo__31B762FC">
+    <End Type="POSModel.core_promocionticket" Role="core_promocionticket" Multiplicity="1" />
+    <End Type="POSModel.core_tarjetacreditopromocionticket" Role="core_tarjetacreditopromocionticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_promocionticket">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_tarjetacreditopromocionticket">
+        <PropertyRef Name="promocion_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tarjeta_id_refs_id_0b442392">
+    <End Type="POSModel.core_tarjetacredito" Role="core_tarjetacredito" Multiplicity="1" />
+    <End Type="POSModel.core_tarjetacreditopromocionticket" Role="core_tarjetacreditopromocionticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_tarjetacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_tarjetacreditopromocionticket">
+        <PropertyRef Name="tarjeta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="pos_autorizacionsri">
+    <Key>
+      <PropertyRef Name="autorizacion" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="activo" />
+    </Key>
+    <Property Type="String" Name="autorizacion" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="fecha_inicio" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="3" />
+    <Property Type="Boolean" Name="activo" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ViewFacturasUsuario">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="punto_emision" />
+      <PropertyRef Name="usuario" />
+    </Key>
+    <Property Type="String" Name="establecimiento" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="punto_emision" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="fecha" Precision="3" />
+    <Property Type="Decimal" Name="total" Precision="38" Scale="4" />
+    <Property Type="String" Name="usuario" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="numerofactura" />
+  </EntityType>
+  <EntityType Name="ViewPagoDetalleUsuario">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="tipo_id" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="datos" />
+    </Key>
+    <Property Type="String" Name="establecimiento" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="fecha" Precision="3" />
+    <Property Type="String" Name="usuario" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="tipo_id" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="valor" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="String" Name="datos" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ViewFacturaPagoUsuario">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="PAYMMODE" />
+    </Key>
+    <Property Type="String" Name="establecimiento" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="fecha" Precision="3" />
+    <Property Type="String" Name="usuario" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="valor" Precision="38" Scale="2" />
+    <Property Type="String" Name="PAYMMODE" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="auth_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="last_login" Nullable="false" Precision="3" />
+    <Property Type="Boolean" Name="is_superuser" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="first_name" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="last_name" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="is_staff" Nullable="false" />
+    <Property Type="Boolean" Name="is_active" Nullable="false" />
+    <Property Type="DateTime" Name="date_joined" Nullable="false" Precision="3" />
+    <NavigationProperty Name="auth_user_groups" Relationship="POSModel.user_id_refs_id_40c41112" FromRole="auth_user" ToRole="auth_user_groups" />
+    <NavigationProperty Name="django_admin_log" Relationship="POSModel.FK__django_ad__user___03F0984C" FromRole="auth_user" ToRole="django_admin_log" />
+    <NavigationProperty Name="auth_user_user_permissions" Relationship="POSModel.user_id_refs_id_4dc23c39" FromRole="auth_user" ToRole="auth_user_user_permissions" />
+    <Property Name="Huella" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="auth_group">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="auth_user_groups" Relationship="POSModel.FK__auth_user__group__04E4BC85" FromRole="auth_group" ToRole="auth_user_groups" />
+    <NavigationProperty Name="auth_group_permissions" Relationship="POSModel.group_id_refs_id_f4b32aac" FromRole="auth_group" ToRole="auth_group_permissions" />
+  </EntityType>
+  <EntityType Name="auth_user_groups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="user_id" Nullable="false" />
+    <Property Type="Int32" Name="group_id" Nullable="false" />
+    <NavigationProperty Name="auth_group" Relationship="POSModel.FK__auth_user__group__04E4BC85" FromRole="auth_user_groups" ToRole="auth_group" />
+    <NavigationProperty Name="auth_user" Relationship="POSModel.user_id_refs_id_40c41112" FromRole="auth_user_groups" ToRole="auth_user" />
+  </EntityType>
+  <Association Name="FK__auth_user__group__04E4BC85">
+    <End Type="POSModel.auth_group" Role="auth_group" Multiplicity="1" />
+    <End Type="POSModel.auth_user_groups" Role="auth_user_groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_groups">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="user_id_refs_id_40c41112">
+    <End Type="POSModel.auth_user" Role="auth_user" Multiplicity="1" />
+    <End Type="POSModel.auth_user_groups" Role="auth_user_groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_groups">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="core_promocionticket_items">
+    <Key>
+      <PropertyRef Name="promocionticket_id" />
+      <PropertyRef Name="itemid" />
+    </Key>
+    <Property Type="Int32" Name="promocionticket_id" Nullable="false" />
+    <Property Type="String" Name="itemid" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="core_facturadetalle_carnicero">
+    <Key>
+      <PropertyRef Name="itemID" />
+      <PropertyRef Name="CarniceroCOD" />
+      <PropertyRef Name="factura_id" />
+    </Key>
+    <Property Type="String" Name="itemID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CarniceroCOD" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="core_factura" Relationship="POSModel.core_facturacore_facturadetalle_carnicero" FromRole="core_facturadetalle_carnicero" ToRole="core_factura" />
+    <Property Type="Int32" Name="factura_id" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_CarnicerosAX">
+    <Key>
+      <PropertyRef Name="CODIGO" />
+      <PropertyRef Name="NOMBRE" />
+    </Key>
+    <Property Type="String" Name="CODIGO" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="core_facturacore_facturadetalle_carnicero">
+    <End Type="POSModel.core_factura" Role="core_factura" Multiplicity="1" />
+    <End Type="POSModel.core_facturadetalle_carnicero" Role="core_facturadetalle_carnicero" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_factura">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_facturadetalle_carnicero">
+        <PropertyRef Name="factura_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="View_AlmacenProductoPeso">
+    <Key>
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="INVENTLOCATIONID" />
+    </Key>
+    <Property Type="String" Name="ITEMID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="INVENTLOCATIONID" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_DescuentosCabeceraAX">
+    <Key>
+      <PropertyRef Name="ALMACEN" />
+      <PropertyRef Name="TIPODESCUENTO" />
+      <PropertyRef Name="DESCRIPCION" />
+      <PropertyRef Name="FECHADESDE" />
+      <PropertyRef Name="FECHADESDETZID" />
+      <PropertyRef Name="FECHAHASTA" />
+      <PropertyRef Name="FECHAHASTATZID" />
+      <PropertyRef Name="ESTADO" />
+      <PropertyRef Name="LUNES" />
+      <PropertyRef Name="MARTES" />
+      <PropertyRef Name="MIERCOLES" />
+      <PropertyRef Name="JUEVES" />
+      <PropertyRef Name="VIERNES" />
+      <PropertyRef Name="SABADO" />
+      <PropertyRef Name="DOMINGO" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="ALMACEN" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="TIPODESCUENTO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FECHADESDE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FECHADESDETZID" Type="Int32" Nullable="false" />
+    <Property Name="FECHAHASTA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FECHAHASTATZID" Type="Int32" Nullable="false" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="LUNES" Type="Int32" Nullable="false" />
+    <Property Name="MARTES" Type="Int32" Nullable="false" />
+    <Property Name="MIERCOLES" Type="Int32" Nullable="false" />
+    <Property Name="JUEVES" Type="Int32" Nullable="false" />
+    <Property Name="VIERNES" Type="Int32" Nullable="false" />
+    <Property Name="SABADO" Type="Int32" Nullable="false" />
+    <Property Name="DOMINGO" Type="Int32" Nullable="false" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RECVERSION" Type="Int32" Nullable="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_DescuentosDetalleAX">
+    <Key>
+      <PropertyRef Name="REFRECID" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="CANTIDAD" />
+      <PropertyRef Name="DESCUENTO" />
+      <PropertyRef Name="TIENEDESCUENTO" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="ITEMBARCODE" />
+    </Key>
+    <Property Name="REFRECID" Type="Int64" Nullable="false" />
+    <Property Name="ITEMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CANTIDAD" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="DESCUENTO" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="TIENEDESCUENTO" Type="Int32" Nullable="false" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RECVERSION" Type="Int32" Nullable="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+    <Property Name="ITEMBARCODE" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ax_viewCorteCredito">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="monto" />
+      <PropertyRef Name="corte" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="monto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="corte" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_factura_view">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="DateInvoice" />
+      <PropertyRef Name="InvoiceAccount" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="SalesResponsable" />
+      <PropertyRef Name="InventLocationId" />
+      <PropertyRef Name="documento" />
+      <PropertyRef Name="descuento" />
+      <PropertyRef Name="descuento2" />
+      <PropertyRef Name="loadinvoice" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="DateInvoice" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="InvoiceId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceAccount" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SalesResponsable" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="InventLocationId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="documento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="descuento" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="descuento2" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="orderID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="loadinvoice" Type="Boolean" Nullable="false" />
+    <Property Name="SalesSubtotal" Type="Decimal" Precision="13" Scale="4" />
+  </EntityType>
+  <EntityType Name="core_facturadetalle_view">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="itemid" />
+      <PropertyRef Name="description" />
+      <PropertyRef Name="LineNum" />
+      <PropertyRef Name="SalesQTY" />
+      <PropertyRef Name="SalesPrice" />
+      <PropertyRef Name="SalesDesc" />
+      <PropertyRef Name="SalesUnit" />
+      <PropertyRef Name="TAX" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="itemid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LineNum" Type="Int32" Nullable="false" />
+    <Property Name="SalesQTY" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="SalesPrice" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="SalesDesc" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="SalesUnit" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LineAmount" Type="Decimal" Precision="38" Scale="16" />
+    <Property Name="TAX" Type="Int32" Nullable="false" />
+    <Property Name="SalesDescUnit" Type="Decimal" Precision="38" Scale="14" />
+  </EntityType>
+  <EntityType Name="core_facturapago_view">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="Paymode" />
+      <PropertyRef Name="PayReference" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="PaymDate" />
+      <PropertyRef Name="PaymID" />
+      <PropertyRef Name="documento" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Paymode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PayReference" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="PaymDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaymID" Type="Int32" Nullable="false" />
+    <Property Name="documento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="Voucher" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ViewDetalleAcumulado">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="item_id" />
+    </Key>
+    <Property Name="establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="item_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="cantidad" Type="Decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <EntityType Name="ViewEstablecimientoTotal">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+    </Key>
+    <Property Name="establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="subtotal" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="descuento" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="descuento2" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="iva" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="total" Type="Decimal" Precision="38" Scale="4" />
+  </EntityType>
+  <EntityType Name="ViewFacturasPagoCredito">
+    <Key>
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="cliente_ax" />
+      <PropertyRef Name="razon_social" />
+      <PropertyRef Name="tarjeta" />
+      <PropertyRef Name="empresa" />
+    </Key>
+    <Property Name="Factura" Type="String" MaxLength="43" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="cliente_ax" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="razon_social" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tarjeta" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="empresa" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ViewPagosCredito">
+    <Key>
+      <PropertyRef Name="fecha" />
+      <PropertyRef Name="tarjeta" />
+      <PropertyRef Name="cliente" />
+      <PropertyRef Name="ruc" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="razon_social" />
+    </Key>
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="tarjeta" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="cliente" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="ruc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="razon_social" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ViewTicketsCarnicero">
+    <Key>
+      <PropertyRef Name="FECHA_CREACION" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="ITEM_NOMBRE" />
+      <PropertyRef Name="CODIGOCARNICERO" />
+      <PropertyRef Name="CANTIDAD" />
+      <PropertyRef Name="UNIDADES" />
+      <PropertyRef Name="TOTAL" />
+    </Key>
+    <Property Name="FECHA_CREACION" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ITEMID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ITEM_NOMBRE" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CODIGOCARNICERO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBRECARNICERO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDALMACEN" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ALMACEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CANTIDAD" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="UNIDADES" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+  </EntityType>
+  <EntityType Name="vw_PreciosPOS">
+    <Key>
+      <PropertyRef Name="ALMACEN" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="ITEMNAME" />
+      <PropertyRef Name="DSCE" />
+      <PropertyRef Name="DSCP" />
+      <PropertyRef Name="DSCEP" />
+      <PropertyRef Name="UNITID" />
+      <PropertyRef Name="ITEMBARCODE" />
+    </Key>
+    <Property Name="ALMACEN" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ITEMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ITEMNAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="PLM" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="DSCE" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="DSCP" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="DSCEP" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="TAXVALUE" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PVP" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="UNITID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ITEMBARCODE" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="auth_group_permissions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="group_id" Type="Int32" Nullable="false" />
+    <Property Name="permission_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="auth_group" Relationship="POSModel.group_id_refs_id_f4b32aac" FromRole="auth_group_permissions" ToRole="auth_group" />
+    <NavigationProperty Name="auth_permission" Relationship="POSModel.FK__auth_grou__permi__0F624AF8" FromRole="auth_group_permissions" ToRole="auth_permission" />
+  </EntityType>
+  <EntityType Name="auth_permission">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="content_type_id" Type="Int32" Nullable="false" />
+    <Property Name="codename" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="auth_group_permissions" Relationship="POSModel.FK__auth_grou__permi__0F624AF8" FromRole="auth_permission" ToRole="auth_group_permissions" />
+    <NavigationProperty Name="django_content_type" Relationship="POSModel.content_type_id_refs_id_d043b34a" FromRole="auth_permission" ToRole="django_content_type" />
+    <NavigationProperty Name="auth_user_user_permissions" Relationship="POSModel.FK__auth_user__permi__0D7A0286" FromRole="auth_permission" ToRole="auth_user_user_permissions" />
+    <NavigationProperty Name="sitetree_treeitem_access_permissions" Relationship="POSModel.FK__sitetree___permi__06CD04F7" FromRole="auth_permission" ToRole="sitetree_treeitem_access_permissions" />
+  </EntityType>
+  <EntityType Name="auth_user_user_permissions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="permission_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="auth_permission" Relationship="POSModel.FK__auth_user__permi__0D7A0286" FromRole="auth_user_user_permissions" ToRole="auth_permission" />
+    <NavigationProperty Name="auth_user" Relationship="POSModel.user_id_refs_id_4dc23c39" FromRole="auth_user_user_permissions" ToRole="auth_user" />
+  </EntityType>
+  <EntityType Name="core_descuentotipo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="complejo" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_empresacredito">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="razon_social" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="lista_blanca" Type="Boolean" Nullable="false" />
+    <Property Name="dia_corte" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="core_empresacreditocorte" Relationship="POSModel.FK__core_empr__codig__797309D9" FromRole="core_empresacredito" ToRole="core_empresacreditocorte" />
+    <NavigationProperty Name="core_tarjetacreditointerno" Relationship="POSModel.FK__core_tarj__empre__7A672E12" FromRole="core_empresacredito" ToRole="core_tarjetacreditointerno" />
+  </EntityType>
+  <EntityType Name="core_empresacreditocorte">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="codigo_id" Type="Int32" Nullable="false" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="monto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="core_empresacredito" Relationship="POSModel.FK__core_empr__codig__797309D9" FromRole="core_empresacreditocorte" ToRole="core_empresacredito" />
+    <NavigationProperty Name="core_empresacreditopago" Relationship="POSModel.FK__core_empr__codig__0A9D95DB" FromRole="core_empresacreditocorte" ToRole="core_empresacreditopago" />
+  </EntityType>
+  <EntityType Name="core_empresacreditopago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="codigo_id" Type="Int32" Nullable="false" />
+    <Property Name="tipo_pago" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="comentario" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_empresacreditocorte" Relationship="POSModel.FK__core_empr__codig__0A9D95DB" FromRole="core_empresacreditopago" ToRole="core_empresacreditocorte" />
+  </EntityType>
+  <EntityType Name="core_giftcard_migracion">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="numero" Type="Int32" Nullable="false" />
+    <Property Name="codigo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="valor" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="core_poscustomergroup">
+    <Key>
+      <PropertyRef Name="custgroup" />
+    </Key>
+    <Property Name="custgroup" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="django_admin_log">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="action_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="content_type_id" Type="Int32" />
+    <Property Name="object_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="object_repr" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="action_flag" Type="Int16" Nullable="false" />
+    <Property Name="change_message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="auth_user" Relationship="POSModel.FK__django_ad__user___03F0984C" FromRole="django_admin_log" ToRole="auth_user" />
+    <NavigationProperty Name="django_content_type" Relationship="POSModel.FK__django_ad__conte__02FC7413" FromRole="django_admin_log" ToRole="django_content_type" />
+  </EntityType>
+  <EntityType Name="django_content_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="app_label" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="model" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="auth_permission" Relationship="POSModel.content_type_id_refs_id_d043b34a" FromRole="django_content_type" ToRole="auth_permission" />
+    <NavigationProperty Name="django_admin_log" Relationship="POSModel.FK__django_ad__conte__02FC7413" FromRole="django_content_type" ToRole="django_admin_log" />
+  </EntityType>
+  <EntityType Name="django_session">
+    <Key>
+      <PropertyRef Name="session_key" />
+    </Key>
+    <Property Name="session_key" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="session_data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="expire_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="django_site">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="domain" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MSpeer_lsns">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="last_updated" Type="DateTime" Precision="3" />
+    <Property Name="originator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="originator_db" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="originator_publication" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="originator_publication_id" Type="Int32" />
+    <Property Name="originator_db_version" Type="Int32" />
+    <Property Name="originator_lsn" Type="Binary" MaxLength="16" FixedLength="false" />
+    <Property Name="originator_version" Type="Int32" />
+    <Property Name="originator_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="pos_customer_group">
+    <Key>
+      <PropertyRef Name="CUSTGROUP" />
+    </Key>
+    <Property Name="CUSTGROUP" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="dataareaid" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sitetree_tree">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="alias" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="sitetree_treeitem" Relationship="POSModel.FK__sitetree___tree___00200768" FromRole="sitetree_tree" ToRole="sitetree_treeitem" />
+  </EntityType>
+  <EntityType Name="sitetree_treeitem">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="hint" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="url" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="urlaspattern" Type="Boolean" Nullable="false" />
+    <Property Name="tree_id" Type="Int32" Nullable="false" />
+    <Property Name="hidden" Type="Boolean" Nullable="false" />
+    <Property Name="alias" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="inmenu" Type="Boolean" Nullable="false" />
+    <Property Name="inbreadcrumbs" Type="Boolean" Nullable="false" />
+    <Property Name="insitetree" Type="Boolean" Nullable="false" />
+    <Property Name="access_loggedin" Type="Boolean" Nullable="false" />
+    <Property Name="access_guest" Type="Boolean" Nullable="false" />
+    <Property Name="access_restricted" Type="Boolean" Nullable="false" />
+    <Property Name="access_perm_type" Type="Int32" Nullable="false" />
+    <Property Name="parent_id" Type="Int32" />
+    <Property Name="sort_order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="sitetree_tree" Relationship="POSModel.FK__sitetree___tree___00200768" FromRole="sitetree_treeitem" ToRole="sitetree_tree" />
+    <NavigationProperty Name="sitetree_treeitem1" Relationship="POSModel.parent_id_refs_id_04063ce5" FromRole="sitetree_treeitem" ToRole="sitetree_treeitem1" />
+    <NavigationProperty Name="sitetree_treeitem2" Relationship="POSModel.parent_id_refs_id_04063ce5" FromRole="sitetree_treeitem1" ToRole="sitetree_treeitem" />
+    <NavigationProperty Name="sitetree_treeitem_access_permissions" Relationship="POSModel.treeitem_id_refs_id_dc62ad92" FromRole="sitetree_treeitem" ToRole="sitetree_treeitem_access_permissions" />
+  </EntityType>
+  <EntityType Name="sitetree_treeitem_access_permissions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="treeitem_id" Type="Int32" Nullable="false" />
+    <Property Name="permission_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="auth_permission" Relationship="POSModel.FK__sitetree___permi__06CD04F7" FromRole="sitetree_treeitem_access_permissions" ToRole="auth_permission" />
+    <NavigationProperty Name="sitetree_treeitem" Relationship="POSModel.treeitem_id_refs_id_dc62ad92" FromRole="sitetree_treeitem_access_permissions" ToRole="sitetree_treeitem" />
+  </EntityType>
+  <EntityType Name="core_autorizacionsri2">
+    <Key>
+      <PropertyRef Name="autorizacion" />
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="fecha_modificacion" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="activo" />
+    </Key>
+    <Property Name="autorizacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="activo" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CORE_PROMOCIONTICKET2">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="fecha_modificacion" />
+      <PropertyRef Name="fecha_desde" />
+      <PropertyRef Name="fecha_hasta" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="descripcion_larga" />
+      <PropertyRef Name="impresion_unitario" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_desde" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_hasta" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="descripcion_larga" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="establecimiento" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="impresion_unitario" Type="Boolean" Nullable="false" />
+    <Property Name="division" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ismoneda" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CORE_PROMOCIONTICKET2_items">
+    <Key>
+      <PropertyRef Name="promocionticket_id" />
+      <PropertyRef Name="itemid" />
+    </Key>
+    <Property Name="promocionticket_id" Type="Int32" Nullable="false" />
+    <Property Name="itemid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MSpeer_originatorid_history">
+    <Key>
+      <PropertyRef Name="originator_publication" />
+      <PropertyRef Name="originator_id" />
+      <PropertyRef Name="originator_node" />
+      <PropertyRef Name="originator_db" />
+      <PropertyRef Name="originator_db_version" />
+      <PropertyRef Name="originator_version" />
+      <PropertyRef Name="inserted_date" />
+    </Key>
+    <Property Name="originator_publication" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="originator_id" Type="Int32" Nullable="false" />
+    <Property Name="originator_node" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="originator_db" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="originator_db_version" Type="Int32" Nullable="false" />
+    <Property Name="originator_version" Type="Int32" Nullable="false" />
+    <Property Name="inserted_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="mt_FacturasRezagadas">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="punto_emision" />
+      <PropertyRef Name="numero" />
+      <PropertyRef Name="cliente_ax" />
+      <PropertyRef Name="total" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="fecha_deteccion" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="punto_emision" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="numero" Type="Int64" Nullable="false" />
+    <Property Name="cliente_ax" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="total" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="estado" Type="Int16" Nullable="false" />
+    <Property Name="fecha_deteccion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_correccion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="pos_customer2">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="ADDRESS" />
+      <PropertyRef Name="PHONE" />
+      <PropertyRef Name="TELEFAX" />
+      <PropertyRef Name="CUSTGROUP" />
+      <PropertyRef Name="CREDITMAX" />
+      <PropertyRef Name="MANDATORYCREDITLIMIT" />
+      <PropertyRef Name="DIMENSION" />
+      <PropertyRef Name="DIMENSION2_" />
+      <PropertyRef Name="DIMENSION3_" />
+      <PropertyRef Name="VATNUM" />
+      <PropertyRef Name="COUNTRYREGIONID" />
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="CELLULARPHONE" />
+      <PropertyRef Name="PHONELOCAL" />
+      <PropertyRef Name="STREET" />
+      <PropertyRef Name="MODIFIEDDATETIME" />
+      <PropertyRef Name="CREATEDDATETIME" />
+      <PropertyRef Name="DATAAREAID" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="ADDRESS" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="PHONE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TELEFAX" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CUSTGROUP" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CREDITMAX" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="MANDATORYCREDITLIMIT" Type="Int32" Nullable="false" />
+    <Property Name="DIMENSION" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DIMENSION2_" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DIMENSION3_" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="VATNUM" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="COUNTRYREGIONID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="CELLULARPHONE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PHONELOCAL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="STREET" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MODIFIEDDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CREATEDDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProduccionAx">
+    <Key>
+      <PropertyRef Name="productoax" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="peso" />
+      <PropertyRef Name="fecha" />
+      <PropertyRef Name="recepcionconsumo" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="nivel" />
+    </Key>
+    <Property Name="productoax" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="peso" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="hora" Type="Time" Precision="7" />
+    <Property Name="articuloplanificacionax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="recepcionconsumo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nivel" Type="Int32" Nullable="false" />
+    <Property Name="diario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ordencompra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="almacen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="almacen_tran" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="numero_guia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="transportista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="placa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="num_op" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="razonsocial_transporte" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblNavidadLMAT">
+    <Key>
+      <PropertyRef Name="factura_id" />
+      <PropertyRef Name="Almacen" />
+      <PropertyRef Name="Seleccionado" />
+      <PropertyRef Name="Procesado" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="factura_id" Type="Int32" Nullable="false" />
+    <Property Name="Almacen" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Seleccionado" Type="Boolean" Nullable="false" />
+    <Property Name="Procesado" Type="Boolean" Nullable="false" />
+    <Property Name="Usuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="group_id_refs_id_f4b32aac">
+    <End Type="POSModel.auth_group" Role="auth_group" Multiplicity="1" />
+    <End Type="POSModel.auth_group_permissions" Role="auth_group_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_group_permissions">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__auth_grou__permi__0F624AF8">
+    <End Type="POSModel.auth_permission" Role="auth_permission" Multiplicity="1" />
+    <End Type="POSModel.auth_group_permissions" Role="auth_group_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_permission">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_group_permissions">
+        <PropertyRef Name="permission_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="content_type_id_refs_id_d043b34a">
+    <End Type="POSModel.django_content_type" Role="django_content_type" Multiplicity="1" />
+    <End Type="POSModel.auth_permission" Role="auth_permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="django_content_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_permission">
+        <PropertyRef Name="content_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__auth_user__permi__0D7A0286">
+    <End Type="POSModel.auth_permission" Role="auth_permission" Multiplicity="1" />
+    <End Type="POSModel.auth_user_user_permissions" Role="auth_user_user_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_permission">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_user_permissions">
+        <PropertyRef Name="permission_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sitetree___permi__06CD04F7">
+    <End Type="POSModel.auth_permission" Role="auth_permission" Multiplicity="1" />
+    <End Type="POSModel.sitetree_treeitem_access_permissions" Role="sitetree_treeitem_access_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_permission">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem_access_permissions">
+        <PropertyRef Name="permission_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__django_ad__user___03F0984C">
+    <End Type="POSModel.auth_user" Role="auth_user" Multiplicity="1" />
+    <End Type="POSModel.django_admin_log" Role="django_admin_log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="django_admin_log">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="user_id_refs_id_4dc23c39">
+    <End Type="POSModel.auth_user" Role="auth_user" Multiplicity="1" />
+    <End Type="POSModel.auth_user_user_permissions" Role="auth_user_user_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_user_permissions">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_empr__codig__797309D9">
+    <End Type="POSModel.core_empresacredito" Role="core_empresacredito" Multiplicity="1" />
+    <End Type="POSModel.core_empresacreditocorte" Role="core_empresacreditocorte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_empresacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_empresacreditocorte">
+        <PropertyRef Name="codigo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_tarj__empre__7A672E12">
+    <End Type="POSModel.core_empresacredito" Role="core_empresacredito" Multiplicity="1" />
+    <End Type="POSModel.core_tarjetacreditointerno" Role="core_tarjetacreditointerno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_empresacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_tarjetacreditointerno">
+        <PropertyRef Name="empresa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_empr__codig__0A9D95DB">
+    <End Type="POSModel.core_empresacreditocorte" Role="core_empresacreditocorte" Multiplicity="1" />
+    <End Type="POSModel.core_empresacreditopago" Role="core_empresacreditopago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_empresacreditocorte">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_empresacreditopago">
+        <PropertyRef Name="codigo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__django_ad__conte__02FC7413">
+    <End Type="POSModel.django_content_type" Role="django_content_type" Multiplicity="0..1" />
+    <End Type="POSModel.django_admin_log" Role="django_admin_log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="django_content_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="django_admin_log">
+        <PropertyRef Name="content_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sitetree___tree___00200768">
+    <End Type="POSModel.sitetree_tree" Role="sitetree_tree" Multiplicity="1" />
+    <End Type="POSModel.sitetree_treeitem" Role="sitetree_treeitem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sitetree_tree">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem">
+        <PropertyRef Name="tree_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="parent_id_refs_id_04063ce5">
+    <End Type="POSModel.sitetree_treeitem" Role="sitetree_treeitem" Multiplicity="0..1" />
+    <End Type="POSModel.sitetree_treeitem" Role="sitetree_treeitem1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sitetree_treeitem">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem1">
+        <PropertyRef Name="parent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="treeitem_id_refs_id_dc62ad92">
+    <End Type="POSModel.sitetree_treeitem" Role="sitetree_treeitem" Multiplicity="1" />
+    <End Type="POSModel.sitetree_treeitem_access_permissions" Role="sitetree_treeitem_access_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sitetree_treeitem">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem_access_permissions">
+        <PropertyRef Name="treeitem_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="dss_function_CREDITO_EmpresaFechaCorte_Result">
+    <Property Type="DateTime" Name="fecha_inicio" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="fecha_fin" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="SP_SECUENCIAS_IG_Result">
+    <Property Type="String" Name="Establecimiento" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Pto_Emision" Nullable="false" MaxLength="3" />
+    <Property Type="Int64" Name="Fac_Actual" Nullable="true" />
+    <Property Type="Int64" Name="Siguiente" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spGetFacturasPendientes_Result">
+    <Property Type="String" Name="ID" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Facturas" Nullable="false" />
+    <Property Type="Int32" Name="Procesadas" Nullable="false" />
+    <Property Type="Int32" Name="Pendientes" Nullable="false" />
+    <Property Type="Int32" Name="Rezagadas" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="VW_ITEMBARCODEQTY">
+    <Key>
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="ITEMBARCODE" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="INVENTDIMID" />
+      <PropertyRef Name="QTY" />
+      <PropertyRef Name="BARCODESETUPID" />
+      <PropertyRef Name="MODIFIEDDATETIME" />
+      <PropertyRef Name="DEL_MODIFIEDTIME" />
+      <PropertyRef Name="MODIFIEDBY" />
+      <PropertyRef Name="DATAAREAID" />
+    </Key>
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+    <Property Name="ITEMBARCODE" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="ITEMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="INVENTDIMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="QTY" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="BARCODESETUPID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MODIFIEDDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DEL_MODIFIEDTIME" Type="Int32" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_descuento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="tipo_descuento" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="parametro" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="parametro2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="rango_fecha" Type="Boolean" Nullable="false" />
+    <Property Name="fecha_desde" Type="DateTime" Precision="3" />
+    <Property Name="fecha_hasta" Type="DateTime" Precision="3" />
+    <Property Name="usar_dia_semana" Type="Boolean" Nullable="false" />
+    <Property Name="dia_semana" Type="Int32" />
+    <Property Name="activo" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_CreditoLocalesCabecera">
+    <Key>
+      <PropertyRef Name="CLIENTE" />
+      <PropertyRef Name="CLIENTENOMBRE" />
+      <PropertyRef Name="FECHACONTRATO" />
+      <PropertyRef Name="FECHAENTREGA" />
+      <PropertyRef Name="FECHAVENCIMIENTO" />
+      <PropertyRef Name="LOCALENTREGA" />
+      <PropertyRef Name="NOMBRELOCAL" />
+      <PropertyRef Name="ESTADO" />
+      <PropertyRef Name="TOTAL" />
+      <PropertyRef Name="ABONADO" />
+      <PropertyRef Name="ENTREGADO" />
+      <PropertyRef Name="LOCALCONTRATO" />
+      <PropertyRef Name="ANULADO" />
+    </Key>
+    <Property Name="CLIENTE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CLIENTENOMBRE" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="FECHACONTRATO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FECHAENTREGA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FECHAVENCIMIENTO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LOCALENTREGA" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NOMBRELOCAL" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="ABONADO" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="ENTREGADO" Type="Int32" Nullable="false" />
+    <Property Name="LOCALCONTRATO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ANULADO" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_CreditoLocalesMensajes">
+    <Key>
+      <PropertyRef Name="TIPOMENSAJE" />
+      <PropertyRef Name="MENSAJE" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="TIPOMENSAJE" Type="Int32" Nullable="false" />
+    <Property Name="MENSAJE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RECVERSION" Type="Int32" Nullable="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_CreditoLocalesPagos">
+    <Key>
+      <PropertyRef Name="FECHA" />
+      <PropertyRef Name="CLIENTE" />
+      <PropertyRef Name="MONTO" />
+      <PropertyRef Name="SALDO" />
+      <PropertyRef Name="LOCAL" />
+      <PropertyRef Name="CAJERO" />
+      <PropertyRef Name="ESTABLECIMIENTO" />
+      <PropertyRef Name="NOMBRELOCAL" />
+      <PropertyRef Name="FORMAPAGO" />
+      <PropertyRef Name="DETALLE" />
+      <PropertyRef Name="CREATEDDATETIME" />
+      <PropertyRef Name="CREATEDBY" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CLIENTE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MONTO" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="SALDO" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="LOCAL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CAJERO" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="ESTABLECIMIENTO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NOMBRELOCAL" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="FORMAPAGO" Type="Int32" Nullable="false" />
+    <Property Name="DETALLE" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CREATEDDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CREATEDBY" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RECVERSION" Type="Int32" Nullable="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VW_CombosCaja">
+    <Key>
+      <PropertyRef Name="ITEMRELATION" />
+      <PropertyRef Name="ITEMNAME" />
+      <PropertyRef Name="SUPPITEMID" />
+      <PropertyRef Name="SUPPITEMNAME" />
+      <PropertyRef Name="UNITID" />
+      <PropertyRef Name="FROMDATE" />
+      <PropertyRef Name="TODATE" />
+      <PropertyRef Name="MULTIPLEQTY" />
+      <PropertyRef Name="SUPPITEMQTY" />
+      <PropertyRef Name="SUPPITEMFREE" />
+      <PropertyRef Name="SUPPITEMOPTIONAL" />
+      <PropertyRef Name="ITEMRELATIONCODE" />
+    </Key>
+    <Property Name="ITEMRELATION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ITEMNAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="SUPPITEMID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="SUPPITEMNAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="UNITID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FROMDATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TODATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MULTIPLEQTY" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="SUPPITEMQTY" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="SUPPITEMFREE" Type="Int32" Nullable="false" />
+    <Property Name="SUPPITEMOPTIONAL" Type="Int32" Nullable="false" />
+    <Property Name="ITEMRELATIONCODE" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="SUPPITEMCODE" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TblAuthorizeDeleteProduct">
+    <Key>
+      <PropertyRef Name="USERID" />
+      <PropertyRef Name="LOCATIONID" />
+      <PropertyRef Name="AUTHORIZE" />
+      <PropertyRef Name="Huella" />
+    </Key>
+    <Property Name="USERID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="USERNAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="LOCATIONID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AUTHORIZE" Type="Boolean" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Huella" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TblDeletedProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="INVOICEDATE" Type="DateTime" Precision="3" />
+    <Property Name="ESTABLISHMENT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EMISIONSERIES" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="NUMBER" Type="Int64" />
+    <Property Name="CASHIER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ITEMID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="QTY" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="TOTAL" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="USERAUTHORIZE" Type="String" MaxLength="130" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VW_SEARCHPRODUCT">
+    <Key>
+      <PropertyRef Name="ARTICULO" />
+      <PropertyRef Name="BARRAS" />
+    </Key>
+    <Property Name="ARTICULO" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="BARRAS" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="SP_GENERABARCODE_Result">
+    <Property Type="String" Name="CODIGO" Nullable="true" MaxLength="15" />
+  </ComplexType>
+  <EntityType Name="TblFeriado">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="permiteVenta" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="permiteVenta" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VW_BLOCK_PRODUCTS">
+    <Key>
+      <PropertyRef Name="PRODUCT" />
+      <PropertyRef Name="BARCODE" />
+      <PropertyRef Name="QTY" />
+      <PropertyRef Name="DESCRIPTION" />
+      <PropertyRef Name="SETPRODUCT" />
+      <PropertyRef Name="CATEGORY" />
+      <PropertyRef Name="VARIETY" />
+      <PropertyRef Name="GROUPS" />
+      <PropertyRef Name="SUBGROUP" />
+      <PropertyRef Name="VENDORID" />
+    </Key>
+    <Property Name="PRODUCT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BARCODE" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="QTY" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="SETPRODUCT" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CATEGORY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="VARIETY" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="GROUPS" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SUBGROUP" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="VENDORID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TblInvoiceCounter">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="establishment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="counter" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TblInvoiceRandom">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="establishment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="winner" Type="Int32" />
+    <Property Name="won" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TblInvoiceWinner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="invoicedate" Type="DateTime" Precision="3" />
+    <Property Name="establishment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emisionseries" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="resource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="value" Type="Decimal" Precision="7" Scale="2" />
+  </EntityType>
+  <EntityType Name="TblDiscountCard">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emision_date" Type="DateTime" Precision="3" />
+    <Property Name="card" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="itemid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="value" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="expiration_date" Type="DateTime" Precision="3" />
+    <Property Name="times" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TblDiscountCardTran">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="trans_date" Type="DateTime" Precision="3" />
+    <Property Name="card" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ax_viewConsumoCreditoCliente">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="CORTE" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="MONTO" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="CORTE" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VW_PromoChoose">
+    <Key>
+      <PropertyRef Name="BARCODE" />
+      <PropertyRef Name="DESCRIPCION" />
+      <PropertyRef Name="IVA" />
+    </Key>
+    <Property Name="ITEMID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BARCODE" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="QTY" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="P1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="P2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="P3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PRECIO_COMBO" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="PVP" Type="Decimal" Precision="30" Scale="13" />
+    <Property Name="IVA" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="ESTADO" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BG_Apertura">
+    <Key>
+      <PropertyRef Name="CEDULA" />
+      <PropertyRef Name="CAJERA" />
+      <PropertyRef Name="LOCAL" />
+      <PropertyRef Name="PUNTO_VENTA" />
+      <PropertyRef Name="TURNO" />
+      <PropertyRef Name="VALOR_BASE" />
+      <PropertyRef Name="ESTABLECIMIENTO" />
+      <PropertyRef Name="PUNTO_EMISION" />
+      <PropertyRef Name="IP" />
+      <PropertyRef Name="FECHA" />
+      <PropertyRef Name="LEIDO" />
+      <PropertyRef Name="NUM_CAJA" />
+      <PropertyRef Name="CERRADO" />
+      <PropertyRef Name="PRE_CIERRE" />
+      <PropertyRef Name="INVENTLOCATION" />
+    </Key>
+    <Property Name="CEDULA" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="CAJERA" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="LOCAL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PUNTO_VENTA" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TURNO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="VALOR_BASE" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="ESTABLECIMIENTO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PUNTO_EMISION" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IP" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LEIDO" Type="Int32" Nullable="false" />
+    <Property Name="NUM_CAJA" Type="Int32" Nullable="false" />
+    <Property Name="CERRADO" Type="Int32" Nullable="false" />
+    <Property Name="PRE_CIERRE" Type="Int32" Nullable="false" />
+    <Property Name="INVENTLOCATION" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BG_Lst_POS_no_sub_AX">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="item_id" />
+      <PropertyRef Name="item_nombre" />
+    </Key>
+    <Property Name="establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_creacion" Type="DateTime" Precision="0" />
+    <Property Name="orderID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="item_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="item_nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cantidad" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="unidades" Type="Decimal" Precision="38" Scale="2" />
+    <Property Name="total" Type="Decimal" Precision="38" Scale="4" />
+  </EntityType>
+  <EntityType Name="core_retencion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_autorizacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="factura_id" Type="Int32" Nullable="false" />
+    <Property Name="num_retencion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="num_autorizacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="valor_ret_fte" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <NavigationProperty Name="core_factura" Relationship="POSModel.FK__core_retencion__factura" FromRole="core_retencion" ToRole="core_factura" />
+    <Property Name="num_factura" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="valor_base" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="CodRetIVA" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="CodPorcRetIVA" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ValorBaseIVA" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ValorRetIVA" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ConceptoRetIVA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__core_retencion__factura">
+    <End Type="POSModel.core_factura" Role="core_factura" Multiplicity="1" />
+    <End Type="POSModel.core_retencion" Role="core_retencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_factura">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_retencion">
+        <PropertyRef Name="factura_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="core_TarjetaDescuento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="codigo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_activacion" Type="DateTime" Precision="3" />
+    <Property Name="fecha_expiracion" Type="DateTime" Precision="3" />
+    <Property Name="fecha_desactivacion" Type="DateTime" Precision="3" />
+    <Property Name="saldo" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="activo" Type="Boolean" Nullable="false" />
+    <Property Name="bono" Type="Boolean" Nullable="false" />
+    <Property Name="numeroFactura" Type="Int64" Nullable="false" />
+    <Property Name="codigoCliente" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_RETIVA">
+    <Key>
+      <PropertyRef Name="CODE" />
+      <PropertyRef Name="CONCEPT" />
+      <PropertyRef Name="RETENTION" />
+      <PropertyRef Name="INITDATE" />
+      <PropertyRef Name="ENDDATE" />
+    </Key>
+    <Property Name="CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="CONCEPT" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RETENTION" Type="Decimal" Nullable="false" Precision="28" Scale="12" />
+    <Property Name="INITDATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ENDDATE" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="VW_NC_Motivo">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DESCRIPTION" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="core_notacredito">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="numdocumento" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="cliente" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="loadinvoice" Type="Boolean" Nullable="false" />
+    <Property Name="loadpaym" Type="Boolean" Nullable="false" />
+    <Property Name="msgError" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="paymID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="documentoaplica" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="motivo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="salesID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="core_notacreditodetalle" Relationship="POSModel.FK__core_nc__nc__7C4F7684" FromRole="core_notacredito" ToRole="core_notacreditodetalle" />
+  </EntityType>
+  <EntityType Name="core_notacreditodetalle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="notacredito_id" Type="Int32" Nullable="false" />
+    <Property Name="linea" Type="Int32" Nullable="false" />
+    <Property Name="item_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="cantidad" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="pvp" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="descuento" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <Property Name="unidad" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="total" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+    <NavigationProperty Name="core_notacredito" Relationship="POSModel.FK__core_nc__nc__7C4F7684" FromRole="core_notacreditodetalle" ToRole="core_notacredito" />
+  </EntityType>
+  <Association Name="FK__core_nc__nc__7C4F7684">
+    <End Type="POSModel.core_notacredito" Role="core_notacredito" Multiplicity="1" />
+    <End Type="POSModel.core_notacreditodetalle" Role="core_notacreditodetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_notacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_notacreditodetalle">
+        <PropertyRef Name="notacredito_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

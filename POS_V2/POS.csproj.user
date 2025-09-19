@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <PublishUrlHistory>C:\Users\jchidalgo\Documents\My Web Sites\DeployPOS\|C:\TFS_NET\DeployPOS\POS_V2\|r\|C:\Users\opozo\Documents\POS_OPOZO\fix_promociones\|C:\Users\opozo\Documents\POS_OPOZO\</PublishUrlHistory>
+    <InstallUrlHistory>\\srv-test2\Prueba_AX\POS_AX\PRODPOS\|http://192.168.127.17/POS_AX/|http://192.168.127.17/POS_AX/publish.htm/|http://192.168.127.17/Prueba_AX/POS_AX/publish.htm/|http://192.168.127.17:83/</InstallUrlHistory>
+    <SupportUrlHistory />
+    <UpdateUrlHistory />
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>es-ES</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+</Project>
