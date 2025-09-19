@@ -1,0 +1,78 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="POS.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CONECTA_AX" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=[ipserver];Initial Catalog=DynamicsAx1;Persist Security Info=True;User ID=app_pos;Password=L1r1$PO$@pp892126565V01;App=POS</Value>
+    </Setting>
+    <Setting Name="SMTP_SERVER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mail.liris.com.ec</Value>
+    </Setting>
+    <Setting Name="SMTP_PORT" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="SMTP_USESSL" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MAILERROR_ALIAS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POS</Value>
+    </Setting>
+    <Setting Name="MAILERROR_MOTIVO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POS ERROR</Value>
+    </Setting>
+    <Setting Name="MAILERROR_FROM" Type="System.String" Scope="User">
+      <Value Profile="(Default)">aplicacion@liris.com.ec</Value>
+    </Setting>
+    <Setting Name="EF_LOG" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Log\POSInserts\|yyyy-|MM-|dd.txt</Value>
+    </Setting>
+    <Setting Name="EFLOG_PATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\</Value>
+    </Setting>
+    <Setting Name="RETENCION_PATHLOGO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\SRV-POS\Retenciones\Blanco.png</Value>
+    </Setting>
+    <Setting Name="SMTP_USER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dbmail</Value>
+    </Setting>
+    <Setting Name="SMTP_PASS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@KeW(r_k=X7(</Value>
+    </Setting>
+    <Setting Name="MAILERROR_DESTINO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">devteam@liris.com.ec</Value>
+    </Setting>
+    <Setting Name="MAILERROR_CC" Type="System.String" Scope="User">
+      <Value Profile="(Default)">devteam@liris.com.ec</Value>
+    </Setting>
+    <Setting Name="CONEXION_PATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Log\POSConexiones.txt</Value>
+    </Setting>
+    <Setting Name="CONEXION_PATH_REMOTO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\srvatila\Shares\Compartido\Conexiones\POSConexiones.txt</Value>
+    </Setting>
+    <Setting Name="PATH_IMG" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Log\POSImg</Value>
+    </Setting>
+    <Setting Name="MENSAJE_CAJA" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">
+          AL OPRIMIR ACEPTAR:
+
+          DECLARO QUE HE LEIDO Y ACEPTO LA TOTALIDAD DE LAS CONDICIONES DE USO DEL SISTEMA.
+
+          DECLARO QUE ACEPTO RECIBIR LA SUMA DETALLADA EN LA PARTE SUPERIOR, CORRESPONDIENTE AL MONTO PARA SUELTOS QUE ME COMPROMETO A DEVOLVER  AL CIERRE Y CUADRE DE LA CAJA, SUMADO AL TOTAL DE INGRESOS DEL DÍA Y ASUMO PERSONALMENTE LA RESPONSABILIDAD POR FALTANTES DE DINERO BAJO MI CUSTODIA.
+        </Value>
+    </Setting>
+    <Setting Name="ROOT_URL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://[ipserver]:8000/</Value>
+    </Setting>
+    <Setting Name="ROOT_URL_GENERAL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://[ipserver]:8000/webrequests/</Value>
+    </Setting>
+    <Setting Name="CONECTA_MKT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=[ipserver];Initial Catalog=Marketing;Persist Security Info=True;User ID=app_pos;Password=L1r1$PO$@pp892126565V01;</Value>
+    </Setting>
+    <Setting Name="TituloApp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POS Dynamics AX 2025</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
