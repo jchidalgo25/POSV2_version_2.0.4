@@ -4745,7 +4745,12 @@ namespace POS
 
                 using (POSEntities db = new POSEntities())
                 {
-                    // 1. Buscar cupón en BD
+                    // 1. Buscar cupón en BD // NO INCLUIR EN EL MERGE - PRUEBAS OPOZO
+                    var bd = db.core_TarjetaDescuento;
+                    // NO INCLUIR EN EL MERGE - PRUEBAS OPOZO
+                    var codigoDescuento = bd.Where(x => x.codigo == codigoCupon);
+
+                    // ESTO SI
                     var cupon = db.core_TarjetaDescuento
                         .Where(x => x.codigo == codigoCupon && x.numeroFactura == -1)
                         .FirstOrDefault();
@@ -5233,7 +5238,47 @@ namespace POS
                         "IntentarAplicarCupon");
 
                 var cuponAplicado = IntentarAplicarCupon(codigo);
+
+                //var producto = new Producto();
+                //bool productoCargado = producto.getProducto(codigo, _factura, cliente_actual);
                 
+
+                //if (!productoCargado)
+                //{
+                //    Control.Common.General.GetMensajeToList(123);
+                //    return;
+                //}
+
+                //// Verificar si ya existe en la factura
+                //var existente = _factura.Productos.FirstOrDefault(p => p.Id == producto.Id);
+
+                //if (existente != null)
+                //{
+                //    //producto.Cantidad += 1;
+                //    //producto.CantidadINEC += 1;
+                //    //producto.Unidades += 1;
+                //    //producto.actualizarDescuentoPromocionAX(_factura.PromocionesActuales, _factura.ClienteIdentificacion, _factura);
+                //    existente.Cantidad += producto.Cantidad;
+                //    existente.CantidadINEC += producto.CantidadINEC;
+                //    existente.Unidades += producto.Unidades;
+
+                //    existente.actualizarDescuentoPromocionAX(_factura.PromocionesActuales, _factura.ClienteIdentificacion, _factura);
+                //    // existente.update();
+                //}
+                //else
+                //{
+                //    producto.actualizarDescuentoPromocionAX(_factura.PromocionesActuales, _factura.ClienteIdentificacion, _factura);
+                //}
+                ////AplicarPromocionesAX(producto, producto.Id);
+
+                
+                ////getProducto(producto.Id);
+                //calcularFactura();
+                //RefrescarGridItems();
+
+                //// Guardar estado temporal
+                //GuardarEstadoTemporal(codigo);
+
                 // 3. Intentar aplicar cupón
                 if (cuponAplicado)
                 {
@@ -5272,6 +5317,7 @@ namespace POS
                         $"Buscando producto con código: {codigo}");
 
                     getProducto(codigo);
+                    // APLICAR DESCUENTO AQUÍ
 
                     Control.Common.Logger.LogMessage(
                         Control.Common.Enum.LogTypes.Info,
@@ -9299,8 +9345,8 @@ namespace POS
                 existente.agregarAdicional(pesobascula + (getCantidadXCaja(codigo) - 1));
             }
 
-            // Aplicar promociones
-            //AplicarPromocionesAX(existente, codigo);
+            // Aplicar promociones  // SE DESCOMENTÓ ESTA LÍNEA OPOZO
+            AplicarPromocionesAX(existente, codigo);
 
             //// ⚠️ Validar si ya se aplicó cupón antes de update
             //bool yaTieneCupon = existente.DescuentosCupon != null &&
@@ -17203,13 +17249,14 @@ namespace POS
                     qty.ShowDialog();
                     //var item = _factura.Productos.Last();
                     var item = gridItems.SelectedRows[0].DataBoundItem as POS.Models.Producto;
+                    var cantidadItem = item.Cantidad;
 
                     //if (focused.Text.ToString() != "")
                     if (qty.txtQty.Text != "")
                     {
                         if (item.Unidad.ToUpper() == "UND")
                         {
-                            var producto = new Producto();
+                            //var producto = new Producto();
                             //item.Cantidad = int.Parse(focused.Text.ToString()) - 1;
                             //item.Unidades = int.Parse(focused.Text.ToString()) - 1;
                             if (qty.q > item.Cantidad)
@@ -17217,8 +17264,9 @@ namespace POS
                                 item.Cantidad = qty.q - 1;
                                 item.CantidadINEC = item.Cantidad;
                                 item.Unidades = qty.q - 1;
-
+                                
                                 getProducto(item.Id);
+
                             }
                             else
                             {
