@@ -21471,11 +21471,13 @@ namespace POS
                                     itm.Pvp = decimal.Parse(item[9]);  //precio
 
                                     existeEnListaDescuento(itm.Id); //Verifica si esta en lista de descuentos AX
-                                    if (POS.Control.Common.Promo.PuedeConjuntoClienteRecibirDescGestor(cliente_actual.CUSTGROUP))//cliente_actual.CUSTGROUP != "07" && cliente_actual.CUSTGROUP != "09" /*&& cliente_actual.CUSTGROUP != "EM"*/ && cliente_actual.CUSTGROUP != "CE")
+                                    if(ClienteActual != null)
                                     {
-                                        itm.actualizarDescuentoPromocionAX(_factura.PromocionesActuales, (cliente_actual == null ? string.Empty : cliente_actual.ACCOUNTNUM), _factura);
+                                        if (POS.Control.Common.Promo.PuedeConjuntoClienteRecibirDescGestor(cliente_actual.CUSTGROUP))//cliente_actual.CUSTGROUP != "07" && cliente_actual.CUSTGROUP != "09" /*&& cliente_actual.CUSTGROUP != "EM"*/ && cliente_actual.CUSTGROUP != "CE")
+                                        {
+                                            itm.actualizarDescuentoPromocionAX(_factura.PromocionesActuales, (cliente_actual == null ? string.Empty : cliente_actual.ACCOUNTNUM), _factura);
+                                        }
                                     }
-
                                     //itm.update();
                                     //_factura.Productos.Add(itm);
                                     datos.Productos.Add(itm);
