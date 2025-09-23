@@ -21424,7 +21424,7 @@ namespace POS
                         + Control.Common.ExceptionHandler.GetExceptionMessages(ex) + "StackTrace: " + ex.StackTrace;
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "CargaFacturaTmpFile", errorMsj);
-                    Control.Common.General.GetMensajeToList(300, parametros);
+                    Control.Common.General.GetMensajeToList(300, parametros,this);
 
                     //Manejo de error 
                     //System.Windows.Forms.MessageBox.Show(this, ex.Message);
@@ -21532,7 +21532,7 @@ namespace POS
 
                     List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
                     parametros.Add(new ParametrosMensajes() { codigo = "[error_exception]", valor = ex.StackTrace });
-                    Control.Common.General.GetMensajeToList(302, parametros);
+                    Control.Common.General.GetMensajeToList(302, parametros,this);
 
                 }
 
@@ -21748,7 +21748,7 @@ namespace POS
 
                     List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
                     parametros.Add(new ParametrosMensajes() { codigo = "[error_exception]", valor = ex.Message });
-                    Control.Common.General.GetMensajeToList(303, parametros);
+                    Control.Common.General.GetMensajeToList(303, parametros, this);
 
 
                     //Control.Common.General.GetMensaje("POS", "No fue posible carar los datos de Formas de Pago de la factura temporal. Error: " + ex.Message, "I");
