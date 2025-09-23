@@ -304,7 +304,11 @@ namespace POS.Models
                 $"Evaluando promociones AX para producto {this.Id}");
 
             // Limpiar descuento AX previo
-            this.DescuentoAX = 0;
+            // AHORA SE LIMPIAN LOS DESCUENTOS AQUÍ PARA DESCUENTOS PROMOCIÓN Y DESCUENTOS CUPONES
+            this.DescuentoAX = 0M;
+            this.DescuentoActual = 0M;
+            this.DescuentoPorCombinacion = 0M;
+
 
             //cambiar estaa lista
 

@@ -9254,6 +9254,8 @@ namespace POS
             if (ReversaDevolucionIVA_Items()) return;
 
             ////Reiniciar descuentos            
+            /// se dejan comentadas las lineas porque se cambió la ubicación del reinicio de descuentos ax para que no entre en conflicto con el descuento por CUPON
+            /// ahora se reinician los descuentos en actualizarDescuentoPromocionAX() en Producto.cs
             //existente.Descuento = 0M;
             //existente.DescuentoActual = 0M;
             //existente.DescuentoPorCombinacion = 0M;
@@ -9345,10 +9347,11 @@ namespace POS
                 _factura.Pagos.Clear();
             }
 
-            // Reaplicar descuentos acumulados
-            //ReaplicarDescuentosAcumulados(existente);
+            // Reaplicar descuentos acumulados 
+            // se descomentan estas líneas para que convivan DESCUENTOS PROMOCIÓN Y DESCUENTOS CUPONES opozo
+            ReaplicarDescuentosAcumulados(existente);
 
-            //AplicarDescuentoCuponPromocional(existente, codigo);
+            AplicarDescuentoCuponPromocional(existente, codigo);
         }
         private void ManejarNuevoProducto(string codigo, string operador)
         {
