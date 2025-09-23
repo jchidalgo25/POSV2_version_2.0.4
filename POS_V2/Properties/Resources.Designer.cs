@@ -1561,5 +1561,14 @@ namespace POS.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        internal static System.Drawing.Bitmap cliente_app_icon
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("cliente_app_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

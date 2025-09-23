@@ -83,6 +83,7 @@ namespace POS
         public static RadTextBox InputDestinoTemporal;
         private StringBuilder codigoBarra = new StringBuilder();
         private DateTime ultimaTecla = DateTime.Now;
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuInicial));
 
 
         private ConcurrentQueue<CodigoItemThreads> _colaCodigos = new ConcurrentQueue<CodigoItemThreads>();
@@ -1060,6 +1061,9 @@ namespace POS
                         if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
                         {
                             validaClienteSp(itendifacionCompleta);
+                            // PRUEBA OPOZO // SE QUE NO ES EL LUGAR CORRECTO PERO SOLO PARA TEST
+                            picClienteApp.Visible = _factura.EsClienteApp;
+                            picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null ;
 
                             if (cliente_actual.ACCOUNTNUM != GlobalclteEmpleado.Identificacion)
                             {
@@ -1155,6 +1159,7 @@ namespace POS
                             _factura.EsClienteApp = false;
                             _factura.CodigoClienteApp = "";
                             _factura.codigoclienteAPP = "";
+                            picClienteApp.Visible = _factura.EsClienteApp; //opozo
 
                             txtCedula.Text = cliente_actual.ACCOUNTNUM;
                             txtCedula.Focus();
@@ -20125,6 +20130,8 @@ namespace POS
                         ClienteEmpleado clteEmpleado = Control.Common.General.ValidaClienteEmpleado(cliente_actual.ACCOUNTNUM, EstablecimientoAxCode);
                         _factura.EsClienteApp = clteEmpleado.EsClienteApp;
                         _factura.codigoclienteAPP = clteEmpleado.CodigoClienteApp;
+                        picClienteApp.Visible = _factura.EsClienteApp;
+                        picClienteApp.Image = _factura.EsClienteApp ? ((System.Drawing.Image)(resources.GetObject("btnVtaApp.Image"))) : null;
                         //insertaCabeceraFile();  //insertaCabecera();
                         txtCodigo.Focus();
                         txtCodigo.SelectAll();
@@ -23402,6 +23409,20 @@ namespace POS
             //bgw2.WorkerSupportsCancellation = true;
             //bgw2.RunWorkerAsync();
             ////System.Threading.Thread.Sleep(500);
+        }
+
+        private void lblIdClienteApp_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblIdClienteApp_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picClienteApp_Click(object sender, EventArgs e)
+        {
+
         }
 
         void bgw2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
