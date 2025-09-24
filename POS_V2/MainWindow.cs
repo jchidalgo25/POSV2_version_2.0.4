@@ -1061,10 +1061,6 @@ namespace POS
                         if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
                         {
                             validaClienteSp(itendifacionCompleta);
-                            // PRUEBA OPOZO // SE QUE NO ES EL LUGAR CORRECTO PERO SOLO PARA TEST
-                            picClienteApp.Visible = _factura.EsClienteApp;
-                            picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null ;
-
                             if (cliente_actual.ACCOUNTNUM != GlobalclteEmpleado.Identificacion)
                             {
                                 itendifacionCompleta = string.Empty;
@@ -2077,6 +2073,9 @@ namespace POS
                 _factura.EsClienteApp = false;
                 _factura.CodigoClienteApp = "";
                 _factura.codigoclienteAPP = "";
+                // opozo - inicializa valores imagen cliente app
+                picClienteApp.Visible = _factura.EsClienteApp;
+                picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null;
 
 
                 if (_factura.Descuentos2.Any())
@@ -2288,6 +2287,9 @@ namespace POS
                     txtCodigo.SelectAll();
                     _factura.EsClienteApp = clteEmpleado.EsClienteApp;
                     _factura.CodigoClienteApp = clteEmpleado.CodigoClienteApp;
+                    // opozo - asigna valores de _factura.EsClienteApp a imagen app
+                    picClienteApp.Visible = _factura.EsClienteApp;
+                    picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null;
                     //insertaCabeceraFile();  //insertaCabecera();
                     insertaCabeceraFile(clteEmpleado);
                 }
@@ -9353,10 +9355,9 @@ namespace POS
             }
 
             // Reaplicar descuentos acumulados 
-            // se descomentan estas líneas para que convivan DESCUENTOS PROMOCIÓN Y DESCUENTOS CUPONES opozo
-            ReaplicarDescuentosAcumulados(existente);
+            //ReaplicarDescuentosAcumulados(existente);
 
-            AplicarDescuentoCuponPromocional(existente, codigo);
+            //AplicarDescuentoCuponPromocional(existente, codigo);
         }
         private void ManejarNuevoProducto(string codigo, string operador)
         {
@@ -15029,6 +15030,9 @@ namespace POS
 
                 var st12 = stopwatch.ElapsedMilliseconds;
                 EliminaFacturaTmpFile();    //eliminaFacturatmp();
+                // opozo - al procesar factura
+                picClienteApp.Visible = false;  // se quita la visibilidad de la imagen de cliente app
+                picClienteApp.Image = null;     // se limpia la imagen de cliente app
                 var st13 = stopwatch.ElapsedMilliseconds;
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "EliminaFacturaTmpFile", st12.ToString() + " " + st13.ToString() + ":" + (st13 - st12).ToString());
 
@@ -20130,8 +20134,6 @@ namespace POS
                         ClienteEmpleado clteEmpleado = Control.Common.General.ValidaClienteEmpleado(cliente_actual.ACCOUNTNUM, EstablecimientoAxCode);
                         _factura.EsClienteApp = clteEmpleado.EsClienteApp;
                         _factura.codigoclienteAPP = clteEmpleado.CodigoClienteApp;
-                        picClienteApp.Visible = _factura.EsClienteApp;
-                        picClienteApp.Image = _factura.EsClienteApp ? ((System.Drawing.Image)(resources.GetObject("btnVtaApp.Image"))) : null;
                         //insertaCabeceraFile();  //insertaCabecera();
                         txtCodigo.Focus();
                         txtCodigo.SelectAll();
