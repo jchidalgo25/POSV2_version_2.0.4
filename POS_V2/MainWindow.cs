@@ -83,6 +83,7 @@ namespace POS
         public static RadTextBox InputDestinoTemporal;
         private StringBuilder codigoBarra = new StringBuilder();
         private DateTime ultimaTecla = DateTime.Now;
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuInicial));
 
 
         private ConcurrentQueue<CodigoItemThreads> _colaCodigos = new ConcurrentQueue<CodigoItemThreads>();
@@ -1060,7 +1061,6 @@ namespace POS
                         if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
                         {
                             validaClienteSp(itendifacionCompleta);
-
                             if (cliente_actual.ACCOUNTNUM != GlobalclteEmpleado.Identificacion)
                             {
                                 itendifacionCompleta = string.Empty;
@@ -1155,6 +1155,7 @@ namespace POS
                             _factura.EsClienteApp = false;
                             _factura.CodigoClienteApp = "";
                             _factura.codigoclienteAPP = "";
+                            picClienteApp.Visible = _factura.EsClienteApp; //opozo
 
                             txtCedula.Text = cliente_actual.ACCOUNTNUM;
                             txtCedula.Focus();
@@ -2072,6 +2073,9 @@ namespace POS
                 _factura.EsClienteApp = false;
                 _factura.CodigoClienteApp = "";
                 _factura.codigoclienteAPP = "";
+                // opozo - inicializa valores imagen cliente app
+                picClienteApp.Visible = _factura.EsClienteApp;
+                picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null;
 
 
                 if (_factura.Descuentos2.Any())
@@ -2283,6 +2287,9 @@ namespace POS
                     txtCodigo.SelectAll();
                     _factura.EsClienteApp = clteEmpleado.EsClienteApp;
                     _factura.CodigoClienteApp = clteEmpleado.CodigoClienteApp;
+                    // opozo - asigna valores de _factura.EsClienteApp a imagen app
+                    picClienteApp.Visible = _factura.EsClienteApp;
+                    picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null;
                     //insertaCabeceraFile();  //insertaCabecera();
                     insertaCabeceraFile(clteEmpleado);
                 }
@@ -4745,7 +4752,6 @@ namespace POS
 
                 using (POSEntities db = new POSEntities())
                 {
-                    // 1. Buscar cupón en BD
                     var cupon = db.core_TarjetaDescuento
                         .Where(x => x.codigo == codigoCupon && x.numeroFactura == -1)
                         .FirstOrDefault();
@@ -5233,7 +5239,10 @@ namespace POS
                         "IntentarAplicarCupon");
 
                 var cuponAplicado = IntentarAplicarCupon(codigo);
-                
+
+                //// Guardar estado temporal
+                GuardarEstadoTemporal(codigo);
+
                 // 3. Intentar aplicar cupón
                 if (cuponAplicado)
                 {
@@ -5272,6 +5281,7 @@ namespace POS
                         $"Buscando producto con código: {codigo}");
 
                     getProducto(codigo);
+                    // APLICAR DESCUENTO AQUÍ
 
                     Control.Common.Logger.LogMessage(
                         Control.Common.Enum.LogTypes.Info,
@@ -9251,6 +9261,8 @@ namespace POS
             if (ReversaDevolucionIVA_Items()) return;
 
             ////Reiniciar descuentos            
+            /// se dejan comentadas las lineas porque se cambió la ubicación del reinicio de descuentos ax para que no entre en conflicto con el descuento por CUPON
+            /// ahora se reinician los descuentos en actualizarDescuentoPromocionAX() en Producto.cs
             //existente.Descuento = 0M;
             //existente.DescuentoActual = 0M;
             //existente.DescuentoPorCombinacion = 0M;
@@ -9299,8 +9311,8 @@ namespace POS
                 existente.agregarAdicional(pesobascula + (getCantidadXCaja(codigo) - 1));
             }
 
-            // Aplicar promociones
-            //AplicarPromocionesAX(existente, codigo);
+            // Aplicar promociones  // SE DESCOMENTÓ ESTA LÍNEA OPOZO
+            AplicarPromocionesAX(existente, codigo);
 
             //// ⚠️ Validar si ya se aplicó cupón antes de update
             //bool yaTieneCupon = existente.DescuentosCupon != null &&
@@ -9342,7 +9354,7 @@ namespace POS
                 _factura.Pagos.Clear();
             }
 
-            // Reaplicar descuentos acumulados
+            // Reaplicar descuentos acumulados 
             //ReaplicarDescuentosAcumulados(existente);
 
             //AplicarDescuentoCuponPromocional(existente, codigo);
@@ -15018,6 +15030,9 @@ namespace POS
 
                 var st12 = stopwatch.ElapsedMilliseconds;
                 EliminaFacturaTmpFile();    //eliminaFacturatmp();
+                // opozo - al procesar factura
+                picClienteApp.Visible = false;  // se quita la visibilidad de la imagen de cliente app
+                picClienteApp.Image = null;     // se limpia la imagen de cliente app
                 var st13 = stopwatch.ElapsedMilliseconds;
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "EliminaFacturaTmpFile", st12.ToString() + " " + st13.ToString() + ":" + (st13 - st12).ToString());
 
@@ -17203,13 +17218,12 @@ namespace POS
                     qty.ShowDialog();
                     //var item = _factura.Productos.Last();
                     var item = gridItems.SelectedRows[0].DataBoundItem as POS.Models.Producto;
-
                     //if (focused.Text.ToString() != "")
                     if (qty.txtQty.Text != "")
                     {
                         if (item.Unidad.ToUpper() == "UND")
                         {
-                            var producto = new Producto();
+                            //var producto = new Producto();
                             //item.Cantidad = int.Parse(focused.Text.ToString()) - 1;
                             //item.Unidades = int.Parse(focused.Text.ToString()) - 1;
                             if (qty.q > item.Cantidad)
@@ -17217,8 +17231,9 @@ namespace POS
                                 item.Cantidad = qty.q - 1;
                                 item.CantidadINEC = item.Cantidad;
                                 item.Unidades = qty.q - 1;
-
+                                
                                 getProducto(item.Id);
+
                             }
                             else
                             {
@@ -23396,6 +23411,20 @@ namespace POS
             //bgw2.WorkerSupportsCancellation = true;
             //bgw2.RunWorkerAsync();
             ////System.Threading.Thread.Sleep(500);
+        }
+
+        private void lblIdClienteApp_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblIdClienteApp_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picClienteApp_Click(object sender, EventArgs e)
+        {
+
         }
 
         void bgw2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

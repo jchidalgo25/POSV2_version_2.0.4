@@ -65,6 +65,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.clienteGroup = new Telerik.WinControls.UI.RadGroupBox();
+            this.picClienteApp = new System.Windows.Forms.PictureBox(); //opozo
             this.lblEtiquetaSaldo = new Telerik.WinControls.UI.RadLabel();
             this.lblSaldoTarjeta = new Telerik.WinControls.UI.RadLabel();
             this.lblDireccion = new Telerik.WinControls.UI.RadLabel();
@@ -161,6 +162,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).BeginInit();
             this.clienteGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit(); //opozo
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).BeginInit();
@@ -550,6 +552,7 @@
             // 
             this.clienteGroup.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.clienteGroup.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.clienteGroup.Controls.Add(this.picClienteApp);
             this.clienteGroup.Controls.Add(this.lblEtiquetaSaldo);
             this.clienteGroup.Controls.Add(this.lblSaldoTarjeta);
             this.clienteGroup.Controls.Add(this.lblDireccion);
@@ -576,6 +579,18 @@
             this.clienteGroup.Text = "F-001-001-0000000000 ";
             this.clienteGroup.ThemeName = "TelerikMetroTouch";
             this.clienteGroup.Click += new System.EventHandler(this.clienteGroup_Click);
+            // 
+            // picClienteApp - opozo
+            // 
+            this.picClienteApp.Image = global::POS.Properties.Resources.cliente_app_icon;
+            this.picClienteApp.Location = new System.Drawing.Point(262, 73);
+            this.picClienteApp.Name = "picClienteApp";
+            this.picClienteApp.Size = new System.Drawing.Size(40, 27);
+            this.picClienteApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picClienteApp.TabIndex = 25;
+            this.picClienteApp.TabStop = false;
+            this.picClienteApp.Visible = false;
+            this.picClienteApp.Click += new System.EventHandler(this.picClienteApp_Click);
             // 
             // lblEtiquetaSaldo
             // 
@@ -636,6 +651,7 @@
             this.lblIdClienteApp.TabIndex = 23;
             this.lblIdClienteApp.Text = "#####";
             this.lblIdClienteApp.Visible = false;
+            this.lblIdClienteApp.Click += new System.EventHandler(this.lblIdClienteApp_Click_1);
             // 
             // btnCliente
             // 
@@ -866,7 +882,7 @@
             this.panel3.Controls.Add(this.btnBusqProd);
             this.panel3.Controls.Add(this.btnKbd);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 534);
+            this.panel3.Location = new System.Drawing.Point(0, 532);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1026, 70);
             this.panel3.TabIndex = 1;
@@ -1030,7 +1046,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel1.Size = new System.Drawing.Size(1026, 604);
+            this.panel1.Size = new System.Drawing.Size(1026, 602);
             this.panel1.TabIndex = 1;
             // 
             // panel4
@@ -1039,7 +1055,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 104);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1026, 430);
+            this.panel4.Size = new System.Drawing.Size(1026, 428);
             this.panel4.TabIndex = 2;
             // 
             // splitDetalle
@@ -1061,7 +1077,7 @@
             this.splitDetalle.Panel2.BackColor = System.Drawing.Color.White;
             this.splitDetalle.Panel2.Controls.Add(this.panelgrid);
             this.splitDetalle.Panel2.Controls.Add(this.panel10);
-            this.splitDetalle.Size = new System.Drawing.Size(1026, 430);
+            this.splitDetalle.Size = new System.Drawing.Size(1026, 428);
             this.splitDetalle.SplitterDistance = 611;
             this.splitDetalle.TabIndex = 0;
             // 
@@ -1151,7 +1167,7 @@
             // 
             this.gridItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 64, 240, 150);
             this.gridItems.RootElement.Shape = null;
-            this.gridItems.Size = new System.Drawing.Size(611, 366);
+            this.gridItems.Size = new System.Drawing.Size(611, 364);
             this.gridItems.TabIndex = 2;
             this.gridItems.Text = "radGridView1";
             this.gridItems.ThemeName = "TelerikMetroTouch";
@@ -1287,7 +1303,7 @@
             this.panelgrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelgrid.Location = new System.Drawing.Point(0, 59);
             this.panelgrid.Name = "panelgrid";
-            this.panelgrid.Size = new System.Drawing.Size(411, 371);
+            this.panelgrid.Size = new System.Drawing.Size(411, 369);
             this.panelgrid.TabIndex = 3;
             // 
             // panel6
@@ -1297,7 +1313,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(411, 371);
+            this.panel6.Size = new System.Drawing.Size(411, 369);
             this.panel6.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -1316,7 +1332,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.12583F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.74419F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 371);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 369);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tablePagar2
@@ -1352,7 +1368,7 @@
             this.tablePagar2.Controls.Add(this.btnRetencion, 1, 4);
             this.tablePagar2.Controls.Add(this.btn7, 1, 2);
             this.tablePagar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePagar2.Location = new System.Drawing.Point(3, 167);
+            this.tablePagar2.Location = new System.Drawing.Point(3, 165);
             this.tablePagar2.Name = "tablePagar2";
             this.tablePagar2.RowCount = 5;
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -1906,11 +1922,11 @@
             this.tableLayoutPanel2.Controls.Add(this.btnPagoBorrar, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtPagoValor, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 111);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 110);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(405, 50);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(405, 49);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // btnEfectivo
@@ -1924,7 +1940,7 @@
             // 
             // 
             this.btnEfectivo.RootElement.ControlBounds = new System.Drawing.Rectangle(4, 4, 110, 24);
-            this.btnEfectivo.Size = new System.Drawing.Size(94, 42);
+            this.btnEfectivo.Size = new System.Drawing.Size(94, 41);
             this.btnEfectivo.TabIndex = 42;
             this.btnEfectivo.Text = "Efectivo";
             this.btnEfectivo.ThemeName = "TelerikMetroTouch";
@@ -1945,7 +1961,7 @@
             // 
             // 
             this.btnPagoBorrar.RootElement.ControlBounds = new System.Drawing.Rectangle(306, 4, 110, 24);
-            this.btnPagoBorrar.Size = new System.Drawing.Size(95, 42);
+            this.btnPagoBorrar.Size = new System.Drawing.Size(95, 41);
             this.btnPagoBorrar.TabIndex = 38;
             this.btnPagoBorrar.Text = "Borrar";
             this.btnPagoBorrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -1969,7 +1985,7 @@
             // 
             // 
             this.txtPagoValor.RootElement.ControlBounds = new System.Drawing.Rectangle(105, 4, 100, 20);
-            this.txtPagoValor.Size = new System.Drawing.Size(194, 42);
+            this.txtPagoValor.Size = new System.Drawing.Size(194, 41);
             this.txtPagoValor.TabIndex = 37;
             this.txtPagoValor.TabStop = false;
             this.txtPagoValor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2008,7 +2024,7 @@
             // 
             // 
             this.gridPagos.RootElement.ControlBounds = new System.Drawing.Rectangle(5, 5, 240, 150);
-            this.gridPagos.Size = new System.Drawing.Size(401, 98);
+            this.gridPagos.Size = new System.Drawing.Size(401, 97);
             this.gridPagos.TabIndex = 10;
             this.gridPagos.Text = "radGridView1";
             this.gridPagos.ThemeName = "TelerikMetroTouch";
@@ -2104,7 +2120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 681);
+            this.ClientSize = new System.Drawing.Size(1026, 679);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelToolbar);
@@ -2149,6 +2165,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).EndInit();
             this.clienteGroup.ResumeLayout(false);
             this.clienteGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit(); // opozo
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).EndInit();
@@ -2332,5 +2349,6 @@
         private Telerik.WinControls.UI.RadButton radButton1;
         private Telerik.WinControls.UI.RadButton btnDevolucionIVA;
         private Telerik.WinControls.UI.RadButton btn7;
+        private System.Windows.Forms.PictureBox picClienteApp;
     }
 }

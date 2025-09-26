@@ -1912,6 +1912,7 @@
     <None Include="Resources\error.png" />
     <None Include="Resources\default.png" />
     <None Include="Resources\Iconos_Intranet_LIRIS-01.png" />
+    <Content Include="Resources\cliente_app_icon.png" />
     <Content Include="Resources\Iconos_Western_Union_DELPORTAL2-01.png" />
     <Content Include="Resources\Iconos_Western_Union_DELPORTAL2-02.png" />
     <Content Include="Resources\Iconos_Western_Union_DELPORTAL2-03.png" />
