@@ -6148,7 +6148,7 @@ namespace POS.Models
                 query = string.Concat(query, $" , @punto_emision = '{devolucionIva.puntoEmision}' ", Environment.NewLine);
                 query = string.Concat(query, $" , @numero = {devolucionIva.numDocumento} ", Environment.NewLine);
                 query = string.Concat(query, $" , @cliente = '{devolucionIva.cliente}' ", Environment.NewLine);
-                query = string.Concat(query, $" , @montoIvaDevolver = {devolucionIva.montoIvaDevolver} ", Environment.NewLine);
+                query = string.Concat(query, $" , @montoIvaDevolver = {devolucionIva.montoIvaDevolver} ", Environment.NewLine);        //_factura.montoIvaDevolver 
                 query = string.Concat(query, $" , @claveAccesoComprobante = '{devolucionIva.ClaveAccesoSRI}' ", Environment.NewLine);
                 query = string.Concat(query, $" , @estado = '{devolucionIva.estado}' ", Environment.NewLine);
 
@@ -6177,13 +6177,9 @@ namespace POS.Models
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "grabaDevolucionIVA", $" codError:-111, msjError: {msjError}");
 
             }
-
-
-
-
-
-
         }
+
+
         public void grabaDevolucionIVA(string tipoDocumento, string establecimiento, string puntoEmision, string numDocumento, decimal montoIvaDevolver, string ClaveAccesoSRI, string estado)
         {
             string query = string.Empty;

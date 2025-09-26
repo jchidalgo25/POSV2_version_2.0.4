@@ -305,6 +305,10 @@ namespace POS.Control.SRI
             //end jchid
 
 
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Debug",
+                $"Monto Iva Delvolver: {factura._montoIvaDevolver}");
+           
+
             try
             {
 

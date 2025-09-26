@@ -301,6 +301,153 @@ namespace MensajesLibrary
             return _result;
 
         }
+
+        public MessageBoxResult ShowMessage(Form parent, bool contador = false)
+        {
+            pbInfo.Visible = false;
+            pbError.Visible = false;
+            pbQue.Visible = false;
+            pbWar.Visible = false;
+            pbStop.Visible = false;
+
+            CodigoMessageBox = CodigoMensaje;
+            TituloMessageBox = TituloMensaje;
+            TiempoMaximo = 0;
+            TextoMessageBox = TextMensaje;
+            TextoMessageAdicionalBox = TextMensajeAdicional;
+
+            btnAceptar.Visible = false;
+            btnCancelar.Visible = false;
+
+            drawingFont = new Liris_MenssageDLL.Model.DrawingFontCtrl();
+            Font font = drawingFont.GetFont();
+            DrawingFont = font;
+
+            this.lblMessage.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblMessage.Font = font;
+            //this.lblMessage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            panel1.Size = new Size(WidthForm - 3, HeightForm - 6);
+            // Crear formulario contenedor para simular una ventana modal
+            _containerForm = new Form
+            {
+                FormBorderStyle = FormBorderStyle.None,
+                StartPosition = FormStartPosition.CenterScreen,
+                Size = new Size(WidthForm, HeightForm),
+                ShowInTaskbar = false,
+                TopMost = true
+            };
+
+            this.Dock = DockStyle.Fill;
+            this.Update();
+            _containerForm.Controls.Add(this);
+
+
+            if (TiempoEspera > 0)
+            {
+                if (MostrarContador)
+                {
+                    TextoMessageBox = string.Concat(TextMensaje, $"\r\nEste mensaje se cerrará dentro de [TIEMPO_ESPERA] segundos");
+                    this.lblMessage.Text = TextoMessageBox.Replace("[TIEMPO_ESPERA]", TiempoEspera.ToString());
+                }
+
+                StartCountdown(TiempoEspera);
+            }
+            else
+            {
+                this.lblMessage.Text = TextoMessageBox;
+            }
+
+            //TextoMessageAdicionalBox = TextMensajeAdicional;
+            this.lblMessageMore.Text = TextoMessageAdicionalBox;
+
+            this.lblTitiuloMessage.Text = string.Empty;
+            if (!string.IsNullOrEmpty(TituloMensaje))
+            {
+                this.lblTitiuloMessage.Text = TituloMensaje;
+            }
+
+            switch (TipoMensaje)
+            {
+                case MessageType.Information:
+                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pbInfo.Visible = true;//mostramos la imagen
+
+                    btnAceptar.Visible = true;
+                    btnAceptar.Text = "Ok.";
+
+                    btnCancelar.Visible = false;
+
+
+                    break;
+                case MessageType.Question:
+                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pbQue.Visible = true;//mostramos la imagen
+
+                    btnAceptar.Visible = true;
+                    btnAceptar.Text = "Sí";
+
+                    btnCancelar.Visible = true;
+                    btnCancelar.Text = "No";
+
+                    break;
+                case MessageType.Warning:
+                    pL1.BackColor = Color.FromArgb(255, 193, 7);//panel la primera línea
+                    pbWar.Visible = true;//mostramos la imagen
+
+                    btnAceptar.Visible = true;
+                    btnAceptar.Text = "Ok";
+
+                    btnCancelar.Visible = false;
+                    btnCancelar.Text = "Cancelar";
+
+
+                    break;
+                case MessageType.Error:
+                    pL1.BackColor = Color.FromArgb(244, 67, 54);//panel la primera línea
+                    pbError.Visible = true;
+
+                    btnAceptar.Visible = true;
+                    btnAceptar.Text = "Ok.";
+
+                    btnCancelar.Visible = false;
+                    btnCancelar.Text = "No";
+
+
+                    break;
+                case MessageType.Stop:
+                    pL1.BackColor = Color.FromArgb(244, 67, 54);//panel la primera línea
+                    pbStop.Visible = true;
+
+                    btnAceptar.Visible = true;
+                    btnAceptar.Text = "Ok";
+
+                    btnCancelar.Visible = false;
+                    btnCancelar.Text = "No";
+
+                    break;
+
+                default:
+                    lblTitiuloMessage.Text = "";//"Error al seleccionar";
+                    break;
+            }
+
+
+            //_containerForm.Owner = MainWindow; // o tu formulario principal
+            //JEspinoza.sn Modificación porque se oculta ventana detras de la ventana principal
+            _containerForm.Activate();
+            _containerForm.BringToFront();
+            //if (Application.OpenForms.Count > 0)
+            //    _containerForm.ShowDialog(Application.OpenForms[0]);
+            //else
+            //    _containerForm.ShowDialog();
+            _containerForm.Owner = parent;
+            _containerForm.ShowDialog();
+            //JEspinoza.en
+            RepuestaMensaje = _result;
+            return _result;
+
+        }
         public MessageBoxResult ShowMessage(string TipoMensaje, string Message, int CodigoMensaje, string TituloMensaje, int tiempo = 0, bool contador = false)
         {
             //InitializeComponent();

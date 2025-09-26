@@ -303,8 +303,11 @@ namespace POS.Models
             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Producto", metodo,
                 $"Evaluando promociones AX para producto {this.Id}");
 
-            // Limpiar descuento AX previo
-            this.DescuentoAX = 0;
+           
+            // AHORA SE LIMPIAN LOS DESCUENTOS AQUÍ PARA DESCUENTOS PROMOCIÓN Y DESCUENTOS CUPONES
+            this.DescuentoAX = 0M;
+            this.DescuentoActual = 0M;
+            this.DescuentoPorCombinacion = 0M;
 
             //cambiar estaa lista
 
@@ -514,7 +517,7 @@ namespace POS.Models
                 //Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Producto", metodo,
                 //    $"Aplicado {mejorRegla.DESCUENTO}% de descuento AX a {this.Id} (cantidad: {cantidadParaDscto}, valor: {descuentoAplicado:C})");
                 // 9. Aplicar descuento
-                if (cantidadParaDscto > 0)
+                if (cantidadParaDscto >= mejorRegla.CANTIDAD)
                 {
                     decimal descuentoAplicado = (mejorRegla.DESCUENTO / 100M) *
                         Math.Round(this.Pvp * cantidadParaDscto, 2, MidpointRounding.AwayFromZero);

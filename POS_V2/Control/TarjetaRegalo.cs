@@ -1096,7 +1096,7 @@ namespace POS.Control
             
            
             cadenaCon = Control.Common.GlobalParameters.ConServerPuntos;
-            if (local) { cadenaCon = pos.Database.Connection.ConnectionString; }
+            if (local) { cadenaCon = pos.Database.Connection.ConnectionString; } // jchid valida si es local por el parametro booleano.
             
              if (Control.Common.GlobalParameters.ConServerPuntos == "")
             {

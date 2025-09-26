@@ -1261,45 +1261,34 @@ namespace POS
 
                                 if (result == MsgBoxCtrl.MessageBoxResult.Yes || result == MsgBoxCtrl.MessageBoxResult.Ok)
                                 {
-                                    if (    ValidarIdentificador.ValidarCedula(clteEmpleado.Identificacion)         // TOMAR EN CUENTA QUE NO ESTA ENTRANDO EN LO DE RUC POR QUE FALTABA 
-                                            || ValidarIdentificador.ValidarRUCPrivada(clteEmpleado.Identificacion)
-                                            || ValidarIdentificador.ValidarRUCPublica(clteEmpleado.Identificacion)
-                                            || ValidarIdentificador.ValidarRUCNatural(clteEmpleado.Identificacion))
+                           
+                                    var fClte = new POS.Control.Clientes.ClienteForm();
+                                    fClte._cliente = null;
+
+                                    fClte.DeseaPermitirCambioBasico = true;
+
+                                    fClte.identificacion = clteEmpleado.Identificacion; //txtCedula.Text;
+                                    fClte.ShowDialog();
+
+                                    if (fClte._cliente != null)
                                     {
+                                        cliente_actual = fClte._cliente;
+                                        txtCedula.Text = cliente_actual.VATNUM;
+                                        setClienteData();
+                                        txtCodigo.Focus();
+                                        txtCodigo.SelectAll();
 
-                                        var fClte = new POS.Control.Clientes.ClienteForm();
-                                        fClte._cliente = null;
+                                        //Levantar encuesta
+                                        POS.Control.Encuestas.EncuestaHandler.LevantarEncuestaFactura();
+                                        //VALIDACION DESCUENTOS / OSCAR POZO
+                                        cambiarCliente(clteEmpleado.Identificacion);
+                                        _factura.EsClienteApp = clteEmpleado.EsClienteApp;
+                                        _factura.codigoclienteAPP = clteEmpleado.CodigoClienteApp;
+                                        insertaCabeceraFile(clteEmpleado);  //insertaCabecera();
+                                        //Mostrar mensajes para cliente
+                                        var InvoiceMessagePrompter = new POS.Control.Main.ClsFacturaMensaje();
+                                        InvoiceMessagePrompter.ShowInvoiceMessages(cliente_actual.ACCOUNTNUM);
 
-                                        fClte.DeseaPermitirCambioBasico = true;
-
-                                        fClte.identificacion = clteEmpleado.Identificacion; //txtCedula.Text;
-                                        fClte.ShowDialog();
-
-                                        if (fClte._cliente != null)
-                                        {
-                                            cliente_actual = fClte._cliente;
-                                            txtCedula.Text = cliente_actual.VATNUM;
-                                            setClienteData();
-                                            txtCodigo.Focus();
-                                            txtCodigo.SelectAll();
-
-                                            //Levantar encuesta
-                                            POS.Control.Encuestas.EncuestaHandler.LevantarEncuestaFactura();
-                                            //VALIDACION DESCUENTOS / OSCAR POZO
-                                            cambiarCliente(clteEmpleado.Identificacion);
-                                            _factura.EsClienteApp = clteEmpleado.EsClienteApp;
-                                            _factura.codigoclienteAPP = clteEmpleado.CodigoClienteApp;
-                                            insertaCabeceraFile(clteEmpleado);  //insertaCabecera();
-                                            //Mostrar mensajes para cliente
-                                            var InvoiceMessagePrompter = new POS.Control.Main.ClsFacturaMensaje();
-                                            InvoiceMessagePrompter.ShowInvoiceMessages(cliente_actual.ACCOUNTNUM);
-
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        Control.Common.General.GetMensajeToList(60);
                                     }
 
                                 }
@@ -2170,6 +2159,7 @@ namespace POS
                             devolucionIva.numDocumento = _factura.Secuencia.ToString();
                             devolucionIva.ClaveAccesoSRI = _factura.ClaveAccesoSRI;
                             devolucionIva.cliente = _factura.ClienteIdentificacion;
+                            devolucionIva.montoIvaDevolver = _factura.montoIvaDevolver;
                             devolucionIva.estado = "R";
 
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "ejecutaReversoDevolucionIVA", $"Ejecuta metodo  grabaDevolucionIVA");
@@ -3459,6 +3449,7 @@ namespace POS
 
                     _factura.ClaveAccesoSRI = _factura.generarClaveAccesoSRI("F");
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow(Constructor)", "Ejecuta generarClaveAccesoSRI ");
+
 
                 }
 
@@ -9151,7 +9142,6 @@ namespace POS
         {
             List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
 
-
             // Validación inicial
             if (string.IsNullOrWhiteSpace(codigo)) return;
 
@@ -9251,9 +9241,11 @@ namespace POS
             if (ReversaDevolucionIVA_Items()) return;
 
             ////Reiniciar descuentos            
-            //existente.Descuento = 0M;
-            //existente.DescuentoActual = 0M;
-            //existente.DescuentoPorCombinacion = 0M;
+            // existente.Descuento = 0M;
+            // existente.DescuentoActual = 0M;
+            // xistente.DescuentoPorCombinacion = 0M;
+            ////JCHID PRUEBA DE ENCERAR LOS DESCUENTOS
+
 
 
             decimal peso = 0M;
@@ -9300,7 +9292,7 @@ namespace POS
             }
 
             // Aplicar promociones
-            //AplicarPromocionesAX(existente, codigo);
+            AplicarPromocionesAX(existente, codigo);  //para los promociones y descuentos en AX
 
             //// ⚠️ Validar si ya se aplicó cupón antes de update
             //bool yaTieneCupon = existente.DescuentosCupon != null &&
@@ -9343,9 +9335,11 @@ namespace POS
             }
 
             // Reaplicar descuentos acumulados
-            //ReaplicarDescuentosAcumulados(existente);
+            // se descomentan estas líneas para que convivan DESCUENTOS PROMOCIÓN Y DESCUENTOS CUPONES opozo
+            ReaplicarDescuentosAcumulados(existente);
 
             //AplicarDescuentoCuponPromocional(existente, codigo);
+            AplicarDescuentoCuponPromocional(existente, codigo);
         }
         private void ManejarNuevoProducto(string codigo, string operador)
         {
@@ -9551,6 +9545,7 @@ namespace POS
                    "MainWindows",
                    "AplicarPromocionesAX",
                    $"Ejecuta actualizarDescuentoPromocionAX");
+
 
                 producto.actualizarDescuentoPromocionAX(
                     _factura.PromocionesActuales,
@@ -12940,6 +12935,23 @@ namespace POS
 
                 //_factura.ClaveAccesoSRI = _factura.generarClaveAccesoSRI("F");
 
+                //string ClaveAccesoSRI = string.Empty;
+
+                //if (Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO)
+                //{
+                //    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto", " Regenera Clave de Acceso.");
+                //    ClaveAccesoSRI = _factura.generarClaveAccesoSRI(_factura.Documento);
+                //}
+
+                //_factura.ClaveAccesoSRI = ClaveAccesoSRI;
+
+                //jchid
+                if (string.IsNullOrEmpty(_factura.ClaveAccesoSRI))
+                {
+                    _factura.ClaveAccesoSRI = _factura.generarClaveAccesoSRI("F");
+                }
+
+
                 var fPagoEfec = (from deta in _factura.Pagos
                                  where deta.Descripcion != "EFECTIVO"
                                  select deta).ToList();
@@ -14333,14 +14345,7 @@ namespace POS
                     }
 
 
-                    DevolucionIvaModel devolucionIva = new DevolucionIvaModel();
-                    devolucionIva.tipoDocumento = _factura.Documento;
-                    devolucionIva.establecimiento = _factura.Establecimiento;
-                    devolucionIva.puntoEmision = _factura.PtoEmision;
-                    devolucionIva.numDocumento = _factura.Secuencia.ToString();
-                    devolucionIva.ClaveAccesoSRI = _factura.ClaveAccesoSRI;
-                    devolucionIva.cliente = _factura.ClienteIdentificacion;
-                    devolucionIva.estado = "G";
+                   
 
 
                     var st5 = stopwatch.ElapsedMilliseconds;
@@ -14421,8 +14426,17 @@ namespace POS
                         {
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", $"Ejecuta metodo  grabaDevolucionIVA");
 
+                            DevolucionIvaModel devolucionIva = new DevolucionIvaModel();
+                            devolucionIva.tipoDocumento = _factura.Documento;
+                            devolucionIva.establecimiento = _factura.Establecimiento;
+                            devolucionIva.puntoEmision = _factura.PtoEmision;
+                            devolucionIva.numDocumento = _factura.Secuencia.ToString();
+                            devolucionIva.ClaveAccesoSRI = _factura.ClaveAccesoSRI;
+                            devolucionIva.cliente = _factura.ClienteIdentificacion;
+                            devolucionIva.estado = "G";
+
                             st8 = stopwatch.ElapsedMilliseconds;
-                            _factura.grabaDevolucionIVA(devolucionIva);
+                            _factura.grabaDevolucionIVA(devolucionIva);      //Validando la devolucion de IVA para pasar el estado "G"
                             st9 = stopwatch.ElapsedMilliseconds;
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "grabaDevolucionIVA", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
 
@@ -17203,13 +17217,14 @@ namespace POS
                     qty.ShowDialog();
                     //var item = _factura.Productos.Last();
                     var item = gridItems.SelectedRows[0].DataBoundItem as POS.Models.Producto;
-
+                    
                     //if (focused.Text.ToString() != "")
                     if (qty.txtQty.Text != "")
                     {
                         if (item.Unidad.ToUpper() == "UND")
                         {
                             var producto = new Producto();
+                            
                             //item.Cantidad = int.Parse(focused.Text.ToString()) - 1;
                             //item.Unidades = int.Parse(focused.Text.ToString()) - 1;
                             if (qty.q > item.Cantidad)
@@ -17217,8 +17232,19 @@ namespace POS
                                 item.Cantidad = qty.q - 1;
                                 item.CantidadINEC = item.Cantidad;
                                 item.Unidades = qty.q - 1;
-
                                 getProducto(item.Id);
+
+                                //jchid para actulizar producto
+                                //var itemsuma = gridItems.SelectedRows[0].DataBoundItem as POS.Models.Producto;
+                                //AplicarPromocionesAX(itemsuma, itemsuma.Id);
+                                //itemsuma.Cantidad = qty.q - 1;
+                                //itemsuma.CantidadINEC = item.Cantidad;
+                                //itemsuma.Unidades = qty.q - 1;
+                                //getProducto(itemsuma.Id);
+
+                   
+
+
                             }
                             else
                             {
@@ -17258,6 +17284,7 @@ namespace POS
 
 
             }
+
         }
 
         private void btnCFinal_Click(object sender, EventArgs e)
@@ -21424,7 +21451,7 @@ namespace POS
                         + Control.Common.ExceptionHandler.GetExceptionMessages(ex) + "StackTrace: " + ex.StackTrace;
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "CargaFacturaTmpFile", errorMsj);
-                    Control.Common.General.GetMensajeToList(300, parametros);
+                    Control.Common.General.GetMensajeToList(300, parametros, this);
 
                     //Manejo de error 
                     //System.Windows.Forms.MessageBox.Show(this, ex.Message);
@@ -21471,9 +21498,12 @@ namespace POS
                                     itm.Pvp = decimal.Parse(item[9]);  //precio
 
                                     existeEnListaDescuento(itm.Id); //Verifica si esta en lista de descuentos AX
-                                    if (POS.Control.Common.Promo.PuedeConjuntoClienteRecibirDescGestor(cliente_actual.CUSTGROUP))//cliente_actual.CUSTGROUP != "07" && cliente_actual.CUSTGROUP != "09" /*&& cliente_actual.CUSTGROUP != "EM"*/ && cliente_actual.CUSTGROUP != "CE")
+                                    if (ClienteActual != null)
                                     {
-                                        itm.actualizarDescuentoPromocionAX(_factura.PromocionesActuales, (cliente_actual == null ? string.Empty : cliente_actual.ACCOUNTNUM), _factura);
+                                        if (POS.Control.Common.Promo.PuedeConjuntoClienteRecibirDescGestor(cliente_actual.CUSTGROUP))//cliente_actual.CUSTGROUP != "07" && cliente_actual.CUSTGROUP != "09" /*&& cliente_actual.CUSTGROUP != "EM"*/ && cliente_actual.CUSTGROUP != "CE")
+                                        {
+                                            itm.actualizarDescuentoPromocionAX(_factura.PromocionesActuales, (cliente_actual == null ? string.Empty : cliente_actual.ACCOUNTNUM), _factura);
+                                        }
                                     }
 
                                     //itm.update();
@@ -21532,7 +21562,7 @@ namespace POS
 
                     List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
                     parametros.Add(new ParametrosMensajes() { codigo = "[error_exception]", valor = ex.StackTrace });
-                    Control.Common.General.GetMensajeToList(302, parametros);
+                    Control.Common.General.GetMensajeToList(302, parametros, this);
 
                 }
 
@@ -21748,7 +21778,7 @@ namespace POS
 
                     List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
                     parametros.Add(new ParametrosMensajes() { codigo = "[error_exception]", valor = ex.Message });
-                    Control.Common.General.GetMensajeToList(303, parametros);
+                    Control.Common.General.GetMensajeToList(303, parametros, this);
 
 
                     //Control.Common.General.GetMensaje("POS", "No fue posible carar los datos de Formas de Pago de la factura temporal. Error: " + ex.Message, "I");
@@ -22947,7 +22977,7 @@ namespace POS
                         devolucionIva.puntoEmision = _factura.PtoEmision;
                         devolucionIva.numDocumento = _factura.Secuencia.ToString();
                         devolucionIva.ClaveAccesoSRI = pinForm.ClaveAccesoSRI;
-                        devolucionIva.montoIvaDevolver = _factura.getIVA();
+                        devolucionIva.montoIvaDevolver = pinForm.montoIvaDevolver;    //_factura.getIVA();  cambiar por el valor a delvolver jchid 
                         devolucionIva.cliente = _factura.ClienteIdentificacion;
                         devolucionIva.estado = "I";
 
