@@ -178,7 +178,7 @@ namespace POS.Control.Security
                         if (hasPendingChecklists == 1)
                         {
                             //System.Windows.Forms.MessageBox.Show("El local tiene checklists pendientes. Solicite que se regularice en administración y vuelva a abrir POS");
-                            Common.General.GetMensajeToList(610);
+                            Common.General.GetMensajeToList(701);
 
                             Control.Common.GlobalParameters.MustCloseApplication = true;
                             System.Windows.Forms.Application.Exit();
