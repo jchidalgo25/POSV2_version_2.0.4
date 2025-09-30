@@ -150,6 +150,7 @@ namespace POS.Control.Pagos
                 lblIva.Text = objNC.cabNotaCredito.iva.ToString("###,###,###,##0.00");
                 lblTotal.Text = objNC.cabNotaCredito.total.ToString("###,###,###,##0.00");
                 lblmontoIvaDevolver.Text = "0";
+                devIvaFac.Text = objNC.cabNotaCredito.montoIvaDevolver.ToString("###,###,###,##0.00");
                 radLabelDesc2.Text = objNC.cabNotaCredito.descuento2.ToString("###,###,###,##0.00"); // TRAER DESCUENTOS 2 PARA EL CASO DE LOS DESCUENTO DE EMPLEADOS O DESCUENTOS PROMOCIONALES A LA TOTALIDAD DE LA FACTURA
                 //if (objNC.cabNotaCredito.descuento2 != 0 && objNC.cabNotaCredito.descuento2 != null)
 
@@ -861,7 +862,7 @@ namespace POS.Control.Pagos
                     }
 
 
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.FormaNotaCredito", "btnGrabar_Click", $" CodigoRespuesta: {objRespuesta.CodigoRespuesta} ");
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.FormaNotaCredito", "btnGrabar_Click", $" CodigoRespuesta: {objRespuesta.CodigoRespuesta} ");
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.FormaNotaCredito", "btnGrabar_Click", $" MensajeRespuesta: {objRespuesta.MensajeRespuesta} ");
 
 
@@ -893,6 +894,7 @@ namespace POS.Control.Pagos
                             devolucionIva.numDocumento = txtNum.Text;
                             devolucionIva.ClaveAccesoSRI = ClaveAccesoSRI;
                             devolucionIva.cliente = lblCedula.Text;
+                            devolucionIva.montoIvaDevolver = IvaDevolver;
                             devolucionIva.estado = "G";
 
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "FormaNotaCredito", "ejecutaGrabarUDT ", $"Ejecuta metodo  grabaDevolucionIVA");
@@ -2411,17 +2413,18 @@ namespace POS.Control.Pagos
             recibo_NC = recibo_NC.Replace("<<iva>>", Control.Common.StringHelper.DevolverConPadding(IvaSel.ToString("N2"), 65));
 
 
-            if (_facturaActual.aplicaBeneficioDevolucionIVA)
-            {
-                recibo_NC = recibo_NC.Replace("<<montoIvaDevolver>>", _facturaActual.montoIvaDevolver.ToString());
-            }
+            //if (_facturaActual.aplicaBeneficioDevolucionIVA)
+            //{
+            //    recibo_NC = recibo_NC.Replace("<<montoIvaDevolver>>", _facturaActual.montoIvaDevolver.ToString());
+            //}
 
             decimal IvaDevolver = decimal.Parse(lblmontoIvaDevolver.Text);
 
             if (IvaDevolver != 0)
             {
-                recibo_NC = recibo_NC.Replace("<<montoIvaDevolver>>", Control.Common.StringHelper.DevolverConPadding(lblmontoIvaDevolver.Text, 65));
+                recibo_NC = recibo_NC.Replace("<<iva2>>", Control.Common.StringHelper.DevolverConPadding(lblmontoIvaDevolver.Text, 65)); // cambio para que devuelva el IVA correcto
             }
+            
 
 
 

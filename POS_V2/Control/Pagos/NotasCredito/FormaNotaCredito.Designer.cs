@@ -83,6 +83,8 @@
             this.lblmontoIvaDevolver = new Telerik.WinControls.UI.RadLabel();
             this.radLabel7 = new Telerik.WinControls.UI.RadLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.devIvaFac = new Telerik.WinControls.UI.RadLabel();
+            this.radLabel12 = new Telerik.WinControls.UI.RadLabel();
             this.radLabelDesc2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabeldescuentodos = new Telerik.WinControls.UI.RadLabel();
             this.secNotaCredito = new Telerik.WinControls.UI.RadLabel();
@@ -127,6 +129,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblmontoIvaDevolver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.devIvaFac)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelDesc2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabeldescuentodos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secNotaCredito)).BeginInit();
@@ -355,7 +359,7 @@
             // 
             // 
             // 
-            this.lblDscto.RootElement.ControlBounds = new System.Drawing.Rectangle(147, 48, 100, 18);
+            this.lblDscto.RootElement.ControlBounds = new System.Drawing.Rectangle(102, 48, 100, 18);
             this.lblDscto.Size = new System.Drawing.Size(126, 21);
             this.lblDscto.TabIndex = 22;
             this.lblDscto.Text = "#####";
@@ -385,7 +389,7 @@
             // 
             // 
             // 
-            this.lblSubtotal.RootElement.ControlBounds = new System.Drawing.Rectangle(147, 21, 100, 18);
+            this.lblSubtotal.RootElement.ControlBounds = new System.Drawing.Rectangle(102, 21, 100, 18);
             this.lblSubtotal.Size = new System.Drawing.Size(126, 21);
             this.lblSubtotal.TabIndex = 20;
             this.lblSubtotal.Text = "#####";
@@ -410,12 +414,12 @@
             this.lblTotal.AutoSize = false;
             this.lblTotal.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(102, 149);
+            this.lblTotal.Location = new System.Drawing.Point(102, 167);
             this.lblTotal.Name = "lblTotal";
             // 
             // 
             // 
-            this.lblTotal.RootElement.ControlBounds = new System.Drawing.Rectangle(147, 149, 100, 18);
+            this.lblTotal.RootElement.ControlBounds = new System.Drawing.Rectangle(102, 167, 100, 18);
             this.lblTotal.Size = new System.Drawing.Size(126, 21);
             this.lblTotal.TabIndex = 26;
             this.lblTotal.Text = "#####";
@@ -425,12 +429,12 @@
             // 
             this.radLabel8.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel8.Location = new System.Drawing.Point(44, 145);
+            this.radLabel8.Location = new System.Drawing.Point(44, 163);
             this.radLabel8.Name = "radLabel8";
             // 
             // 
             // 
-            this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(44, 145, 100, 18);
+            this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(44, 163, 100, 18);
             this.radLabel8.Size = new System.Drawing.Size(52, 25);
             this.radLabel8.TabIndex = 25;
             this.radLabel8.Text = "Total:";
@@ -445,7 +449,7 @@
             // 
             // 
             // 
-            this.lblIva.RootElement.ControlBounds = new System.Drawing.Rectangle(147, 116, 100, 18);
+            this.lblIva.RootElement.ControlBounds = new System.Drawing.Rectangle(102, 116, 100, 18);
             this.lblIva.Size = new System.Drawing.Size(126, 21);
             this.lblIva.TabIndex = 24;
             this.lblIva.Text = "#####";
@@ -482,7 +486,7 @@
             this.cmbFecha.Size = new System.Drawing.Size(145, 30);
             this.cmbFecha.TabIndex = 28;
             this.cmbFecha.TabStop = false;
-            this.cmbFecha.Text = "28/9/2016";
+            this.cmbFecha.Text = "9/28/2016";
             this.cmbFecha.ThemeName = "TelerikMetroTouch";
             this.cmbFecha.Value = new System.DateTime(2016, 9, 28, 14, 35, 43, 190);
             ((Telerik.WinControls.UI.RadDateTimePickerElement)(this.cmbFecha.GetChildAt(0))).CalendarSize = new System.Drawing.Size(300, 300);
@@ -787,7 +791,7 @@
             // 
             this.radLabel7.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel7.Location = new System.Drawing.Point(33, 128);
+            this.radLabel7.Location = new System.Drawing.Point(33, 136);
             this.radLabel7.Name = "radLabel7";
             // 
             // 
@@ -799,6 +803,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.devIvaFac);
+            this.groupBox2.Controls.Add(this.radLabel12);
             this.groupBox2.Controls.Add(this.radLabelDesc2);
             this.groupBox2.Controls.Add(this.radLabeldescuentodos);
             this.groupBox2.Controls.Add(this.radLabel6);
@@ -817,6 +823,36 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Total Documento";
             // 
+            // devIvaFac
+            // 
+            this.devIvaFac.AutoSize = false;
+            this.devIvaFac.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.devIvaFac.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.devIvaFac.Location = new System.Drawing.Point(147, 144);
+            this.devIvaFac.Name = "devIvaFac";
+            // 
+            // 
+            // 
+            this.devIvaFac.RootElement.ControlBounds = new System.Drawing.Rectangle(147, 144, 100, 18);
+            this.devIvaFac.Size = new System.Drawing.Size(81, 21);
+            this.devIvaFac.TabIndex = 32;
+            this.devIvaFac.Text = "#####";
+            this.devIvaFac.TextAlignment = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // radLabel12
+            // 
+            this.radLabel12.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.radLabel12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radLabel12.Location = new System.Drawing.Point(30, 138);
+            this.radLabel12.Name = "radLabel12";
+            // 
+            // 
+            // 
+            this.radLabel12.RootElement.ControlBounds = new System.Drawing.Rectangle(30, 138, 100, 18);
+            this.radLabel12.Size = new System.Drawing.Size(74, 25);
+            this.radLabel12.TabIndex = 32;
+            this.radLabel12.Text = "Dev. Iva:";
+            // 
             // radLabelDesc2
             // 
             this.radLabelDesc2.AutoSize = false;
@@ -827,7 +863,7 @@
             // 
             // 
             // 
-            this.radLabelDesc2.RootElement.ControlBounds = new System.Drawing.Rectangle(147, 81, 100, 18);
+            this.radLabelDesc2.RootElement.ControlBounds = new System.Drawing.Rectangle(102, 81, 100, 18);
             this.radLabelDesc2.Size = new System.Drawing.Size(126, 19);
             this.radLabelDesc2.TabIndex = 28;
             this.radLabelDesc2.Text = "#####";
@@ -942,6 +978,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.devIvaFac)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelDesc2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabeldescuentodos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secNotaCredito)).EndInit();
@@ -1000,5 +1038,7 @@
         private Telerik.WinControls.UI.RadLabel radLabeldescueSe;
         private Telerik.WinControls.UI.RadLabel radLabelDesc2;
         private Telerik.WinControls.UI.RadLabel radLabeldescuentodos;
+        private Telerik.WinControls.UI.RadLabel devIvaFac;
+        private Telerik.WinControls.UI.RadLabel radLabel12;
     }
 }

@@ -40,7 +40,7 @@ using POS.Control.Main.MainTouch;
 using POS.Models.DevolucionIVA;
 using System.Data.Entity.SqlServer; // Necesario para SqlFunctions
 using POS.Models.SRI;
-using POS.Control.Main.MainTouchClte;
+//using POS.Control.Main.MainTouchClte;
 //using POS.Services;
 
 namespace POS
@@ -103,7 +103,7 @@ namespace POS
         //private BackgroundWorker backgroundWorkerMensajes;
         // En MainWindow.cs o clase donde lo estés creando
         private frmMainTouchClte frmTouchClte;
-        private frmPromocionPantallaCliente frmPromocionPantallaCliente;
+        //private frmPromocionPantallaCliente frmPromocionPantallaCliente;
 
         //loading object
         private frmLoading loading;
@@ -3457,8 +3457,8 @@ namespace POS
                 if (Control.Common.GlobalParameters.PANTALLA_CLIENTE)
                 {
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow(Constructor)", "frmTouchClte");
-                    //frmTouchClte = Control.Common.GlobalParameters.frmTouchClte;
-                    frmPromocionPantallaCliente = Control.Common.GlobalParameters.frmPromocionPantallaCliente;
+                    frmTouchClte = Control.Common.GlobalParameters.frmTouchClte;
+                    //frmPromocionPantallaCliente = Control.Common.GlobalParameters.frmPromocionPantallaCliente;
                 };
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow(Constructor)", "tokenResponse");
@@ -14544,90 +14544,139 @@ namespace POS
 
                             }
                             st8 = stopwatch.ElapsedMilliseconds;
+                            //jchid end cambio para impresion por contador de cupones
+                            //foreach (var fc in _factura.Cupon)
+                            //{
+                            //    if (fc.Unico)
+                            //    {
+                            //        if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
+                            //        {
+
+                            //            //Control.Common.Printer.Imprimir(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11);
+                            //            Task.Run(() => ImprimirSeguro(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11));
+                            //        }
+                            //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
+                            //        //imprimir(fc.Texto);
+                            //    }
+                            //    else
+                            //    {
+                            //        for (int i = 1; i <= Math.Truncate(_factura.GetTotal() / fc.Valor); i++)
+                            //        {
+                            //            ///Cupon con GiftCard
+                            //            if (fc.Giftcard == true)
+                            //            {
+                            //                string coded = "11" + i.ToString().PadLeft(2, '0') + (_factura.getNumeroFacturaGiftcard().Replace("-", "")).Replace("F", "");
+
+                            //                var pos = new POSEntities();
+                            //                var giftcard = new core_giftcard();
+                            //                giftcard.fecha_creacion = DateTime.Now;
+                            //                giftcard.fecha_modificacion = DateTime.Now;
+                            //                giftcard.fecha_activacion = DateTime.Now;
+                            //                giftcard.fecha_expiracion = DateTime.Now.AddDays(1);
+                            //                giftcard.activo = true;
+                            //                giftcard.bono = true;
+                            //                giftcard.codigo = coded;
+                            //                giftcard.saldo = fc.Valorgiftcard;
+
+                            //                giftcard.monto = 0;
+                            //                giftcard.tipoTransaccion = "";
+                            //                giftcard.tipoTransaccionId = 0;
+
+                            //                pos.core_giftcard.Add(giftcard);
+                            //                pos.SaveChanges();
+
+                            //                ////Agregar lineas de insert
+                            //                //Control.Common.Logger.Agregar_Trace_Giftcard(giftcard);
+
+                            //                //StringBuilder lineas_impresion = new StringBuilder();
+                            //                //addCL(printer, lineas_impresion, fc.Texto);
+
+                            //                //Barcode bc = new Barcode();
+                            //                //coded = bc.encodeString(coded);
+                            //                //addCL(printer, lineas_impresion, "<barcode>" + "" + coded + "</barcode>");
+                            //                //printer.TextToPrint = lineas_impresion.ToString();
+                            //                //printer.Print();
+
+                            //                // Preparar el texto de impresión
+                            //                StringBuilder lineas_impresion = new StringBuilder();
+                            //                addCL(null, lineas_impresion, fc.Texto);   // si addCL requiere printer, lo ajustamos
+                            //                Barcode bc = new Barcode();
+                            //                coded = bc.encodeString(coded);
+                            //                addCL(null, lineas_impresion, "<barcode>" + coded + "</barcode>");
+
+                            //                // Enviar a imprimir de forma segura
+                            //                Task.Run(() => ImprimirSeguro(lineas_impresion.ToString(), 3, 11));
+
+                            //            }
+                            //            else
+                            //            {
+                            //                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click"
+                            //                , "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
+                            //                + "ClienteIdentificacion: " + _factura.ClienteIdentificacion
+                            //               + "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
+                            //                );
+
+
+                            //                if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
+                            //                {
+                            //                    //Control.Common.Printer.ExportarPDF(fc.Texto, 3, 11);
+                            //                    //Control.Common.Printer.Imprimir(fc.Texto, 3, 11);
+                            //                    Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11));
+                            //                }
+
+                            //                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
+                            //            }
+                            //        }
+                            //    }
+                            //}
+                            //jchid end cambio para impresion por contador de cupones
+                            int contadorCupones = 0; // NUEVO: Declaramos un contador antes de empezar el loop.
+
                             foreach (var fc in _factura.Cupon)
                             {
-                                if (fc.Unico)
+                                contadorCupones++; // NUEVO: Incrementamos el contador en cada pasada.
+
+                                if (fc.Giftcard == true)
                                 {
-                                    if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
+                                    // --- Lógica para imprimir un cupón de tipo Giftcard ---
+
+                                    // CORREGIDO: Usamos la nueva variable 'contadorCupones' en lugar de 'i'.
+                                    string coded = "11" + contadorCupones.ToString().PadLeft(2, '0') + (_factura.getNumeroFacturaGiftcard().Replace("-", "")).Replace("F", "");
+
+                                    var pos = new POSEntities();
+                                    var giftcard = new core_giftcard
                                     {
-                                        
-                                        //Control.Common.Printer.Imprimir(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11);
-                                        Task.Run(() => ImprimirSeguro(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11));
-                                    }
-                                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
-                                    //imprimir(fc.Texto);
+                                        fecha_creacion = DateTime.Now,
+                                        fecha_modificacion = DateTime.Now,
+                                        fecha_activacion = DateTime.Now,
+                                        fecha_expiracion = DateTime.Now.AddDays(1),
+                                        activo = true,
+                                        bono = true,
+                                        codigo = coded,
+                                        saldo = fc.Valorgiftcard,
+                                        monto = 0,
+                                        tipoTransaccion = "",
+                                        tipoTransaccionId = 0
+                                    };
+
+                                    pos.core_giftcard.Add(giftcard);
+                                    pos.SaveChanges();
+
+                                    // **IMPORTANTE**: Tu lógica de impresión de giftcard va aquí.
+                                    Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11)); // Ajusta esto si el texto de la giftcard es diferente
                                 }
                                 else
                                 {
-                                    for (int i = 1; i <= Math.Truncate(_factura.GetTotal() / fc.Valor); i++)
+                                    // --- Lógica para imprimir un cupón normal ---
+                                    if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
                                     {
-                                        ///Cupon con GiftCard
-                                        if (fc.Giftcard == true)
-                                        {
-                                            string coded = "11" + i.ToString().PadLeft(2, '0') + (_factura.getNumeroFacturaGiftcard().Replace("-", "")).Replace("F", "");
-
-                                            var pos = new POSEntities();
-                                            var giftcard = new core_giftcard();
-                                            giftcard.fecha_creacion = DateTime.Now;
-                                            giftcard.fecha_modificacion = DateTime.Now;
-                                            giftcard.fecha_activacion = DateTime.Now;
-                                            giftcard.fecha_expiracion = DateTime.Now.AddDays(1);
-                                            giftcard.activo = true;
-                                            giftcard.bono = true;
-                                            giftcard.codigo = coded;
-                                            giftcard.saldo = fc.Valorgiftcard;
-
-                                            giftcard.monto = 0;
-                                            giftcard.tipoTransaccion = "";
-                                            giftcard.tipoTransaccionId = 0;
-
-                                            pos.core_giftcard.Add(giftcard);
-                                            pos.SaveChanges();
-
-                                            ////Agregar lineas de insert
-                                            //Control.Common.Logger.Agregar_Trace_Giftcard(giftcard);
-
-                                            //StringBuilder lineas_impresion = new StringBuilder();
-                                            //addCL(printer, lineas_impresion, fc.Texto);
-
-                                            //Barcode bc = new Barcode();
-                                            //coded = bc.encodeString(coded);
-                                            //addCL(printer, lineas_impresion, "<barcode>" + "" + coded + "</barcode>");
-                                            //printer.TextToPrint = lineas_impresion.ToString();
-                                            //printer.Print();
-
-                                            // Preparar el texto de impresión
-                                            StringBuilder lineas_impresion = new StringBuilder();
-                                            addCL(null, lineas_impresion, fc.Texto);   // si addCL requiere printer, lo ajustamos
-                                            Barcode bc = new Barcode();
-                                            coded = bc.encodeString(coded);
-                                            addCL(null, lineas_impresion, "<barcode>" + coded + "</barcode>");
-
-                                            // Enviar a imprimir de forma segura
-                                            Task.Run(() => ImprimirSeguro(lineas_impresion.ToString(), 3, 11));
-
-                                        }
-                                        else
-                                        {
-                                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click"
-                                            , "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
-                                            + "ClienteIdentificacion: " + _factura.ClienteIdentificacion
-                                           + "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
-                                            );
-
-
-                                            if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
-                                            {
-                                                //Control.Common.Printer.ExportarPDF(fc.Texto, 3, 11);
-                                                //Control.Common.Printer.Imprimir(fc.Texto, 3, 11);
-                                                Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11));
-                                            }
-
-                                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
-                                        }
+                                        Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11));
                                     }
                                 }
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
                             }
+
+
                             st9 = stopwatch.ElapsedMilliseconds;
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "foreach (var fc in _factura.Cupon)", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
 
@@ -21398,7 +21447,8 @@ namespace POS
                 {
                     string txtfilecab = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Cab.txt";
                     //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-                    txtfilecab = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                    //txtfilecab = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                    txtfilecab = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoCab); //jchid valide la conexion en ruta localZZ
                     bool EsEmpleadoLiris = false;
 
 
@@ -21464,7 +21514,8 @@ namespace POS
 
                     string txtfiledet = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Det.txt";
                     //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-                    txtfiledet = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                    //txtfiledet = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                    txtfiledet = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoDet); //jchid valide la conexion en ruta local
 
                     if (File.Exists(txtfiledet))
                     {
@@ -21572,7 +21623,8 @@ namespace POS
 
                     string txtfilepag = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Pag.txt";
                     //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-                    txtfilepag = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoPag);
+                    //txtfilepag = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoPag);
+                    txtfilepag = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoPag);  //jchid valide la conexion en ruta local
 
                     if (File.Exists(txtfilepag))
                     {
@@ -22314,6 +22366,14 @@ namespace POS
                 POS.Control.Common.GlobalParameters.DBIdCaja = POS.Control.Common.GlobalParameters.DBIdCajaLocal;
                 return POS.Control.Common.GlobalParameters.DBIdCajaLocal + idPOS + tipo;
             }
+        }
+
+
+        private string ObtenerRutaLocalTmpFile(string idPOS, string tipo)
+        {
+   
+            POS.Control.Common.GlobalParameters.DBIdCaja = POS.Control.Common.GlobalParameters.DBIdCajaLocal;
+            return POS.Control.Common.GlobalParameters.DBIdCajaLocal + idPOS + tipo;
         }
 
         private bool QuickBestGuessAboutAccessibilityOfNetworkPath(string path)
@@ -23477,21 +23537,24 @@ namespace POS
 
             string txtfilecab = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Cab.txt";
             //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-            txtfilecab = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+            //txtfilecab = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+            txtfilecab = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoCab);  // jchid validar solo en la ruta local
 
             if (File.Exists(txtfilecab))
                 existe = true;
 
             string txtfiledet = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Det.txt";
             //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-            txtfiledet = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+            //txtfiledet = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+            txtfiledet = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoDet);  // jchid validar solo en la ruta local
 
             if (File.Exists(txtfiledet))
                 existe = true;
 
             string txtfilepag = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Pag.txt";
             //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-            txtfilepag = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoPag);
+            //txtfilepag = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoPag);
+            txtfilepag = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoPag);  // jchid validar solo en la ruta local 
 
             if (File.Exists(txtfilepag))
                 existe = true;
