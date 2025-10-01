@@ -14545,136 +14545,136 @@ namespace POS
                             }
                             st8 = stopwatch.ElapsedMilliseconds;
                             //jchid end cambio para impresion por contador de cupones
-                            foreach (var fc in _factura.Cupon)
-                            {
-                                if (fc.Unico)
-                                {
-                                    if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
-                                    {
-
-                                        //Control.Common.Printer.Imprimir(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11);
-                                        Task.Run(() => ImprimirSeguro(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11));
-                                    }
-                                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
-                                    //imprimir(fc.Texto);
-                                }
-                                else
-                                {
-                                    for (int i = 1; i <= Math.Truncate(_factura.GetTotal() / fc.Valor); i++)
-                                    {
-                                        ///Cupon con GiftCard
-                                        if (fc.Giftcard == true)
-                                        {
-                                            string coded = "11" + i.ToString().PadLeft(2, '0') + (_factura.getNumeroFacturaGiftcard().Replace("-", "")).Replace("F", "");
-
-                                            var pos = new POSEntities();
-                                            var giftcard = new core_giftcard();
-                                            giftcard.fecha_creacion = DateTime.Now;
-                                            giftcard.fecha_modificacion = DateTime.Now;
-                                            giftcard.fecha_activacion = DateTime.Now;
-                                            giftcard.fecha_expiracion = DateTime.Now.AddDays(1);
-                                            giftcard.activo = true;
-                                            giftcard.bono = true;
-                                            giftcard.codigo = coded;
-                                            giftcard.saldo = fc.Valorgiftcard;
-
-                                            giftcard.monto = 0;
-                                            giftcard.tipoTransaccion = "";
-                                            giftcard.tipoTransaccionId = 0;
-
-                                            pos.core_giftcard.Add(giftcard);
-                                            pos.SaveChanges();
-
-                                            ////Agregar lineas de insert
-                                            //Control.Common.Logger.Agregar_Trace_Giftcard(giftcard);
-
-                                            //StringBuilder lineas_impresion = new StringBuilder();
-                                            //addCL(printer, lineas_impresion, fc.Texto);
-
-                                            //Barcode bc = new Barcode();
-                                            //coded = bc.encodeString(coded);
-                                            //addCL(printer, lineas_impresion, "<barcode>" + "" + coded + "</barcode>");
-                                            //printer.TextToPrint = lineas_impresion.ToString();
-                                            //printer.Print();
-
-                                            // Preparar el texto de impresión
-                                            StringBuilder lineas_impresion = new StringBuilder();
-                                            addCL(null, lineas_impresion, fc.Texto);   // si addCL requiere printer, lo ajustamos
-                                            Barcode bc = new Barcode();
-                                            coded = bc.encodeString(coded);
-                                            addCL(null, lineas_impresion, "<barcode>" + coded + "</barcode>");
-
-                                            // Enviar a imprimir de forma segura
-                                            Task.Run(() => ImprimirSeguro(lineas_impresion.ToString(), 3, 11));
-
-                                        }
-                                        else
-                                        {
-                                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click"
-                                            , "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
-                                            + "ClienteIdentificacion: " + _factura.ClienteIdentificacion
-                                           + "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
-                                            );
-
-
-                                            if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
-                                            {
-                                                //Control.Common.Printer.ExportarPDF(fc.Texto, 3, 11);
-                                                //Control.Common.Printer.Imprimir(fc.Texto, 3, 11);
-                                                Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11));
-                                            }
-
-                                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
-                                        }
-                                    }
-                                }
-                            }
-                            //jchid end cambio para impresion por contador de cupones
-                            //int contadorCupones = 0; // NUEVO: Declaramos un contador antes de empezar el loop.
-
                             //foreach (var fc in _factura.Cupon)
                             //{
-                            //    contadorCupones++; // NUEVO: Incrementamos el contador en cada pasada.
-
-                            //    if (fc.Giftcard == true)
+                            //    if (fc.Unico)
                             //    {
-                            //        // --- Lógica para imprimir un cupón de tipo Giftcard ---
-
-                            //        // CORREGIDO: Usamos la nueva variable 'contadorCupones' en lugar de 'i'.
-                            //        string coded = "11" + contadorCupones.ToString().PadLeft(2, '0') + (_factura.getNumeroFacturaGiftcard().Replace("-", "")).Replace("F", "");
-
-                            //        var pos = new POSEntities();
-                            //        var giftcard = new core_giftcard
+                            //        if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
                             //        {
-                            //            fecha_creacion = DateTime.Now,
-                            //            fecha_modificacion = DateTime.Now,
-                            //            fecha_activacion = DateTime.Now,
-                            //            fecha_expiracion = DateTime.Now.AddDays(1),
-                            //            activo = true,
-                            //            bono = true,
-                            //            codigo = coded,
-                            //            saldo = fc.Valorgiftcard,
-                            //            monto = 0,
-                            //            tipoTransaccion = "",
-                            //            tipoTransaccionId = 0
-                            //        };
 
-                            //        pos.core_giftcard.Add(giftcard);
-                            //        pos.SaveChanges();
-
-                            //        // **IMPORTANTE**: Tu lógica de impresión de giftcard va aquí.
-                            //        Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11)); // Ajusta esto si el texto de la giftcard es diferente
+                            //            //Control.Common.Printer.Imprimir(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11);
+                            //            Task.Run(() => ImprimirSeguro(fc.Texto, (fc.Referencia == "PERDIDAPARQUEO") ? 5 : 3, 11));
+                            //        }
+                            //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
+                            //        //imprimir(fc.Texto);
                             //    }
                             //    else
                             //    {
-                            //        // --- Lógica para imprimir un cupón normal ---
-                            //        if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
+                            //        for (int i = 1; i <= Math.Truncate(_factura.GetTotal() / fc.Valor); i++)
                             //        {
-                            //            Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11));
+                            //            ///Cupon con GiftCard
+                            //            if (fc.Giftcard == true)
+                            //            {
+                            //                string coded = "11" + i.ToString().PadLeft(2, '0') + (_factura.getNumeroFacturaGiftcard().Replace("-", "")).Replace("F", "");
+
+                            //                var pos = new POSEntities();
+                            //                var giftcard = new core_giftcard();
+                            //                giftcard.fecha_creacion = DateTime.Now;
+                            //                giftcard.fecha_modificacion = DateTime.Now;
+                            //                giftcard.fecha_activacion = DateTime.Now;
+                            //                giftcard.fecha_expiracion = DateTime.Now.AddDays(1);
+                            //                giftcard.activo = true;
+                            //                giftcard.bono = true;
+                            //                giftcard.codigo = coded;
+                            //                giftcard.saldo = fc.Valorgiftcard;
+
+                            //                giftcard.monto = 0;
+                            //                giftcard.tipoTransaccion = "";
+                            //                giftcard.tipoTransaccionId = 0;
+
+                            //                pos.core_giftcard.Add(giftcard);
+                            //                pos.SaveChanges();
+
+                            //                ////Agregar lineas de insert
+                            //                //Control.Common.Logger.Agregar_Trace_Giftcard(giftcard);
+
+                            //                //StringBuilder lineas_impresion = new StringBuilder();
+                            //                //addCL(printer, lineas_impresion, fc.Texto);
+
+                            //                //Barcode bc = new Barcode();
+                            //                //coded = bc.encodeString(coded);
+                            //                //addCL(printer, lineas_impresion, "<barcode>" + "" + coded + "</barcode>");
+                            //                //printer.TextToPrint = lineas_impresion.ToString();
+                            //                //printer.Print();
+
+                            //                // Preparar el texto de impresión
+                            //                StringBuilder lineas_impresion = new StringBuilder();
+                            //                addCL(null, lineas_impresion, fc.Texto);   // si addCL requiere printer, lo ajustamos
+                            //                Barcode bc = new Barcode();
+                            //                coded = bc.encodeString(coded);
+                            //                addCL(null, lineas_impresion, "<barcode>" + coded + "</barcode>");
+
+                            //                // Enviar a imprimir de forma segura
+                            //                Task.Run(() => ImprimirSeguro(lineas_impresion.ToString(), 3, 11));
+
+                            //            }
+                            //            else
+                            //            {
+                            //                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click"
+                            //                , "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
+                            //                + "ClienteIdentificacion: " + _factura.ClienteIdentificacion
+                            //               + "fc.Valorgiftcard: " + fc.Valorgiftcard.ToString()
+                            //                );
+
+
+                            //                if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
+                            //                {
+                            //                    //Control.Common.Printer.ExportarPDF(fc.Texto, 3, 11);
+                            //                    //Control.Common.Printer.Imprimir(fc.Texto, 3, 11);
+                            //                    Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11));
+                            //                }
+
+                            //                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
+                            //            }
                             //        }
                             //    }
-                            //    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
                             //}
+                            //jchid end cambio para impresion por contador de cupones
+                            int contadorCupones = 0; // NUEVO: Declaramos un contador antes de empezar el loop.
+
+                            foreach (var fc in _factura.Cupon)
+                            {
+                                contadorCupones++; // NUEVO: Incrementamos el contador en cada pasada.
+
+                                if (fc.Giftcard == true)
+                                {
+                                    // --- Lógica para imprimir un cupón de tipo Giftcard ---
+
+                                    // CORREGIDO: Usamos la nueva variable 'contadorCupones' en lugar de 'i'.
+                                    string coded = "11" + contadorCupones.ToString().PadLeft(2, '0') + (_factura.getNumeroFacturaGiftcard().Replace("-", "")).Replace("F", "");
+
+                                    var pos = new POSEntities();
+                                    var giftcard = new core_giftcard
+                                    {
+                                        fecha_creacion = DateTime.Now,
+                                        fecha_modificacion = DateTime.Now,
+                                        fecha_activacion = DateTime.Now,
+                                        fecha_expiracion = DateTime.Now.AddDays(1),
+                                        activo = true,
+                                        bono = true,
+                                        codigo = coded,
+                                        saldo = fc.Valorgiftcard,
+                                        monto = 0,
+                                        tipoTransaccion = "",
+                                        tipoTransaccionId = 0
+                                    };
+
+                                    pos.core_giftcard.Add(giftcard);
+                                    pos.SaveChanges();
+
+                                    // **IMPORTANTE**: Tu lógica de impresión de giftcard va aquí.
+                                    Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11)); // Ajusta esto si el texto de la giftcard es diferente
+                                }
+                                else
+                                {
+                                    // --- Lógica para imprimir un cupón normal ---
+                                    if ((fc.Valorgiftcard != 999M) || (_factura.ClienteIdentificacion != "9999999999999" && fc.Valorgiftcard == 999M))
+                                    {
+                                        Task.Run(() => ImprimirSeguro(fc.Texto, 3, 11));
+                                    }
+                                }
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar", "Se imprime cupon correctamente");
+                            }
                             //jchid end cambio para impresion por contador de cupones
 
                             st9 = stopwatch.ElapsedMilliseconds;

@@ -6514,8 +6514,9 @@ namespace POS.Control.Pagos
             //jchid Giftcard que empiezan con 99 
            
             bool omitirConsultaLocal = numeroTarjeta?.StartsWith("99") == true;
+            bool omitirTarjetaConsultaLocal = numeroTarjeta?.StartsWith("13") == true;
 
-            if (!omitirConsultaLocal)
+            if (!omitirConsultaLocal || !omitirTarjetaConsultaLocal)
             {
                 // 3. Primera consulta: Tarjeta Genérica en LOCAL (último parámetro = true)
                 bool encontradoLocal = t.getTarjetaGen(ValorOriginalTarjeta, "", false, true);
