@@ -4745,7 +4745,6 @@ namespace POS
 
                 using (POSEntities db = new POSEntities())
                 {
-                    // 1. Buscar cupón en BD
                     var cupon = db.core_TarjetaDescuento
                         .Where(x => x.codigo == codigoCupon && x.numeroFactura == -1)
                         .FirstOrDefault();
@@ -5233,7 +5232,10 @@ namespace POS
                         "IntentarAplicarCupon");
 
                 var cuponAplicado = IntentarAplicarCupon(codigo);
-                
+
+                //// Guardar estado temporal
+                GuardarEstadoTemporal(codigo);
+
                 // 3. Intentar aplicar cupón
                 if (cuponAplicado)
                 {
@@ -5272,6 +5274,7 @@ namespace POS
                         $"Buscando producto con código: {codigo}");
 
                     getProducto(codigo);
+                    // APLICAR DESCUENTO AQUÍ
 
                     Control.Common.Logger.LogMessage(
                         Control.Common.Enum.LogTypes.Info,
@@ -9251,6 +9254,8 @@ namespace POS
             if (ReversaDevolucionIVA_Items()) return;
 
             ////Reiniciar descuentos            
+            /// se dejan comentadas las lineas porque se cambió la ubicación del reinicio de descuentos ax para que no entre en conflicto con el descuento por CUPON
+            /// ahora se reinician los descuentos en actualizarDescuentoPromocionAX() en Producto.cs
             //existente.Descuento = 0M;
             //existente.DescuentoActual = 0M;
             //existente.DescuentoPorCombinacion = 0M;
@@ -9299,8 +9304,8 @@ namespace POS
                 existente.agregarAdicional(pesobascula + (getCantidadXCaja(codigo) - 1));
             }
 
-            // Aplicar promociones
-            //AplicarPromocionesAX(existente, codigo);
+            // Aplicar promociones  // SE DESCOMENTÓ ESTA LÍNEA OPOZO
+            AplicarPromocionesAX(existente, codigo);
 
             //// ⚠️ Validar si ya se aplicó cupón antes de update
             //bool yaTieneCupon = existente.DescuentosCupon != null &&
@@ -9342,10 +9347,11 @@ namespace POS
                 _factura.Pagos.Clear();
             }
 
-            // Reaplicar descuentos acumulados
-            //ReaplicarDescuentosAcumulados(existente);
+            // Reaplicar descuentos acumulados 
+            // se descomentan estas líneas para que convivan DESCUENTOS PROMOCIÓN Y DESCUENTOS CUPONES opozo
+            ReaplicarDescuentosAcumulados(existente);
 
-            //AplicarDescuentoCuponPromocional(existente, codigo);
+            AplicarDescuentoCuponPromocional(existente, codigo);
         }
         private void ManejarNuevoProducto(string codigo, string operador)
         {
@@ -17203,13 +17209,12 @@ namespace POS
                     qty.ShowDialog();
                     //var item = _factura.Productos.Last();
                     var item = gridItems.SelectedRows[0].DataBoundItem as POS.Models.Producto;
-
                     //if (focused.Text.ToString() != "")
                     if (qty.txtQty.Text != "")
                     {
                         if (item.Unidad.ToUpper() == "UND")
                         {
-                            var producto = new Producto();
+                            //var producto = new Producto();
                             //item.Cantidad = int.Parse(focused.Text.ToString()) - 1;
                             //item.Unidades = int.Parse(focused.Text.ToString()) - 1;
                             if (qty.q > item.Cantidad)
@@ -17217,8 +17222,9 @@ namespace POS
                                 item.Cantidad = qty.q - 1;
                                 item.CantidadINEC = item.Cantidad;
                                 item.Unidades = qty.q - 1;
-
+                                
                                 getProducto(item.Id);
+
                             }
                             else
                             {

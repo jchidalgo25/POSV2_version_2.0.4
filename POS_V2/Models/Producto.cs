@@ -304,7 +304,11 @@ namespace POS.Models
                 $"Evaluando promociones AX para producto {this.Id}");
 
             // Limpiar descuento AX previo
-            this.DescuentoAX = 0;
+            // AHORA SE LIMPIAN LOS DESCUENTOS AQUÍ PARA DESCUENTOS PROMOCIÓN Y DESCUENTOS CUPONES
+            this.DescuentoAX = 0M;
+            this.DescuentoActual = 0M;
+            this.DescuentoPorCombinacion = 0M;
+
 
             //cambiar estaa lista
 
@@ -323,6 +327,7 @@ namespace POS.Models
             // Obtener todas las reglas de descuento para este producto desde la vista
             using (var db = new POSEntities())
             {
+
                 var promocionesItem = db.vw_DescuentosDetalleAX
                     .Where(x => x.ITEMID == this.Id &&
                                 x.POS == 1) // Solo promociones para POS
@@ -334,7 +339,6 @@ namespace POS.Models
                 var datosRelacionados = (from r1 in promocionesItem
                                          join r2 in _listProductosDescuentos on r1.REFRECID equals r2.RecId
                                          select r1).ToList();
-
 
                 // Buscar la mejor promoción aplicable
                 var mejorRegla = datosRelacionados.FirstOrDefault(x =>
@@ -352,6 +356,19 @@ namespace POS.Models
                 var promoActiva = promocionesValidas.FirstOrDefault(p => p.RecId == mejorRegla.REFRECID);
                 if (promoActiva == null)
                     return;
+
+                decimal cantidadMinimaDecimal = mejorRegla.CANTIDAD;
+                int cantidadMinima = (int)Math.Floor(cantidadMinimaDecimal);
+
+                if (this.Cantidad < cantidadMinima)
+                {
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Warning,
+                        "Producto",
+                        metodo,
+                        $"Cantidad insuficiente para aplicar descuento. Producto: {this.Id}, Cantidad: {this.Cantidad:F2}, Mínima: {cantidadMinima}");
+                    return;
+                }
 
                 // Validar si es restrictiva
                 if (promoActiva.EsRestrictiva)
@@ -514,12 +531,14 @@ namespace POS.Models
                 //Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Producto", metodo,
                 //    $"Aplicado {mejorRegla.DESCUENTO}% de descuento AX a {this.Id} (cantidad: {cantidadParaDscto}, valor: {descuentoAplicado:C})");
                 // 9. Aplicar descuento
-                if (cantidadParaDscto > 0)
+                if (cantidadParaDscto >= mejorRegla.CANTIDAD)
                 {
                     decimal descuentoAplicado = (mejorRegla.DESCUENTO / 100M) *
                         Math.Round(this.Pvp * cantidadParaDscto, 2, MidpointRounding.AwayFromZero);
 
                     this.DescuentoAX = descuentoAplicado;
+
+                    //this.update();
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Producto", metodo,
                         $"Aplicado {mejorRegla.DESCUENTO}% de descuento AX a {this.Id} " +
