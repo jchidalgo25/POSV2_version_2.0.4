@@ -4605,7 +4605,7 @@ namespace POS.Control.Pagos
 
                                 try
                                 {
-                                    string QueryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] '" + clteEmpleado2.Identificacion + "' ";
+                                    string QueryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] '" + this._factura.ClienteIdentificacion + "' ";
 
                                     if (Control.Common.GlobalParameters.ConServerPuntos != "")
                                     {
@@ -4627,30 +4627,31 @@ namespace POS.Control.Pagos
                                                         _tarjetaRegalo = t;
                                                         dValorGiftCard = decimal.Parse(dr.GetValue(3).ToString());
 
-                                                        if (valor  > saldoFacturaPago)
-                                                        {
-                                                            this.BeginInvoke((MethodInvoker)delegate
-                                                            {
-                                                                Control.Common.General.GetMensajeToList(689);
-                                                            });
-                                                            return;
-                                                           
-                                                        }
+                                                        // Se comenta estas validaciones para que no salga error al cliente al leer sus giftcard con estado 1 -opozo . Se me ocurre hacer esta validación pero con el saldogifcard que se recibe de la vista "vieInvCustomerRevision"
+                                                        //if (valor > saldoFacturaPago)
+                                                        //{
+                                                        //    this.BeginInvoke((MethodInvoker)delegate
+                                                        //    {
+                                                        //        Control.Common.General.GetMensajeToList(689);
+                                                        //    });
+                                                        //    return;
+
+                                                        //}
 
 
 
-                                                        if (valor > dValorGiftCard)
-                                                        {
+                                                        //if (valor > dValorGiftCard)
+                                                        //{
 
-                                                            this.BeginInvoke((MethodInvoker)delegate
-                                                            {
-                                                                //Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "Exec [PtsCliente].[spConsultaGiftCardAppGen]", "error en Saldo de las GIFT CARDV");  jchid validacion de la GIFTCARDV 
-                                                                Control.Common.General.GetMensajeToList(180);
-                                                            });
+                                                        //    this.BeginInvoke((MethodInvoker)delegate
+                                                        //    {
+                                                        //        //Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "Exec [PtsCliente].[spConsultaGiftCardAppGen]", "error en Saldo de las GIFT CARDV");  jchid validacion de la GIFTCARDV 
+                                                        //        Control.Common.General.GetMensajeToList(180);
+                                                        //    });
 
-                                                            
-                                                            return;
-                                                        }
+
+                                                        //    return;
+                                                        //}
 
 
 
