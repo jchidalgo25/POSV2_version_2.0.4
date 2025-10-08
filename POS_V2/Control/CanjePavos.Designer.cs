@@ -40,6 +40,8 @@
             this.lblPeso = new Telerik.WinControls.UI.RadLabel();
             this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
             this.txtProducto = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel6 = new Telerik.WinControls.UI.RadLabel();
+            this.lblNombre = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodCanje)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnValidar)).BeginInit();
@@ -51,6 +53,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblPeso)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProducto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNombre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,7 +104,7 @@
             // radLabel3
             // 
             this.radLabel3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel3.Location = new System.Drawing.Point(12, 257);
+            this.radLabel3.Location = new System.Drawing.Point(12, 281);
             this.radLabel3.Name = "radLabel3";
             this.radLabel3.Size = new System.Drawing.Size(104, 30);
             this.radLabel3.TabIndex = 27;
@@ -110,7 +114,7 @@
             // radLabel4
             // 
             this.radLabel4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel4.Location = new System.Drawing.Point(12, 295);
+            this.radLabel4.Location = new System.Drawing.Point(12, 314);
             this.radLabel4.Name = "radLabel4";
             this.radLabel4.Size = new System.Drawing.Size(63, 30);
             this.radLabel4.TabIndex = 28;
@@ -120,7 +124,7 @@
             // lblCliente
             // 
             this.lblCliente.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCliente.Location = new System.Drawing.Point(151, 219);
+            this.lblCliente.Location = new System.Drawing.Point(162, 218);
             this.lblCliente.Name = "lblCliente";
             this.lblCliente.Size = new System.Drawing.Size(2, 2);
             this.lblCliente.TabIndex = 29;
@@ -129,7 +133,7 @@
             // lblItem
             // 
             this.lblItem.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblItem.Location = new System.Drawing.Point(150, 257);
+            this.lblItem.Location = new System.Drawing.Point(162, 282);
             this.lblItem.Name = "lblItem";
             this.lblItem.Size = new System.Drawing.Size(2, 2);
             this.lblItem.TabIndex = 30;
@@ -138,7 +142,7 @@
             // lblPeso
             // 
             this.lblPeso.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeso.Location = new System.Drawing.Point(151, 296);
+            this.lblPeso.Location = new System.Drawing.Point(162, 314);
             this.lblPeso.Name = "lblPeso";
             this.lblPeso.Size = new System.Drawing.Size(2, 2);
             this.lblPeso.TabIndex = 31;
@@ -166,6 +170,25 @@
             this.txtProducto.TabStop = false;
             this.txtProducto.ThemeName = "TelerikMetroTouch";
             // 
+            // radLabel6
+            // 
+            this.radLabel6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radLabel6.Location = new System.Drawing.Point(12, 249);
+            this.radLabel6.Name = "radLabel6";
+            this.radLabel6.Size = new System.Drawing.Size(135, 30);
+            this.radLabel6.TabIndex = 27;
+            this.radLabel6.Text = "Razón Social: ";
+            this.radLabel6.ThemeName = "TelerikMetroTouch";
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.Location = new System.Drawing.Point(162, 250);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(2, 2);
+            this.lblNombre.TabIndex = 30;
+            this.lblNombre.ThemeName = "TelerikMetroTouch";
+            // 
             // CanjePavos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,6 +198,8 @@
             inputBinding1.Chord = null;
             this.CommandBindings.AddRange(new Telerik.WinControls.Keyboard.InputBinding[] {
             inputBinding1});
+            this.Controls.Add(this.lblNombre);
+            this.Controls.Add(this.radLabel6);
             this.Controls.Add(this.txtProducto);
             this.Controls.Add(this.radLabel5);
             this.Controls.Add(this.lblPeso);
@@ -210,6 +235,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblPeso)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProducto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNombre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -229,5 +256,7 @@
         private Telerik.WinControls.UI.RadLabel lblPeso;
         private Telerik.WinControls.UI.RadLabel radLabel5;
         private Telerik.WinControls.UI.RadTextBox txtProducto;
+        private Telerik.WinControls.UI.RadLabel radLabel6;
+        private Telerik.WinControls.UI.RadLabel lblNombre;
     }
 }

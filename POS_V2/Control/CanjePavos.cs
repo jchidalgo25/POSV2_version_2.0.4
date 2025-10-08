@@ -18,10 +18,23 @@ namespace POS.Control
     {
         string cliente;
         string producto;
+        string nombrecliente;
+        string nombreproducto;
         Factura _factura;
+
+        
+        private bool _validando; // evita reentradas
+
         public CanjePavos()
         {
             InitializeComponent();
+            // Capturar Enter en ambos campos
+            txtCodCanje.KeyDown += OnEnterPressed;
+            txtProducto.KeyDown += OnEnterPressed;
+
+            // Recomendado: asegurarte que no sean Multiline
+            txtCodCanje.Multiline = false;
+            txtProducto.Multiline = false;
         }
 
         public CanjePavos(Factura factura) : this()
@@ -33,25 +46,77 @@ namespace POS.Control
         {
 
         }
+        
 
-        private void btnValidar_Click(object sender, EventArgs e)
+        private void OnEnterPressed(object sender, KeyEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCodCanje.Text))
+            if (e.KeyCode != Keys.Enter || e.KeyCode == Keys.Tab) return;
+
+            e.SuppressKeyPress = true; // evita el “beep”
+            e.Handled = true;
+
+            // Si estoy en Código y el producto está vacío, pasar el foco al producto
+            if (sender == txtCodCanje && string.IsNullOrWhiteSpace(txtProducto.Text))
+            {
+                txtProducto.Focus();
+                
+            }
+
+            // Si estoy en Producto y el código está vacío, pasar el foco al código
+            if (sender == txtProducto && string.IsNullOrWhiteSpace(txtCodCanje.Text))
             {
                 Control.Common.General.GetMensajeToList(696);
+                
+                txtProducto.Text = "";
+                
+                lblItem.Text = "";
+               
                 txtCodCanje.Focus();
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtProducto.Text))
+            TryValidateNow();
+        }
+
+        private void TryValidateNow()
+        {
+            if (_validando) return;
+            
+            var cod = txtCodCanje.Text?.Trim();
+            var prod = txtProducto.Text?.Trim();
+            //if (string.IsNullOrWhiteSpace(cod) || string.IsNullOrWhiteSpace(prod)) return;
+
+            try
             {
-                Control.Common.General.GetMensajeToList(697);
-                txtProducto.Focus();
-                return;
+                _validando = true;
+                // Reutiliza tu lógica existente del botón:
+                btnValidar_Click(btnValidar, EventArgs.Empty);
+                // o: btnValidar.PerformClick();
             }
-            else
+            finally
             {
-                if(validarCodigo(txtCodCanje.Text, txtProducto.Text))
+                _validando = false;
+            }
+        }
+
+    private void btnValidar_Click(object sender, EventArgs e)
+        {
+            //if (string.IsNullOrEmpty(txtCodCanje.Text))
+            //{
+            //    Control.Common.General.GetMensajeToList(696);
+            //    txtCodCanje.Focus();
+            //    return;
+            //}
+
+            //if (string.IsNullOrEmpty(txtProducto.Text))
+            //{
+            //    Control.Common.General.GetMensajeToList(697);
+            //    txtProducto.Focus();
+            //    return;
+            //}
+            //else
+            //{
+                if(validarCodigo(txtCodCanje.Text, txtProducto.Text) && !string.IsNullOrWhiteSpace(txtProducto.Text))
                 {
                     //pedir pesaje de item
                     string EstablecimientoAxCode = Control.Common.GlobalParameters.EstablecimientoAxCode;
@@ -77,16 +142,20 @@ namespace POS.Control
 
                     //si peso es mayor mensaje de error
 
-                    if (this.validarPeso(lblItem.Text, pesoKg))
+                    if (this.validarPeso(this.producto, pesoKg))
                     {
                         this.crearOV_AddItemAX(EstablecimientoAxCode, txtCodCanje.Text, pesoLb);
                     }
+                    else
+                    {
+                        lblPeso.Text = "";
+                    }
                     
-                }
+                //}
             }
         }
 
-        private bool validarCodigo(string codigo, string producto)
+        private bool validarCodigo(string codigo, string producto="")
         {
 
             bool result = false;
@@ -108,16 +177,28 @@ namespace POS.Control
 
                         int msg = dr.IsDBNull(0) ? 694 : dr.GetInt32(0);
                         cliente = dr.IsDBNull(1) ? null : dr.GetString(1);
-                        producto = dr.IsDBNull(2) ? null : dr.GetString(2);
+                        this.producto = dr.IsDBNull(2) ? null : dr.GetString(2);
+                        nombrecliente = dr.IsDBNull(3) ? null : dr.GetString(3);
+                        nombreproducto = dr.IsDBNull(4) ? null : dr.GetString(4);
+
 
                         if (msg != 0)
                         {
+                            if (msg == 694)
+                                txtCodCanje.Focus();
                             Control.Common.General.GetMensajeToList(msg);
+                            txtCodCanje.Text = "";
+                            txtProducto.Text = "";
+                            lblCliente.Text = "";
+                            lblItem.Text = "";
+                            lblNombre.Text = "";
+                            
                             return false;
                         }
 
                         lblCliente.Text = cliente;
-                        lblItem.Text = producto;
+                        lblNombre.Text = nombrecliente.ToUpper();
+                        lblItem.Text = nombreproducto.ToUpper();
 
                     }
 
@@ -139,7 +220,7 @@ namespace POS.Control
 
             return result;
         }
-      
+        
         private bool validarPeso(string producto, decimal pesoKg)
             {
                 string cadenaCon = Control.Common.GlobalParameters.ConServerPuntos;
@@ -195,7 +276,13 @@ namespace POS.Control
                                 new ParametrosMensajes { codigo = "[DIFERENCIA]", valor = diferenciaKg.ToString("N2") }
                             };
                             Control.Common.General.GetMensajeToList(690, parametros);
-                       
+                            txtCodCanje.Text = "";
+                            txtProducto.Text = "";
+                            lblCliente.Text = "";
+                            lblItem.Text = "";
+                            lblNombre.Text = "";
+                            lblPeso.Text = "";
+
                         //MessageBox.Show("El Pavo excede el peso permitido en "+ diferenciaKg+" Kg");
                         return false;
 
@@ -214,11 +301,23 @@ namespace POS.Control
                                 if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
                                 {
                                     Control.Common.General.GetMensajeToList(692);
-                                }
+                                    txtCodCanje.Text = "";
+                                    txtProducto.Text = "";
+                                    lblCliente.Text = "";
+                                    lblItem.Text = "";
+                                    lblNombre.Text = "";
+                                    lblPeso.Text = "";
+                            }
                                 else
                                 {
                                     Control.Common.General.GetMensajeToList(700);
-                                    return false;
+                                    txtCodCanje.Text = "";
+                                    txtProducto.Text = "";
+                                    lblCliente.Text = "";
+                                    lblItem.Text = "";
+                                    lblNombre.Text = "";
+                                    lblPeso.Text = "";
+                                return false;
                                 }
 
                             }
@@ -301,6 +400,12 @@ namespace POS.Control
                         {
                         // Loguea el detalle devuelto por el SP (errores del WS, etc.)
                         Control.Common.General.GetMensajeToList(699);
+                        txtCodCanje.Text = "";
+                        txtProducto.Text = "";
+                        lblCliente.Text = "";
+                        lblItem.Text = "";
+                        lblNombre.Text = "";
+                        lblPeso.Text = "";
                         Control.Common.Logger.LogMessage(
                                 Control.Common.Enum.LogTypes.Info,
                                 "Control/CanjePavos",
@@ -310,11 +415,7 @@ namespace POS.Control
                         }
 
                     Control.Common.General.GetMensajeToList(698);
-                    txtCodCanje.Text = "";
-                    txtProducto.Text = "";
-                    lblCliente.Text = "";
-                    lblItem.Text = "";
-                    lblPeso.Text = "";
+                    
                     return ok;
                     }
                 }
