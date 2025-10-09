@@ -4617,8 +4617,11 @@ namespace POS.Control.Pagos
                                             IAsyncResult iar = select.BeginExecuteReader();
                                             SqlDataReader dr = (SqlDataReader)select.EndExecuteReader(iar);
 
+                                            var saldosCliente = MetodosBilletera.RecuperaSaldosPorIdentificacion(clteEmpleado2.Identificacion);
+                                            decimal saldoGiftCardTotal = saldosCliente.SaldoGifCard; // cambios version 220 - opozo - giftcard
+                                            
 
-                                            while (dr.Read())
+                                            while (dr.Read()) 
                                             {
                                                 if (t.getTarjetaGen(dr.GetValue(1).ToString(), dr.GetValue(2).ToString(), true) && valor > 0)
                                                 {
@@ -4639,7 +4642,7 @@ namespace POS.Control.Pagos
 
 
 
-                                                        if (valor > dValorGiftCard)
+                                                        if (valor > saldoGiftCardTotal) // se compara el valor de la factura (restante) contra el valor saldo giftcard del cliente - opozo
                                                         {
 
                                                             this.BeginInvoke((MethodInvoker)delegate
@@ -4657,12 +4660,15 @@ namespace POS.Control.Pagos
                                                         if (valor <= dValorGiftCard)
                                                         {
                                                             _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARDV");
+                                                            saldoGiftCardTotal -= valor; // se resta el total del valor de la factura a mi auxiliar de saldo giftcard del cliente - opozo
                                                             valor = 0;
                                                         }
                                                         else
                                                         {
                                                             _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARDV");
+                                                            saldoGiftCardTotal -= valor; // se resta el valor de mi saldo giftcard - opozo
                                                             valor = valor - dValorGiftCard;
+                                                            
                                                         }
                                                         this.Close();
                                                     }
@@ -6514,8 +6520,9 @@ namespace POS.Control.Pagos
             //jchid Giftcard que empiezan con 99 
            
             bool omitirConsultaLocal = numeroTarjeta?.StartsWith("99") == true;
+            bool omitirTarjetaConsultaLocal = numeroTarjeta?.StartsWith("13") == true;  // código de la version 219 - opozo
 
-            if (!omitirConsultaLocal)
+            if (!omitirConsultaLocal || !omitirTarjetaConsultaLocal) // código de la versión 219 - opozo
             {
                 // 3. Primera consulta: Tarjeta Genérica en LOCAL (último parámetro = true)
                 bool encontradoLocal = t.getTarjetaGen(ValorOriginalTarjeta, "", false, true);
@@ -6549,7 +6556,7 @@ namespace POS.Control.Pagos
                     Control.Common.Enum.LogTypes.Info,
                     "POS.Control.Pagos.BasePagos",
                     "ProcesarValidacionTarjetaRegalo",
-                    $"Tarjeta con prefijo 99 detectada: {ValorOriginalTarjeta}. Omitiendo consulta local, consultando directamente en global..."
+                    $"Tarjeta con prefijo 99 o 13 detectada: {ValorOriginalTarjeta}. Omitiendo consulta local, consultando directamente en global..."
                 );
             }
 
