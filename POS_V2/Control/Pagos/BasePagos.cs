@@ -6522,7 +6522,7 @@ namespace POS.Control.Pagos
             bool omitirConsultaLocal = numeroTarjeta?.StartsWith("99") == true;
             bool omitirTarjetaConsultaLocal = numeroTarjeta?.StartsWith("13") == true;  // código de la version 219 - opozo
 
-            if (!omitirConsultaLocal || !omitirTarjetaConsultaLocal) // código de la versión 219 - opozo
+            if (!(omitirConsultaLocal || omitirTarjetaConsultaLocal)) // código de la versión 219 - opozo
             {
                 // 3. Primera consulta: Tarjeta Genérica en LOCAL (último parámetro = true)
                 bool encontradoLocal = t.getTarjetaGen(ValorOriginalTarjeta, "", false, true);
