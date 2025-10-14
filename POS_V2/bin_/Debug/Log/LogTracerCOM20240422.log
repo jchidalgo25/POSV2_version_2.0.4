@@ -1,0 +1,2 @@
+19:17:18.1079099	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=6500 iBaudios=115200 iBits=8 TimeOut=65000
+19:17:18.1238871	ERROR : Exception: El puerto 'COM6500' no existe.

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IntegracionPedidos": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Environment": "DEVELOPMENT"
+      }
+    }
+  }
+}

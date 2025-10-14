@@ -1,0 +1,103 @@
+07:17:28.5749281	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=300000
+07:17:28.5749281	ERROR : Exception: El puerto 'COM9' no existe.
+12:08:07.1531461	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=3000
+12:08:07.2691461	ERROR : Exception: El puerto 'COM9' no existe.
+12:09:13.7691461	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=300000
+12:09:13.8211461	DEBUG : SendPinpad Se envia trama de seguridad al puerto COM9 TramaSeguridad=SH564E3ABAF8C28505
+12:09:14.8241461	DEBUG : SendPinpad Trama de Seguridad Leo la respuesta enviada por el pinpad Resp.=SHA5CE550A699A58DAd
+12:09:14.8651461	DEBUG : SendPinpad Autorizacion se envia trama al puerto COM9 Trama=LT
+12:09:15.8651461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:16.8671461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:17.8671461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:18.8671461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:19.8671461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:21.1011461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:22.1011461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:23.1011461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:24.4191461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:09:25.4221461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=LT2000                                                                     TRANS CANCELADA     !
+12:09:25.4221461	DEBUG : SendPinpad Autorizacion evaluo si la trama de respuesta es correcta calculo el LRC=!
+12:09:25.4231461	DEBUG : SendPinpad Autorizacion LRC de respuesta es correcto envio ACK y salgo del ciclo respuesta=LT2000                                                                     TRANS CANCELADA     !
+12:09:25.4251461	DEBUG : SendPinpad Autorizacion se envia respuesta a la caja respuesta=LT2000                                                                     TRANS CANCELADA     
+12:10:18.0861461	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=3000000
+12:10:18.0921461	DEBUG : SendPinpad Se envia trama de seguridad al puerto COM9 TramaSeguridad=SHFEA6F6434842982Df
+12:10:19.0921461	DEBUG : SendPinpad Trama de Seguridad Leo la respuesta enviada por el pinpad Resp.=SHFBC5BE200528D2E6e
+12:10:19.1011461	DEBUG : SendPinpad Autorizacion se envia trama al puerto COM9 Trama=CP192.168.126.242255.255.255.0  192.168.126.1                                            10.10.30.100   7784                             
+12:10:20.1051461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:10:21.1061461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:10:22.1071461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=CP00CONFIG. PROCESADA   h
+12:10:22.1071461	DEBUG : SendPinpad Autorizacion evaluo si la trama de respuesta es correcta calculo el LRC=h
+12:10:22.1071461	DEBUG : SendPinpad Autorizacion LRC de respuesta es correcto envio ACK y salgo del ciclo respuesta=CP00CONFIG. PROCESADA   h
+12:10:22.1081461	DEBUG : SendPinpad Autorizacion se envia respuesta a la caja respuesta=CP00CONFIG. PROCESADA   
+12:11:17.5421461	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=300000
+12:11:17.5451461	DEBUG : SendPinpad Se envia trama de seguridad al puerto COM9 TramaSeguridad=SH5E8F81E14FBCBC35
+12:11:18.5511461	DEBUG : SendPinpad Trama de Seguridad Leo la respuesta enviada por el pinpad Resp.=SHBF436F96742B37FD
+12:11:18.5571461	DEBUG : SendPinpad Autorizacion se envia trama al puerto COM9 Trama=PP0220103   000000000058000000000051000000000000000000000007                                          12111720170324      000000813005   LR000001011998                             
+12:11:19.5581461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:20.5591461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:21.5601461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:22.5601461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:23.5611461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:24.5611461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:25.5961461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:26.6911461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:27.6921461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:28.6921461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:29.6931461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:30.6941461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:31.6941461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:32.6951461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:33.6961461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:34.6961461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:35.6971461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:36.6971461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:11:37.6981461	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=PP000200AUTORIZACION OK.    00000800000112111720170324114292LR000001000000813005   000000000002                                                                                                                 MASTERCARD/MAESTRO       03ALARCON/FRANCISCA                                   MASTERCARD                                                                                   519209XXXXXX2018         2010ED1ECF634F7E6B3F5A8EA8E70FAE55DEF49BF8CC                          -
+12:11:37.6991461	DEBUG : SendPinpad Autorizacion evaluo si la trama de respuesta es correcta calculo el LRC=-
+12:11:37.7001461	DEBUG : SendPinpad Autorizacion LRC de respuesta es correcto envio ACK y salgo del ciclo respuesta=PP000200AUTORIZACION OK.    00000800000112111720170324114292LR000001000000813005   000000000002                                                                                                                 MASTERCARD/MAESTRO       03ALARCON/FRANCISCA                                   MASTERCARD                                                                                   519209XXXXXX2018         2010ED1ECF634F7E6B3F5A8EA8E70FAE55DEF49BF8CC                          -
+12:11:37.7121461	DEBUG : SendPinpad Autorizacion se envia respuesta a la caja respuesta=PP000200AUTORIZACION OK.    00000800000112111720170324114292LR000001000000813005   000000000002                                                                                                                 MASTERCARD/MAESTRO       03ALARCON/FRANCISCA                                   MASTERCARD                                                                                   519209XXXXXX2018         2010ED1ECF634F7E6B3F5A8EA8E70FAE55DEF49BF8CC                          
+13:33:53.3311550	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=300000
+13:33:53.3421649	ERROR : Exception: El puerto 'COM9' no existe.
+11:02:31.7991666	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=300000
+11:02:31.9291614	DEBUG : SendPinpad Se envia trama de seguridad al puerto COM9 TramaSeguridad=SHCC26FEC15B9B4DCD
+11:02:32.9291214	DEBUG : SendPinpad Trama de Seguridad Leo la respuesta enviada por el pinpad Resp.=SH7F3D1A63456F4846
+11:02:32.9291214	DEBUG : SendPinpad Autorizacion se envia trama al puerto COM9 Trama=PC0000010000010000020000071              1       000000813005   LR000001011999         
+11:02:33.9390810	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:02:34.9390410	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:02:35.9390010	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:02:36.9389610	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:02:37.9389210	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:02:38.9388810	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:02:39.9388410	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:02:40.9388010	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=PC0000AUTORIZADO          
+11:02:40.9388010	DEBUG : SendPinpad Autorizacion evaluo si la trama de respuesta es correcta calculo el LRC=
+11:02:40.9388010	DEBUG : SendPinpad Autorizacion LRC de respuesta es correcto envio ACK y salgo del ciclo respuesta=PC0000AUTORIZADO          
+11:02:40.9388010	DEBUG : SendPinpad Autorizacion se envia respuesta a la caja respuesta=PC0000AUTORIZADO          
+11:14:29.1266938	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=300000
+11:14:29.1766938	DEBUG : SendPinpad Se envia trama de seguridad al puerto COM9 TramaSeguridad=SH92B43F63F6E73B96i
+11:14:30.1766938	DEBUG : SendPinpad Trama de Seguridad Leo la respuesta enviada por el pinpad Resp.=SH34071C1709927CBD
+11:14:30.1966938	DEBUG : SendPinpad Autorizacion se envia trama al puerto COM9 Trama=PC0000010000010000020000071              1       000000813005   LR000001011999         
+11:14:31.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:14:32.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:14:33.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:14:34.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:14:35.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:14:36.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:14:37.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+11:14:38.1966938	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=PC0000AUTORIZADO          
+11:14:38.1966938	DEBUG : SendPinpad Autorizacion evaluo si la trama de respuesta es correcta calculo el LRC=
+11:14:38.1966938	DEBUG : SendPinpad Autorizacion LRC de respuesta es correcto envio ACK y salgo del ciclo respuesta=PC0000AUTORIZADO          
+11:14:38.1966938	DEBUG : SendPinpad Autorizacion se envia respuesta a la caja respuesta=PC0000AUTORIZADO          
+12:54:10.9096380	DEBUG : SendPinpad cargamos la configuracion para la libreria DriverVerifone32  Puerto=9 iBaudios=115200 iBits=8 TimeOut=300000
+12:54:10.9876400	DEBUG : SendPinpad Se envia trama de seguridad al puerto COM9 TramaSeguridad=SH698531E8C35A2E1Cd
+12:54:12.0016660	DEBUG : SendPinpad Trama de Seguridad Leo la respuesta enviada por el pinpad Resp.=SH0EAA28A9DDB4BA31h
+12:54:12.0016660	DEBUG : SendPinpad Autorizacion se envia trama al puerto COM9 Trama=PC0000010000010000020000071              1       000000813005   LR000001011999         
+12:54:13.0156920	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:54:14.0297180	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:54:15.0437440	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:54:16.0577700	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:54:17.0717960	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:54:18.0858220	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=
+12:54:19.1310488	DEBUG : SendPinpad Autorizacion leo la respuesta enviada por el pinpad Resp.=PC0000AUTORIZADO          
+12:54:19.1310488	DEBUG : SendPinpad Autorizacion evaluo si la trama de respuesta es correcta calculo el LRC=
+12:54:19.1310488	DEBUG : SendPinpad Autorizacion LRC de respuesta es correcto envio ACK y salgo del ciclo respuesta=PC0000AUTORIZADO          
+12:54:19.1466492	DEBUG : SendPinpad Autorizacion se envia respuesta a la caja respuesta=PC0000AUTORIZADO          

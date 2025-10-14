@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CorrBanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblRecaudaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRecaudacionTran" Type="int" />
+          <Property Name="TipoTransaccion" Type="smallint" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="Trama" Type="varchar(max)" />
+          <Property Name="Equipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LstCatalogosRecaudo">
+          <Key>
+            <PropertyRef Name="IdCatalogosRecaudo" />
+          </Key>
+          <Property Name="IdCatalogosRecaudo" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTabla" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="FechaCreacion" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LstCatalogosRecaudoDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCatalogosRecaudo" Type="smallint" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="FechaCreacion" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LstIRecaudos">
+          <Key>
+            <PropertyRef Name="IdIRecaudos" />
+          </Key>
+          <Property Name="IdIRecaudos" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoCorrBan" Type="smallint" Nullable="false" />
+          <Property Name="CodigoEmpresa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NombreEntidad" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SubTipo" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="FechaCreacion" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="smalldatetime" Nullable="false" />
+          <Property Name="UsuarioCrea" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsuarioModifica" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Min" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Max" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="AplicaAbono" Type="bit" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Logo" Type="varchar" MaxLength="60" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LstReglasRecaudos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdIRecaudos" Type="smallint" Nullable="false" />
+          <Property Name="IdTipoServicio" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TipoServicio" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="CampoObliga" Type="varchar" MaxLength="100" />
+          <Property Name="CampoOpcional" Type="varchar" MaxLength="20" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LstSoapCorrBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TimeOut" Type="smallint" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="FechaCreacion" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LstSoapCorrBanDet">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdLstSoapCarrBan" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLstSoapCarrBan" Type="smallint" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="SoapLiris" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="XsdLiris" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="SoapRedActiva" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="XslConvert" Type="varchar" MaxLength="5000" />
+          <Property Name="FechaCreacion" Type="smalldatetime" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblRecaudaciones1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PkgNo" Type="int" Nullable="false" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cuenta" Type="varchar" MaxLength="30" />
+          <Property Name="Secuencial" Type="int" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="IdIRecaudos" Type="smallint" Nullable="false" />
+          <Property Name="ValorRecaudado" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="SecuencialSara" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Terminal" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Operador" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Canal" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Establecimiento" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="PuntoEmision" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="SecuenciaFactura" Type="varchar" MaxLength="17" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="FechaCreacion" Type="smalldatetime" Nullable="false" />
+          <Property Name="EstadoProceso" Type="smallint" Nullable="false" />
+          <Property Name="UsuarioModifica" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="FechaModificacion" Type="smalldatetime" Nullable="false" />
+          <Property Name="TipoTransCorresponsal" Type="varchar" MaxLength="2" />
+          <Property Name="ActivaId" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="IdCajaApertura" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CorrBan.dbo.vieReqsWF' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vieReqsWF">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Corresponsal" />
+            <PropertyRef Name="CodigoEmpresa" />
+            <PropertyRef Name="SecuencialSara" />
+            <PropertyRef Name="Secuencial" />
+            <PropertyRef Name="Canal" />
+            <PropertyRef Name="Terminal" />
+            <PropertyRef Name="Operador" />
+            <PropertyRef Name="IdRecaudacion" />
+            <PropertyRef Name="IdIRecaudos" />
+            <PropertyRef Name="IdTipoCorrBan" />
+            <PropertyRef Name="CodigoCliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="TipoRecaudo" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="WFTipo" />
+            <PropertyRef Name="WFPkgNo" />
+          </Key>
+          <Property Name="Trama" Type="varchar(max)" />
+          <Property Name="Cuenta" Type="varchar" MaxLength="30" />
+          <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
+          <Property Name="Valor" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Corresponsal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodigoEmpresa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SecuencialSara" Type="int" Nullable="false" />
+          <Property Name="Secuencial" Type="int" Nullable="false" />
+          <Property Name="Canal" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Terminal" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Operador" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="IdRecaudacion" Type="int" Nullable="false" />
+          <Property Name="IdIRecaudos" Type="smallint" Nullable="false" />
+          <Property Name="IdTipoCorrBan" Type="smallint" Nullable="false" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="TipoRecaudo" Type="smallint" Nullable="false" />
+          <Property Name="IdCaja" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="WFEstado" Type="smallint" />
+          <Property Name="WFTipo" Type="smallint" Nullable="false" />
+          <Property Name="WFPkgNo" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo">
+          <End Role="LstCatalogosRecaudo" Type="Self.LstCatalogosRecaudo" Multiplicity="1" />
+          <End Role="LstCatalogosRecaudoDet" Type="Self.LstCatalogosRecaudoDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstCatalogosRecaudo">
+              <PropertyRef Name="IdCatalogosRecaudo" />
+            </Principal>
+            <Dependent Role="LstCatalogosRecaudoDet">
+              <PropertyRef Name="IdCatalogosRecaudo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LstSoapCorrBanDet_LstSoapCorrBan">
+          <End Role="LstSoapCorrBan" Type="Self.LstSoapCorrBan" Multiplicity="1" />
+          <End Role="LstSoapCorrBanDet" Type="Self.LstSoapCorrBanDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstSoapCorrBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LstSoapCorrBanDet">
+              <PropertyRef Name="IdLstSoapCarrBan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recaudaciones_IRecaudos">
+          <End Role="LstIRecaudos" Type="Self.LstIRecaudos" Multiplicity="1" />
+          <End Role="TblRecaudaciones1" Type="Self.TblRecaudaciones1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstIRecaudos">
+              <PropertyRef Name="IdIRecaudos" />
+            </Principal>
+            <Dependent Role="TblRecaudaciones1">
+              <PropertyRef Name="IdIRecaudos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasRecaudos_IRecaudos">
+          <End Role="LstIRecaudos" Type="Self.LstIRecaudos" Multiplicity="1" />
+          <End Role="LstReglasRecaudos" Type="Self.LstReglasRecaudos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstIRecaudos">
+              <PropertyRef Name="IdIRecaudos" />
+            </Principal>
+            <Dependent Role="LstReglasRecaudos">
+              <PropertyRef Name="IdIRecaudos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblRecaudaciones_LstCatalogosRecaudoDet">
+          <End Role="LstCatalogosRecaudoDet" Type="Self.LstCatalogosRecaudoDet" Multiplicity="1" />
+          <End Role="TblRecaudaciones" Type="Self.TblRecaudaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstCatalogosRecaudoDet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblRecaudaciones">
+              <PropertyRef Name="TipoTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spGetDetCatalogId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nameCab" Type="varchar" Mode="In" />
+          <Parameter Name="nameDet" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spPingRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Xml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="spProcesaRecaudacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Xml" Type="xml" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="spProcesaSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Xml" Type="xml" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="CorrBanModelStoreContainer">
+          <EntitySet Name="TblRecaudaciones" EntityType="Self.TblRecaudaciones" Schema="aud" store:Type="Tables" />
+          <EntitySet Name="LstCatalogosRecaudo" EntityType="Self.LstCatalogosRecaudo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LstCatalogosRecaudoDet" EntityType="Self.LstCatalogosRecaudoDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LstIRecaudos" EntityType="Self.LstIRecaudos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LstReglasRecaudos" EntityType="Self.LstReglasRecaudos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LstSoapCorrBan" EntityType="Self.LstSoapCorrBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LstSoapCorrBanDet" EntityType="Self.LstSoapCorrBanDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblRecaudaciones1" EntityType="Self.TblRecaudaciones1" Schema="dbo" Table="TblRecaudaciones" store:Type="Tables" />
+          <EntitySet Name="vieReqsWF" EntityType="Self.vieReqsWF" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vieReqsWF].[Trama] AS [Trama], 
+    [vieReqsWF].[Cuenta] AS [Cuenta], 
+    [vieReqsWF].[Fecha] AS [Fecha], 
+    [vieReqsWF].[Valor] AS [Valor], 
+    [vieReqsWF].[Corresponsal] AS [Corresponsal], 
+    [vieReqsWF].[CodigoEmpresa] AS [CodigoEmpresa], 
+    [vieReqsWF].[SecuencialSara] AS [SecuencialSara], 
+    [vieReqsWF].[Secuencial] AS [Secuencial], 
+    [vieReqsWF].[Canal] AS [Canal], 
+    [vieReqsWF].[Terminal] AS [Terminal], 
+    [vieReqsWF].[Operador] AS [Operador], 
+    [vieReqsWF].[IdRecaudacion] AS [IdRecaudacion], 
+    [vieReqsWF].[IdIRecaudos] AS [IdIRecaudos], 
+    [vieReqsWF].[IdTipoCorrBan] AS [IdTipoCorrBan], 
+    [vieReqsWF].[CodigoCliente] AS [CodigoCliente], 
+    [vieReqsWF].[Estado] AS [Estado], 
+    [vieReqsWF].[TipoRecaudo] AS [TipoRecaudo], 
+    [vieReqsWF].[IdCaja] AS [IdCaja], 
+    [vieReqsWF].[WFEstado] AS [WFEstado], 
+    [vieReqsWF].[WFTipo] AS [WFTipo], 
+    [vieReqsWF].[WFPkgNo] AS [WFPkgNo]
+    FROM [dbo].[vieReqsWF] AS [vieReqsWF]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo" Association="Self.FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo">
+            <End Role="LstCatalogosRecaudo" EntitySet="LstCatalogosRecaudo" />
+            <End Role="LstCatalogosRecaudoDet" EntitySet="LstCatalogosRecaudoDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LstSoapCorrBanDet_LstSoapCorrBan" Association="Self.FK_LstSoapCorrBanDet_LstSoapCorrBan">
+            <End Role="LstSoapCorrBan" EntitySet="LstSoapCorrBan" />
+            <End Role="LstSoapCorrBanDet" EntitySet="LstSoapCorrBanDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recaudaciones_IRecaudos" Association="Self.FK_Recaudaciones_IRecaudos">
+            <End Role="LstIRecaudos" EntitySet="LstIRecaudos" />
+            <End Role="TblRecaudaciones1" EntitySet="TblRecaudaciones1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasRecaudos_IRecaudos" Association="Self.FK_ReglasRecaudos_IRecaudos">
+            <End Role="LstIRecaudos" EntitySet="LstIRecaudos" />
+            <End Role="LstReglasRecaudos" EntitySet="LstReglasRecaudos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblRecaudaciones_LstCatalogosRecaudoDet" Association="Self.FK_TblRecaudaciones_LstCatalogosRecaudoDet">
+            <End Role="LstCatalogosRecaudoDet" EntitySet="LstCatalogosRecaudoDet" />
+            <End Role="TblRecaudaciones" EntitySet="TblRecaudaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CorrBanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CatalogosRecaudo">
+          <Key>
+            <PropertyRef Name="IdCatalogosRecaudo" />
+          </Key>
+          <Property Name="IdCatalogosRecaudo" Type="Int16" Nullable="false" />
+          <Property Name="IdTabla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="LstCatalogosRecaudoDet" Relationship="Self.FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo" FromRole="LstCatalogosRecaudo" ToRole="LstCatalogosRecaudoDet" />
+        </EntityType>
+        <EntityType Name="CatalogosRecaudoDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" />
+          <Property Name="IdCatalogosRecaudo" Type="Int16" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="LstCatalogosRecaudo" Relationship="Self.FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo" FromRole="LstCatalogosRecaudoDet" ToRole="LstCatalogosRecaudo" />
+          <NavigationProperty Name="TblRecaudaciones" Relationship="CorrBanModel.FK_TblRecaudaciones_LstCatalogosRecaudoDet" FromRole="CatalogosRecaudoDet" ToRole="TblRecaudaciones" />
+        </EntityType>
+        <Association Name="FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo">
+          <End Role="LstCatalogosRecaudo" Type="CorrBanModel.CatalogosRecaudo" Multiplicity="1" />
+          <End Role="LstCatalogosRecaudoDet" Type="CorrBanModel.CatalogosRecaudoDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstCatalogosRecaudo">
+              <PropertyRef Name="IdCatalogosRecaudo" />
+            </Principal>
+            <Dependent Role="LstCatalogosRecaudoDet">
+              <PropertyRef Name="IdCatalogosRecaudo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CorrBanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CatalogosRecaudo" EntityType="CorrBanModel.CatalogosRecaudo" />
+          <EntitySet Name="CatalogosRecaudoDet" EntityType="CorrBanModel.CatalogosRecaudoDet" />
+          <AssociationSet Name="FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo" Association="Self.FK_LstCatalogosRecaudoDet_LstCatalogosRecaudo">
+            <End Role="LstCatalogosRecaudo" EntitySet="CatalogosRecaudo" />
+            <End Role="LstCatalogosRecaudoDet" EntitySet="CatalogosRecaudoDet" />
+          </AssociationSet>
+          <EntitySet Name="ReglasRecaudos" EntityType="CorrBanModel.ReglasRecaudos" />
+          <EntitySet Name="InstRecaudos" EntityType="CorrBanModel.InstRecaudos" />
+          <AssociationSet Name="FK_ReglasRecaudos_IRecaudos" Association="CorrBanModel.FK_ReglasRecaudos_IRecaudos">
+            <End Role="LstIRecaudos" EntitySet="InstRecaudos" />
+            <End Role="ReglasRecaudos" EntitySet="ReglasRecaudos" />
+          </AssociationSet>
+          <FunctionImport Name="spGetDetCatalogId">
+            <Parameter Name="nameCab" Mode="In" Type="String" />
+            <Parameter Name="nameDet" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="SoapCorrBan" EntityType="CorrBanModel.SoapCorrBan" />
+          <EntitySet Name="SoapCorrBanDet" EntityType="CorrBanModel.SoapCorrBanDet" />
+          <AssociationSet Name="FK_LstSoapCorrBanDet_LstSoapCorrBan" Association="CorrBanModel.FK_LstSoapCorrBanDet_LstSoapCorrBan">
+            <End Role="LstSoapCorrBan" EntitySet="SoapCorrBan" />
+            <End Role="LstSoapCorrBanDet" EntitySet="SoapCorrBanDet" />
+          </AssociationSet>
+          <FunctionImport Name="spProcesaSolicitud">
+            <Parameter Name="Xml" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spPingRequest" ReturnType="Collection(String)">
+          <Parameter Name="Xml" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Recaudaciones" EntityType="CorrBanModel.Recaudaciones" />
+          <AssociationSet Name="FK_Recaudaciones_IRecaudos" Association="CorrBanModel.FK_Recaudaciones_IRecaudos">
+            <End Role="InstRecaudos" EntitySet="InstRecaudos" />
+            <End Role="TblRecaudaciones1" EntitySet="Recaudaciones" />
+          </AssociationSet>
+          <EntitySet Name="AudRecaudaciones" EntityType="CorrBanModel.AudRecaudaciones" />
+          <AssociationSet Name="FK_TblRecaudaciones_LstCatalogosRecaudoDet" Association="CorrBanModel.FK_TblRecaudaciones_LstCatalogosRecaudoDet">
+            <End Role="CatalogosRecaudoDet" EntitySet="CatalogosRecaudoDet" />
+            <End Role="TblRecaudaciones" EntitySet="AudRecaudaciones" />
+          </AssociationSet>
+          <FunctionImport Name="spProcesaRecaudacion">
+            <Parameter Name="Xml" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="VieReqsWF" EntityType="CorrBanModel.VieReqsWF" />
+          </EntityContainer>
+        <EntityType Name="ReglasRecaudos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdIRecaudos" Type="Int16" Nullable="false" />
+          <Property Name="IdTipoServicio" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="TipoServicio" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CampoObliga" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CampoOpcional" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LstIRecaudos" Relationship="CorrBanModel.FK_ReglasRecaudos_IRecaudos" FromRole="ReglasRecaudos" ToRole="LstIRecaudos" />
+        </EntityType>
+        <EntityType Name="InstRecaudos">
+          <Key>
+            <PropertyRef Name="IdIRecaudos" />
+          </Key>
+          <Property Name="IdIRecaudos" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoCorrBan" Type="Int16" Nullable="false" />
+          <Property Name="CodigoEmpresa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NombreEntidad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SubTipo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UsuarioCrea" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioModifica" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Min" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="Max" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="AplicaAbono" Type="Boolean" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="Logo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LstReglasRecaudos" Relationship="CorrBanModel.FK_ReglasRecaudos_IRecaudos" FromRole="LstIRecaudos" ToRole="ReglasRecaudos" />
+          <NavigationProperty Name="TblRecaudaciones1" Relationship="CorrBanModel.FK_Recaudaciones_IRecaudos" FromRole="InstRecaudos" ToRole="TblRecaudaciones1" />
+        </EntityType>
+        <Association Name="FK_ReglasRecaudos_IRecaudos">
+          <End Type="CorrBanModel.InstRecaudos" Role="LstIRecaudos" Multiplicity="1" />
+          <End Type="CorrBanModel.ReglasRecaudos" Role="ReglasRecaudos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstIRecaudos">
+              <PropertyRef Name="IdIRecaudos" />
+            </Principal>
+            <Dependent Role="ReglasRecaudos">
+              <PropertyRef Name="IdIRecaudos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SoapCorrBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TimeOut" Type="Int16" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="LstSoapCorrBanDet" Relationship="CorrBanModel.FK_LstSoapCorrBanDet_LstSoapCorrBan" FromRole="LstSoapCorrBan" ToRole="LstSoapCorrBanDet" />
+        </EntityType>
+        <EntityType Name="SoapCorrBanDet">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdLstSoapCarrBan" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLstSoapCarrBan" Type="Int16" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SoapLiris" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="XsdLiris" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="SoapRedActiva" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LstSoapCorrBan" Relationship="CorrBanModel.FK_LstSoapCorrBanDet_LstSoapCorrBan" FromRole="LstSoapCorrBanDet" ToRole="LstSoapCorrBan" />
+          <Property Name="XslConvert" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_LstSoapCorrBanDet_LstSoapCorrBan">
+          <End Type="CorrBanModel.SoapCorrBan" Role="LstSoapCorrBan" Multiplicity="1" />
+          <End Type="CorrBanModel.SoapCorrBanDet" Role="LstSoapCorrBanDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LstSoapCorrBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LstSoapCorrBanDet">
+              <PropertyRef Name="IdLstSoapCarrBan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Recaudaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PkgNo" Type="Int32" Nullable="false" />
+          <Property Name="CodigoCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cuenta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Secuencial" Type="Int32" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdIRecaudos" Type="Int16" Nullable="false" />
+          <Property Name="ValorRecaudado" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="SecuencialSara" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Terminal" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Operador" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Canal" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PuntoEmision" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaFactura" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EstadoProceso" Type="Int16" Nullable="false" />
+          <Property Name="UsuarioModifica" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TipoTransCorresponsal" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LstIRecaudos" Relationship="CorrBanModel.FK_Recaudaciones_IRecaudos" FromRole="TblRecaudaciones1" ToRole="InstRecaudos" />
+          <Property Name="ActivaId" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="IdCajaApertura" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Recaudaciones_IRecaudos">
+          <End Type="CorrBanModel.InstRecaudos" Role="InstRecaudos" Multiplicity="1" />
+          <End Type="CorrBanModel.Recaudaciones" Role="TblRecaudaciones1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstRecaudos">
+              <PropertyRef Name="IdIRecaudos" />
+            </Principal>
+            <Dependent Role="TblRecaudaciones1">
+              <PropertyRef Name="IdIRecaudos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AudRecaudaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRecaudacionTran" Type="Int32" />
+          <Property Name="TipoTransaccion" Type="Int16" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Trama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Equipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LstCatalogosRecaudoDet" Relationship="CorrBanModel.FK_TblRecaudaciones_LstCatalogosRecaudoDet" FromRole="TblRecaudaciones" ToRole="CatalogosRecaudoDet" />
+        </EntityType>
+        <Association Name="FK_TblRecaudaciones_LstCatalogosRecaudoDet">
+          <End Type="CorrBanModel.CatalogosRecaudoDet" Role="CatalogosRecaudoDet" Multiplicity="1" />
+          <End Type="CorrBanModel.AudRecaudaciones" Role="TblRecaudaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogosRecaudoDet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TblRecaudaciones">
+              <PropertyRef Name="TipoTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VieReqsWF">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Corresponsal" />
+            <PropertyRef Name="CodigoEmpresa" />
+            <PropertyRef Name="SecuencialSara" />
+            <PropertyRef Name="Secuencial" />
+            <PropertyRef Name="Canal" />
+            <PropertyRef Name="Terminal" />
+            <PropertyRef Name="Operador" />
+            <PropertyRef Name="IdRecaudacion" />
+            <PropertyRef Name="IdIRecaudos" />
+            <PropertyRef Name="IdTipoCorrBan" />
+            <PropertyRef Name="CodigoCliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="TipoRecaudo" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="WFTipo" />
+            <PropertyRef Name="WFPkgNo" />
+          </Key>
+          <Property Name="Trama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cuenta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="Corresponsal" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoEmpresa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SecuencialSara" Type="Int32" Nullable="false" />
+          <Property Name="Secuencial" Type="Int32" Nullable="false" />
+          <Property Name="Canal" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Terminal" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Operador" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IdRecaudacion" Type="Int32" Nullable="false" />
+          <Property Name="IdIRecaudos" Type="Int16" Nullable="false" />
+          <Property Name="IdTipoCorrBan" Type="Int16" Nullable="false" />
+          <Property Name="CodigoCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="TipoRecaudo" Type="Int16" Nullable="false" />
+          <Property Name="IdCaja" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="WFEstado" Type="Int16" />
+          <Property Name="WFTipo" Type="Int16" Nullable="false" />
+          <Property Name="WFPkgNo" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CorrBanModelStoreContainer" CdmEntityContainer="CorrBanEntities">
+          <EntitySetMapping Name="CatalogosRecaudo">
+            <EntityTypeMapping TypeName="CorrBanModel.CatalogosRecaudo">
+              <MappingFragment StoreEntitySet="LstCatalogosRecaudo">
+                <ScalarProperty Name="IdCatalogosRecaudo" ColumnName="IdCatalogosRecaudo" />
+                <ScalarProperty Name="IdTabla" ColumnName="IdTabla" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatalogosRecaudoDet">
+            <EntityTypeMapping TypeName="CorrBanModel.CatalogosRecaudoDet">
+              <MappingFragment StoreEntitySet="LstCatalogosRecaudoDet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCatalogosRecaudo" ColumnName="IdCatalogosRecaudo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReglasRecaudos">
+            <EntityTypeMapping TypeName="CorrBanModel.ReglasRecaudos">
+              <MappingFragment StoreEntitySet="LstReglasRecaudos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CampoOpcional" ColumnName="CampoOpcional" />
+                <ScalarProperty Name="CampoObliga" ColumnName="CampoObliga" />
+                <ScalarProperty Name="TipoServicio" ColumnName="TipoServicio" />
+                <ScalarProperty Name="IdTipoServicio" ColumnName="IdTipoServicio" />
+                <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstRecaudos">
+            <EntityTypeMapping TypeName="CorrBanModel.InstRecaudos">
+              <MappingFragment StoreEntitySet="LstIRecaudos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="AplicaAbono" ColumnName="AplicaAbono" />
+                <ScalarProperty Name="Max" ColumnName="Max" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="SubTipo" ColumnName="SubTipo" />
+                <ScalarProperty Name="NombreEntidad" ColumnName="NombreEntidad" />
+                <ScalarProperty Name="CodigoEmpresa" ColumnName="CodigoEmpresa" />
+                <ScalarProperty Name="IdTipoCorrBan" ColumnName="IdTipoCorrBan" />
+                <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetDetCatalogId" FunctionName="CorrBanModel.Store.spGetDetCatalogId" />
+          <EntitySetMapping Name="SoapCorrBan">
+            <EntityTypeMapping TypeName="CorrBanModel.SoapCorrBan">
+              <MappingFragment StoreEntitySet="LstSoapCorrBan">
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoapCorrBanDet">
+            <EntityTypeMapping TypeName="CorrBanModel.SoapCorrBanDet">
+              <MappingFragment StoreEntitySet="LstSoapCorrBanDet">
+                <ScalarProperty Name="XslConvert" ColumnName="XslConvert" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="SoapRedActiva" ColumnName="SoapRedActiva" />
+                <ScalarProperty Name="XsdLiris" ColumnName="XsdLiris" />
+                <ScalarProperty Name="SoapLiris" ColumnName="SoapLiris" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdLstSoapCarrBan" ColumnName="IdLstSoapCarrBan" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spProcesaSolicitud" FunctionName="CorrBanModel.Store.spProcesaSolicitud" />
+          <FunctionImportMapping FunctionImportName="spPingRequest" FunctionName="CorrBanModel.Store.spPingRequest" />
+          <EntitySetMapping Name="Recaudaciones">
+            <EntityTypeMapping TypeName="CorrBanModel.Recaudaciones">
+              <MappingFragment StoreEntitySet="TblRecaudaciones1">
+                <ScalarProperty Name="IdCajaApertura" ColumnName="IdCajaApertura" />
+                <ScalarProperty Name="ActivaId" ColumnName="ActivaId" />
+                <ScalarProperty Name="TipoTransCorresponsal" ColumnName="TipoTransCorresponsal" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="EstadoProceso" ColumnName="EstadoProceso" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="SecuenciaFactura" ColumnName="SecuenciaFactura" />
+                <ScalarProperty Name="PuntoEmision" ColumnName="PuntoEmision" />
+                <ScalarProperty Name="Establecimiento" ColumnName="Establecimiento" />
+                <ScalarProperty Name="Canal" ColumnName="Canal" />
+                <ScalarProperty Name="Operador" ColumnName="Operador" />
+                <ScalarProperty Name="Terminal" ColumnName="Terminal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="SecuencialSara" ColumnName="SecuencialSara" />
+                <ScalarProperty Name="ValorRecaudado" ColumnName="ValorRecaudado" />
+                <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Secuencial" ColumnName="Secuencial" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="PkgNo" ColumnName="PkgNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AudRecaudaciones">
+            <EntityTypeMapping TypeName="CorrBanModel.AudRecaudaciones">
+              <MappingFragment StoreEntitySet="TblRecaudaciones">
+                <ScalarProperty Name="Equipo" ColumnName="Equipo" />
+                <ScalarProperty Name="Trama" ColumnName="Trama" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="TipoTransaccion" ColumnName="TipoTransaccion" />
+                <ScalarProperty Name="IdRecaudacionTran" ColumnName="IdRecaudacionTran" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spProcesaRecaudacion" FunctionName="CorrBanModel.Store.spProcesaRecaudacion" />
+          <EntitySetMapping Name="VieReqsWF">
+            <EntityTypeMapping TypeName="CorrBanModel.VieReqsWF">
+              <MappingFragment StoreEntitySet="vieReqsWF">
+                <ScalarProperty Name="WFPkgNo" ColumnName="WFPkgNo" />
+                <ScalarProperty Name="WFTipo" ColumnName="WFTipo" />
+                <ScalarProperty Name="WFEstado" ColumnName="WFEstado" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="TipoRecaudo" ColumnName="TipoRecaudo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="IdTipoCorrBan" ColumnName="IdTipoCorrBan" />
+                <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+                <ScalarProperty Name="IdRecaudacion" ColumnName="IdRecaudacion" />
+                <ScalarProperty Name="Operador" ColumnName="Operador" />
+                <ScalarProperty Name="Terminal" ColumnName="Terminal" />
+                <ScalarProperty Name="Canal" ColumnName="Canal" />
+                <ScalarProperty Name="Secuencial" ColumnName="Secuencial" />
+                <ScalarProperty Name="SecuencialSara" ColumnName="SecuencialSara" />
+                <ScalarProperty Name="CodigoEmpresa" ColumnName="CodigoEmpresa" />
+                <ScalarProperty Name="Corresponsal" ColumnName="Corresponsal" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="Trama" ColumnName="Trama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

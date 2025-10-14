@@ -1,0 +1,2617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1EB1067D-B9AF-438D-AA9D-FD7BA6672280}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POS</RootNamespace>
+    <AssemblyName>POS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>C:\Users\jchidalgo\Documents\My Web Sites\DeployPOS\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>POSax2025</ProductName>
+    <PublisherName>Liris</PublisherName>
+    <WebPage>publish.htm</WebPage>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>216</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>149BFEC35C703379F00924D2CC2C731C06FB8F51</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>POS_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo_liris.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CajaPinpad, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\CajaPinpad.dll</HintPath>
+    </Reference>
+    <Reference Include="ClibcommunicateSocket, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\ClibcommunicateSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="ClibSecurity">
+      <HintPath>Libs\ClibSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPCtlXTypeLibNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=c0c98f712d5392a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>Libs\DPFPCtlXTypeLibNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPCtlXWrapperNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=c0c98f712d5392a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\DPFPCtlXWrapperNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPDevNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=696774c42ee28c57, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\DPFPDevNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPEngNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=7fe76e7adf19964b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\DPFPEngNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPGuiNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d4f4a0bd9c559145, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\DPFPGuiNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPShrNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d902fe275a8d6cf2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\DPFPShrNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPShrXTypeLibNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=c0c98f712d5392a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>Libs\DPFPShrXTypeLibNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPVerNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=4de0a9c4dcc83984, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\DPFPVerNET.dll</HintPath>
+    </Reference>
+    <Reference Include="eComp.PDF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\eComp.PDF.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>Libs\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.AWT.WinForms, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.AWT.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Beans, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Beans.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Charsets, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Charsets.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Cldrdata, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Cldrdata.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Corba, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Corba.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Jdbc, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Jdbc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Localedata, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Localedata.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Management, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Management.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Media, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Misc, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Misc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Naming, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Naming.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Nashorn, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Nashorn.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Remoting, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Remoting.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Security, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.SwingAWT, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.SwingAWT.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Text, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Tools, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Util, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.API, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.API.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Bind, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Bind.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Crypto, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Parse, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Parse.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Transform, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Transform.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.WebServices, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.XPath, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime.JNI, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.JNI.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ServiceOPOSLib">
+      <HintPath>Libs\Interop.ServiceOPOSLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=95df54ee0e647ef6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Control\PINPAD\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OposImageScanner_CCO">
+      <HintPath>..\..\dll\OposImageScanner_CCO.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="OposScale_CCO">
+      <HintPath>..\..\dll\OposScale_CCO.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="OposScanner_CCO">
+      <HintPath>..\..\dll\OposScanner_CCO.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Skybound.Gecko">
+      <HintPath>Libs\Skybound.Gecko.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.Core.1.0.105.2\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.EF6.1.0.105.2\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.Linq.1.0.105.2\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.RadDock">
+      <HintPath>Libs\Telerik.WinControls.RadDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetroTouch, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.Themes.TelerikMetroTouch.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI.Design">
+      <HintPath>Libs\Telerik.WinControls.UI.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\TelerikCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikData">
+      <HintPath>Libs\TelerikData.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="UC-CAJA, Version=1.1.0.0, Culture=neutral, PublicKeyToken=95df54ee0e647ef6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Control\PINPAD\UC-CAJA.dll</HintPath>
+    </Reference>
+    <Reference Include="WinSCPnet, Version=1.3.7.7441, Culture=neutral, PublicKeyToken=2271ec4a3c56d0bf, processorArchitecture=MSIL">
+      <HintPath>packages\WinSCP.5.9.5\lib\WinSCPnet.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>packages\ZXing.Net.0.16.9\lib\net45\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>packages\ZXing.Net.0.16.9\lib\net45\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppData.cs" />
+    <Compile Include="Control\Auditor\OpcionesAuditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Auditor\OpcionesAuditor.Designer.cs">
+      <DependentUpon>OpcionesAuditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Auth\CredentialAuth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Auth\CredentialAuth.designer.cs">
+      <DependentUpon>CredentialAuth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CajaPinpad\CifradoTrama.cs" />
+    <Compile Include="Control\CajaPinpad\Conexion.cs" />
+    <Compile Include="Control\CajaPinpad\GeneralPagos.cs" />
+    <Compile Include="Control\CajaPinpad\Modelo\DetVoucher.cs" />
+    <Compile Include="Control\CajaPinpad\Modelo\PinPadRespuesta.cs" />
+    <Compile Include="Control\CajaPinpad\ProcessData.cs" />
+    <Compile Include="Control\Clientes.cs" />
+    <Compile Include="Control\Clientes\ClienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Clientes\ClienteForm.Designer.cs">
+      <DependentUpon>ClienteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Clientes\SearchClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Clientes\SearchClient.Designer.cs">
+      <DependentUpon>SearchClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Common\AesEncryption.cs" />
+    <Compile Include="Control\Common\Encriptador.cs" />
+    <Compile Include="Control\Common\Enum.cs" />
+    <Compile Include="Control\Common\ExceptionHandler.cs" />
+    <Compile Include="Control\Common\General.cs" />
+    <Compile Include="Control\Common\GlobalParameters.cs" />
+    <Compile Include="Control\Common\Logger.cs" />
+    <Compile Include="Control\Common\ModalFocusFormHelper.cs" />
+    <Compile Include="Control\Common\Network.cs" />
+    <Compile Include="Control\Common\Printer.cs" />
+    <Compile Include="Control\Common\RawPrinterHelper.cs" />
+    <Compile Include="Control\Common\StringHelper.cs" />
+    <Compile Include="Control\Common\WinForm.cs" />
+    <Compile Include="Control\Common\XmlHelper.cs" />
+    <Compile Include="Control\CorrBan\MoreAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\CorrBan\MoreAccounts.Designer.cs">
+      <DependentUpon>MoreAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CorrBan\ReimpresionServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\CorrBan\ReimpresionServicios.Designer.cs">
+      <DependentUpon>ReimpresionServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CorrBan\Reimpresion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\CorrBan\Reimpresion.Designer.cs">
+      <DependentUpon>Reimpresion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Main\MainTouchClte\ClienteService.cs" />
+    <Compile Include="Control\Main\MainTouchClte\FacturaService.cs" />
+    <Compile Include="Control\Main\MainTouchClte\frmPromocionPantallaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Main\MainTouchClte\frmPromocionPantallaCliente.Designer.cs">
+      <DependentUpon>frmPromocionPantallaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Main\MainTouchClte\UIHelper.cs" />
+    <Compile Include="Control\PINPAD\bines.cs" />
+    <Compile Include="Control\Security\WallpaperClte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Security\WallpaperClte.Designer.cs">
+      <DependentUpon>WallpaperClte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\SRI\SriApiClient.cs" />
+    <Compile Include="Control\SRI\SRIAuthService.cs" />
+    <Compile Include="Control\SRI\General.cs" />
+    <Compile Include="Control\SRI\SriTokenResponse.cs" />
+    <Compile Include="Control\ToolBox\frmTecladoCompleto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\ToolBox\frmTecladoCompleto.Designer.cs">
+      <DependentUpon>frmTecladoCompleto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ToolBox\KeyboardControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\ToolBox\KeyboardControl.Designer.cs">
+      <DependentUpon>KeyboardControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\LeerProductosArchivo.cs" />
+    <Compile Include="Control\Main\ConsultaArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Main\ConsultaArticulo.Designer.cs">
+      <DependentUpon>ConsultaArticulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Main\MainTouchClte\frmMainTouchClte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Main\MainTouchClte\frmMainTouchClte.Designer.cs">
+      <DependentUpon>frmMainTouchClte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Main\MainTouchClte\frmPinCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Main\MainTouchClte\frmPinCliente.Designer.cs">
+      <DependentUpon>frmPinCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Main\MensajeTarjetaVirtual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Main\MensajeTarjetaVirtual.Designer.cs">
+      <DependentUpon>MensajeTarjetaVirtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\ClsEnviaPinPadGeneral.cs" />
+    <Compile Include="Control\Pagos\FrmDevolucionFlete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\FrmDevolucionFlete.Designer.cs">
+      <DependentUpon>FrmDevolucionFlete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\frmFormasPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\frmFormasPago.Designer.cs">
+      <DependentUpon>frmFormasPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\frmLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\frmLoading.Designer.cs">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\FrmRetencionFisicaDev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\FrmRetencionFisicaDev.Designer.cs">
+      <DependentUpon>FrmRetencionFisicaDev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\PedidosOtrasApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\PedidosOtrasApp.Designer.cs">
+      <DependentUpon>PedidosOtrasApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\SearchTarjetaCreditoBines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\SearchTarjetaCreditoBines.Designer.cs">
+      <DependentUpon>SearchTarjetaCreditoBines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\SearchPromoBinesTarj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\SearchPromoBinesTarj.Designer.cs">
+      <DependentUpon>SearchPromoBinesTarj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\SearchPedidoDomicilio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\SearchPedidoDomicilio.Designer.cs">
+      <DependentUpon>SearchPedidoDomicilio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\UC_Loading.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\UC_Loading.Designer.cs">
+      <DependentUpon>UC_Loading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PINPAD\ConfiguraPinPad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\PINPAD\ConfiguraPinPad.Designer.cs">
+      <DependentUpon>ConfiguraPinPad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PINPAD\MenuInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\PINPAD\MenuInicial.Designer.cs">
+      <DependentUpon>MenuInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PINPAD\ReImprimirFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\PINPAD\ReImprimirFactura.Designer.cs">
+      <DependentUpon>ReImprimirFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\TarjeEmpre\TarjeEmprePagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\TarjeEmpre\TarjeEmprePagos.Designer.cs">
+      <DependentUpon>TarjeEmprePagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Giftcard\GiftcardSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Giftcard\GiftcardSale.Designer.cs">
+      <DependentUpon>GiftcardSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Giftcard\GiftcardProforma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Giftcard\GiftcardProforma.Designer.cs">
+      <DependentUpon>GiftcardProforma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Giftcard\GiftcardTransReprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Giftcard\GiftcardTransReprint.Designer.cs">
+      <DependentUpon>GiftcardTransReprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Giftcard\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Giftcard\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Main\ClsFacturaMensaje.cs" />
+    <Compile Include="Control\Main\TempInvoiceAlert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Main\TempInvoiceAlert.Designer.cs">
+      <DependentUpon>TempInvoiceAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Main\PriceViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Main\PriceViewer.Designer.cs">
+      <DependentUpon>PriceViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\ClsTarjetaCreditoInterno.cs" />
+    <Compile Include="Control\Pagos\FrmRetencionElectronica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\FrmRetencionElectronica.Designer.cs">
+      <DependentUpon>FrmRetencionElectronica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Parking\CapturaParqueo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Parking\CapturaParqueo.Designer.cs">
+      <DependentUpon>CapturaParqueo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Promos\PromoIVA.cs" />
+    <Compile Include="Control\Security\Environment.cs" />
+    <Compile Include="Control\Monedero.cs" />
+    <Compile Include="Control\ToolBox\ClsProveedorDomicilio.cs" />
+    <Compile Include="Control\ToolBox\MenuInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\ToolBox\MenuInicial.Designer.cs">
+      <DependentUpon>MenuInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\WalletPoints\CapturaCupon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\WalletPoints\CapturaCupon.Designer.cs">
+      <DependentUpon>CapturaCupon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\WalletPoints\ClsAcumulacion.cs" />
+    <Compile Include="Control\WalletPoints\ClsCuponApp.cs" />
+    <Compile Include="Control\WalletPoints\ClsListPoints.cs" />
+    <Compile Include="Control\WalletPoints\ClsPoints.cs" />
+    <Compile Include="Control\WalletPoints\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\WalletPoints\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\WalletPoints\PortalCanje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\WalletPoints\PortalCanje.Designer.cs">
+      <DependentUpon>PortalCanje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\WalletPoints\TermsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\WalletPoints\TermsViewer.Designer.cs">
+      <DependentUpon>TermsViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\WalletPoints\WalletDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\WalletPoints\WalletDetails.Designer.cs">
+      <DependentUpon>WalletDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\WalletPoints\ItemShelf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\WalletPoints\ItemShelf.Designer.cs">
+      <DependentUpon>ItemShelf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Security\InactivityChecker.cs" />
+    <Compile Include="Control\Security\Wallpaper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Security\Wallpaper.Designer.cs">
+      <DependentUpon>Wallpaper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ToolBox\ToolBoxMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\ToolBox\ToolBoxMenu.Designer.cs">
+      <DependentUpon>ToolBoxMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auth_group.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auth_group_permissions.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auth_permission.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auth_user.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auth_user_groups.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auth_user_user_permissions.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ax_viewConsumoCreditoCliente.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ax_viewCorteCredito.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BG_Apertura.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BG_Lst_POS_no_sub_AX.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClienteEmpleado.cs" />
+    <Compile Include="Models\Cliente\SRI_DevolucionIVA.cs" />
+    <Compile Include="Models\CodigoItemThreads.cs" />
+    <Compile Include="Models\core_autorizacionsri.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_banco.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Core_CargaDocumento.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_ClaveAccesoFE.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_descuento.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_descuentotipo.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_documento.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_documentosecuencia.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_empresacredito.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_empresacreditocorte.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_empresacreditopago.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_EnviosArchivosVoucher.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_establecimiento.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_factura.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturaAPP.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturadetalle.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturadetalleAPP.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturadetalle_carnicero.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturadetalle_view.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturapago.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturapagoAPP.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_facturapago_view.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_factura_view.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_giftcard.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_giftcardtransaccion.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_giftcard_migracion.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_notacredito.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_notacreditodetalle.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_parametro.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_poscustomergroup.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_promocionticket.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_promocionticket_items.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_promocompragratis.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_puntoemision.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_recibo.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_retencion.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_tarjetacredito.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_tarjetacreditointerno.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_tarjetacreditointernotransaccion.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_tarjetacreditopromocionticket.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_tarjetacredito_bin.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_TarjetaDescuento.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_TarjetaDescuentoHistorico.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\core_transaccion_operador.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cp_ordencabecera.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cp_ordendetalle.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cp_relacion.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CreateFileProducts.cs" />
+    <Compile Include="Enumeradores\Enums.cs" />
+    <Compile Include="Interfaces\ISale.cs" />
+    <Compile Include="Models\Abstract\Sale.cs" />
+    <Compile Include="Models\ClsConeccionPersistente.cs" />
+    <Compile Include="Models\ClsMessageQueue.cs" />
+    <Compile Include="Models\CorrBan\CustAccount.cs" />
+    <Compile Include="Models\CorrBan\LikeAccount.cs" />
+    <Compile Include="Models\DatosFacturaCargados.cs" />
+    <Compile Include="Models\django_admin_log.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\django_content_type.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\django_session.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\django_site.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dss_function_CREDITO_EmpresaFechaCorte_Result.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\finger\respuestaFinger.cs" />
+    <Compile Include="Models\FleteMotorizado.cs" />
+    <Compile Include="Models\Giftcard\ClsGiftcardSale.cs" />
+    <Compile Include="Models\MainWindow.cs" />
+    <Compile Include="Models\Mensajes.cs" />
+    <Compile Include="Models\Monedero\MonederoElectronico.cs" />
+    <Compile Include="Models\NotaCredito\NotaCreditoModel.cs" />
+    <Compile Include="Models\NotaCredito\UDT_NotaCreditoDetalle.cs" />
+    <Compile Include="Models\NotaCredito\RespuestaNotaCredito.cs" />
+    <Compile Include="Models\NotaCredito\UDT_NotaCredito.cs" />
+    <Compile Include="Models\SRI\datosDocumnetos.cs" />
+    <Compile Include="Models\SRI\DevolucionIvaModel.cs" />
+    <Compile Include="Models\SRI\PinCliente.cs" />
+    <Compile Include="Models\SRI\SolicitudDevolucion.cs" />
+    <Compile Include="Models\UDT_DetArticuloPOS.cs" />
+    <Compile Include="Models\UDT_DetDescuentos.cs" />
+    <Compile Include="Models\Precio.cs" />
+    <Compile Include="Models\LstCampania.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstCampaniaDet.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstCampaniaEstablecimientos.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstDelivery.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstEncuesta.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstEncuestaEstablecimiento.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstGrupoCliente.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstOpcionesRespuesta.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstPregunta.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstProductosCanjear.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LstProductosCanjearDet.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mail\MailModel.cs" />
+    <Compile Include="Models\mt_FacturasRezagadas.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PagoPinpad.cs" />
+    <Compile Include="Models\Parking\clsParking.cs" />
+    <Compile Include="Models\Parking\ParkingRequest.cs" />
+    <Compile Include="Models\Parking\Pagado\ParkingResponse.cs" />
+    <Compile Include="Models\Parking\ParkingResponse.cs" />
+    <Compile Include="Models\Parking\ParkingResumResponse.cs" />
+    <Compile Include="Models\POSDATA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSDATA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POSDATA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POSDATA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSDATA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_autorizacionsri.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_customer.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_customer_group.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_item.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_itembarra.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_itembarra_desc.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_itembloq_est.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_paymentmode.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_tarjeta_tipopago.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pos_tarjeta_transaccion.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POS_VOUCHER.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RutaImagen.cs" />
+    <Compile Include="Models\PrinterRecipes\ReceiptFleteMotorizado.cs" />
+    <Compile Include="Models\PrinterRecipes\ReceiptGiftcardSale.cs" />
+    <Compile Include="Models\PrinterRecipes\ReceiptTarjetaEmpresarial.cs" />
+    <Compile Include="Models\PrinterRecipes\ReceiptRetencionElectronica.cs" />
+    <Compile Include="Models\PrinterRecipes\VoucherTarjetaCredito.cs" />
+    <Compile Include="Models\ProduccionAx.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RetencionElectronica.cs" />
+    <Compile Include="Models\sitetree_tree.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sitetree_treeitem.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sitetree_treeitem_access_permissions.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spGetFacturasPendientes_Result.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GENERABARCODE_Result.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_SECUENCIAS_IG_Result.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TarjeEmpresa\ClsTarjetaEmpresaPagos.cs" />
+    <Compile Include="Models\TblAuthorizeDeleteProduct.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblCobroCreditoEmp.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblCobroCreditoEmpPago.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblDeletedProduct.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblDiscountCard.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblDiscountCardTran.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblEncuestaDetalle.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblEncuestaRealizada.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblFacturaCanjes.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblFacturasCanjesDet.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblFeriado.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblFlete.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblInvoiceCounter.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblInvoiceRandom.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblInvoiceWinner.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblItemsMaxSales.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblMensaje.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblNavidadLMAT.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblOrdenDelivery.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblOrdenDeliveryDet.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblPedido.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblPuntos.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblPuntosCab.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblRegistroParqueo.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblVacunacion.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblVentaPago.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblVentaTarjeta.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_DiferenciaPeso.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_DineroGiftCardApp.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_PickOrderCab.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_PickOrderDet.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDT_DetFacturaCupon.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\viewAperturaLogin.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewDetalleAcumulado.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEstablecimientoTotal.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewFacturaPagoUsuario.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewFacturasPagoCredito.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewFacturasUsuarios.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewPagoDetalleUsuario.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewPagosCredito.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewTicketsCarnicero.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_AlmacenProductoPeso.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_CarnicerosAX.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_Tbl_Punto_Venta.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_BLOCK_PRODUCTS.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_CATEGORIA.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_CombosCaja.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_CP_DETALLE.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_CreditoLocalesCabecera.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_CreditoLocalesMensajes.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_CreditoLocalesPagos.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_DescuentosCabeceraAX.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_DescuentosDetalleAX.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_ITEMBARCODEQTY.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_NC_Motivo.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_PreciosPOS.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_PromoChoose.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_RETIVA.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VW_SEARCHPRODUCT.cs">
+      <DependentUpon>POSDATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchProductV3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchProductV3.designer.cs">
+      <DependentUpon>SearchProductV3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchProductV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchProductV2.designer.cs">
+      <DependentUpon>SearchProductV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\WSIntegracion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\ConvertToAlphanumericUnitTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\ConvertToAlphanumericUnitTest.Designer.cs">
+      <DependentUpon>ConvertToAlphanumericUnitTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\DeletedProductsByIdCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\DeletedProductsByIdCaja.Designer.cs">
+      <DependentUpon>DeletedProductsByIdCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\DummyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\DummyForm.Designer.cs">
+      <DependentUpon>DummyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\EmuladorPOSVOUCHER.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\EmuladorPOSVOUCHER.Designer.cs">
+      <DependentUpon>EmuladorPOSVOUCHER.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\LoggerUnitTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\LoggerUnitTest.Designer.cs">
+      <DependentUpon>LoggerUnitTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Common\Mail.cs" />
+    <Compile Include="UnitTests\MailUnitTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\MailUnitTest.Designer.cs">
+      <DependentUpon>MailUnitTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Common\Promo.cs" />
+    <Compile Include="Control\CorrBan\ClsCorrBan.cs" />
+    <Compile Include="Control\CorrBan\PagosServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\CorrBan\PagosServicios.Designer.cs">
+      <DependentUpon>PagosServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CorrBan\Recargas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\CorrBan\Recargas.Designer.cs">
+      <DependentUpon>Recargas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CorrBan\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\CorrBan\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Encuestas\EncuestaHandler.cs" />
+    <Compile Include="Control\Encuestas\Encuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Encuestas\Encuesta.Designer.cs">
+      <DependentUpon>Encuesta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Fingerprint\VerificationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Fingerprint\VerificationForm.Designer.cs">
+      <DependentUpon>VerificationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Garancheck\GarancheckForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Garancheck\GarancheckForm.Designer.cs">
+      <DependentUpon>GarancheckForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\BasePagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\BasePagos.Designer.cs">
+      <DependentUpon>BasePagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\CalculoPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\CalculoPago.Designer.cs">
+      <DependentUpon>CalculoPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\ClsPagos.cs" />
+    <Compile Include="Control\Pagos\CreditoPavos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\CreditoPavos.Designer.cs">
+      <DependentUpon>CreditoPavos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\DescuentoPromocion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\DescuentoPromocion.Designer.cs">
+      <DependentUpon>DescuentoPromocion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\NotasCredito\FormaNotaCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\NotasCredito\FormaNotaCredito.Designer.cs">
+      <DependentUpon>FormaNotaCredito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\RetencionesPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Pagos\RetencionesPagos.Designer.cs">
+      <DependentUpon>RetencionesPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pagos\SP_GENERABARCODE_Result.cs" />
+    <Compile Include="Control\PINPAD\PagoPINPAD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\PINPAD\PagoPINPAD.Designer.cs">
+      <DependentUpon>PagoPINPAD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PINPAD\Tramas.cs" />
+    <Compile Include="Control\TarjetaDelPortal.cs" />
+    <Compile Include="Control\DSSPrint.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\Peso\TomaPesoUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Peso\TomaPesoUI.designer.cs">
+      <DependentUpon>TomaPesoUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\POS.cs" />
+    <Compile Include="Control\SerialPortFixer.cs" />
+    <Compile Include="Control\NotaCredito.cs" />
+    <Compile Include="Control\TarjetaRegalo.cs" />
+    <Compile Include="Control\TarjetaRegaloInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\TarjetaRegaloInput.Designer.cs">
+      <DependentUpon>TarjetaRegaloInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\TomaPeso.cs" />
+    <Compile Include="Control\Ganador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Ganador.Designer.cs">
+      <DependentUpon>Ganador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\TopeCF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\TopeCF.Designer.cs">
+      <DependentUpon>TopeCF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\WebMethods.cs" />
+    <Compile Include="Control\XML\FacturaXML.cs" />
+    <Compile Include="frmNotificaApertura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNotificaApertura.Designer.cs">
+      <DependentUpon>frmNotificaApertura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Barcode.cs" />
+    <Compile Include="Models\Extends.cs" />
+    <Compile Include="Models\Factura.cs" />
+    <Compile Include="Models\Pagos.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Promociones.cs" />
+    <Compile Include="Models\Retencion.cs" />
+    <Compile Include="Models\spGetFacturasPendientesFecha_Result.cs" />
+    <Compile Include="Models\TarjetaDescuento.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QtyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QtyForm.Designer.cs">
+      <DependentUpon>QtyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchProdCateg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchProdCateg.Designer.cs">
+      <DependentUpon>SearchProdCateg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchProduct.Designer.cs">
+      <DependentUpon>SearchProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeleccionaLocal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeleccionaLocal.Designer.cs">
+      <DependentUpon>SeleccionaLocal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\BroadNetWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CreateCustomerLirisAxPOS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CreateCustomerLirisProduccion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\WebPortal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\WebPortal.Designer.cs">
+      <DependentUpon>WebPortal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\TarjetaPinpadTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\TarjetaPinpadTest.Designer.cs">
+      <DependentUpon>TarjetaPinpadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\ValidaCedulaTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\ValidaCedulaTest.Designer.cs">
+      <DependentUpon>ValidaCedulaTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\XmlToTextTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitTests\XmlToTextTest.Designer.cs">
+      <DependentUpon>XmlToTextTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ValidaCedula.cs" />
+    <Compile Include="WonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WonForm.Designer.cs">
+      <DependentUpon>WonForm.cs</DependentUpon>
+    </Compile>
+    <None Include="Control\Pagos\free-vector-visa-credit-card-86.jpg" />
+    <None Include="Control\Pagos\visa2.png" />
+    <None Include="Control\Pagos\visa3.jpg" />
+    <None Include="Control\Pagos\visa4.png" />
+    <None Include="Control\Pagos\visa5.png" />
+    <Content Include="Libs\Gma.System.MouseKeyHook.dll" />
+    <Content Include="Libs\xulrunner\AccessibleMarshal.dll" />
+    <Content Include="Libs\xulrunner\breakpadinjector.dll" />
+    <Content Include="Libs\xulrunner\chrome\classic.jar" />
+    <Content Include="Libs\xulrunner\chrome\comm.jar" />
+    <Content Include="Libs\xulrunner\chrome\en-US.jar" />
+    <Content Include="Libs\xulrunner\chrome\pippki.jar" />
+    <Content Include="Libs\xulrunner\chrome\toolkit.jar" />
+    <Content Include="Libs\xulrunner\components\FeedProcessor.js" />
+    <Content Include="Libs\xulrunner\components\jsconsole-clhandler.js" />
+    <Content Include="Libs\xulrunner\components\NetworkGeolocationProvider.js" />
+    <Content Include="Libs\xulrunner\components\nsAddonRepository.js" />
+    <Content Include="Libs\xulrunner\components\nsBadCertHandler.js" />
+    <Content Include="Libs\xulrunner\components\nsBlocklistService.js" />
+    <Content Include="Libs\xulrunner\components\nsContentDispatchChooser.js" />
+    <Content Include="Libs\xulrunner\components\nsContentPrefService.js" />
+    <Content Include="Libs\xulrunner\components\nsDefaultCLH.js" />
+    <Content Include="Libs\xulrunner\components\nsDownloadManagerUI.js" />
+    <Content Include="Libs\xulrunner\components\nsExtensionManager.js" />
+    <Content Include="Libs\xulrunner\components\nsHandlerService.js" />
+    <Content Include="Libs\xulrunner\components\nsHelperAppDlg.js" />
+    <Content Include="Libs\xulrunner\components\nsLivemarkService.js" />
+    <Content Include="Libs\xulrunner\components\nsLoginInfo.js" />
+    <Content Include="Libs\xulrunner\components\nsLoginManager.js" />
+    <Content Include="Libs\xulrunner\components\nsLoginManagerPrompter.js" />
+    <Content Include="Libs\xulrunner\components\nsPlacesDBFlush.js" />
+    <Content Include="Libs\xulrunner\components\nsPostUpdateWin.js" />
+    <Content Include="Libs\xulrunner\components\nsProgressDialog.js" />
+    <Content Include="Libs\xulrunner\components\nsProxyAutoConfig.js" />
+    <Content Include="Libs\xulrunner\components\nsSearchService.js" />
+    <Content Include="Libs\xulrunner\components\nsSearchSuggestions.js" />
+    <Content Include="Libs\xulrunner\components\nsTaggingService.js" />
+    <Content Include="Libs\xulrunner\components\nsTryToClose.js" />
+    <Content Include="Libs\xulrunner\components\nsUpdateService.js" />
+    <Content Include="Libs\xulrunner\components\nsURLFormatter.js" />
+    <Content Include="Libs\xulrunner\components\nsWebHandlerApp.js" />
+    <Content Include="Libs\xulrunner\components\nsXULAppInstall.js" />
+    <Content Include="Libs\xulrunner\components\pluginGlue.js" />
+    <Content Include="Libs\xulrunner\components\storage-Legacy.js" />
+    <Content Include="Libs\xulrunner\components\storage-mozStorage.js" />
+    <Content Include="Libs\xulrunner\components\txEXSLTRegExFunctions.js" />
+    <Content Include="Libs\xulrunner\crashreporter.exe" />
+    <Content Include="Libs\xulrunner\D3DCompiler_43.dll" />
+    <Content Include="Libs\xulrunner\d3dcompiler_47.dll" />
+    <Content Include="Libs\xulrunner\defaults\autoconfig\platform.js" />
+    <Content Include="Libs\xulrunner\defaults\autoconfig\prefcalls.js" />
+    <Content Include="Libs\xulrunner\defaults\pref\xulrunner.js" />
+    <Content Include="Libs\xulrunner\defaults\profile\chrome\userChrome-example.css" />
+    <Content Include="Libs\xulrunner\defaults\profile\chrome\userContent-example.css" />
+    <Content Include="Libs\xulrunner\defaults\profile\US\chrome\userChrome-example.css" />
+    <Content Include="Libs\xulrunner\defaults\profile\US\chrome\userContent-example.css" />
+    <Content Include="Libs\xulrunner\freebl3.dll" />
+    <Content Include="Libs\xulrunner\gmp-clearkey\0.1\clearkey.dll" />
+    <Content Include="Libs\xulrunner\gmp-fakeopenh264\1.0\fakeopenh264.dll" />
+    <Content Include="Libs\xulrunner\gmp-fake\1.0\fake.dll" />
+    <Content Include="Libs\xulrunner\greprefs\all.js" />
+    <Content Include="Libs\xulrunner\greprefs\security-prefs.js" />
+    <Content Include="Libs\xulrunner\greprefs\xpinstall.js" />
+    <Content Include="Libs\xulrunner\IA2Marshal.dll" />
+    <Content Include="Libs\xulrunner\icudt52.dll" />
+    <Content Include="Libs\xulrunner\icuin52.dll" />
+    <Content Include="Libs\xulrunner\icuuc52.dll" />
+    <Content Include="Libs\xulrunner\javaxpcom.jar" />
+    <Content Include="Libs\xulrunner\javaxpcomglue.dll" />
+    <Content Include="Libs\xulrunner\js.exe" />
+    <Content Include="Libs\xulrunner\js3250.dll" />
+    <Content Include="Libs\xulrunner\libEGL.dll" />
+    <Content Include="Libs\xulrunner\libGLESv2.dll" />
+    <Content Include="Libs\xulrunner\modules\debug.js" />
+    <Content Include="Libs\xulrunner\modules\Microformats.js" />
+    <Content Include="Libs\xulrunner\modules\SpatialNavigation.js" />
+    <Content Include="Libs\xulrunner\modules\utils.js" />
+    <Content Include="Libs\xulrunner\mozcrt19.dll" />
+    <Content Include="Libs\xulrunner\mozctl.dll" />
+    <Content Include="Libs\xulrunner\mozctlx.dll" />
+    <Content Include="Libs\xulrunner\mozglue.dll" />
+    <Content Include="Libs\xulrunner\msvcp120.dll" />
+    <Content Include="Libs\xulrunner\msvcr120.dll" />
+    <Content Include="Libs\xulrunner\nspr4.dll" />
+    <Content Include="Libs\xulrunner\nss3.dll" />
+    <Content Include="Libs\xulrunner\nssckbi.dll" />
+    <Content Include="Libs\xulrunner\nssdbm3.dll" />
+    <Content Include="Libs\xulrunner\nssutil3.dll" />
+    <Content Include="Libs\xulrunner\plc4.dll" />
+    <Content Include="Libs\xulrunner\plds4.dll" />
+    <Content Include="Libs\xulrunner\plugin-container.exe" />
+    <Content Include="Libs\xulrunner\plugin-hang-ui.exe" />
+    <Content Include="Libs\xulrunner\plugins\npnul32.dll" />
+    <Content Include="Libs\xulrunner\README.txt" />
+    <Content Include="Libs\xulrunner\redit.exe" />
+    <Content Include="Libs\xulrunner\res\arrow.gif" />
+    <Content Include="Libs\xulrunner\res\arrowd.gif" />
+    <Content Include="Libs\xulrunner\res\broken-image.gif" />
+    <Content Include="Libs\xulrunner\res\contenteditable.css" />
+    <Content Include="Libs\xulrunner\res\designmode.css" />
+    <Content Include="Libs\xulrunner\res\EditorOverride.css" />
+    <Content Include="Libs\xulrunner\res\forms.css" />
+    <Content Include="Libs\xulrunner\res\grabber.gif" />
+    <Content Include="Libs\xulrunner\res\hiddenWindow.html" />
+    <Content Include="Libs\xulrunner\res\html.css" />
+    <Content Include="Libs\xulrunner\res\html\folder.png" />
+    <Content Include="Libs\xulrunner\res\loading-image.gif" />
+    <Content Include="Libs\xulrunner\res\mathml.css" />
+    <Content Include="Libs\xulrunner\res\quirk.css" />
+    <Content Include="Libs\xulrunner\res\svg.css" />
+    <Content Include="Libs\xulrunner\res\table-add-column-after-active.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-column-after-hover.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-column-after.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-column-before-active.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-column-before-hover.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-column-before.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-row-after-active.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-row-after-hover.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-row-after.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-row-before-active.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-row-before-hover.gif" />
+    <Content Include="Libs\xulrunner\res\table-add-row-before.gif" />
+    <Content Include="Libs\xulrunner\res\table-remove-column-active.gif" />
+    <Content Include="Libs\xulrunner\res\table-remove-column-hover.gif" />
+    <Content Include="Libs\xulrunner\res\table-remove-column.gif" />
+    <Content Include="Libs\xulrunner\res\table-remove-row-active.gif" />
+    <Content Include="Libs\xulrunner\res\table-remove-row-hover.gif" />
+    <Content Include="Libs\xulrunner\res\table-remove-row.gif" />
+    <Content Include="Libs\xulrunner\res\ua.css" />
+    <Content Include="Libs\xulrunner\res\viewsource.css" />
+    <Content Include="Libs\xulrunner\sandboxbroker.dll" />
+    <Content Include="Libs\xulrunner\smime3.dll" />
+    <Content Include="Libs\xulrunner\softokn3.dll" />
+    <Content Include="Libs\xulrunner\sqlite3.dll" />
+    <Content Include="Libs\xulrunner\ssl3.dll" />
+    <Content Include="Libs\xulrunner\updater.exe" />
+    <Content Include="Libs\xulrunner\wow_helper.exe" />
+    <Content Include="Libs\xulrunner\xpcom.dll" />
+    <Content Include="Libs\xulrunner\xpcshell.exe" />
+    <Content Include="Libs\xulrunner\xpidl.exe" />
+    <Content Include="Libs\xulrunner\xpt_dump.exe" />
+    <Content Include="Libs\xulrunner\xpt_link.exe" />
+    <Content Include="Libs\xulrunner\xul.dll" />
+    <Content Include="Libs\xulrunner\xulrunner-stub.exe" />
+    <Content Include="Libs\xulrunner\xulrunner.exe" />
+    <Content Include="Libs\Skybound.Gecko.dll" />
+    <Content Include="Libs\x64\SQLite.Interop.dll" />
+    <Content Include="Libs\xulrunner\components\accessibility-msaa.xpt" />
+    <Content Include="Libs\xulrunner\components\accessibility.xpt" />
+    <Content Include="Libs\xulrunner\components\alerts.xpt" />
+    <Content Include="Libs\xulrunner\components\appshell.xpt" />
+    <Content Include="Libs\xulrunner\components\appstartup.xpt" />
+    <Content Include="Libs\xulrunner\components\autocomplete.xpt" />
+    <Content Include="Libs\xulrunner\components\autoconfig.xpt" />
+    <Content Include="Libs\xulrunner\components\caps.xpt" />
+    <Content Include="Libs\xulrunner\components\chardet.xpt" />
+    <Content Include="Libs\xulrunner\components\chrome.xpt" />
+    <Content Include="Libs\xulrunner\components\commandhandler.xpt" />
+    <Content Include="Libs\xulrunner\components\commandlines.xpt" />
+    <Content Include="Libs\xulrunner\components\composer.xpt" />
+    <Content Include="Libs\xulrunner\components\compreg.dat" />
+    <Content Include="Libs\xulrunner\components\contentprefs.xpt" />
+    <Content Include="Libs\xulrunner\components\content_base.xpt" />
+    <Content Include="Libs\xulrunner\components\content_html.xpt" />
+    <Content Include="Libs\xulrunner\components\content_htmldoc.xpt" />
+    <Content Include="Libs\xulrunner\components\content_xmldoc.xpt" />
+    <Content Include="Libs\xulrunner\components\content_xslt.xpt" />
+    <Content Include="Libs\xulrunner\components\content_xtf.xpt" />
+    <Content Include="Libs\xulrunner\components\cookie.xpt" />
+    <Content Include="Libs\xulrunner\components\directory.xpt" />
+    <Content Include="Libs\xulrunner\components\docshell_base.xpt" />
+    <Content Include="Libs\xulrunner\components\dom.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_base.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_canvas.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_core.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_css.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_events.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_geolocation.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_html.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_json.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_loadsave.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_offline.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_range.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_sidebar.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_storage.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_stylesheets.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_svg.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_threads.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_traversal.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_views.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_xbl.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_xpath.xpt" />
+    <Content Include="Libs\xulrunner\components\dom_xul.xpt" />
+    <Content Include="Libs\xulrunner\components\downloads.xpt" />
+    <Content Include="Libs\xulrunner\components\editor.xpt" />
+    <Content Include="Libs\xulrunner\components\embed_base.xpt" />
+    <Content Include="Libs\xulrunner\components\extensions.xpt" />
+    <Content Include="Libs\xulrunner\components\exthandler.xpt" />
+    <Content Include="Libs\xulrunner\components\exthelper.xpt" />
+    <Content Include="Libs\xulrunner\components\fastfind.xpt" />
+    <Content Include="Libs\xulrunner\components\feeds.xpt" />
+    <Content Include="Libs\xulrunner\components\find.xpt" />
+    <Content Include="Libs\xulrunner\components\gfx.xpt" />
+    <Content Include="Libs\xulrunner\components\htmlparser.xpt" />
+    <Content Include="Libs\xulrunner\components\imgicon.xpt" />
+    <Content Include="Libs\xulrunner\components\imglib2.xpt" />
+    <Content Include="Libs\xulrunner\components\inspector.xpt" />
+    <Content Include="Libs\xulrunner\components\intl.xpt" />
+    <Content Include="Libs\xulrunner\components\jar.xpt" />
+    <Content Include="Libs\xulrunner\components\jsdservice.xpt" />
+    <Content Include="Libs\xulrunner\components\layout_base.xpt" />
+    <Content Include="Libs\xulrunner\components\layout_printing.xpt" />
+    <Content Include="Libs\xulrunner\components\layout_xul.xpt" />
+    <Content Include="Libs\xulrunner\components\layout_xul_tree.xpt" />
+    <Content Include="Libs\xulrunner\components\locale.xpt" />
+    <Content Include="Libs\xulrunner\components\loginmgr.xpt" />
+    <Content Include="Libs\xulrunner\components\lwbrk.xpt" />
+    <Content Include="Libs\xulrunner\components\mimetype.xpt" />
+    <Content Include="Libs\xulrunner\components\mozbrwsr.xpt" />
+    <Content Include="Libs\xulrunner\components\mozfind.xpt" />
+    <Content Include="Libs\xulrunner\components\necko.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_about.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_cache.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_cookie.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_dns.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_file.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_ftp.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_http.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_res.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_socket.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_strconv.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_viewsource.xpt" />
+    <Content Include="Libs\xulrunner\components\necko_wifi.xpt" />
+    <Content Include="Libs\xulrunner\components\oji.xpt" />
+    <Content Include="Libs\xulrunner\components\parentalcontrols.xpt" />
+    <Content Include="Libs\xulrunner\components\pipboot.xpt" />
+    <Content Include="Libs\xulrunner\components\pipnss.xpt" />
+    <Content Include="Libs\xulrunner\components\pippki.xpt" />
+    <Content Include="Libs\xulrunner\components\places.xpt" />
+    <Content Include="Libs\xulrunner\components\plugin.xpt" />
+    <Content Include="Libs\xulrunner\components\pref.xpt" />
+    <Content Include="Libs\xulrunner\components\prefetch.xpt" />
+    <Content Include="Libs\xulrunner\components\profile.xpt" />
+    <Content Include="Libs\xulrunner\components\proxyObject.xpt" />
+    <Content Include="Libs\xulrunner\components\rdf.xpt" />
+    <Content Include="Libs\xulrunner\components\satchel.xpt" />
+    <Content Include="Libs\xulrunner\components\saxparser.xpt" />
+    <Content Include="Libs\xulrunner\components\shistory.xpt" />
+    <Content Include="Libs\xulrunner\components\spellchecker.xpt" />
+    <Content Include="Libs\xulrunner\components\storage.xpt" />
+    <Content Include="Libs\xulrunner\components\toolkitprofile.xpt" />
+    <Content Include="Libs\xulrunner\components\toolkitsearch.xpt" />
+    <Content Include="Libs\xulrunner\components\txmgr.xpt" />
+    <Content Include="Libs\xulrunner\components\txtsvc.xpt" />
+    <Content Include="Libs\xulrunner\components\uconv.xpt" />
+    <Content Include="Libs\xulrunner\components\unicharutil.xpt" />
+    <Content Include="Libs\xulrunner\components\update.xpt" />
+    <Content Include="Libs\xulrunner\components\uriloader.xpt" />
+    <Content Include="Libs\xulrunner\components\urlformatter.xpt" />
+    <Content Include="Libs\xulrunner\components\webbrowserpersist.xpt" />
+    <Content Include="Libs\xulrunner\components\webBrowser_core.xpt" />
+    <Content Include="Libs\xulrunner\components\webshell_idls.xpt" />
+    <Content Include="Libs\xulrunner\components\widget.xpt" />
+    <Content Include="Libs\xulrunner\components\windowds.xpt" />
+    <Content Include="Libs\xulrunner\components\windowwatcher.xpt" />
+    <Content Include="Libs\xulrunner\components\xpcom_base.xpt" />
+    <Content Include="Libs\xulrunner\components\xpcom_components.xpt" />
+    <Content Include="Libs\xulrunner\components\xpcom_ds.xpt" />
+    <Content Include="Libs\xulrunner\components\xpcom_io.xpt" />
+    <Content Include="Libs\xulrunner\components\xpcom_system.xpt" />
+    <Content Include="Libs\xulrunner\components\xpcom_thread.xpt" />
+    <Content Include="Libs\xulrunner\components\xpcom_xpti.xpt" />
+    <Content Include="Libs\xulrunner\components\xpconnect.xpt" />
+    <Content Include="Libs\xulrunner\components\xpinstall.xpt" />
+    <Content Include="Libs\xulrunner\components\xpti.dat" />
+    <Content Include="Libs\xulrunner\components\xulapp.xpt" />
+    <Content Include="Libs\xulrunner\components\xulapp_setup.xpt" />
+    <Content Include="Libs\xulrunner\components\xuldoc.xpt" />
+    <Content Include="Libs\xulrunner\components\xultmpl.xpt" />
+    <Content Include="Libs\xulrunner\components\zipwriter.xpt" />
+    <Content Include="Libs\xulrunner\chrome\classic.manifest" />
+    <Content Include="Libs\xulrunner\chrome\comm.manifest" />
+    <Content Include="Libs\xulrunner\chrome\en-US.manifest" />
+    <Content Include="Libs\xulrunner\chrome\pippki.manifest" />
+    <Content Include="Libs\xulrunner\chrome\toolkit.manifest" />
+    <None Include="Libs\xulrunner\crashreporter.ini" />
+    <None Include="Libs\xulrunner\defaults\profile\localstore.rdf" />
+    <None Include="Libs\xulrunner\defaults\profile\US\localstore.rdf" />
+    <None Include="Libs\xulrunner\dependentlibs.list" />
+    <None Include="Libs\xulrunner\dictionaries\en-US.aff" />
+    <None Include="Libs\xulrunner\dictionaries\en-US.dic" />
+    <None Include="Libs\xulrunner\freebl3.chk" />
+    <None Include="Libs\xulrunner\gmp-clearkey\0.1\clearkey.info" />
+    <None Include="Libs\xulrunner\gmp-fakeopenh264\1.0\fakeopenh264.info" />
+    <None Include="Libs\xulrunner\gmp-fakeopenh264\1.0\fakeopenh264.voucher" />
+    <None Include="Libs\xulrunner\gmp-fake\1.0\fake.info" />
+    <None Include="Libs\xulrunner\gmp-fake\1.0\fake.voucher" />
+    <None Include="Libs\xulrunner\js-gdb.py" />
+    <None Include="Libs\xulrunner\LICENSE" />
+    <None Include="Libs\xulrunner\modules\DownloadLastDir.jsm" />
+    <None Include="Libs\xulrunner\modules\DownloadUtils.jsm" />
+    <None Include="Libs\xulrunner\modules\ISO8601DateUtils.jsm" />
+    <None Include="Libs\xulrunner\modules\PlacesDBUtils.jsm" />
+    <None Include="Libs\xulrunner\modules\PluralForm.jsm" />
+    <None Include="Libs\xulrunner\modules\WindowDraggingUtils.jsm" />
+    <None Include="Libs\xulrunner\modules\XPCOMUtils.jsm" />
+    <None Include="Libs\xulrunner\nssdbm3.chk" />
+    <None Include="Libs\xulrunner\omni.ja" />
+    <None Include="Libs\xulrunner\platform.ini" />
+    <None Include="Libs\xulrunner\precomplete" />
+    <None Include="Libs\xulrunner\README.xulrunner" />
+    <None Include="Libs\xulrunner\res\charsetalias.properties" />
+    <None Include="Libs\xulrunner\res\charsetData.properties" />
+    <None Include="Libs\xulrunner\res\dtd\mathml.dtd" />
+    <None Include="Libs\xulrunner\res\dtd\xhtml11.dtd" />
+    <None Include="Libs\xulrunner\res\entityTables\html40Latin1.properties" />
+    <None Include="Libs\xulrunner\res\entityTables\html40Special.properties" />
+    <None Include="Libs\xulrunner\res\entityTables\html40Symbols.properties" />
+    <None Include="Libs\xulrunner\res\entityTables\htmlEntityVersions.properties" />
+    <None Include="Libs\xulrunner\res\entityTables\mathml20.properties" />
+    <None Include="Libs\xulrunner\res\entityTables\transliterate.properties" />
+    <None Include="Libs\xulrunner\res\fonts\mathfont.properties" />
+    <None Include="Libs\xulrunner\res\fonts\mathfontStandardSymbolsL.properties" />
+    <None Include="Libs\xulrunner\res\fonts\mathfontSTIXNonUnicode.properties" />
+    <None Include="Libs\xulrunner\res\fonts\mathfontSTIXSize1.properties" />
+    <None Include="Libs\xulrunner\res\fonts\mathfontSymbol.properties" />
+    <None Include="Libs\xulrunner\res\fonts\mathfontUnicode.properties" />
+    <None Include="Libs\xulrunner\res\langGroups.properties" />
+    <None Include="Libs\xulrunner\res\language.properties" />
+    <None Include="Libs\xulrunner\res\wincharset.properties" />
+    <None Include="Libs\xulrunner\softokn3.chk" />
+    <None Include="Libs\xulrunner\update.locale" />
+    <EntityDeploy Include="Models\POSDATA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>POSDATA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\POSDATA.edmx.diagram">
+      <DependentUpon>POSDATA.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\Iconos_Retencion_Electronica_DELPORTAL-01.png" />
+    <None Include="Resources\Iconos_Tarjeta_Empresarial_DELPORTAL-02.png" />
+    <None Include="Resources\Iconos_Intranet_LIRIS-05.png" />
+    <None Include="Resources\Iconos_Intranet_LIRIS-03.png" />
+    <None Include="Resources\Iconos_Retencion_Electronica_DELPORTAL-011.png" />
+    <Content Include="Models\POSDATA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POSDATA.edmx</DependentUpon>
+      <LastGenOutput>POSDATA.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\POSDATA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POSDATA.edmx</DependentUpon>
+      <LastGenOutput>POSDATA.cs</LastGenOutput>
+    </Content>
+    <Content Include="Resources\1234.jpg" />
+    <None Include="Resources\AB.png" />
+    <None Include="Resources\categories.png" />
+    <None Include="Resources\AB1.png" />
+    <None Include="Resources\AV.png" />
+    <None Include="Resources\BE.png" />
+    <None Include="Resources\box.png" />
+    <None Include="Resources\CA.png" />
+    <None Include="Resources\categories1.png" />
+    <None Include="Resources\billetera_electronica_menu.png" />
+    <None Include="Resources\billetera_electronica_tarjeta.png" />
+    <None Include="Resources\accept_check.png" />
+    <None Include="Resources\Blocks%401x-1.0s-280px-280px.gif" />
+    <None Include="Resources\back_icon.png" />
+    <None Include="Resources\back_icon32x32.png" />
+    <None Include="Resources\back_icon48x48.png" />
+    <None Include="Resources\arroba.jpg" />
+    <None Include="Resources\arroba2.jpg" />
+    <None Include="Resources\arroba3.jpg" />
+    <None Include="Resources\arroba_30x31.jpg" />
+    <None Include="Resources\1441598112_search.png" />
+    <None Include="Resources\24_search.png" />
+    <None Include="Resources\736B.png" />
+    <None Include="Resources\accept_check %281%29.png" />
+    <None Include="Resources\box-list.png" />
+    <Content Include="Resources\btnGacela.png" />
+    <Content Include="Resources\btnGlovo.png" />
+    <Content Include="Resources\btnRappi.png" />
+    <Content Include="Resources\btnTipti.png" />
+    <Content Include="Resources\btnUberEats.png" />
+    <None Include="Resources\card-delportal.png" />
+    <Content Include="Resources\categories\AB.png" />
+    <Content Include="Resources\categories\AV.png" />
+    <Content Include="Resources\categories\BE.png" />
+    <Content Include="Resources\categories\box-list.png" />
+    <Content Include="Resources\categories\box.png" />
+    <Content Include="Resources\categories\CA.png" />
+    <Content Include="Resources\categories\card-delportal.png" />
+    <Content Include="Resources\categories\categories.png" />
+    <Content Include="Resources\categories\CG.png" />
+    <Content Include="Resources\categories\CP.png" />
+    <Content Include="Resources\categories\credit-card.png" />
+    <Content Include="Resources\categories\DA.png" />
+    <Content Include="Resources\categories\EM.png" />
+    <Content Include="Resources\categories\FV.png" />
+    <Content Include="Resources\categories\headset.png" />
+    <Content Include="Resources\categories\heart.png" />
+    <Content Include="Resources\categories\HG.png" />
+    <Content Include="Resources\categories\home.png" />
+    <Content Include="Resources\categories\invoice.png" />
+    <Content Include="Resources\categories\LC.png" />
+    <Content Include="Resources\categories\list.png" />
+    <Content Include="Resources\categories\list1.png" />
+    <Content Include="Resources\categories\location-1.png" />
+    <Content Include="Resources\categories\location.png" />
+    <Content Include="Resources\categories\logout.png" />
+    <Content Include="Resources\categories\LP.png" />
+    <Content Include="Resources\categories\MA.png" />
+    <Content Include="Resources\categories\MC.png" />
+    <Content Include="Resources\categories\meat.png" />
+    <Content Include="Resources\categories\NB.png" />
+    <Content Include="Resources\categories\note.png" />
+    <Content Include="Resources\categories\order-repeat.png" />
+    <Content Include="Resources\categories\PPA.png" />
+    <Content Include="Resources\categories\PU.png" />
+    <Content Include="Resources\categories\recipes.png" />
+    <Content Include="Resources\categories\sale.png" />
+    <Content Include="Resources\categories\shop.png" />
+    <Content Include="Resources\categories\shopping-cart.png" />
+    <Content Include="Resources\categories\store.png" />
+    <Content Include="Resources\categories\trophy.png" />
+    <Content Include="Resources\categories\VL.png" />
+    <Content Include="Resources\categories\wallet.png" />
+    <None Include="Resources\CG.png" />
+    <None Include="Resources\CP.png" />
+    <None Include="Resources\DA.png" />
+    <None Include="Resources\coin.png" />
+    <None Include="Resources\credit-card.png" />
+    <None Include="Resources\default1.png" />
+    <None Include="Resources\EM.png" />
+    <None Include="Resources\FV.png" />
+    <None Include="Resources\headset.png" />
+    <None Include="Resources\heart.png" />
+    <None Include="Resources\HG.png" />
+    <None Include="Resources\home.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\default.png" />
+    <None Include="Resources\Iconos_Intranet_LIRIS-01.png" />
+    <Content Include="Resources\Iconos_Western_Union_DELPORTAL2-01.png" />
+    <Content Include="Resources\Iconos_Western_Union_DELPORTAL2-02.png" />
+    <Content Include="Resources\Iconos_Western_Union_DELPORTAL2-03.png" />
+    <None Include="Resources\Iconos_Western_Union_DELPORTAL2T-02.png" />
+    <None Include="Resources\Iconos_Western_Union_DELPORTAL2T-03.png" />
+    <None Include="Resources\Iconos_Western_Union_DELPORTAL2T-01.png" />
+    <Content Include="Resources\Iconos_Western_Union_DELPORTAL-01.png" />
+    <Content Include="Resources\Iconos_Western_Union_DELPORTAL-02.png" />
+    <Content Include="Resources\Iconos_Western_Union_DELPORTAL-03.png" />
+    <None Include="Resources\Logo_Horizontal_DELPORTAL.png" />
+    <None Include="Resources\invoice.png" />
+    <None Include="Resources\LC.png" />
+    <None Include="Resources\list.png" />
+    <None Include="Resources\list1.png" />
+    <None Include="Resources\location.png" />
+    <None Include="Resources\location-1.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\loading2.gif" />
+    <None Include="Resources\ingresos %281%29.png" />
+    <None Include="Resources\IMG_5887.png" />
+    <None Include="Resources\IMG_5888.png" />
+    <None Include="Resources\loading21.gif" />
+    <Content Include="Resources\Logo_Intranet_DELPORTAL-01.png" />
+    <None Include="Resources\Pantalla_Cajas_DELPORTAL-01.png" />
+    <None Include="Resources\Logo_Redondo_DELPORTAL-01.png" />
+    <None Include="Resources\LogoPrincipal.PNG" />
+    <None Include="Resources\LOGO_POS_70.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\LP.png" />
+    <None Include="Resources\MA.png" />
+    <None Include="Resources\MC.png" />
+    <None Include="Resources\meat.png" />
+    <None Include="Resources\NB.png" />
+    <None Include="Resources\note.png" />
+    <None Include="Resources\order-repeat.png" />
+    <None Include="Resources\PPA.png" />
+    <None Include="Resources\PU.png" />
+    <None Include="Resources\recipes.png" />
+    <None Include="Resources\sale.png" />
+    <None Include="Resources\shop.png" />
+    <None Include="Resources\shopping-cart.png" />
+    <None Include="Resources\store.png" />
+    <None Include="Resources\sort_up.png" />
+    <None Include="Resources\sort_down.png" />
+    <None Include="Resources\question.png" />
+    <None Include="Resources\questio.png" />
+    <None Include="Resources\stop.png" />
+    <None Include="Resources\teclado.png" />
+    <None Include="Resources\tecladox32.png" />
+    <None Include="Resources\tecladox64.png" />
+    <None Include="Resources\Pantalla_Cliente_Pollo_horno.jpg" />
+    <Content Include="Resources\PROMO_DIA_MADRE_2025.jpeg" />
+    <Content Include="Resources\PROMO_HoraDelporta.jpeg" />
+    <Content Include="Resources\PROMO_TOALLA_NAUTICA_2025.jpeg" />
+    <Content Include="Resources\TerminosPuntos.JPG" />
+    <None Include="Resources\trophy.png" />
+    <None Include="Resources\VL.png" />
+    <None Include="Resources\wallet.png" />
+    <None Include="Service References\BroadNetWebService\POS.BroadNetWebService.peticionRequerimientoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CreateCustomerLirisAxPOS\POS.CreateCustomerLirisAxPOS.Cliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CreateCustomerLirisProduccion\POS.CreateCustomerLirisProduccion.Cliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WSIntegracion\Service1.disco" />
+    <None Include="Service References\WSIntegracion\configuration91.svcinfo" />
+    <None Include="Service References\WSIntegracion\configuration.svcinfo" />
+    <None Include="Service References\WSIntegracion\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\warning.png" />
+    <None Include="Resources\warning1.png" />
+    <None Include="Resources\WallpaperClte_Pollo_horno.jpg" />
+    <Content Include="SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WinSCP.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Control\Auditor\OpcionesAuditor.resx">
+      <DependentUpon>OpcionesAuditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Auth\CredentialAuth.resx">
+      <DependentUpon>CredentialAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Clientes\ClienteForm.resx">
+      <DependentUpon>ClienteForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Clientes\SearchClient.resx">
+      <DependentUpon>SearchClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CorrBan\MoreAccounts.resx">
+      <DependentUpon>MoreAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CorrBan\ReimpresionServicios.resx">
+      <DependentUpon>ReimpresionServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CorrBan\Reimpresion.resx">
+      <DependentUpon>Reimpresion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Main\MainTouchClte\frmPromocionPantallaCliente.resx">
+      <DependentUpon>frmPromocionPantallaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Security\WallpaperClte.resx">
+      <DependentUpon>WallpaperClte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ToolBox\frmTecladoCompleto.resx">
+      <DependentUpon>frmTecladoCompleto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ToolBox\KeyboardControl.resx">
+      <DependentUpon>KeyboardControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Main\ConsultaArticulo.resx">
+      <DependentUpon>ConsultaArticulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Main\MainTouchClte\frmMainTouchClte.resx">
+      <DependentUpon>frmMainTouchClte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Main\MainTouchClte\frmPinCliente.resx">
+      <DependentUpon>frmPinCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Main\MensajeTarjetaVirtual.resx">
+      <DependentUpon>MensajeTarjetaVirtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\FrmDevolucionFlete.resx">
+      <DependentUpon>FrmDevolucionFlete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\frmFormasPago.resx">
+      <DependentUpon>frmFormasPago.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\frmLoading.resx">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\FrmRetencionFisicaDev.resx">
+      <DependentUpon>FrmRetencionFisicaDev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\PedidosOtrasApp.resx">
+      <DependentUpon>PedidosOtrasApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\SearchTarjetaCreditoBines.resx">
+      <DependentUpon>SearchTarjetaCreditoBines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\SearchPromoBinesTarj.resx">
+      <DependentUpon>SearchPromoBinesTarj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\SearchPedidoDomicilio.resx">
+      <DependentUpon>SearchPedidoDomicilio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\UC_Loading.resx">
+      <DependentUpon>UC_Loading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PINPAD\ConfiguraPinPad.resx">
+      <DependentUpon>ConfiguraPinPad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PINPAD\MenuInicial.resx">
+      <DependentUpon>MenuInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PINPAD\ReImprimirFactura.resx">
+      <DependentUpon>ReImprimirFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\TarjeEmpre\TarjeEmprePagos.resx">
+      <DependentUpon>TarjeEmprePagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Giftcard\GiftcardSale.resx">
+      <DependentUpon>GiftcardSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Giftcard\GiftcardProforma.resx">
+      <DependentUpon>GiftcardProforma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Giftcard\GiftcardTransReprint.resx">
+      <DependentUpon>GiftcardTransReprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Giftcard\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Main\TempInvoiceAlert.resx">
+      <DependentUpon>TempInvoiceAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Main\PriceViewer.resx">
+      <DependentUpon>PriceViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\FrmRetencionElectronica.resx">
+      <DependentUpon>FrmRetencionElectronica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Parking\CapturaParqueo.resx">
+      <DependentUpon>CapturaParqueo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ToolBox\MenuInicial.resx">
+      <DependentUpon>MenuInicial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\WalletPoints\CapturaCupon.resx">
+      <DependentUpon>CapturaCupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\WalletPoints\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\WalletPoints\PortalCanje.resx">
+      <DependentUpon>PortalCanje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\WalletPoints\TermsViewer.resx">
+      <DependentUpon>TermsViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\WalletPoints\WalletDetails.resx">
+      <DependentUpon>WalletDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\WalletPoints\ItemShelf.resx">
+      <DependentUpon>ItemShelf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Security\Wallpaper.resx">
+      <DependentUpon>Wallpaper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ToolBox\ToolBoxMenu.resx">
+      <DependentUpon>ToolBoxMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchProductV3.resx">
+      <DependentUpon>SearchProductV3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchProductV2.resx">
+      <DependentUpon>SearchProductV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\ConvertToAlphanumericUnitTest.resx">
+      <DependentUpon>ConvertToAlphanumericUnitTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\DeletedProductsByIdCaja.resx">
+      <DependentUpon>DeletedProductsByIdCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\DummyForm.resx">
+      <DependentUpon>DummyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\EmuladorPOSVOUCHER.resx">
+      <DependentUpon>EmuladorPOSVOUCHER.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\LoggerUnitTest.resx">
+      <DependentUpon>LoggerUnitTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\MailUnitTest.resx">
+      <DependentUpon>MailUnitTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CorrBan\PagosServicios.resx">
+      <DependentUpon>PagosServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CorrBan\Recargas.resx">
+      <DependentUpon>Recargas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CorrBan\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Encuestas\Encuesta.resx">
+      <DependentUpon>Encuesta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Fingerprint\VerificationForm.resx">
+      <DependentUpon>VerificationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Garancheck\GarancheckForm.resx">
+      <DependentUpon>GarancheckForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\BasePagos.resx">
+      <DependentUpon>BasePagos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\CalculoPago.resx">
+      <DependentUpon>CalculoPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\CreditoPavos.resx">
+      <DependentUpon>CreditoPavos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\DescuentoPromocion.resx">
+      <DependentUpon>DescuentoPromocion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\NotasCredito\FormaNotaCredito.resx">
+      <DependentUpon>FormaNotaCredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pagos\RetencionesPagos.resx">
+      <DependentUpon>RetencionesPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Peso\TomaPesoUI.resx">
+      <DependentUpon>TomaPesoUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PINPAD\PagoPINPAD.resx">
+      <DependentUpon>PagoPINPAD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\TarjetaRegaloInput.resx">
+      <DependentUpon>TarjetaRegaloInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Ganador.resx">
+      <DependentUpon>Ganador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\TopeCF.resx">
+      <DependentUpon>TopeCF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNotificaApertura.resx">
+      <DependentUpon>frmNotificaApertura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QtyForm.resx">
+      <DependentUpon>QtyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchProdCateg.resx">
+      <DependentUpon>SearchProdCateg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchProduct.resx">
+      <DependentUpon>SearchProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeleccionaLocal.resx">
+      <DependentUpon>SeleccionaLocal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\WebPortal.resx">
+      <DependentUpon>WebPortal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\TarjetaPinpadTest.resx">
+      <DependentUpon>TarjetaPinpadTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\ValidaCedulaTest.resx">
+      <DependentUpon>ValidaCedulaTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\XmlToTextTest.resx">
+      <DependentUpon>XmlToTextTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WonForm.resx">
+      <DependentUpon>WonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="C128N.TTF" />
+    <Content Include="DriverVerifone32.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\POS.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="POS_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\usuariogenerico.png" />
+    <None Include="Service References\BroadNetWebService\wsrecargas.wsdl" />
+    <None Include="Service References\CreateCustomerLirisAxPOS\service1.wsdl" />
+    <None Include="Service References\CreateCustomerLirisAxPOS\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CreateCustomerLirisAxPOS\service21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CreateCustomerLirisAxPOS\WSClientes1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CreateCustomerLirisProduccion\Service11.wsdl" />
+    <None Include="Service References\CreateCustomerLirisProduccion\WSClientes3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CreateCustomerLirisProduccion\WSClientes4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CreateCustomerLirisProduccion\WSClientes5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WSIntegracion\Service1.wsdl" />
+    <None Include="Service References\WSIntegracion\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WSIntegracion\Service11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_liris.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\collaborator-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BroadNetWebService\" />
+    <WCFMetadataStorage Include="Service References\CreateCustomerLirisAxPOS\" />
+    <WCFMetadataStorage Include="Service References\CreateCustomerLirisProduccion\" />
+    <WCFMetadataStorage Include="Service References\WSIntegracion\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BroadNetWebService\wsrecargas.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BroadNetWebService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BroadNetWebService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BroadNetWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Control\Pagos\log4net.dll" />
+    <Content Include="Control\Pagos\UC-CAJA.dll" />
+    <Content Include=".nuget\log4net.dll" />
+    <Content Include="Libs\DPFPCtlXTypeLibNET.dll" />
+    <Content Include="Libs\DPFPCtlXWrapperNET.dll" />
+    <Content Include="Libs\DPFPDevNET.dll" />
+    <Content Include="Libs\DPFPEngNET.dll" />
+    <Content Include="Libs\DPFPGuiNET.dll" />
+    <Content Include="Libs\DPFPShrNET.dll" />
+    <Content Include="Libs\DPFPShrXTypeLibNET.dll" />
+    <Content Include="Libs\DPFPVerNET.dll" />
+    <Content Include="Libs\DSS.BALANZAS.TomaPeso.dll" />
+    <Content Include="Libs\EntityFramework.dll" />
+    <Content Include="Libs\EntityFramework.SqlServer.dll" />
+    <Content Include="Libs\EntityFramework.SqlServer.xml" />
+    <Content Include="Libs\EN\DPFPDevNET.XML" />
+    <Content Include="Libs\EN\DPFPEngNET.XML" />
+    <Content Include="Libs\EN\DPFPGuiNET.XML" />
+    <Content Include="Libs\EN\DPFPShrNET.XML" />
+    <Content Include="Libs\EN\DPFPVerNET.XML" />
+    <Content Include="Libs\Newtonsoft.Json.dll" />
+    <Content Include="Libs\OposImageScanner_CCO.dll" />
+    <Content Include="Libs\OposScale_CCO.dll" />
+    <Content Include="Libs\OposScanner_CCO.dll" />
+    <Content Include="Libs\Telerik.WinControls.dll" />
+    <Content Include="Libs\Telerik.WinControls.GridView.dll" />
+    <Content Include="Libs\Telerik.WinControls.RadDock.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.Office2007Black.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.Office2010Black.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.TelerikMetroTouch.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.Windows7.dll" />
+    <Content Include="Libs\Telerik.WinControls.UI.Design.dll" />
+    <Content Include="Libs\Telerik.WinControls.UI.dll" />
+    <Content Include="Libs\TelerikCommon.dll" />
+    <Content Include="Libs\TelerikData.dll" />
+    <Content Include="logo_liris.ico" />
+    <None Include="Resources\usuariogenerico.png" />
+    <None Include="Service References\CreateCustomerLirisProduccion\WSClientes1.disco" />
+    <None Include="Resources\PROTECTOR-PANTALLA.jpg" />
+    <None Include="Resources\delportal.png" />
+    <None Include="Resources\delportal_new.png" />
+    <None Include="Resources\cancel-26.png" />
+    <Content Include="Resources\ds.jpg" />
+    <Content Include="Resources\ds21.jpg" />
+    <Content Include="Resources\ds2icon.jpg" />
+    <None Include="Service References\CreateCustomerLirisProduccion\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\CreateCustomerLirisProduccion\configuration.svcinfo" />
+    <None Include="Service References\CreateCustomerLirisProduccion\configuration91.svcinfo" />
+    <None Include="Resources\logo_paviplan.png" />
+    <None Include="Service References\CreateCustomerLirisAxPOS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\CreateCustomerLirisAxPOS\configuration.svcinfo" />
+    <None Include="Service References\CreateCustomerLirisAxPOS\configuration91.svcinfo" />
+    <None Include="Resources\login-26.png" />
+    <None Include="Resources\ds2icon1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Microsoft.MSXML">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.OLE.Interop">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.Shell.Interop">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.Shell.Interop.8.0">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.TextManager.Interop">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.TextManager.Interop.8.0">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Telerik.WinControls">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Telerik.WinControls.GridView">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Telerik.WinControls.Themes.TelerikMetroTouch">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Telerik.WinControls.UI">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="TelerikCommon">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Libs\x86\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LirisLibLogger\LirisLibLogger\LirisLibLogger.csproj">
+      <Project>{382eef98-d9bd-40f1-9060-e6e50f6b8edb}</Project>
+      <Name>LirisLibLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Liris_BasePagoDLL\Liris_BasePagoDLL.csproj">
+      <Project>{cdd6dfb3-0f8c-4293-a07b-d0cca8cb3b84}</Project>
+      <Name>Liris_BasePagoDLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessageDLL\Liris_MessageDLL\MensajesLibrary\Liris_MenssageDLL.csproj">
+      <Project>{199aa85c-1191-4a89-b319-76d64b406cd0}</Project>
+      <Name>Liris_MenssageDLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="LirisLibCorrBan\LirisLibCorrBan.csproj">
+      <Project>{f05dc5c3-5574-4a40-82e4-9852bad5153c}</Project>
+      <Name>LirisLibCorrBan</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CorrBanModelStoreContainer" CdmEntityContainer="CorrBanEntities">
+    <EntitySetMapping Name="CatalogosRecaudo">
+      <EntityTypeMapping TypeName="CorrBanModel.CatalogosRecaudo">
+        <MappingFragment StoreEntitySet="LstCatalogosRecaudo">
+          <ScalarProperty Name="IdCatalogosRecaudo" ColumnName="IdCatalogosRecaudo" />
+          <ScalarProperty Name="IdTabla" ColumnName="IdTabla" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CatalogosRecaudoDet">
+      <EntityTypeMapping TypeName="CorrBanModel.CatalogosRecaudoDet">
+        <MappingFragment StoreEntitySet="LstCatalogosRecaudoDet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCatalogosRecaudo" ColumnName="IdCatalogosRecaudo" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReglasRecaudos">
+      <EntityTypeMapping TypeName="CorrBanModel.ReglasRecaudos">
+        <MappingFragment StoreEntitySet="LstReglasRecaudos">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CampoOpcional" ColumnName="CampoOpcional" />
+          <ScalarProperty Name="CampoObliga" ColumnName="CampoObliga" />
+          <ScalarProperty Name="TipoServicio" ColumnName="TipoServicio" />
+          <ScalarProperty Name="IdTipoServicio" ColumnName="IdTipoServicio" />
+          <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InstRecaudos">
+      <EntityTypeMapping TypeName="CorrBanModel.InstRecaudos">
+        <MappingFragment StoreEntitySet="LstIRecaudos">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="AplicaAbono" ColumnName="AplicaAbono" />
+          <ScalarProperty Name="Max" ColumnName="Max" />
+          <ScalarProperty Name="Min" ColumnName="Min" />
+          <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+          <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="SubTipo" ColumnName="SubTipo" />
+          <ScalarProperty Name="NombreEntidad" ColumnName="NombreEntidad" />
+          <ScalarProperty Name="CodigoEmpresa" ColumnName="CodigoEmpresa" />
+          <ScalarProperty Name="IdTipoCorrBan" ColumnName="IdTipoCorrBan" />
+          <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spGetDetCatalogId" FunctionName="CorrBanModel.Store.spGetDetCatalogId" />
+    <EntitySetMapping Name="SoapCorrBan">
+      <EntityTypeMapping TypeName="CorrBanModel.SoapCorrBan">
+        <MappingFragment StoreEntitySet="LstSoapCorrBan">
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoapCorrBanDet">
+      <EntityTypeMapping TypeName="CorrBanModel.SoapCorrBanDet">
+        <MappingFragment StoreEntitySet="LstSoapCorrBanDet">
+          <ScalarProperty Name="XslConvert" ColumnName="XslConvert" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="SoapRedActiva" ColumnName="SoapRedActiva" />
+          <ScalarProperty Name="XsdLiris" ColumnName="XsdLiris" />
+          <ScalarProperty Name="SoapLiris" ColumnName="SoapLiris" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdLstSoapCarrBan" ColumnName="IdLstSoapCarrBan" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spProcesaSolicitud" FunctionName="CorrBanModel.Store.spProcesaSolicitud" />
+    <FunctionImportMapping FunctionImportName="spPingRequest" FunctionName="CorrBanModel.Store.spPingRequest" />
+    <EntitySetMapping Name="Recaudaciones">
+      <EntityTypeMapping TypeName="CorrBanModel.Recaudaciones">
+        <MappingFragment StoreEntitySet="TblRecaudaciones1">
+          <ScalarProperty Name="IdCajaApertura" ColumnName="IdCajaApertura" />
+          <ScalarProperty Name="ActivaId" ColumnName="ActivaId" />
+          <ScalarProperty Name="TipoTransCorresponsal" ColumnName="TipoTransCorresponsal" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+          <ScalarProperty Name="EstadoProceso" ColumnName="EstadoProceso" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="SecuenciaFactura" ColumnName="SecuenciaFactura" />
+          <ScalarProperty Name="PuntoEmision" ColumnName="PuntoEmision" />
+          <ScalarProperty Name="Establecimiento" ColumnName="Establecimiento" />
+          <ScalarProperty Name="Canal" ColumnName="Canal" />
+          <ScalarProperty Name="Operador" ColumnName="Operador" />
+          <ScalarProperty Name="Terminal" ColumnName="Terminal" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="SecuencialSara" ColumnName="SecuencialSara" />
+          <ScalarProperty Name="ValorRecaudado" ColumnName="ValorRecaudado" />
+          <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+          <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+          <ScalarProperty Name="Secuencial" ColumnName="Secuencial" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+          <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+          <ScalarProperty Name="PkgNo" ColumnName="PkgNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AudRecaudaciones">
+      <EntityTypeMapping TypeName="CorrBanModel.AudRecaudaciones">
+        <MappingFragment StoreEntitySet="TblRecaudaciones">
+          <ScalarProperty Name="Equipo" ColumnName="Equipo" />
+          <ScalarProperty Name="Trama" ColumnName="Trama" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="TipoTransaccion" ColumnName="TipoTransaccion" />
+          <ScalarProperty Name="IdRecaudacionTran" ColumnName="IdRecaudacionTran" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spProcesaRecaudacion" FunctionName="CorrBanModel.Store.spProcesaRecaudacion" />
+    <EntitySetMapping Name="VieReqsWF">
+      <EntityTypeMapping TypeName="CorrBanModel.VieReqsWF">
+        <MappingFragment StoreEntitySet="vieReqsWF">
+          <ScalarProperty Name="WFPkgNo" ColumnName="WFPkgNo" />
+          <ScalarProperty Name="WFTipo" ColumnName="WFTipo" />
+          <ScalarProperty Name="WFEstado" ColumnName="WFEstado" />
+          <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+          <ScalarProperty Name="TipoRecaudo" ColumnName="TipoRecaudo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+          <ScalarProperty Name="IdTipoCorrBan" ColumnName="IdTipoCorrBan" />
+          <ScalarProperty Name="IdIRecaudos" ColumnName="IdIRecaudos" />
+          <ScalarProperty Name="IdRecaudacion" ColumnName="IdRecaudacion" />
+          <ScalarProperty Name="Operador" ColumnName="Operador" />
+          <ScalarProperty Name="Terminal" ColumnName="Terminal" />
+          <ScalarProperty Name="Canal" ColumnName="Canal" />
+          <ScalarProperty Name="Secuencial" ColumnName="Secuencial" />
+          <ScalarProperty Name="SecuencialSara" ColumnName="SecuencialSara" />
+          <ScalarProperty Name="CodigoEmpresa" ColumnName="CodigoEmpresa" />
+          <ScalarProperty Name="Corresponsal" ColumnName="Corresponsal" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+          <ScalarProperty Name="Trama" ColumnName="Trama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
