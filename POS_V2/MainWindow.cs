@@ -14535,10 +14535,10 @@ namespace POS
                                 _factura.Cupon = new List<Cupones>();
 
                                 st8 = stopwatch.ElapsedMilliseconds;
-                                _factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
+                                //_factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
                                 st9 = stopwatch.ElapsedMilliseconds;
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "prepararImpresionCupones3", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
-                                //_factura.prepararImpresionCupones4(_factura, 0); --
+                                _factura.prepararImpresionCupones4(_factura, 0); 
 
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", "Recorro lista de Pagos ");
 
@@ -19761,6 +19761,7 @@ namespace POS
 
                             Control.Common.General.GetMensajeToList(286);
                             //System.Windows.Forms.MessageBox.Show(this, "Caja Cerrada\nSaliendo del programa");
+                            LimpiezaCompletaCierreCaja(); // agregar la limpieza de parametros en el otro camino de cerrar una caja JCHID 
                             POS.Control.Common.GlobalParameters.MustCloseApplication = true;
                             Application.Exit();
                         }

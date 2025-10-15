@@ -190,6 +190,7 @@ namespace DSS.Controles.Impresion
                     e.Graphics.DrawString(linea_a_imprimir,
                         new Font(_font.Name, _font.Size + value, _font.Style), Brushes.Black, x, y);
                 }
+              
                 else if (linea_a_imprimir.StartsWith("<titulo") && linea_a_imprimir.EndsWith("</titulo>"))
                 {
                     string contenido = ExtraerContenido(linea_a_imprimir, "titulo");

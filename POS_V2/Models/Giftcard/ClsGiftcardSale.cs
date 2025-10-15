@@ -284,7 +284,7 @@ namespace POS.Models.Giftcard
                     foreach (var gc in this.LstGiftcard)
                     {
                         sQuery = string.Empty;
-                        //sQuery = string.Concat(sQuery, "Declare @UDT_TblVentaPagoType UDT_TblVentaPagoType ", Environment.NewLine);
+                        //sQuery = string.Concat(sQuery, "Declare @UDT_TblVentaPagoType UDT_TblVentaPagoType ", Environment.NewLine); 
 
                         sQuery = string.Concat(sQuery, $" exec spInsertGiftcardSale ", Environment.NewLine);
                         sQuery = string.Concat(sQuery, $" @tarjeta = '{ gc.codigo}' ", Environment.NewLine);
