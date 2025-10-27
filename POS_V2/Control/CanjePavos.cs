@@ -20,7 +20,11 @@ namespace POS.Control
         string producto;
         string nombrecliente;
         string nombreproducto;
+        string codigocanje;
+        string cedulacanje;
+        string nombrecanje;
         Factura _factura;
+
 
         
         private bool _validando; // evita reentradas
@@ -28,6 +32,12 @@ namespace POS.Control
         public CanjePavos()
         {
             InitializeComponent();
+            // Bloquear letras al tipear
+            txtCedula.KeyPress += TxtCedula_KeyPress;
+
+            // Limpiar pegados (Ctrl+V, arrastres, etc.) y cortar a 10
+            txtCedula.TextChanging += TxtCedula_TextChanging;
+
             // Capturar Enter en ambos campos
             txtCodCanje.KeyDown += OnEnterPressed;
             txtProducto.KeyDown += OnEnterPressed;
@@ -40,13 +50,30 @@ namespace POS.Control
         public CanjePavos(Factura factura) : this()
         {
             _factura = factura ?? throw new ArgumentNullException(nameof(factura));
+            txtCedula.Focus();
         }
 
         private void CanjePavos_Load(object sender, EventArgs e)
         {
 
         }
-        
+
+        private void TxtCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void TxtCedula_TextChanging(object sender, Telerik.WinControls.TextChangingEventArgs e)
+        {
+            var digits = new string(e.NewValue.Where(char.IsDigit).Take(10).ToArray());
+            if (digits != e.NewValue)
+            {
+                e.Cancel = true;                 // cancela el cambio inválido
+                txtCedula.Text = digits;         // aplica solo dígitos
+                txtCedula.SelectionStart = txtCedula.Text.Length;
+            }
+        }
 
         private void OnEnterPressed(object sender, KeyEventArgs e)
         {
@@ -54,9 +81,9 @@ namespace POS.Control
 
             e.SuppressKeyPress = true; // evita el “beep”
             e.Handled = true;
-
+            
             // Si estoy en Código y el producto está vacío, pasar el foco al producto
-            if (sender == txtCodCanje && string.IsNullOrWhiteSpace(txtProducto.Text))
+            if (sender == txtCodCanje && string.IsNullOrWhiteSpace(txtProducto.Text) && !string.IsNullOrWhiteSpace(txtCodCanje.Text))
             {
                 txtProducto.Focus();
                 
@@ -65,6 +92,26 @@ namespace POS.Control
             // Si estoy en Producto y el código está vacío, pasar el foco al código
             if (sender == txtProducto && string.IsNullOrWhiteSpace(txtCodCanje.Text))
             {
+                if (string.IsNullOrWhiteSpace(txtCedula.Text))
+                {
+                    Control.Common.General.GetMensajeToList(702);
+                    txtProducto.Text = "";
+
+                    lblItem.Text = "";
+
+                    txtCedula.Focus();
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                {
+                    Control.Common.General.GetMensajeToList(703);
+                    txtProducto.Text = "";
+
+                    lblItem.Text = "";
+
+                    txtNombre.Focus();
+                    return;
+                }
                 Control.Common.General.GetMensajeToList(696);
                 
                 txtProducto.Text = "";
@@ -101,22 +148,26 @@ namespace POS.Control
 
     private void btnValidar_Click(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty(txtCodCanje.Text))
-            //{
-            //    Control.Common.General.GetMensajeToList(696);
-            //    txtCodCanje.Focus();
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(txtCedula.Text))
+            {
+                Control.Common.General.GetMensajeToList(702);
+                txtCodCanje.Text = "";
+                txtCedula.Focus();
+                return;
+            }
 
-            //if (string.IsNullOrEmpty(txtProducto.Text))
-            //{
-            //    Control.Common.General.GetMensajeToList(697);
-            //    txtProducto.Focus();
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                Control.Common.General.GetMensajeToList(703);
+                txtCodCanje.Text = "";
+                txtNombre.Focus();
+                return;
+            }
             //else
             //{
-                if(validarCodigo(txtCodCanje.Text, txtProducto.Text) && !string.IsNullOrWhiteSpace(txtProducto.Text))
+            
+
+            if (validarCodigo(txtCodCanje.Text, txtProducto.Text) && !string.IsNullOrWhiteSpace(txtProducto.Text))
                 {
                     //pedir pesaje de item
                     string EstablecimientoAxCode = Control.Common.GlobalParameters.EstablecimientoAxCode;
@@ -138,18 +189,28 @@ namespace POS.Control
 
                     lblPeso.Text = pesoKg.ToString("N" + Common.GlobalParameters.CantidadDecimalesBascula.ToString()) + " kg";
 
-                    //si peso es correcto o menor entrega item y crea ov y/o remision
+                //si peso es correcto o menor entrega item y crea ov y/o remision
 
-                    //si peso es mayor mensaje de error
+                //si peso es mayor mensaje de error
+                    this.codigocanje = txtCodCanje.Text;
+                this.cedulacanje = txtCedula.Text;
+                this.nombrecanje = txtNombre.Text;
+                txtCedula.Text = "";
+                txtNombre.Text = "";
+                txtCodCanje.Text = "";
+                txtProducto.Text = "";
+                lblCliente.Text = "";
+                lblItem.Text = "";
+                lblNombre.Text = "";
+                lblPeso.Text = "";
 
-                    if (this.validarPeso(this.producto, pesoKg))
+                
+                if (this.validarPeso(this.producto, pesoKg))
                     {
-                        this.crearOV_AddItemAX(EstablecimientoAxCode, txtCodCanje.Text, pesoLb);
+                    
+                    this.crearOV_AddItemAX(EstablecimientoAxCode, this.codigocanje, pesoKg);
                     }
-                    else
-                    {
-                        lblPeso.Text = "";
-                    }
+                    
                     
                 //}
             }
@@ -224,7 +285,7 @@ namespace POS.Control
         private bool validarPeso(string producto, decimal pesoKg)
             {
                 string cadenaCon = Control.Common.GlobalParameters.ConServerPuntos;
-
+                
                 if (string.IsNullOrWhiteSpace(cadenaCon))
                 {
                     Control.Common.Logger.LogMessage(
@@ -301,12 +362,15 @@ namespace POS.Control
                                 if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
                                 {
                                     Control.Common.General.GetMensajeToList(692);
+                                    txtCedula.Text = "";
+                                    txtNombre.Text = "";
                                     txtCodCanje.Text = "";
                                     txtProducto.Text = "";
                                     lblCliente.Text = "";
                                     lblItem.Text = "";
                                     lblNombre.Text = "";
                                     lblPeso.Text = "";
+                                txtCedula.Focus();
                             }
                                 else
                                 {
@@ -324,8 +388,19 @@ namespace POS.Control
                             else
                             {
                                 Control.Common.General.GetMensajeToList(692);
-                            }
-                            return true;
+                     
+
+                        }
+                        txtCedula.Text = "";
+                        txtNombre.Text = "";
+                        txtCodCanje.Text = "";
+                        txtProducto.Text = "";
+                        lblCliente.Text = "";
+                        lblItem.Text = "";
+                        lblNombre.Text = "";
+                        lblPeso.Text = "";
+                        txtCedula.Focus();
+                        return true;
                         
                         }
 
@@ -348,10 +423,10 @@ namespace POS.Control
                 }
             }
 
-        private bool crearOV_AddItemAX(string inventlocation, string barcode, decimal pesoLb)
+        private bool crearOV_AddItemAX(string inventlocation, string barcode, decimal pesoKg)
             {
                 string cadenaCon = Control.Common.GlobalParameters.ConServerPuntos;
-
+                
                 if (string.IsNullOrWhiteSpace(cadenaCon))
                 {
                     Control.Common.Logger.LogMessage(
@@ -379,11 +454,18 @@ namespace POS.Control
                         cmd.Parameters.Add("@barCode", SqlDbType.VarChar, 100)
                            .Value = (object)barcode ?? string.Empty;
 
-                        // @qty decimal  -> usa decimal con escala (ej. 3) para no perder decimales
-                        var pQty = cmd.Parameters.Add("@qty", SqlDbType.Decimal);
+                        cmd.Parameters.Add("@cedula", SqlDbType.VarChar, 100)
+                           .Value = (object)cedulacanje ?? string.Empty;
+                        cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 100)
+                               .Value = (object)nombrecanje ?? string.Empty;
+
+                    // @qty decimal  -> usa decimal con escala (ej. 3) para no perder decimales
+                    var pQty = cmd.Parameters.Add("@qty", SqlDbType.Decimal);
                         pQty.Precision = 18;          // o la que uses en SQL
                         pQty.Scale = 2;               // 2 decimales
-                        pQty.Value = decimal.Round(pesoLb, 2, MidpointRounding.AwayFromZero);
+                        //pQty.Value = decimal.Round(pesoLb, 2, MidpointRounding.AwayFromZero);
+                        pQty.Value = decimal.Round(pesoKg, 2, MidpointRounding.AwayFromZero);
+
 
 
                     // @Respuesta varchar(2000) OUTPUT
@@ -400,6 +482,8 @@ namespace POS.Control
                         {
                         // Loguea el detalle devuelto por el SP (errores del WS, etc.)
                         Control.Common.General.GetMensajeToList(699);
+                        txtCedula.Text = "";
+                        txtNombre.Text = "";
                         txtCodCanje.Text = "";
                         txtProducto.Text = "";
                         lblCliente.Text = "";
