@@ -83,7 +83,7 @@ namespace POS.Models
 
         public decimal DescuentoAX
         {
-            get { return Math.Round(_descuentoAX, 2); }
+            get { return decimal.Round(_descuentoAX, 2); } // Opozo cambio de desceuntos
             set { _descuentoAX = value; }
         }
 
@@ -270,15 +270,15 @@ namespace POS.Models
             {
                 decimal retornaPrecioLocal = 0M;
                 retornaPrecioLocal = this.PrecioAx - (this.PrecioAx * this.DescuentoLocal);
-                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2);
+                retornaPrecioLocal = decimal.Round(retornaPrecioLocal, 2, MidpointRounding.AwayFromZero); //opozo redondeo
                 retornaPrecioLocal = retornaPrecioLocal - (retornaPrecioLocal * this.DescuentoEstablecimientocategoria);
-                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2);
+                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2, MidpointRounding.AwayFromZero); //opozo redondeo
                 retornaPrecioLocal = retornaPrecioLocal - (retornaPrecioLocal * this.DescuentoEstablecimientovariedad);
-                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2);
+                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2, MidpointRounding.AwayFromZero); //opozo redondeo
                 retornaPrecioLocal = retornaPrecioLocal - (retornaPrecioLocal * this.DescuentoEstablecimientogrupo);
-                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2);
+                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2, MidpointRounding.AwayFromZero); //opozo redondeo
                 retornaPrecioLocal = retornaPrecioLocal - (retornaPrecioLocal * this.DescuentoEstablecimientosubgrupo);
-                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2);
+                retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2, MidpointRounding.AwayFromZero); //opozo redondeo
 
                 decimal DsctoProducto = this.DescuentoEstablecimientoProductos;
                 if (this.DescuentoLocalProducto != 0)
@@ -292,7 +292,7 @@ namespace POS.Models
                 retornaPrecioLocal = retornaPrecioLocal - (retornaPrecioLocal * this.DescuentoProductoCliente);
                 retornaPrecioLocal = Math.Round(retornaPrecioLocal, 2);
                 
-                return decimal.Round(retornaPrecioLocal, 2, MidpointRounding.AwayFromZero);
+                return decimal.Round(retornaPrecioLocal, 2, MidpointRounding.AwayFromZero); // redondeo descuento 
             }
         }
 
@@ -2652,7 +2652,7 @@ namespace POS.Models
                 //Encerar el valor DescuentoAX una vez usado
                 this.DescuentoAX = 0M;
 
-                this.Iva = decimal.Round(this.Subtotal * _ivaProducto, 2);
+                this.Iva = decimal.Round(this.Subtotal * _ivaProducto, 2, MidpointRounding.AwayFromZero); //Opozo descuentos cambio de redondeo
             }
         }
 

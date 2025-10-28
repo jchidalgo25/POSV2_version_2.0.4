@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liris_MenssageDLL.Model;
+using Telerik.WinControls.Primitives;
+using Telerik.WinControls.UI;
 
 namespace Liris_MenssageDLL
 {
@@ -259,49 +261,56 @@ namespace Liris_MenssageDLL
 
         private void ConfigureMessageType(MessageType type)
         {
-            switch (type)
+            // OCULTA EL TEXTO DEL TÍTULO ESTÁNDAR
+            this.FormElement.TitleBar.TitlePrimitive.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+
+            // LOCALIZA EL ELEMENTO DE RELLENO DE LA BARRA DE TÍTULO
+            Telerik.WinControls.Primitives.FillPrimitive titleFill = this.FormElement.TitleBar.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>();
+
+            // ASEGURA QUE EL ELEMENTO FUE ENCONTRADO ANTES DE MODIFICARLO
+            if (titleFill != null)
             {
-                case MessageType.Information:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);
-                    pbInfo.Show();
-                    btnAceptar.Text = "Ok.";
-                    btnCancelar.Hide();
-                    break;
+                // ESTO EVITA QUE EL TEMA SOBREESCRIBA NUESTROS COLORES
+                titleFill.GradientStyle = Telerik.WinControls.GradientStyles.Solid;
 
-                case MessageType.Question:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);
-                    pbQue.Show();
-                    btnAceptar.Text = "Sí";
-                    btnCancelar.Show();
-                    btnCancelar.Text = "No";
-                    break;
+                switch (type)
+                {
+                    case MessageType.Information:
+                        titleFill.BackColor = Color.FromArgb(0, 100, 0); // Verde Oscuro
+                        pbInfo.Show();
+                        btnAceptar.Text = "Ok.";
+                        btnCancelar.Hide();
+                        break;
 
-                case MessageType.Warning:
-                    pL1.BackColor = Color.FromArgb(255, 193, 7);
-                    pbWar.Show();
-                    btnAceptar.Text = "Ok";
-                    btnCancelar.Hide();
-                    break;
+                    case MessageType.Question:
+                        titleFill.BackColor = Color.FromArgb(0, 100, 0); // Verde Oscuro
+                        pbQue.Show();
+                        btnAceptar.Text = "Sí";
+                        btnCancelar.Show();
+                        btnCancelar.Text = "No";
+                        break;
 
-                case MessageType.Error:
-                    pL1.BackColor = Color.FromArgb(244, 67, 54);
-                    pbError.Show();
-                    btnAceptar.Text = "Ok.";
-                    btnCancelar.Hide();
-                    break;
+                    case MessageType.Warning:
+                        titleFill.BackColor = Color.FromArgb(255, 193, 7); // Amarillo
+                        pbWar.Show();
+                        btnAceptar.Text = "Ok";
+                        btnCancelar.Hide();
+                        break;
 
-                case MessageType.Stop:
-                    pL1.BackColor = Color.FromArgb(244, 67, 54);
-                    pbStop.Show();
-                    btnAceptar.Text = "Ok";
-                    btnCancelar.Hide();
-                    break;
+                    case MessageType.Error:
+                    case MessageType.Stop:
+                        titleFill.BackColor = Color.FromArgb(244, 67, 54); // Rojo
+                        if (type == MessageType.Error) pbError.Show(); else pbStop.Show();
+                        btnAceptar.Text = "Ok";
+                        btnCancelar.Hide();
+                        break;
 
-                default:
-                    pL1.BackColor = Color.LightGray;
-                    btnAceptar.Text = "Ok";
-                    btnCancelar.Hide();
-                    break;
+                    default:
+                        titleFill.BackColor = Color.LightGray; // Gris claro
+                        btnAceptar.Text = "Ok";
+                        btnCancelar.Hide();
+                        break;
+                }
             }
         }
 

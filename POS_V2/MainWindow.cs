@@ -9444,6 +9444,8 @@ namespace POS
                 _factura.Pagos.Clear();
             }
         }
+
+
         private void ManejarProductoPorUnidad(Producto producto, string codigo, string operador, POSEntities db)
         {
             decimal peso = tomarPeso(producto);
@@ -14535,10 +14537,10 @@ namespace POS
                                 _factura.Cupon = new List<Cupones>();
 
                                 st8 = stopwatch.ElapsedMilliseconds;
-                                //_factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
+                                _factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
                                 st9 = stopwatch.ElapsedMilliseconds;
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "prepararImpresionCupones3", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
-                                _factura.prepararImpresionCupones4(_factura, 0); 
+                                //_factura.prepararImpresionCupones4(_factura, 0); 
 
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", "Recorro lista de Pagos ");
 
@@ -17516,6 +17518,31 @@ namespace POS
         {
             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow_FormClosing", "Inicia MainWindow_FormClosing");
 
+            //jchid detenet timer 
+            try
+            {
+                if (tempo != null)
+                {
+                    tempo.Stop();
+                    tempo.Dispose();
+                }
+                if (tempo5min != null)
+                {
+                    tempo5min.Stop();
+                    tempo5min.Dispose();
+                }
+            }
+            catch (Exception exTimer)
+            {
+                // Registrar si falla la detención del timer, pero no detener el cierre
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow_FormClosing", "Error al detener timers: " + exTimer.Message);
+            }
+            // ==============================================================
+
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow_FormClosing", "Inicia MainWindow_FormClosing (Timers detenidos)");
+
+
+
             //Si es modo Consulta 2X o la accion de cierre viene desde herramientas administrativas
             if (Es2X_CONSULTA_POS || POS.Control.Common.GlobalParameters.MustCloseApplication)
             {
@@ -19620,6 +19647,7 @@ namespace POS
             POSEntities db = new POSEntities();
             if (db.core_parametro.Where(x => x.identificador == "FINGERPRINT" && x.parametro2 == establecimiento_inicio).First().valor == "TRUE")
             {
+                // ... (código de verificación de huella) ...
                 Verifier = new VerificationForm(Data, _factura);
                 Verifier.Tag = "usr";
                 verificador = Verifier.ShowDialog();
@@ -19627,82 +19655,113 @@ namespace POS
                 ParametrosMensajes = new List<ParametrosMensajes>();
                 ParametrosMensajes.Add(new ParametrosMensajes() { codigo = "[NOMBRE_USUARIO]", valor = _current_user.nombres });
 
-
                 if (verificador == DialogResult.OK)
                 {
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Se ha verificado la identiidad Indentidad con éxito");
-
                     var result = Control.Common.General.GetMensajeToList(283, ParametrosMensajes);
 
-                    //if (System.Windows.Forms.MessageBox.Show(this, "Usuario: " + _current_user.nombres + "\n\nDesea cerrar la caja?\nEste proceso no se puede revertir", "ADVERTENCIA!!!!!!!!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                     if (result == MsgBoxCtrl.MessageBoxResult.Yes || result == MsgBoxCtrl.MessageBoxResult.Ok)
                     {
                         try
                         {
+                            // ... (código de cierre de lote PinPad) ...
                             if (db.core_parametro.Where(x => x.identificador == "PINPAD" && x.parametro2 == this._factura.Establecimiento).First().valor == "TRUE")
                             {
-                                //Control.Common.General.GetMensaje(43, ParametrosMensajes);
                                 Control.Common.General.GetMensajeToList(284);
-
-                                //msgBoxCtrl.ShowMessage(MsgBoxCtrl.MessageType.Information, " Se va a imprimir el lote de transacciones de Tarjetas de Crédito ", " POS - Cierre de Lote");
-                                //System.Windows.Forms.MessageBox.Show(this, "Se va a imprimir el lote de transacciones de Tarjetas de Crédito");
-
                                 _factura.prepararCorteLote();
-
                                 if (_factura.ReciboCorteLote != null)
                                 {
                                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Fatura", "F2", "Imprime ticket de cierre de corte lote");
                                     imprimir(_factura.ReciboCorteLote);
-
                                 }
                             }
 
+                            // ... (código de actualización de BD) ...
                             SqlConnection conexion2 = new SqlConnection(POS.Properties.Settings.Default.CONECTA_AX);
                             using (conexion2)
                             {
                                 Int64 registro;
                                 decimal valor = ObtenAvance(out registro);
-
                                 conexion2.Open();
                                 String Query1 = "UPDATE TBL_MONTOAPERTURA  SET PRE_CIERRE= 1 WHERE recid=" + registro;
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Enviando a actualizar registro de monto apertura: " + Query1);
-
                                 SqlCommand comandoupd = new SqlCommand(Query1, conexion2);
                                 comandoupd.ExecuteNonQuery();
                                 comandoupd.CommandTimeout = 5000;
                                 conexion2.Close();
                                 imprimir("Caja Cerrada\nUsuario: " + _current_user.nombres);
-
                             }
                         }
                         catch (Exception ex)
                         {
+                            // ... (manejo de excepciones) ...
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "f2", "No fue posible modificar el campo PRE_CIERRE de la tbl_montoapertura, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex), "StackTrace: " + ex.StackTrace);
-                            //System.Windows.Forms.MessageBox.Show(this, ex.ToString(), "Mensaje");
-
                             ParametrosMensajes = new List<ParametrosMensajes>();
                             ParametrosMensajes.Add(new ParametrosMensajes() { codigo = "[error_exception]", valor = ex.ToString() });
                             Control.Common.General.GetMensajeToList(285, ParametrosMensajes);
                         }
 
+                        // <--- INICIO BLOQUE DE CIERRE ROBUSTO (RAMA HUELLA) --->
                         Control.Common.General.GetMensajeToList(286);
                         LimpiezaCompletaCierreCaja(); // JCHID se elimina los archivos temporales cuando se cierra la caja
-                        //System.Windows.Forms.MessageBox.Show(this, "Caja Cerrada\nSaliendo del programa");
+
+                        // 1. Mover la limpieza de Timers (de FormClosing)
+                        try
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Deteniendo Timers manualmente...");
+                            if (tempo != null)
+                            {
+                                tempo.Stop();
+                                tempo.Dispose();
+                            }
+                            if (tempo5min != null)
+                            {
+                                tempo5min.Stop();
+                                tempo5min.Dispose();
+                            }
+                        }
+                        catch (Exception exTimer)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "f2-cleanup", "Error al detener timers: " + exTimer.Message);
+                        }
+
+                        // 2. Mover la limpieza de Scanners (de FormClosed)
+                        try
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Cerrando Scanners manualmente...");
+                            if (scanner != null && scanner.IsOpen)
+                            {
+                                scanner.Close();
+                            }
+                            if (scannerDL != null)
+                            {
+                                scannerDL.DeviceEnabled = false;
+                                scannerDL.ReleaseDevice();
+                                scannerDL.Close();
+                            }
+                        }
+                        catch (Exception exScanner)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "f2-cleanup", "Error al cerrar scanners: " + exScanner.Message);
+                        }
+
                         POS.Control.Common.GlobalParameters.MustCloseApplication = true;
-                        Application.Exit();
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Limpieza finalizada. Forzando salida de la aplicación...");
+
+                        Environment.Exit(0); // <-- La salida forzada y definitiva
+                                             // <--- FIN BLOQUE DE CIERRE ROBUSTO --->
                     }
                 }
                 else
                 {
-                    //System.Windows.Forms.MessageBox.Show(this, "Usuario no autorizado", "Autorización", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     Control.Common.General.GetMensajeToList(9007);
                 }
-
             }
-            else
+            else // Rama de Autenticación Manual
             {
                 try
                 {
+                    // ... (código para mostrar InputBoxDialog) ...
                     DialogResult _authorize;
                     _inputFormAuthUser = new InputBoxDialog("Ingrese código de autorización", "Cierre de Caja");
                     _inputFormAuthUser.setValue(String.Empty);
@@ -19712,37 +19771,31 @@ namespace POS
                 }
                 catch (Exception ex)
                 {
+                    // ... (manejo de excepciones) ...
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "f2", "No fue posible realizar la validacion manual del usuario logueado, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex));
-                    //System.Windows.Forms.MessageBox.Show(this, "Por favor, intente nuevamente", "Cuadre de Caja", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Control.Common.General.GetMensajeToList(9006);
-
-
                 }
 
                 if (focused.Text.ToString() != "")
                 {
                     if (ValidateAuthorizationUser(focused.Text.ToString()) == true)
                     {
-
                         ParametrosMensajes = new List<ParametrosMensajes>();
                         ParametrosMensajes.Add(new ParametrosMensajes() { codigo = "[NOMBRE_USUARIO]", valor = _current_user.nombres });
                         var result = Control.Common.General.GetMensajeToList(283, ParametrosMensajes);
 
-
-                        //if (System.Windows.Forms.MessageBox.Show(this, "Usuario: " + _current_user.nombres + "\n\nDesea cerrar la caja?\nEste proceso no se puede revertir", "ADVERTENCIA!!!!!!!!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                         if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
                         {
                             try
                             {
+                                // ... (código de actualización de BD - es idéntico) ...
                                 SqlConnection conexion2 = new SqlConnection(POS.Properties.Settings.Default.CONECTA_AX);
                                 using (conexion2)
                                 {
                                     Int64 registro;
                                     decimal valor = ObtenAvance(out registro);
-
                                     conexion2.Open();
                                     String Query1 = "UPDATE TBL_MONTOAPERTURA  SET PRE_CIERRE= 1 WHERE recid=" + registro;
-
                                     SqlCommand comandoupd = new SqlCommand(Query1, conexion2);
                                     comandoupd.ExecuteNonQuery();
                                     conexion2.Close();
@@ -19751,26 +19804,67 @@ namespace POS
                             }
                             catch (Exception ex)
                             {
+                                // ... (manejo de excepciones) ...
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "f2", "No fue posible modificar el campo PRE_CIERRE de la tbl_montoapertura, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex));
-                                //System.Windows.Forms.MessageBox.Show(this, ex.ToString(), "Mensaje");
-
                                 parametros = new List<ParametrosMensajes>();
                                 parametros.Add(new ParametrosMensajes() { codigo = "[error_exception]", valor = ex.ToString() });
                                 Control.Common.General.GetMensajeToList(285, parametros);
                             }
 
+                            // <--- INICIO BLOQUE DE CIERRE ROBUSTO (RAMA MANUAL) --->
                             Control.Common.General.GetMensajeToList(286);
-                            //System.Windows.Forms.MessageBox.Show(this, "Caja Cerrada\nSaliendo del programa");
                             LimpiezaCompletaCierreCaja(); // agregar la limpieza de parametros en el otro camino de cerrar una caja JCHID 
+
+                            // 1. Mover la limpieza de Timers (de FormClosing)
+                            try
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Deteniendo Timers manualmente...");
+                                if (tempo != null)
+                                {
+                                    tempo.Stop();
+                                    tempo.Dispose();
+                                }
+                                if (tempo5min != null)
+                                {
+                                    tempo5min.Stop();
+                                    tempo5min.Dispose();
+                                }
+                            }
+                            catch (Exception exTimer)
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "f2-cleanup", "Error al detener timers: " + exTimer.Message);
+                            }
+
+                            // 2. Mover la limpieza de Scanners (de FormClosed)
+                            try
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Cerrando Scanners manualmente...");
+                                if (scanner != null && scanner.IsOpen)
+                                {
+                                    scanner.Close();
+                                }
+                                if (scannerDL != null)
+                                {
+                                    scannerDL.DeviceEnabled = false;
+                                    scannerDL.ReleaseDevice();
+                                    scannerDL.Close();
+                                }
+                            }
+                            catch (Exception exScanner)
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "f2-cleanup", "Error al cerrar scanners: " + exScanner.Message);
+                            }
+
                             POS.Control.Common.GlobalParameters.MustCloseApplication = true;
-                            Application.Exit();
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "f2", "Limpieza finalizada. Forzando salida de la aplicación...");
+
+                            Environment.Exit(0); // <-- La salida forzada y definitiva
+                                                 // <--- FIN BLOQUE DE CIERRE ROBUSTO --->
                         }
                     }
                     else
                     {
-                        //System.Windows.Forms.MessageBox.Show(this, "Usuario no autorizado", "Autorización", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                         Control.Common.General.GetMensajeToList(9006);
-
                     }
                 }
             }

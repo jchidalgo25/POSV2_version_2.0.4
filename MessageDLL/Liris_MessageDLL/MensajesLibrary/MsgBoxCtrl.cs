@@ -232,7 +232,7 @@ namespace MensajesLibrary
             switch (TipoMensaje)
             {
                 case MessageType.Information:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbInfo.Visible = true;//mostramos la imagen
 
                     btnAceptar.Visible = true;
@@ -243,7 +243,7 @@ namespace MensajesLibrary
 
                     break;
                 case MessageType.Question:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbQue.Visible = true;//mostramos la imagen
 
                     btnAceptar.Visible = true;
@@ -370,7 +370,7 @@ namespace MensajesLibrary
             switch (TipoMensaje)
             {
                 case MessageType.Information:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbInfo.Visible = true;//mostramos la imagen
 
                     btnAceptar.Visible = true;
@@ -381,7 +381,7 @@ namespace MensajesLibrary
 
                     break;
                 case MessageType.Question:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbQue.Visible = true;//mostramos la imagen
 
                     btnAceptar.Visible = true;
@@ -507,7 +507,7 @@ namespace MensajesLibrary
             switch (TipoMensaje)
             {
                 case "info":
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbInfo.Visible = true;//mostramos la imagen
 
                     btnAceptar.Visible = true;
@@ -518,7 +518,7 @@ namespace MensajesLibrary
 
                     break;
                 case "question":
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbQue.Visible = true;//mostramos la imagen
 
                     btnAceptar.Visible = true;
@@ -638,11 +638,11 @@ namespace MensajesLibrary
             switch (messageType)
             {
                 case MessageType.Information:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbInfo.Visible = true;//mostramos la imagen
                     break;
                 case MessageType.Question:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbQue.Visible = true;//mostramos la imagen
                     break;
                 case MessageType.Warning:
@@ -731,11 +731,11 @@ namespace MensajesLibrary
             switch (messageType)
             {
                 case MessageType.Information:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbInfo.Visible = true;//mostramos la imagen
                     break;
                 case MessageType.Question:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbQue.Visible = true;//mostramos la imagen
                     break;
                 case MessageType.Warning:
@@ -827,11 +827,11 @@ namespace MensajesLibrary
             switch (messageType)
             {
                 case MessageType.Information:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbInfo.Visible = true;//mostramos la imagen
                     break;
                 case MessageType.Question:
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbQue.Visible = true;//mostramos la imagen
                     break;
                 case MessageType.Warning:
@@ -930,11 +930,11 @@ namespace MensajesLibrary
             switch (Tipo)
             {
                 case "info":
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbInfo.Visible = true;//mostramos la imagen
                     break;
                 case "question":
-                    pL1.BackColor = Color.FromArgb(33, 150, 243);//panel la primera línea
+                    pL1.BackColor = Color.FromArgb(13, 93, 58);//panel la primera línea
                     pbQue.Visible = true;//mostramos la imagen
                     break;
                 case "warning":
