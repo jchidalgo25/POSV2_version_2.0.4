@@ -2834,7 +2834,7 @@ namespace POS
                     //btnRecarga.Enabled = habilitar;
                     btnCorresponsal.Enabled = habilitar;
                     btnParqueo.Enabled = habilitar;
-                    btnWallet.Enabled = habilitar;
+                    //btnWallet.Enabled = habilitar;
                 }
             }
             catch (Exception)
@@ -6462,7 +6462,7 @@ namespace POS
                 Control.WalletPoints.ClsPoints.EsOpcionPuntosActiva = false;
             }
 
-            btnWallet.Visible = Control.WalletPoints.ClsPoints.EsOpcionPuntosActiva;
+            //btnWallet.Visible = Control.WalletPoints.ClsPoints.EsOpcionPuntosActiva;
         }
 
         private void RecargarParametrosGenerales()
@@ -23581,6 +23581,25 @@ namespace POS
             //bgw2.WorkerSupportsCancellation = true;
             //bgw2.RunWorkerAsync();
             ////System.Threading.Thread.Sleep(500);
+        }
+
+        /// <summary>
+        /// Acción al pulsar el botón Canje Pavos. Escanea el código del cupón y el pavo con su peso específico
+        /// Author: jtorres
+        /// </summary>
+        private void btnCanjePavos_Click(object sender, EventArgs e)
+        {
+            SolicitarCodigoPavo();
+        }
+
+        private void SolicitarCodigoPavo()
+        {
+
+            var frmPavo = new POS.Control.CanjePavos(this._factura);
+
+            frmPavo.ShowDialog();
+
+
         }
 
         void bgw2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
