@@ -114,3 +114,16 @@ C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\POS_V2\LirisLibCorrBan
 C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csproj.CopyComplete
 C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.dll
 C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.pdb
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\LirisLibCorrBan.dll.config
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\LirisLibCorrBan.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\LirisLibCorrBan.pdb
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\EntityFramework.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\EntityFramework.xml
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csprojAssemblyReference.cache
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csproj.CoreCompileInputs.cache
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csproj.CopyComplete
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.pdb

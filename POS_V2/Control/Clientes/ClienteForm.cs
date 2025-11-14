@@ -133,13 +133,13 @@ namespace POS.Control.Clientes
                 Control.Common.General.GetMensajeToList(320);
                 //MessageBox.Show(this, "Identificación no es válida, si la identificación es Cédula seleccionar persona Natural!");
             }
-            else if (cmbTipoCliente.SelectedItem.Text == "Extranjero")
-            {
-                response = false;
+            //else if (cmbTipoCliente.SelectedItem.Text == "Extranjero")
+            //{
+            //    response = false;
 
-                Control.Common.General.GetMensajeToList(321);
-                //MessageBox.Show(this, "Identificación no es válida, si es Pasaporte ingrésela en AX !");
-            }
+            //    Control.Common.General.GetMensajeToList(321);
+            //    //MessageBox.Show(this, "Identificación no es válida, si es Pasaporte ingrésela en AX !");
+            //}
             else if (txtMail.Text.Trim() != "" && !ValidarEmail(txtMail.Text.Trim()))
             {
                 response = false;

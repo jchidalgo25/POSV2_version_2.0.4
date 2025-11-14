@@ -769,8 +769,8 @@ namespace POS.Control.ToolBox
                     {
 
                         Rectangle areaToUse = Control.Common.General.GetRectangleClte();
-                        //frmMainTouchClte frmTouchClte = new frmMainTouchClte(); para pruebas JCHID
-                        frmPromocionPantallaCliente frmTouchClte = new frmPromocionPantallaCliente();
+                        frmMainTouchClte frmTouchClte = new frmMainTouchClte(); //para pruebas JCHID
+                        //frmPromocionPantallaCliente frmTouchClte = new frmPromocionPantallaCliente();
                         frmTouchClte.StartPosition = FormStartPosition.Manual;
                         frmTouchClte.Location = new Point(areaToUse.Left, areaToUse.Top);
                         frmTouchClte.Size = areaToUse.Size; // Ocupa toda la pantalla
@@ -778,8 +778,8 @@ namespace POS.Control.ToolBox
                         frmTouchClte.Show();
                         frmTouchClte.BringToFront();
 
-                        //Control.Common.GlobalParameters.frmTouchClte = frmTouchClte; comentado para pruebas JCHID
-                        Control.Common.GlobalParameters.frmPromocionPantallaCliente = frmTouchClte;
+                        Control.Common.GlobalParameters.frmTouchClte = frmTouchClte; //comentado para pruebas JCHID
+                        //Control.Common.GlobalParameters.frmPromocionPantallaCliente = frmTouchClte;
 
                         // Forzar la posición usando SetWindowPos (opcional)
                         IntPtr handle = frmTouchClte.Handle;

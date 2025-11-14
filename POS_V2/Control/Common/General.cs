@@ -2144,6 +2144,78 @@ namespace POS.Control.Common
             }
         }
 
+        public static MensajesLibrary.MsgBoxCtrl.MessageBoxResult GetMensajeToList(int id, List<ParametrosMensajes> listParametros, Form parent, string textAdicional = "", int activo = 1)
+        {
+            List<Mensajes> mensajes = new List<Mensajes>();
+
+            try
+            {
+                bool isActivo = activo == 1 ? true : false;
+                mensajes = GlobalParameters.ListMensaje;
+                if (mensajes == null || mensajes.ToList().Count == 0) { mensajes = GetListMensaje(id); }
+
+                if (id != 0)
+                {
+                    mensajes = (from deta in GlobalParameters.ListMensaje
+                                where deta.id == id
+                                && deta.activo == isActivo
+                                select deta).ToList();
+                }
+
+                msgBoxCtrl = new MensajesLibrary.MsgBoxCtrl();
+                respuestaMsj = new MensajesLibrary.MsgBoxCtrl.MessageBoxResult();
+
+                foreach (var deta in mensajes)
+                {
+                    var detParam = (from detaP in listParametros
+                                    where deta.descripcion.Contains(detaP.codigo)
+                                    select detaP).ToList();
+
+                    string textomensaje = string.Empty;
+                    textomensaje = deta.descripcion;
+
+                    if (detParam.Count >= 1)
+                    {
+                        foreach (var det1 in detParam)
+                        {
+                            textomensaje = textomensaje.Replace(det1.codigo, det1.valor);
+                        }
+                    }
+
+
+                    msgBoxCtrl.TipoMensaje = deta.TipoMensaje;
+                    msgBoxCtrl.TiempoEspera = deta.tiempo_espera;
+                    msgBoxCtrl.TituloMensaje = deta.titulo_mensaje;
+                    msgBoxCtrl.TextMensaje = textomensaje;
+                    msgBoxCtrl.CodigoMensaje = id;
+
+                    msgBoxCtrl.TextMensajeAdicional = string.Concat("(", msgBoxCtrl.CodigoMensaje, "). ", msgBoxCtrl.TextMensaje);
+                    if (!string.IsNullOrEmpty(textAdicional)) { msgBoxCtrl.TextMensajeAdicional = string.Concat(msgBoxCtrl.TextMensajeAdicional, ": ", textAdicional); }
+
+
+                    msgBoxCtrl.MostrarContador = true;
+                    msgBoxCtrl.CodigoMensaje = id;
+
+                    msgBoxCtrl.drawingFont = new Liris_MenssageDLL.Model.DrawingFontCtrl();
+                    msgBoxCtrl.drawingFont.fontStyle = Common.GlobalParameters.fontStyle;
+                    msgBoxCtrl.drawingFont.fontFamily = Common.GlobalParameters.fontFamily;
+                    msgBoxCtrl.drawingFont.emSize = Common.GlobalParameters.emSize;
+
+                }
+
+                respuestaMsj = msgBoxCtrl.ShowMessage(parent);
+
+                return respuestaMsj;
+
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "GetMensajeToList", $"error {ex.Message}");
+                respuestaMsj = MensajesLibrary.MsgBoxCtrl.MessageBoxResult.Cancel;
+                return respuestaMsj;
+            }
+        }
+
         public static MensajesLibrary.MsgBoxCtrl.MessageBoxResult GetMensajeToList(int id)
         {
             List<Mensajes> mensajes = new List<Mensajes>();

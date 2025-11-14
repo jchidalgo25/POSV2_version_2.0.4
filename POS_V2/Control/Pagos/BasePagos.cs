@@ -4605,7 +4605,7 @@ namespace POS.Control.Pagos
 
                                 try
                                 {
-                                    string QueryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] '" + clteEmpleado2.Identificacion + "' ";
+                                    string QueryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] '" + this._factura.ClienteIdentificacion + "' ";
 
                                     if (Control.Common.GlobalParameters.ConServerPuntos != "")
                                     {
@@ -4627,29 +4627,31 @@ namespace POS.Control.Pagos
                                                         _tarjetaRegalo = t;
                                                         dValorGiftCard = decimal.Parse(dr.GetValue(3).ToString());
 
-                                                        if (valor  > saldoFacturaPago)
-                                                        {
-                                                            this.BeginInvoke((MethodInvoker)delegate
-                                                            {
-                                                                Control.Common.General.GetMensajeToList(689);
-                                                            });
-                                                            return;
-                                                           
-                                                        }
+                                                        // Se comenta estas validaciones para que no salga error al cliente al leer sus giftcard con estado 1 -opozo . Se me ocurre hacer esta validación pero con el saldogifcard que se recibe de la vista "vieInvCustomerRevision"
+                                                        //if (valor > saldoFacturaPago)
+                                                        //{
+                                                        //    this.BeginInvoke((MethodInvoker)delegate
+                                                        //    {
+                                                        //        Control.Common.General.GetMensajeToList(689);
+                                                        //    });
+                                                        //    return;
+
+                                                        //}
 
 
 
-                                                        if (valor > dValorGiftCard)
-                                                        {
+                                                        //if (valor > dValorGiftCard)
+                                                        //{
 
-                                                            this.BeginInvoke((MethodInvoker)delegate
-                                                            {
-                                                                Control.Common.General.GetMensajeToList(180);
-                                                            });
+                                                        //    this.BeginInvoke((MethodInvoker)delegate
+                                                        //    {
+                                                        //        //Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "Exec [PtsCliente].[spConsultaGiftCardAppGen]", "error en Saldo de las GIFT CARDV");  jchid validacion de la GIFTCARDV 
+                                                        //        Control.Common.General.GetMensajeToList(180);
+                                                        //    });
 
-                                                            
-                                                            return;
-                                                        }
+
+                                                        //    return;
+                                                        //}
 
 
 
@@ -6510,32 +6512,53 @@ namespace POS.Control.Pagos
             bool tarjetaEncontrada = false;
             decimal SaldoGifCard = 0M;
 
-            // 3. Primera consulta: Tarjeta Genérica en LOCAL (último parámetro = true)
-            bool encontradoLocal = t.getTarjetaGen(ValorOriginalTarjeta, "", false, true);
+            //jchid Giftcard que empiezan con 99 
+           
+            bool omitirConsultaLocal = numeroTarjeta?.StartsWith("99") == true;
+            bool omitirTarjetaConsultaLocal = numeroTarjeta?.StartsWith("13") == true;
 
-            if (encontradoLocal)
+            if (!omitirConsultaLocal || !omitirTarjetaConsultaLocal)
+            {
+                // 3. Primera consulta: Tarjeta Genérica en LOCAL (último parámetro = true)
+                bool encontradoLocal = t.getTarjetaGen(ValorOriginalTarjeta, "", false, true);
+
+                if (encontradoLocal)
+                {
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Info,
+                        "POS.Control.Pagos.BasePagos",
+                        "ProcesarValidacionTarjetaRegalo",
+                        $"Tarjeta encontrada en srv-pos local: {ValorOriginalTarjeta}"
+                    );
+
+                    _tarjetaRegalo = t;
+                    SaldoGifCard = _tarjetaRegalo.getSaldo();
+                    tarjetaEncontrada = true;
+                }
+                else
+                {
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Warning,
+                        "POS.Control.Pagos.BasePagos",
+                        "ProcesarValidacionTarjetaRegalo",
+                        $"Tarjeta NO encontrada en srv-pos local: {ValorOriginalTarjeta}. Intentando en global..."
+                    );
+                }
+            }
+            else
             {
                 Control.Common.Logger.LogMessage(
                     Control.Common.Enum.LogTypes.Info,
                     "POS.Control.Pagos.BasePagos",
                     "ProcesarValidacionTarjetaRegalo",
-                    $"Tarjeta encontrada en srv-pos local: {ValorOriginalTarjeta}"
+                    $"Tarjeta con prefijo 99 detectada: {ValorOriginalTarjeta}. Omitiendo consulta local, consultando directamente en global..."
                 );
-
-                _tarjetaRegalo = t;
-                SaldoGifCard = _tarjetaRegalo.getSaldo();
-                tarjetaEncontrada = true;
             }
-            else
-            {
-                Control.Common.Logger.LogMessage(
-                    Control.Common.Enum.LogTypes.Warning,
-                    "POS.Control.Pagos.BasePagos",
-                    "ProcesarValidacionTarjetaRegalo",
-                    $"Tarjeta NO encontrada en srv-pos local: {ValorOriginalTarjeta}. Intentando en global..."
-                );
 
-                // 4. Segunda consulta: Tarjeta Genérica en GLOBAL (último parámetro = false)
+            // 4. Segunda consulta: Tarjeta Genérica en GLOBAL (último parámetro = false)
+            // Solo ejecutar si no se encontró en local O si se omitió la consulta local
+            if (!tarjetaEncontrada)
+            {
                 bool encontradoGlobal = t.getTarjetaGen(ValorOriginalTarjeta, "", false, false);
 
                 if (encontradoGlobal)
@@ -6561,6 +6584,8 @@ namespace POS.Control.Pagos
                     );
                 }
             }
+
+
 
             // 5. Si no se encontró en ninguno de los dos servicios
             if (!tarjetaEncontrada)

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="POS.exe" version="2.0.0.205" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
+  <asmv1:assemblyIdentity name="POS.exe" version="2.0.0.219" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <description asmv2:iconFile="logo_liris.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -542,19 +542,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>etrzy/gn5I5O2lxuq2B+6hUijnzxqS2Nnqv9+ylW6r8=</dsig:DigestValue>
+        <dsig:DigestValue>FKuHw+uvFusKXr+8i44onQPh13S+K24EjnMv/gOThD8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Liris_MenssageDLL.dll" size="55808">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Liris_MenssageDLL.dll" size="57344">
       <assemblyIdentity name="Liris_MenssageDLL" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6I8jv946byB35N0ahbYuRsIvkpazKyLOS0GggOBIyGE=</dsig:DigestValue>
+        <dsig:DigestValue>BoTnzUDDBwwUZWH1Xjsy38SHOR7mEaANZNdcnVEvtkQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -566,7 +566,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>i8L+ZId6HiBG29Sp1M2XM25M/qBgh5ADlAMMfyodRcU=</dsig:DigestValue>
+        <dsig:DigestValue>x4PvqRSNkMWU2Z4SkVd+jO1q+GLZB5sO+GJEKuEsNDU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -679,14 +679,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="POS.exe" size="11728896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="POS.exe" size="11730432">
       <assemblyIdentity name="POS" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>r4iX5JKDL02l4dBa+oIdX9mkbrKkZx9TRV2oktWY1fk=</dsig:DigestValue>
+        <dsig:DigestValue>2cDl3IJ6GsYgbmMep1hUzFmbwFmn3ZE7yACLjzXGNpY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1269,13 +1269,13 @@
       <dsig:DigestValue>bvPF66MCT1AjeZ8M8Rnhem9kJYZUrmkm+M+zrmQ0YlM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\chrome\classic.manifest" size="494">
+  <file name="Libs\xulrunner\chrome\classic.manifest" size="500">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QLvr5AhgiZzkkLlZuZ8bEGGTm8LjPjblMSR8XNIQm2s=</dsig:DigestValue>
+      <dsig:DigestValue>rOT0fJP/0Fr98UNpDpaUx7VCaXP+I4wXxuvc7xTIb98=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\chrome\comm.jar" size="40093">
@@ -1287,13 +1287,13 @@
       <dsig:DigestValue>3TauvQ8hcRObIWQikjHpQim2SAhLN96ZCt0PCODo/XE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\chrome\comm.manifest" size="144">
+  <file name="Libs\xulrunner\chrome\comm.manifest" size="146">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>AoUun387R7V81ZnqR/JbOL2ztcttwx8wM9cY9KGjq6U=</dsig:DigestValue>
+      <dsig:DigestValue>Bw6VEqH/PpZ51b4hqUsH3GqLNIrfeEJ0EhLLGOFFJu0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\chrome\en-US.jar" size="321895">
@@ -1305,13 +1305,13 @@
       <dsig:DigestValue>Rrglpythy4XEFIJifM43rMS9yxzp4RPZXn/zl5YdzAQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\chrome\en-US.manifest" size="722">
+  <file name="Libs\xulrunner\chrome\en-US.manifest" size="734">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>8OyGTd5Pkabu+14FgfFBOSk6Es+d+APw0/YpAdVwSYw=</dsig:DigestValue>
+      <dsig:DigestValue>ybMOYlXM2/HGWfJagmSnIPeoJ5ZBOkIgQU/lZrVV8UY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\chrome\pippki.jar" size="279011">
@@ -1323,13 +1323,13 @@
       <dsig:DigestValue>UVo213gV1GFEsacLiprKrDNnQHv51GplBvAlct2zTag=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\chrome\pippki.manifest" size="69">
+  <file name="Libs\xulrunner\chrome\pippki.manifest" size="70">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>wknfS8j63M7tHa0nipbXkVr1TwrpeuDyP8jrQXVzGIA=</dsig:DigestValue>
+      <dsig:DigestValue>Q3Hy/gtZRw8Ga8jNM9pPLN45y+qfeM9UHBmRigP3mw0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\chrome\toolkit.jar" size="1983986">
@@ -1341,13 +1341,13 @@
       <dsig:DigestValue>aI77EGrlo1Loay+BKf29ZUQEy48Z3cM+kQyMnjqeGzA=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\chrome\toolkit.manifest" size="517">
+  <file name="Libs\xulrunner\chrome\toolkit.manifest" size="523">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>KWd3XNAs2SZ3us1xpwIu5NBBbHYeAAoAT4VCJBR7G0Y=</dsig:DigestValue>
+      <dsig:DigestValue>das9V+zt2c6zSH4h5EUtt0v6c1mM3KtjZu5f2PcNNt8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\accessibility.xpt" size="19299">
@@ -1467,13 +1467,13 @@
       <dsig:DigestValue>ORa/Zn7x3I7QilHOOyUiuSqnlcdyJf6/dZTTRWZZC/8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\compreg.dat" size="135817">
+  <file name="Libs\xulrunner\components\compreg.dat" size="137583">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>bEdbqohqVLBA4WfFasFy6MBr2hPHzDRd+MphuW0DEnQ=</dsig:DigestValue>
+      <dsig:DigestValue>N4tNA0eRnYtO88DdtIlNGwjayAM5fY53csm7RS0cjR8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\content_base.xpt" size="9532">
@@ -1827,13 +1827,13 @@
       <dsig:DigestValue>GMAskz7L35+v30GL9dVTf/enDQaSXM6ihMylkg900So=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\FeedProcessor.js" size="66215">
+  <file name="Libs\xulrunner\components\FeedProcessor.js" size="68165">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>OMxZN7bNno5QBjeIuDEPHu5hOGF3NXQyekZwd4nmjXo=</dsig:DigestValue>
+      <dsig:DigestValue>2oQ++HKl2EhRIClCp/Iyo2AdmAdAFze1RMw6QIX9Jak=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\feeds.xpt" size="3274">
@@ -1917,13 +1917,13 @@
       <dsig:DigestValue>TSCcYAIbBMb5tuh8fYhs2cP6Q8udc4Xyn1eGAqBnB0M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\jsconsole-clhandler.js" size="1515">
+  <file name="Libs\xulrunner\components\jsconsole-clhandler.js" size="1553">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>vaXwi0TNkHTLJqByvgms1WqcN7i6exaIXxNgBoFhPLc=</dsig:DigestValue>
+      <dsig:DigestValue>vxbatQ5VU3IRsEAsfGhE9yAcwZPMzy714zAjYNgXIiA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\jsdservice.xpt" size="6029">
@@ -2142,247 +2142,247 @@
       <dsig:DigestValue>PonUqoKkRcLxuLT3BvjkFIeeJTmgooZLtPIfyy1Bask=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\NetworkGeolocationProvider.js" size="9562">
+  <file name="Libs\xulrunner\components\NetworkGeolocationProvider.js" size="9841">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>wVpRlBN4gMFzq7+k4G06PNML6ihH8sNARB4sk87bg+w=</dsig:DigestValue>
+      <dsig:DigestValue>F3Ag/QOu/rkvYuNCwIEOvWTAszFzKTRy2yWGrkoKnPM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsAddonRepository.js" size="11742">
+  <file name="Libs\xulrunner\components\nsAddonRepository.js" size="12091">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>M5+fccA4ahpDl1ku0JhnyYR4R+A4qCdsgTwxDk/QRTY=</dsig:DigestValue>
+      <dsig:DigestValue>8HkWdOR4GeObgcJYQe6sBR5lKKKC5w1WfPMmLwaBetQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsBadCertHandler.js" size="3104">
+  <file name="Libs\xulrunner\components\nsBadCertHandler.js" size="3187">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>fAkmps3GAMmRPXUHBJ4mhI182nkm4NrNh+ZZ0SpRBFU=</dsig:DigestValue>
+      <dsig:DigestValue>xvHvBawyfR5A0S+Zrn4KL8eYnvPpcAJZC4bNVclA2mY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsBlocklistService.js" size="37400">
+  <file name="Libs\xulrunner\components\nsBlocklistService.js" size="38469">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>WuiC3cna6ALdI73haaQdPkKJ+mHabC9zXiNL/p9+QRk=</dsig:DigestValue>
+      <dsig:DigestValue>oIq7hJvT98A7OligvKH6mgKmQZhjP56NtNgkA63aUho=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsContentDispatchChooser.js" size="5005">
+  <file name="Libs\xulrunner\components\nsContentDispatchChooser.js" size="5133">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>IIzyVUOI/PiHoopdGEhp3fCvpEVaLljs/tB7/T+tUKU=</dsig:DigestValue>
+      <dsig:DigestValue>o1SgYBWsd6fdYXU4U5BcPY3+rNv5j7vhpU3UvVt+YIo=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsContentPrefService.js" size="30890">
+  <file name="Libs\xulrunner\components\nsContentPrefService.js" size="31834">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>IKi1wqPAHufWb43jwVianFrFRi2I7GRvpnrkFF0jMes=</dsig:DigestValue>
+      <dsig:DigestValue>Kb5XsaSnD49TPk/iW0FoMa+pkeUljmv3LyicAI8jFG0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsDefaultCLH.js" size="6363">
+  <file name="Libs\xulrunner\components\nsDefaultCLH.js" size="6564">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>B4X875Ew388CrOIw61uFPOImCEmbTnaP0eWE4SamtPk=</dsig:DigestValue>
+      <dsig:DigestValue>QluvaCksP0rzYeEHmaE7dDRggQuH2mi0sNqPNyWGJ2w=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsDownloadManagerUI.js" size="5737">
+  <file name="Libs\xulrunner\components\nsDownloadManagerUI.js" size="5896">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SBAwQBIWS8LSwOskhVHLjDHp0BCnrLBmeJHAMzyzz+I=</dsig:DigestValue>
+      <dsig:DigestValue>ZzvawSQcqzgSSBDskRxzf7O6ty9EIHucjCvckTUYp58=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsExtensionManager.js" size="344789">
+  <file name="Libs\xulrunner\components\nsExtensionManager.js" size="353750">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>JvOBgCB0NJd9mK536/1mDjiprE1fXfK4OkhsjTeV4wk=</dsig:DigestValue>
+      <dsig:DigestValue>QNHrnqPkzjk7CRTp9o4t49jOzVvGQBFsByKvo3yZil0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsHandlerService.js" size="53725">
+  <file name="Libs\xulrunner\components\nsHandlerService.js" size="55156">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>nB4zAVMsg6tm6M/v9mwY1zh8CZJomm6actta0pIG4cU=</dsig:DigestValue>
+      <dsig:DigestValue>VpX++aoHX16K/yYb02VqKAZJgS7Swcom2mZSQAWgw80=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsHelperAppDlg.js" size="43223">
+  <file name="Libs\xulrunner\components\nsHelperAppDlg.js" size="44316">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>XjvPzV4fSMoJMDpyxXpzDv+AMdGaIAGsDk7y0DtYEZs=</dsig:DigestValue>
+      <dsig:DigestValue>li2rPm67M8w6wCFno1dKHF0/NFWTQVm70f37xhKeqhc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsLivemarkService.js" size="36648">
+  <file name="Libs\xulrunner\components\nsLivemarkService.js" size="37788">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>C5RoAGjQ2OshDAheTwdXy83/eWoZMZXvBY6PyBp0Y0Y=</dsig:DigestValue>
+      <dsig:DigestValue>gsaglNA/NB1QcnKTEZ+kmOWDXxQLRL125Cg6z3hPKEw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsLoginInfo.js" size="4920">
+  <file name="Libs\xulrunner\components\nsLoginInfo.js" size="5059">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>opCgEoRXZaUCF4tC2NFk0llLuKVZY0DI1vtrO/pKT7k=</dsig:DigestValue>
+      <dsig:DigestValue>1uAjxsB1zBS5lgcixtxe4CjkP3YgHozP3QepBw6ODt0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsLoginManager.js" size="50965">
+  <file name="Libs\xulrunner\components\nsLoginManager.js" size="52347">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LUscr++8EpffcBuMwvkUwBGsHlKyij0crMeHbQl00lw=</dsig:DigestValue>
+      <dsig:DigestValue>Kd6tjBKnknx3jLenMDCileUvR8/4mpGpUGWZ3QKE1hE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsLoginManagerPrompter.js" size="44596">
+  <file name="Libs\xulrunner\components\nsLoginManagerPrompter.js" size="45825">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>10Nu+fu7OqhcCUFBdgzWukCVy8JlMYDK/66ei9yaw8A=</dsig:DigestValue>
+      <dsig:DigestValue>UG8qRdbgueBPkbhWe5lx38N23sL4unKVl2zByhxGEeM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsPlacesDBFlush.js" size="12139">
+  <file name="Libs\xulrunner\components\nsPlacesDBFlush.js" size="12476">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>IcKKrVYzz/zG+5kQi+uxxdQKAqG+mnk2G7KmJiPkbyY=</dsig:DigestValue>
+      <dsig:DigestValue>axyL/XZr6mJOZ3zVB1E8AJ7tCB3H8JZuyHmdqn8hOAM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsPostUpdateWin.js" size="21420">
+  <file name="Libs\xulrunner\components\nsPostUpdateWin.js" size="22123">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>tKYwD2yzjDcPRqEWZJvhody05OXxAg9tRnBdq7cQY6Q=</dsig:DigestValue>
+      <dsig:DigestValue>JOwOC4gd3EQxJ3ga3NsRKAmR3Qcb9Ov+/9NA370Umn0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsProgressDialog.js" size="37314">
+  <file name="Libs\xulrunner\components\nsProgressDialog.js" size="38260">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>BFmRMqNLxQ1uBmVDr2sizJLxFs/GnqKOvFRCptqav5w=</dsig:DigestValue>
+      <dsig:DigestValue>fUJR1mIETpdJXwjvHtZO5ugN1p1hz4VFpxQzdjEgAk8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsProxyAutoConfig.js" size="13682">
+  <file name="Libs\xulrunner\components\nsProxyAutoConfig.js" size="14083">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Vk2bBgeSaWGmzYOqALltLoR/VvTz3fC0dtTLdNaaC30=</dsig:DigestValue>
+      <dsig:DigestValue>vSAzpX2Bp7eaeHu0e58TdMHZ1HEoQvKtq6sDkwJcQkc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsSearchService.js" size="123475">
+  <file name="Libs\xulrunner\components\nsSearchService.js" size="127047">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>iWp5oaL9OH1Zily0ToSwwdIayF83qHrDRuH6PPSgRts=</dsig:DigestValue>
+      <dsig:DigestValue>H8PO0xX58ezHNghweUR/1SOHGrIKOqG2h4fNffyj7s4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsSearchSuggestions.js" size="24228">
+  <file name="Libs\xulrunner\components\nsSearchSuggestions.js" size="24987">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>+YhOA+GRahL6MsKlk7xfTzPcRUzxMqC8LEt6jCND6l8=</dsig:DigestValue>
+      <dsig:DigestValue>JYhgHfW1PCUH5hcT8WCEOGEkjfoMWrgucpfv4uhZfFU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsTaggingService.js" size="21084">
+  <file name="Libs\xulrunner\components\nsTaggingService.js" size="21747">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QfufuTDuTUKdAwREfkVFz26zjq0nqypTm2QPz6bhZNc=</dsig:DigestValue>
+      <dsig:DigestValue>SGvNa5iAAIIZ4nSXlDJjk4lR0tx5jqs+pgAPweCI/I4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsTryToClose.js" size="3268">
+  <file name="Libs\xulrunner\components\nsTryToClose.js" size="3348">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>o/68OQD99QkKBuGzhkctIMlOGS73MKNUCeosLE2Pd8A=</dsig:DigestValue>
+      <dsig:DigestValue>UeYnFz1FO6z2TpO7S5fSE9IKDbUxHcJTgrTXonLlXzg=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsUpdateService.js" size="107828">
+  <file name="Libs\xulrunner\components\nsUpdateService.js" size="111057">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>fnZGfYtFqs4Il8o9KMgKf3Qpdo7UOEpyPd3TiDIRIY8=</dsig:DigestValue>
+      <dsig:DigestValue>WOhcGZp/TDsHKK0tPdlwdBXMP8QS8IZwQSYcA/oYDe0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsURLFormatter.js" size="3125">
+  <file name="Libs\xulrunner\components\nsURLFormatter.js" size="3210">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>ICH4iHzJ5Wk/7pcncvP57wKe9u4LRpdJJDv+LqdkP4g=</dsig:DigestValue>
+      <dsig:DigestValue>J4AAyMn74QcdmQBYb5hKxPoYvNIxp6RGlYj5lhne96A=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsWebHandlerApp.js" size="6920">
+  <file name="Libs\xulrunner\components\nsWebHandlerApp.js" size="7104">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Ox9OFKXDmYzSl8NIBrxUQGtz6OTb9mpu1DYoUWt8zgE=</dsig:DigestValue>
+      <dsig:DigestValue>G8NefGUmq85k4/jCpvWq75p9RH27VFe2A1sSpKFAs2M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\nsXULAppInstall.js" size="8299">
+  <file name="Libs\xulrunner\components\nsXULAppInstall.js" size="8597">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>RXqQo+FKIB1IEjWA8KN83P9al7wEX27LuacEV9PBfT4=</dsig:DigestValue>
+      <dsig:DigestValue>l3Xj00cC4ELChyHxU/v84H5FNdMC3mvVsVB04yH9VRU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\oji.xpt" size="886">
@@ -2448,13 +2448,13 @@
       <dsig:DigestValue>wMs0EhhNlGgtVdk1/Mf4aVCv/DJPxfQPhbSAWDZaETY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\pluginGlue.js" size="3142">
+  <file name="Libs\xulrunner\components\pluginGlue.js" size="3220">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>feIyl2zuieTwAkWdfpGQg3Aszl9st5ecvszXIkSJQZc=</dsig:DigestValue>
+      <dsig:DigestValue>Y3BIbvt1BgHjuXnCDLtXpXoZ3xMxjxoTqeA/yTuGPDM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\pref.xpt" size="3290">
@@ -2547,22 +2547,22 @@
       <dsig:DigestValue>kHVxGQTfbsD4PgYd/QZS0M0WbYM7w8sMxEau4PLBV1s=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\storage-Legacy.js" size="52873">
+  <file name="Libs\xulrunner\components\storage-Legacy.js" size="54351">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Z3HkXzSvsl4jt/lBk6SMF/vv/ueDSqOAOw/d5jgCDxk=</dsig:DigestValue>
+      <dsig:DigestValue>6+oQ45Hs1zKeK70qPdtVsWMrkHHmMBq2xeMt6ZmOizQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\storage-mozStorage.js" size="56155">
+  <file name="Libs\xulrunner\components\storage-mozStorage.js" size="57743">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>hVnZlw7Viv+/XNNzuLcAW9z1xPnCAZve31fdOf5QYWI=</dsig:DigestValue>
+      <dsig:DigestValue>m3M7MpZm1/29fEfK4gFcPBokK047RZgMPnCT1IFQyww=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\toolkitprofile.xpt" size="1088">
@@ -2583,13 +2583,13 @@
       <dsig:DigestValue>1kUJXc39dfRIJO676e1XAKYUqsWo1/bYsbB1XDnw6gk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\txEXSLTRegExFunctions.js" size="6667">
+  <file name="Libs\xulrunner\components\txEXSLTRegExFunctions.js" size="6855">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>A8sQ7pWi9hiLk3WCjMEuNfuNVyL+JRRbgBy4hO32KnE=</dsig:DigestValue>
+      <dsig:DigestValue>Y03Ja2E5h0UVPE/ueid35PNodSKuomzkfdlGNfVqr98=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\txmgr.xpt" size="1258">
@@ -2790,13 +2790,13 @@
       <dsig:DigestValue>b2uOPFPLAreLiOq1/7G0mi1AVurpsG7q3H4CyUqvypE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\components\xpti.dat" size="104867">
+  <file name="Libs\xulrunner\components\xpti.dat" size="106415">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Z86WzUGVXlQgTQIFAVuOMENTDgEsPmzuzYTQRSNu0CA=</dsig:DigestValue>
+      <dsig:DigestValue>ONXKEHm9G+1TrgkUT5ECyRZsfI2KreMnFbaVwvtj5bM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\components\xulapp.xpt" size="457">
@@ -2871,22 +2871,22 @@
       <dsig:DigestValue>7727zQ2VT4/cU0Z95dia1SXk5KnP/4oV0Hxv2zUMQH8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\defaults\autoconfig\platform.js" size="87">
+  <file name="Libs\xulrunner\defaults\autoconfig\platform.js" size="89">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>oxkSa3AfcioZLgZT0mmLjYVeQ9VhUwaa0SVYeaCv/Lc=</dsig:DigestValue>
+      <dsig:DigestValue>1wJRvnGb0ctR4KkoUbzeRgLoVev+iyNyfhlZnStthDs=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\defaults\autoconfig\prefcalls.js" size="7296">
+  <file name="Libs\xulrunner\defaults\autoconfig\prefcalls.js" size="7536">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>N1+9gkpzNqUXKa5wJaAeobMdM+AF+s7zyL1V+nQihKI=</dsig:DigestValue>
+      <dsig:DigestValue>T1nm+NNxFhS7nsZ8njWa5hJv3QC9Tn1cDCh3qSAqypE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\defaults\pref\xulrunner.js" size="3939">
@@ -2898,40 +2898,40 @@
       <dsig:DigestValue>sa5dI2FGC1fhG70Vi1Nea3gAATAcKr6fT5TmmjSrYIU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\defaults\profile\chrome\userChrome-example.css" size="1078">
+  <file name="Libs\xulrunner\defaults\profile\chrome\userChrome-example.css" size="1132">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>u6pt4yR8nVyZkfjRS5AiSRV45gOmsuKDjnYKh8ZYpxk=</dsig:DigestValue>
+      <dsig:DigestValue>I0u/sKteQFQtWSjWZzsFf9dv3pu6g69uN7LYEXq+/Tk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\defaults\profile\chrome\userContent-example.css" size="663">
+  <file name="Libs\xulrunner\defaults\profile\chrome\userContent-example.css" size="698">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>EM1cfX+x9vESOJNTAJmIiCLGy4pKQVhFNMLS66OPW6k=</dsig:DigestValue>
+      <dsig:DigestValue>+h/q7xXMmr+1ihswDJkBvS7MSfEEvF+mmGycyCBbTZw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\defaults\profile\US\chrome\userChrome-example.css" size="1078">
+  <file name="Libs\xulrunner\defaults\profile\US\chrome\userChrome-example.css" size="1132">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>u6pt4yR8nVyZkfjRS5AiSRV45gOmsuKDjnYKh8ZYpxk=</dsig:DigestValue>
+      <dsig:DigestValue>I0u/sKteQFQtWSjWZzsFf9dv3pu6g69uN7LYEXq+/Tk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\defaults\profile\US\chrome\userContent-example.css" size="663">
+  <file name="Libs\xulrunner\defaults\profile\US\chrome\userContent-example.css" size="698">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>EM1cfX+x9vESOJNTAJmIiCLGy4pKQVhFNMLS66OPW6k=</dsig:DigestValue>
+      <dsig:DigestValue>+h/q7xXMmr+1ihswDJkBvS7MSfEEvF+mmGycyCBbTZw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\freebl3.dll" size="249856">
@@ -3087,40 +3087,40 @@
       <dsig:DigestValue>paFVXxZBQoxaQ2uv8UZi47SN8N292y5CwfuPn4AiDD4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\modules\debug.js" size="2759">
+  <file name="Libs\xulrunner\modules\debug.js" size="2841">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>8qXP/Cu6toHWriDuRo4qrJtq0N/DRRMsK1tWmugnBnU=</dsig:DigestValue>
+      <dsig:DigestValue>pZozh/h2ZZXgZJwWagrlWeDnIv9i7MHZEcYvnotBbHY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\modules\Microformats.js" size="66415">
+  <file name="Libs\xulrunner\modules\Microformats.js" size="68252">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>P/hQJ1ObQbK8w5u+raAI2J2qZ6fJnE0Aru1DnqzYBhE=</dsig:DigestValue>
+      <dsig:DigestValue>Us5x80UmMHp2JEZcg2q6mbs7i5c5A0H7ve/zovsbgTA=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\modules\SpatialNavigation.js" size="15699">
+  <file name="Libs\xulrunner\modules\SpatialNavigation.js" size="16257">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>BxRwnUSfqeVA2Elu0xNa6cDdVL9Q6GgFrI7XQs8epy0=</dsig:DigestValue>
+      <dsig:DigestValue>F4UX0WT8OZidwXJwjKrN2/GpjBTz8JJx5qwPA88/B9g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\modules\utils.js" size="65464">
+  <file name="Libs\xulrunner\modules\utils.js" size="67252">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>/N+6XV7A7/lCtBrn22p1p5Zw0tE7O9ZmDfkKLRO6J64=</dsig:DigestValue>
+      <dsig:DigestValue>Lzcn4JqaICjd0ADczQ5EAIVygnUMFZME7runuNpuwzw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\mozcrt19.dll" size="716800">
@@ -3267,13 +3267,13 @@
       <dsig:DigestValue>Tfp1fSdDsYQObTX+dJTv6n8xZJAj0GheZ8IRNA+dcUQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\README.txt" size="1002">
+  <file name="Libs\xulrunner\README.txt" size="1022">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LMJCKzVCHbnPhd/v3vwNcdUMhYMaJhzt3ygE40bxrJM=</dsig:DigestValue>
+      <dsig:DigestValue>Ur4+JlRYHFNCMLo2Omsg0Ix8XinLNd5pBQWecvPKsXk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\redit.exe" size="8192">
@@ -3312,40 +3312,40 @@
       <dsig:DigestValue>u9fPxqmEJjnm4DNYc67xxxO/0BU7s+3EzHh5nt2ioNI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\contenteditable.css" size="11637">
+  <file name="Libs\xulrunner\res\contenteditable.css" size="12013">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>4uN2tgxtza0ADkWR8gwX4DvkEcoQSbW2jUzd/dERpnk=</dsig:DigestValue>
+      <dsig:DigestValue>zZYi5nscwXFwMYP3f8DA0/zq3jwDraWxy6l7OZhKN2U=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\designmode.css" size="1861">
+  <file name="Libs\xulrunner\res\designmode.css" size="1902">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>TCnyERyx4T/UhmIqWEQ66FKD8KLbSZvdBuqWvThGTvY=</dsig:DigestValue>
+      <dsig:DigestValue>vxdJeYY9yC48oFRXB5jKAlnXcdZyretrSw1S63KYhgs=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\EditorOverride.css" size="10740">
+  <file name="Libs\xulrunner\res\EditorOverride.css" size="11103">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>0irM8jbRoOxS/xaX6KA2bfU+hkt7nwkIpj7jMWC93KU=</dsig:DigestValue>
+      <dsig:DigestValue>5VRt7G3o/7TfU9zEXZTjT4vKNxo7A4ehnjKlQRNvRPk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\forms.css" size="15760">
+  <file name="Libs\xulrunner\res\forms.css" size="16352">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>go2OwZ17E6ykLwd4jeT/zCymo5vi4jaOCZbnqtq4W2o=</dsig:DigestValue>
+      <dsig:DigestValue>4N1wRKz4LIoYdWBa+sw9eh7EftEcW7YKOUFBgh/2M/A=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\res\grabber.gif" size="858">
@@ -3366,13 +3366,13 @@
       <dsig:DigestValue>82g+vf6TDVjxCeQCwYju4vE+xSZA0g7we9I49vcrpFc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\html.css" size="11373">
+  <file name="Libs\xulrunner\res\html.css" size="11899">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>fPM6JzREAjS17Dfs6J4y57UB/OdjWdE6zZe0/dBpiZ0=</dsig:DigestValue>
+      <dsig:DigestValue>z3xQIDklUWi472TnJVsVbL3o7+4HGmk6MCfcddpxnPo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\res\html\folder.png" size="619">
@@ -3393,31 +3393,31 @@
       <dsig:DigestValue>glwZv9JcZ1yAlhjaeISZMzLjIUmuJYXZkP64SK+jwi8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\mathml.css" size="14682">
+  <file name="Libs\xulrunner\res\mathml.css" size="15137">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>xrWOf3BnF16qze6j0Gr1LgYTEx/ssUpQgRc9W12Q3nY=</dsig:DigestValue>
+      <dsig:DigestValue>KPIzbpTpZ1a1HnAJVwEYkX6DiibSGxrIIMqvxAIJYrI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\quirk.css" size="11356">
+  <file name="Libs\xulrunner\res\quirk.css" size="11630">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>GpvTckb7p4WoG3Lqjb3E7gygJFEiCmAQQZTC7veROZs=</dsig:DigestValue>
+      <dsig:DigestValue>eqaRywSOKP5PQXM0CQ2Ubs3Ms183CllWah7G3bNbslI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\svg.css" size="2313">
+  <file name="Libs\xulrunner\res\svg.css" size="2380">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>rOE+0lIeLwpf7vgTEg6zRQ+ZF0L3JUItATn/41iAzMc=</dsig:DigestValue>
+      <dsig:DigestValue>46zSNgcxkl+dRjNhHD0nWOKfBUkMHxcKUwZkwX6EOv8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\res\table-add-column-after.gif" size="826">
@@ -3582,22 +3582,22 @@
       <dsig:DigestValue>8Z00lpzvm1joRfTzYw7D31o8wFSDHziAwbaKNK+kMdg=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\ua.css" size="6580">
+  <file name="Libs\xulrunner\res\ua.css" size="6828">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>6ztOwN6v7X4KKpDbtixjLeF+uM/fogFHEl/JGWsHqtc=</dsig:DigestValue>
+      <dsig:DigestValue>MfBvv/gIzq2U1CTNUf7TwcmZxirMzk1HxLcjaIPpx/0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Libs\xulrunner\res\viewsource.css" size="3062">
+  <file name="Libs\xulrunner\res\viewsource.css" size="3181">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>qdrDoAkIm7mARSEhiJSDh8bARD/XRrBFb8zb4RQWzTY=</dsig:DigestValue>
+      <dsig:DigestValue>7xoQBeMztYVB9BlXFp6BKjCS2wv5cQndyqHgGjumf2A=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Libs\xulrunner\sandboxbroker.dll" size="210944">
