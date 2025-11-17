@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -264,133 +265,141 @@ namespace POS.Control.SRI
 
         }
 
-        public static RespuestaDevlucion devolucionesIndividualesRecepciones(string claveClte, Factura factura, string bearerToken)
+
+
+    public static RespuestaDevlucion devolucionesIndividualesRecepciones(string claveClte, Factura factura, string bearerToken)
+    {
+        // --- LOG ADICIONAL ---
+        // Log de Entrada y medición de tiempo total
+        var watchTotal = Stopwatch.StartNew();
+        string tokenParcial = (bearerToken != null && bearerToken.Length > 6) ? bearerToken.Substring(bearerToken.Length - 6) : "TOKEN_NULO_O_VACIO";
+        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Enter",$"Iniciando devolucionesIndividualesRecepciones. ClaveClte: {claveClte}, Token (Parcial): ...{tokenParcial}");
+
+        var objRespuesta = new RespuestaDevlucion();
+
+        //validaciones
+        if (factura == null)
         {
-            var objRespuesta = new RespuestaDevlucion();
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "Recepcion_Error", "El objeto factura es NULL");
+            objRespuesta.codigo = "-998";
+            objRespuesta.mensaje = "Factura no puede ser NULL";
 
-            //validaciones de prueba para la claveAccesoComprobante JCHID
-            //begin jchid
-            if (factura == null)
-            {
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "Recepcion_Error", "El objeto factura es NULL");
-                objRespuesta.codigo = "-998";
-                objRespuesta.mensaje = "Factura no puede ser NULL";
-                return objRespuesta;
-            }
-
-            if (string.IsNullOrEmpty(factura.ClaveAccesoSRI))
-            {
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "Recepcion_Error", "ClaveAccesoSRI es NULL o vacía");
-                objRespuesta.codigo = "-997";
-                objRespuesta.mensaje = "ClaveAccesoSRI no puede estar vacía";
-                return objRespuesta;
-            }
-            //end jchid
-
-
-            //begin jchid
-            //declaramos una variable local para esta claveAccesoComprobante
-            string claveAccesoLocal = factura.ClaveAccesoSRI;
-            objRespuesta.claveAccesoComprobante = claveAccesoLocal;
-            //end jchid
-
-
-            //objRespuesta.claveAccesoComprobante = factura.ClaveAccesoSRI; // Asignar siempre COMENTANDO POR JCHID POR PRUEBAS DE VARIABLE NULL EN SEGUNDA COMPRA
-
-
-            //begin jchid
-            // Log para debugging
-            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Debug",
-                $"ClaveAccesoSRI recibida: {factura.ClaveAccesoSRI}");
-            //end jchid
-
-
-            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Debug",
-                $"Monto Iva Delvolver: {factura._montoIvaDevolver}");
-           
-
-            try
-            {
-
-                
-
-                // 1. Crear el objeto de la petición (Request)
-                var request = new RecepcionRequest
-                {
-                    rucEmisor = factura.Ruc_matriz,
-                    claveAccesoComprobante = factura.ClaveAccesoSRI,
-                    idBeneficiario = factura.ClienteIdentificacion,
-                    codigoBeneficio = claveClte,
-                    baseImponible = factura.GetBase12(),
-                    porcentajeIva = 4.0M,
-                    montoIva = factura.getIVA()
-                };
-
-                string url = "https://celcer.sri.gob.ec/devolucion-iva/rest/devolucionesIndividualesRecepciones";
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Start", JsonConvert.SerializeObject(request));
-
-                using (var client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
-                    var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-
-                    HttpResponseMessage response = client.PostAsync(url, content).Result;
-
-                    // 3. Leer la respuesta
-                    string responseBody = response.Content.ReadAsStringAsync().Result;
-
-                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Response", responseBody);
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        // 4. Deserializar la respuesta de error
-                        var sriError = JsonConvert.DeserializeObject<SriApiResponse>(responseBody);
-
-                        objRespuesta.codigo = sriError.Codigo;
-                        objRespuesta.mensaje = sriError.Mensaje;
-                        objRespuesta.montoIvaDevolver = sriError.MontoIvaDevolver ?? 0;
-
-                        if (sriError.Codigo == "3003")
-                        {
-                            // Comprobante ya fue procesado, puedes hacer algo especial aquí
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "ComprobanteYaProcesado", $"Clave: {factura.ClaveAccesoSRI}");
-                        }
-                    }
-                    else
-                    {
-                        // Si la respuesta es exitosa, también deserializamos
-                        var sriSuccess = JsonConvert.DeserializeObject<SriApiResponse>(responseBody);
-
-                        objRespuesta.codigo = sriSuccess.Codigo;
-                        objRespuesta.mensaje = sriSuccess.Mensaje;
-                        objRespuesta.montoIvaDevolver = sriSuccess.MontoIvaDevolver ?? 0;
-                    }
-
-                }
-
-                //// 2. Llamar al API Client y obtener la respuesta tipada
-                //var sriResponse = SriApiClient.Post<SriApiResponse>(url, request, bearerToken);
-                
-
-                //// 3. Poblar la respuesta de éxito
-                //objRespuesta.codigo = sriResponse.Codigo;
-                //objRespuesta.mensaje = sriResponse.Mensaje;
-                //objRespuesta.montoIvaDevolver = sriResponse.MontoIvaDevolver ?? 0;
-            }
-            catch (Exception ex)
-            {
-                //var error = JsonConvert.DeserializeObject<T>(ex.Message);
-
-                // 4. Manejo centralizado de errores
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "Recepcion_Failed", ex.ToString());
-                objRespuesta.codigo = "-999";
-                objRespuesta.mensaje = ex.Message;
-            }
+            // --- LOG ADICIONAL ---
+            watchTotal.Stop();
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warn, "General", "Recepcion_Exit_Validation",$"Saliendo por validación (Factura NULL). Duración: {watchTotal.ElapsedMilliseconds}ms");
             return objRespuesta;
         }
 
+        if (string.IsNullOrEmpty(factura.ClaveAccesoSRI))
+        {
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "Recepcion_Error", "ClaveAccesoSRI es NULL o vacía");
+            objRespuesta.codigo = "-997";
+            objRespuesta.mensaje = "ClaveAccesoSRI no puede estar vacía";
 
-        public static RespuestaDevlucion devolucionesIndividualesAnulaciones(string identificacion, string claveClte, Factura factura
+            // --- LOG ADICIONAL ---
+            watchTotal.Stop();
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warn, "General", "Recepcion_Exit_Validation",$"Saliendo por validación (ClaveAccesoSRI vacía). Duración: {watchTotal.ElapsedMilliseconds}ms");
+            return objRespuesta;
+        }
+
+        // ... (tu lógica de 'claveAccesoLocal' y logs de 'Recepcion_Debug' están perfectos) ...
+        string claveAccesoLocal = factura.ClaveAccesoSRI;
+        objRespuesta.claveAccesoComprobante = claveAccesoLocal;
+        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Debug",$"ClaveAccesoSRI recibida: {factura.ClaveAccesoSRI}");
+        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Debug",$"Monto Iva Delvolver: {factura._montoIvaDevolver}");
+
+        try
+        {
+            // 1. Crear el objeto de la petición (Request)
+            var request = new RecepcionRequest
+            {
+                // ... (tus asignaciones de request) ...
+                rucEmisor = factura.Ruc_matriz,
+                claveAccesoComprobante = factura.ClaveAccesoSRI,
+                idBeneficiario = factura.ClienteIdentificacion,
+                codigoBeneficio = claveClte,
+                baseImponible = factura.GetBase12(),
+                porcentajeIva = 4.0M,
+                montoIva = factura.getIVA()
+            };
+
+            string url = Control.Common.GlobalParameters.SRI_URL_DEV_INDV; // URL parametrizada
+
+            // --- LOG ADICIONAL ---
+            // ¡CRÍTICO! Loguear la URL a la que te conectas (¿Pruebas o Producción?)
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_URL",$"Conectando a URL: {url}");
+
+            // (Este log tuyo es excelente)
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Start", JsonConvert.SerializeObject(request));
+
+            // --- LOG ADICIONAL ---
+            // Iniciar cronómetro SÓLO para la llamada al SRI
+            var watchSRI = Stopwatch.StartNew();
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+                var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+                // --- LOG ADICIONAL ---
+                watchSRI.Stop(); // Detener cronómetro del SRI
+
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+
+                // --- LOG ADICIONAL ---
+                // ¡EL LOG MÁS CRÍTICO QUE FALTA!
+                // Te dice el código HTTP (401=Token Malo, 400=Request Malo, 500=SRI Caído)
+                // y cuánto se demoró en responder.
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_HttpResponse",$"Código HTTP: {(int)response.StatusCode} ({response.ReasonPhrase}). Duración SRI: {watchSRI.ElapsedMilliseconds}ms");
+
+                // (Este log tuyo es excelente)
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Response", responseBody);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    // ... (tu lógica de deserialización de error) ...
+                    var sriError = JsonConvert.DeserializeObject<SriApiResponse>(responseBody);
+                    objRespuesta.codigo = sriError.Codigo;
+                    objRespuesta.mensaje = sriError.Mensaje;
+                    //...
+                }
+                else
+                {
+                    // ... (tu lógica de deserialización de éxito) ...
+                    var sriSuccess = JsonConvert.DeserializeObject<SriApiResponse>(responseBody);
+                    objRespuesta.codigo = sriSuccess.Codigo;
+                    objRespuesta.mensaje = sriSuccess.Mensaje;
+                    objRespuesta.montoIvaDevolver = sriSuccess.MontoIvaDevolver ?? 0;  // agregado para que se asigne el valor monto de iva a de volver 
+                    //...
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // (Este log tuyo es excelente, solo le agrego el tiempo total)
+            watchTotal.Stop();
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "Recepcion_Failed",$"Excepción en Recepción. Duración: {watchTotal.ElapsedMilliseconds}ms. Error: {ex.ToString()}");
+
+            objRespuesta.codigo = "-999";
+            objRespuesta.mensaje = ex.Message;
+
+            // --- LOG ADICIONAL ---
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "Recepcion_Exit_Exception",$"Saliendo por Excepción. Código: {objRespuesta.codigo}, Mensaje: {objRespuesta.mensaje}");
+            return objRespuesta;
+        }
+
+        // --- LOG ADICIONAL ---
+        // Log de salida final exitoso
+        watchTotal.Stop();
+        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Recepcion_Exit_Success",$"Recepción finalizada. Duración: {watchTotal.ElapsedMilliseconds}ms. Código: {objRespuesta.codigo}, Mensaje: {objRespuesta.mensaje}");
+
+        return objRespuesta;
+    }
+
+
+    public static RespuestaDevlucion devolucionesIndividualesAnulaciones(string identificacion, string claveClte, Factura factura
             , string BeaerToken, datosDocumnetos datosDocumnetos )
         {
             RespuestaDevlucion objRespuesta = new RespuestaDevlucion();
@@ -508,7 +517,8 @@ namespace POS.Control.SRI
                     montoIvaDevolver = datosDocumentos.montoIvaDevolver
                 };
 
-                string url = "https://celcer.sri.gob.ec/devolucion-iva/rest/devolucionesIndividualesAnulaciones";
+                //string url = "https://celcer.sri.gob.ec/devolucion-iva/rest/devolucionesIndividualesAnulaciones";
+                string url = Control.Common.GlobalParameters.SRI_URL_DEV_INDV;
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "Anulacion_Start", JsonConvert.SerializeObject(request));
 
                 // 2. Llamar al API Client y obtener la respuesta tipada
@@ -591,6 +601,11 @@ namespace POS.Control.SRI
 
         public static RespuestaToken GetBearerToken(string ruc, string cedula, string clave)
         {
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "AuthHash_Enter",$"Iniciando GetBearerToken (AuthHash). RUC: {ruc}, Cédula: {cedula}");
+
+            var watchTotal = Stopwatch.StartNew(); // iniciar un cronometro para medir la conexion.
+          
+
             RespuestaToken respuestaToken = new RespuestaToken();
 
             try
@@ -599,15 +614,24 @@ namespace POS.Control.SRI
                 string hashHex = ComputeSha512Hash(clave);
                 string hashBase64 = ComputeSha512HashBase64(clave);
 
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "AuthHash_Compute",$"Clave hasheada (Hex): {hashHex}");
+
                 // Codificar los parámetros para evitar caracteres no permitidos en URL
                 string encodedRuc = Uri.EscapeDataString(ruc);
                 string encodedCedula = Uri.EscapeDataString(cedula);
                 string encodedClave = Uri.EscapeDataString(hashHex);
+                string baseUrl = Control.Common.GlobalParameters.SRI_URL_ACCESS_TOKEN;
+
                 // Construir la URL correctamente
-                string url = $"https://celcer.sri.gob.ec/sri-seguridad-sso-api-servicio-internet/rest/seguridad-sso-rest/access-token/{encodedRuc}[AD]{encodedCedula}/{encodedClave}";
-                
+                //string url = $"https://celcer.sri.gob.ec/sri-seguridad-sso-api-servicio-internet/rest/seguridad-sso-rest/access-token/{encodedRuc}[AD]{encodedCedula}/{encodedClave}";
+                string url = $"{baseUrl}{encodedRuc}[AD]{encodedCedula}/{encodedClave}";
+
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "AuthHash_Request",$"Contactando URL: {url}");
 
                 string response = GetWebContent(url);
+
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "AuthHash_Response",$"Body (Crudo): {response}");
+
                 string accessToken = string.Empty;
 
                 try
@@ -615,9 +639,15 @@ namespace POS.Control.SRI
                     Newtonsoft.Json.Linq.JObject jsonObject = Newtonsoft.Json.Linq.JObject.Parse(response);
                     accessToken = (string)jsonObject["access_token"];
 
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "AuthHash_ParseSuccess","JSON parseado exitosamente. Access token extraído.");
+
                 }
                 catch (Exception ex)
                 {
+
+                   watchTotal.Stop(); // Detenemos el cronómetro aquí
+                   Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "AuthHash_CRITICAL_JsonParseFail",$"FALLO al parsear JSON. Duración: {watchTotal.ElapsedMilliseconds}ms. Error: {ex.ToString()}. Respuesta recibida que falló: {response}");
+
                     accessToken = null;
 
                     respuestaToken = new RespuestaToken();
@@ -632,16 +662,25 @@ namespace POS.Control.SRI
                 respuestaToken.codigo = 0;
                 respuestaToken.mensaje = "token generado correctamente";
                 respuestaToken.access_token = accessToken;
+                watchTotal.Stop();
+                string tokenParcial = (accessToken != null && accessToken.Length > 6) ? accessToken.Substring(accessToken.Length - 6) : "N/A";
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "General", "AuthHash_Exit",$"Saliendo con código: {respuestaToken.codigo}. Duración: {watchTotal.ElapsedMilliseconds}ms. Token (Parcial): ...{tokenParcial}");
                 return respuestaToken;
 
 
             }
             catch (Exception ex)
             {
+                watchTotal.Stop();
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "AuthHash_CRITICAL_Exception",$"Excepción CRÍTICA en GetBearerToken (AuthHash). Duración: {watchTotal.ElapsedMilliseconds}ms. Error: {ex.ToString()}");
+
                 respuestaToken = new RespuestaToken();
                 respuestaToken.codigo = -1;
                 respuestaToken.mensaje = "Error: " + ex.Message;
                 respuestaToken.access_token = null;
+
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "General", "AuthHash_Exit",$"Saliendo con código: {respuestaToken.codigo}, Mensaje: {respuestaToken.mensaje}");
+
                 return respuestaToken;
             }
 

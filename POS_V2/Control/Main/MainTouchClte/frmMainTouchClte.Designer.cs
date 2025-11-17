@@ -41,6 +41,7 @@
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.lblIdentificacionClte = new Telerik.WinControls.UI.RadLabel();
+            this.picInactive = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtTicket = new System.Windows.Forms.TextBox();
             this.gridItemsClte = new Telerik.WinControls.UI.RadGridView();
@@ -52,6 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblIdentificacionClte)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picInactive)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridItemsClte)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridItemsClte.MasterTemplate)).BeginInit();
@@ -64,10 +66,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::POS.Properties.Resources.PROMO_DIA_MADRE_2025;
-            this.pictureBox1.Location = new System.Drawing.Point(851, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(957, 19);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(499, 857);
+            this.pictureBox1.Size = new System.Drawing.Size(561, 1071);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -77,14 +79,14 @@
             this.lblNombreCliente.AutoSize = false;
             this.lblNombreCliente.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblNombreCliente.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreCliente.Location = new System.Drawing.Point(165, 30);
-            this.lblNombreCliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblNombreCliente.Location = new System.Drawing.Point(186, 42);
+            this.lblNombreCliente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblNombreCliente.Name = "lblNombreCliente";
             // 
             // 
             // 
-            this.lblNombreCliente.RootElement.ControlBounds = new System.Drawing.Rectangle(124, 24, 100, 18);
-            this.lblNombreCliente.Size = new System.Drawing.Size(635, 31);
+            this.lblNombreCliente.RootElement.ControlBounds = new System.Drawing.Rectangle(186, 42, 100, 18);
+            this.lblNombreCliente.Size = new System.Drawing.Size(714, 39);
             this.lblNombreCliente.TabIndex = 7;
             this.lblNombreCliente.Text = "#####";
             // 
@@ -92,14 +94,14 @@
             // 
             this.radLabel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel2.Location = new System.Drawing.Point(61, 30);
-            this.radLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radLabel2.Location = new System.Drawing.Point(69, 38);
+            this.radLabel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.radLabel2.Name = "radLabel2";
             // 
             // 
             // 
-            this.radLabel2.RootElement.ControlBounds = new System.Drawing.Rectangle(46, 24, 100, 18);
-            this.radLabel2.Size = new System.Drawing.Size(95, 31);
+            this.radLabel2.RootElement.ControlBounds = new System.Drawing.Rectangle(69, 38, 100, 18);
+            this.radLabel2.Size = new System.Drawing.Size(113, 37);
             this.radLabel2.TabIndex = 6;
             this.radLabel2.Text = "Nombre:";
             // 
@@ -107,14 +109,14 @@
             // 
             this.radLabel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel1.Location = new System.Drawing.Point(16, 73);
-            this.radLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radLabel1.Location = new System.Drawing.Point(18, 91);
+            this.radLabel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.radLabel1.Name = "radLabel1";
             // 
             // 
             // 
-            this.radLabel1.RootElement.ControlBounds = new System.Drawing.Rectangle(12, 59, 100, 18);
-            this.radLabel1.Size = new System.Drawing.Size(141, 31);
+            this.radLabel1.RootElement.ControlBounds = new System.Drawing.Rectangle(18, 91, 100, 18);
+            this.radLabel1.Size = new System.Drawing.Size(169, 37);
             this.radLabel1.TabIndex = 7;
             this.radLabel1.Text = "Identificación";
             // 
@@ -123,42 +125,53 @@
             this.lblIdentificacionClte.AutoSize = false;
             this.lblIdentificacionClte.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblIdentificacionClte.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdentificacionClte.Location = new System.Drawing.Point(165, 68);
-            this.lblIdentificacionClte.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblIdentificacionClte.Location = new System.Drawing.Point(186, 95);
+            this.lblIdentificacionClte.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblIdentificacionClte.Name = "lblIdentificacionClte";
             // 
             // 
             // 
-            this.lblIdentificacionClte.RootElement.ControlBounds = new System.Drawing.Rectangle(124, 55, 100, 18);
-            this.lblIdentificacionClte.Size = new System.Drawing.Size(635, 36);
+            this.lblIdentificacionClte.RootElement.ControlBounds = new System.Drawing.Rectangle(186, 95, 100, 18);
+            this.lblIdentificacionClte.Size = new System.Drawing.Size(714, 45);
             this.lblIdentificacionClte.TabIndex = 8;
             this.lblIdentificacionClte.Text = "#####";
+            // 
+            // picInactive
+            // 
+            this.picInactive.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picInactive.Location = new System.Drawing.Point(0, 0);
+            this.picInactive.Name = "picInactive";
+            this.picInactive.Size = new System.Drawing.Size(1536, 1108);
+            this.picInactive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picInactive.TabIndex = 0;
+            this.picInactive.TabStop = false;
+            this.picInactive.Visible = false;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.txtTicket);
-            this.panel1.Location = new System.Drawing.Point(16, 167);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(18, 209);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(820, 501);
+            this.panel1.Size = new System.Drawing.Size(922, 626);
             this.panel1.TabIndex = 9;
             // 
             // txtTicket
             // 
-            this.txtTicket.Location = new System.Drawing.Point(5, 4);
-            this.txtTicket.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTicket.Location = new System.Drawing.Point(6, 5);
+            this.txtTicket.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTicket.Multiline = true;
             this.txtTicket.Name = "txtTicket";
             this.txtTicket.ReadOnly = true;
-            this.txtTicket.Size = new System.Drawing.Size(807, 493);
+            this.txtTicket.Size = new System.Drawing.Size(907, 615);
             this.txtTicket.TabIndex = 11;
             // 
             // gridItemsClte
             // 
             this.gridItemsClte.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gridItemsClte.EnableKineticScrolling = true;
-            this.gridItemsClte.Location = new System.Drawing.Point(860, 15);
-            this.gridItemsClte.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridItemsClte.Location = new System.Drawing.Point(968, 19);
+            this.gridItemsClte.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             // 
             // gridItemsClte
             // 
@@ -207,7 +220,7 @@
             this.gridItemsClte.MasterTemplate.EnableGrouping = false;
             this.gridItemsClte.Name = "gridItemsClte";
             this.gridItemsClte.ReadOnly = true;
-            this.gridItemsClte.Size = new System.Drawing.Size(243, 145);
+            this.gridItemsClte.Size = new System.Drawing.Size(273, 181);
             this.gridItemsClte.TabIndex = 3;
             this.gridItemsClte.Text = "radGridView1";
             this.gridItemsClte.ThemeName = "TelerikMetroTouch";
@@ -216,10 +229,10 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.radGridView1);
-            this.panel3.Location = new System.Drawing.Point(16, 676);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Location = new System.Drawing.Point(18, 845);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(820, 196);
+            this.panel3.Size = new System.Drawing.Size(922, 245);
             this.panel3.TabIndex = 0;
             this.panel3.Visible = false;
             // 
@@ -227,8 +240,8 @@
             // 
             this.radGridView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radGridView1.EnableKineticScrolling = true;
-            this.radGridView1.Location = new System.Drawing.Point(5, 4);
-            this.radGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radGridView1.Location = new System.Drawing.Point(6, 5);
+            this.radGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             // 
             // radGridView1
             // 
@@ -245,17 +258,17 @@
             this.radGridView1.MasterTemplate.EnableGrouping = false;
             this.radGridView1.Name = "radGridView1";
             this.radGridView1.ReadOnly = true;
-            this.radGridView1.Size = new System.Drawing.Size(808, 188);
+            this.radGridView1.Size = new System.Drawing.Size(909, 235);
             this.radGridView1.TabIndex = 4;
             this.radGridView1.Text = "radGridView1";
             this.radGridView1.ThemeName = "TelerikMetroTouch";
             // 
             // btnPIN
             // 
-            this.btnPIN.Location = new System.Drawing.Point(1241, 839);
-            this.btnPIN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPIN.Location = new System.Drawing.Point(1396, 1049);
+            this.btnPIN.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPIN.Name = "btnPIN";
-            this.btnPIN.Size = new System.Drawing.Size(100, 28);
+            this.btnPIN.Size = new System.Drawing.Size(112, 35);
             this.btnPIN.TabIndex = 10;
             this.btnPIN.Text = "button1";
             this.btnPIN.UseVisualStyleBackColor = true;
@@ -263,10 +276,11 @@
             // 
             // frmMainTouchClte
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1365, 886);
+            this.ClientSize = new System.Drawing.Size(1536, 1108);
+            this.Controls.Add(this.picInactive);
             this.Controls.Add(this.gridItemsClte);
             this.Controls.Add(this.btnPIN);
             this.Controls.Add(this.panel3);
@@ -277,7 +291,7 @@
             this.Controls.Add(this.radLabel2);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmMainTouchClte";
             // 
             // 
@@ -285,14 +299,14 @@
             this.RootElement.ApplyShapeToControl = true;
             this.Text = "frmMainTouchClte";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmMainTouchClte_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMainTouchClte_FormClosing);
-
+            this.Load += new System.EventHandler(this.frmMainTouchClte_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNombreCliente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblIdentificacionClte)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picInactive)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridItemsClte.MasterTemplate)).EndInit();
@@ -319,5 +333,6 @@
         private Telerik.WinControls.UI.RadGridView radGridView1;
         private System.Windows.Forms.Button btnPIN;
         private System.Windows.Forms.TextBox txtTicket;
+        public System.Windows.Forms.PictureBox picInactive;
     }
 }

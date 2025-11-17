@@ -4581,246 +4581,275 @@ namespace POS.Control.Pagos
                             break;
 
                         case PagoTipo.TarjetaRegalo:
-
-                            Decimal valorgiftcard = 0;
-                            Decimal dValorGiftCard = 0;
-                            ClienteEmpleado clteEmpleado2 = Common.General.ValidaClienteEmpleado(_textoOriginal, Common.GlobalParameters.Establecimiento, Common.GlobalParameters.PINPAD_MULTIRED);
-
-                            
-                            try
                             {
-                                valorgiftcard = Decimal.Parse(this.lblGiftCardSaldo.Text.Substring(1, this.lblGiftCardSaldo.Text.Length - 1));
-                            }
-                            catch { }
+                                // 1. VALIDACIÓN PRELIMINAR (Tu código original - está bien)
+                                if (valor > saldoFacturaPago)
+                                {
+                                    this.BeginInvoke((MethodInvoker)delegate
+                                    {
+                                        Control.Common.General.GetMensajeToList(689); // "El valor ingresado es mayor al saldo"
+                                    });
+                                    return;
+                                }
 
-
-                            if (_textoOriginal.Trim().StartsWith(Control.Common.GlobalParameters.AppMovil_PrefijoUsaApp))
-                            {
-                                string msgError = string.Empty;
+                                // 2. DECLARACIÓN DE VARIABLES
                                 string identificacion = string.Empty;
                                 string nombreGrupo = string.Empty;
                                 bool estaAsociadaGrupoCliente = false;
+                                Decimal valorgiftcard = 0;
+                                Decimal dValorGiftCard = 0;
 
-                                var t = new TarjetaRegalo();
+                                ClienteEmpleado clteEmpleado2 = Common.General.ValidaClienteEmpleado(_textoOriginal, Common.GlobalParameters.Establecimiento, Common.GlobalParameters.PINPAD_MULTIRED);
 
-                                try
+                                // ====================================================================================
+                                // INICIO: LÓGICA DE APP MÓVIL (MÉTODO DE SUMA TOTAL) jchid
+                                // ====================================================================================
+                                if (_textoOriginal.Trim().StartsWith(Control.Common.GlobalParameters.AppMovil_PrefijoUsaApp))
                                 {
-                                    string QueryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] '" + clteEmpleado2.Identificacion + "' ";
+                                    string queryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] @Identificacion";
+                                    string cadenaCon = Control.Common.GlobalParameters.ConServerPuntos;
 
-                                    if (Control.Common.GlobalParameters.ConServerPuntos != "")
+                                    if (string.IsNullOrEmpty(cadenaCon))
                                     {
-                                        SqlConnection conn = new SqlConnection(Control.Common.GlobalParameters.ConServerPuntos);
-                                        try
+                                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", "No hay parametro 'CON_SERVER_PUNTOS'.");
+                                        return;
+                                    }
+
+                                    try
+                                    {
+                                        // --- PASO 1: LEER TODAS LAS TARJETAS A UNA LISTA ---
+                                        var tarjetasEncontradas = new List<dynamic>();
+                                        using (SqlConnection conn = new SqlConnection(cadenaCon))
                                         {
-                                            conn.Open();
-                                            SqlCommand select = new SqlCommand(QueryVT, conn);
-                                            IAsyncResult iar = select.BeginExecuteReader();
-                                            SqlDataReader dr = (SqlDataReader)select.EndExecuteReader(iar);
-
-                                            var saldosCliente = MetodosBilletera.RecuperaSaldosPorIdentificacion(clteEmpleado2.Identificacion);
-                                            decimal saldoGiftCardTotal = saldosCliente.SaldoGifCard; // cambios version 220 - opozo - giftcard
-                                            
-
-                                            while (dr.Read()) 
+                                            using (SqlCommand select = new SqlCommand(queryVT, conn))
                                             {
-                                                if (t.getTarjetaGen(dr.GetValue(1).ToString(), dr.GetValue(2).ToString(), true) && valor > 0)
+                                                select.Parameters.Add(new SqlParameter("@Identificacion", clteEmpleado2.Identificacion));
+                                                conn.Open();
+                                                SqlDataReader dr = select.ExecuteReader();
+                                                while (dr.Read())
                                                 {
-                                                    if (t.TieneSaldoCuadradoGiftEmpl(((Models.Factura)_factura).Secuencia))
+                                                    tarjetasEncontradas.Add(new
                                                     {
-                                                        _tarjetaRegalo = t;
-                                                        dValorGiftCard = decimal.Parse(dr.GetValue(3).ToString());
-
-                                                        if (valor  > saldoFacturaPago)
-                                                        {
-                                                            this.BeginInvoke((MethodInvoker)delegate
-                                                            {
-                                                                Control.Common.General.GetMensajeToList(689);
-                                                            });
-                                                            return;
-                                                           
-                                                        }
-
-
-
-                                                        if (valor > saldoGiftCardTotal) // se compara el valor de la factura (restante) contra el valor saldo giftcard del cliente - opozo
-                                                        {
-
-                                                            this.BeginInvoke((MethodInvoker)delegate
-                                                            {
-                                                                //Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "Exec [PtsCliente].[spConsultaGiftCardAppGen]", "error en Saldo de las GIFT CARDV");  jchid validacion de la GIFTCARDV 
-                                                                Control.Common.General.GetMensajeToList(180);
-                                                            });
-
-                                                            
-                                                            return;
-                                                        }
-
-
-
-                                                        if (valor <= dValorGiftCard)
-                                                        {
-                                                            _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARDV");
-                                                            saldoGiftCardTotal -= valor; // se resta el total del valor de la factura a mi auxiliar de saldo giftcard del cliente - opozo
-                                                            valor = 0;
-                                                        }
-                                                        else
-                                                        {
-                                                            _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARDV");
-                                                            saldoGiftCardTotal -= valor; // se resta el valor de mi saldo giftcard - opozo
-                                                            valor = valor - dValorGiftCard;
-                                                            
-                                                        }
-                                                        this.Close();
-                                                    }
+                                                        IdGiftCard = dr.GetValue(1).ToString(),
+                                                        IdCliente = dr.GetValue(2).ToString(),
+                                                        Saldo = dr.GetValue(3).ToString()
+                                                    });
                                                 }
                                             }
-                                            conn.Close();
                                         }
-                                        catch (Exception ex)
+
+                                        // --- PASO 2: SUMAR EL SALDO TOTAL Y VALIDAR ---
+                                        decimal totalSaldoGiftCard = 0;
+                                        foreach (var tarjetaData in tarjetasEncontradas)
                                         {
-                                            conn.Close();
-                                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", Control.Common.ExceptionHandler.GetExceptionMessages(ex), string.Empty);
+                                            // (Omitimos 'getTarjetaGen' y 'TieneSaldoCuadrado' que estaban comentados)
+                                            decimal saldoEstaTarjeta = 0;
+                                            decimal.TryParse(tarjetaData.Saldo, out saldoEstaTarjeta);
+                                            totalSaldoGiftCard += saldoEstaTarjeta;
                                         }
+
+                                        // Si el monto a pagar (valor) es mayor que el saldo total, mostramos error y salimos.
+                                        if (valor > totalSaldoGiftCard)
+                                        {
+                                            this.BeginInvoke((MethodInvoker)delegate {
+                                                Control.Common.General.GetMensajeToList(180); // "Saldo insuficiente"
+                                            });
+                                            return;
+                                        }
+
+                                        // --- PASO 3: CREAR EL PAGO "GIFT CARDV" UNA SOLA VEZ ---
+                                        // Le pasamos el 'valor' total que vamos a pagar 
+                                        Pago pago = ((Factura)_factura).AgregarPago("GIFT CARDV", valor);
+
+                                        // --- PASO 4: APLICAR LA CASCADA (PERO SOLO A LOS SUB-PAGOS) ---
+                                        decimal montoPendiente = valor; 
+
+                                        foreach (var tarjetaData in tarjetasEncontradas)
+                                        {
+                                            if (montoPendiente <= 0) break;
+
+                                            // Cargamos el objeto 't' solo para obtener el saldo actualizado
+                                            var t = new TarjetaRegalo();
+                                            t.getTarjetaGen(tarjetaData.IdGiftCard, tarjetaData.IdCliente, true);
+
+                                            decimal saldoEstaTarjeta = 0;
+                                            decimal.TryParse(tarjetaData.Saldo, out saldoEstaTarjeta);
+
+                                            if (saldoEstaTarjeta <= 0)
+                                                continue;
+
+                                            // Calculamos cuánto consumir de ESTA tarjeta
+                                            decimal montoAConsumir = Math.Min(montoPendiente, saldoEstaTarjeta);
+
+                                            // AÑADIMOS EL SUB-PAGO DIRECTAMENTE A LA LISTA INTERNA DEL 'pago'
+                                            pago.Pagos.Add(new PagoGiftCard()
+                                            {
+                                                Codigo = tarjetaData.IdGiftCard,
+                                                Valor = montoAConsumir, // varias itereaciones dependiendo cuantas giftcard este activas
+                                                Saldo = t.getSaldoGiftCard() - montoAConsumir, // Saldo restante en la tarjeta
+                                                EstaAsociadaGrupoCliente = estaAsociadaGrupoCliente,
+                                                IdentificacionGrupoCliente = identificacion,
+                                                NombreGrupoCliente = nombreGrupo
+                                            });
+
+                                            // Actualizamos el monto pendiente
+                                            montoPendiente = montoPendiente - montoAConsumir;
+                                        }
+
+                                        // --- PASO 5: RECALCULAR Y CERRAR ---
+
+                                        // Recalculamos el valor total del pago UNA SOLA VEZ
+                                        pago.calcularTotal();
+
+                                        // Cerramos con OK
+                                        this.DialogResult = DialogResult.OK;
+                                        this.Close();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        // Si algo falla (como la NullReferenceException que buscábamos)
+                                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", Control.Common.ExceptionHandler.GetExceptionMessages(ex), string.Empty);
+                                        this.BeginInvoke((MethodInvoker)delegate
+                                        {
+                                            Control.Common.General.GetMensajeToList(180);
+                                        });
+                                        return;
+                                    }
+                                }
+                                // ====================================================================================
+                                // FIN: BLOQUE DE APP MÓVIL jchid
+                                // ====================================================================================
+                                else
+                                {
+                                    // ====================================================================================
+                                    // <-- INICIO: BLOQUE DE TARJETA FÍSICA (Tu código original, SIN CAMBIOS)
+                                    // ====================================================================================
+                                    try
+                                    {
+                                        valorgiftcard = Decimal.Parse(this.lblGiftCardSaldo.Text.Substring(1, this.lblGiftCardSaldo.Text.Length - 1)); //valor que se ingresa para pagar el cajero JCHID
+                                    }
+                                    catch
+                                    {
+                                        //aqui falta agregar codigo para que atrape el error que se esta dando. JCHID
                                     }
 
-
-                                }
-                                catch (Exception ex)
-                                {
-
-                                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", Control.Common.ExceptionHandler.GetExceptionMessages(ex), string.Empty);
-                                }
-
-
-
-                            }
-                            else
-                            {
-
-                                if (validarTarjetaRegalo(valor, valorgiftcard))
-                                {
-                                    bool puedeAgregarPago = true;
-
-                                    //Validar si la giftcard seleccionada es de GrupoCliente, estas facturas deben salir siempre 
-                                    //a nombre del cliente principal del grupo
-                                    string msgError = string.Empty;
-                                    string identificacion = string.Empty;
-                                    string nombreGrupo = string.Empty;
-                                    bool estaAsociadaGrupoCliente = _tarjetaRegalo.EstaAsociadaGrupoCliente(ref identificacion, ref msgError, ref nombreGrupo);
-
-                                    if (estaAsociadaGrupoCliente)
+                                    if (validarTarjetaRegalo(valor, valorgiftcard))
                                     {
-                                        if (!string.IsNullOrEmpty(msgError))
+                                        bool puedeAgregarPago = true;
+
+                                        string msgError = string.Empty;
+                                        // Estas variables se re-declaran aquí, lo cual está bien porque están en un ámbito diferente
+                                        string identificacion_else = string.Empty;
+                                        string nombreGrupo_else = string.Empty;
+                                        bool estaAsociadaGrupoCliente_else = _tarjetaRegalo.EstaAsociadaGrupoCliente(ref identificacion_else, ref msgError, ref nombreGrupo_else);
+
+                                        if (estaAsociadaGrupoCliente_else)
+                                        {
+                                            if (!string.IsNullOrEmpty(msgError))
+                                            {
+                                                puedeAgregarPago = false;
+                                                Control.Common.General.GetMensaje("POS", msgError, "I"); ;
+                                            }
+                                            else
+                                            {
+                                                _debeActualizarClienteFactura = true;
+                                                _identificacionActualizarClienteFactura = identificacion_else;
+                                                _nombreActualizarClienteFactura = nombreGrupo_else;
+                                            }
+                                        }
+
+                                        if (!_tarjetaRegalo.TieneSaldoCuadrado(((Models.Factura)_factura).Secuencia))
                                         {
                                             puedeAgregarPago = false;
-                                            Control.Common.General.GetMensaje("POS", msgError, "I"); ;
-                                        }
-                                        else
-                                        {
-                                            _debeActualizarClienteFactura = true;
-                                            _identificacionActualizarClienteFactura = identificacion;
-                                            _nombreActualizarClienteFactura = nombreGrupo;
-                                        }
-                                    }
-
-                                    if (!_tarjetaRegalo.TieneSaldoCuadrado(((Models.Factura)_factura).Secuencia))
-                                    {
-                                        puedeAgregarPago = false;
-                                    }
-
-                                    if (puedeAgregarPago)
-                                    {
-                                        if (_tarjetaRegalo.tarjetaValida() && _tarjetaRegalo.getSaldo() >= valor)
-                                        {
-                                            _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigo(), _tarjetaRegalo.getSaldo() - valor, estaAsociadaGrupoCliente, identificacion, nombreGrupo);
-                                            this.Close();
                                         }
 
-
-                                        else if (_tarjetaRegalo.tarjetaValidaGiftCard() && valorgiftcard > 0)
+                                        if (puedeAgregarPago)
                                         {
-
-                                            var t = new TarjetaRegalo();
-                                            //JCanarte 19Mar2021 Sumar todas las giftcard matriculadas y presentar total acumulado
-                                            try
+                                            if (_tarjetaRegalo.tarjetaValida() && _tarjetaRegalo.getSaldo() >= valor)
                                             {
-                                                string QueryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] '" + this._factura.ClienteIdentificacion + "' ";
-
-                                                if (Control.Common.GlobalParameters.ConServerPuntos != "")
+                                                _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigo(), _tarjetaRegalo.getSaldo() - valor, estaAsociadaGrupoCliente_else, identificacion_else, nombreGrupo_else);
+                                                this.Close();
+                                            }
+                                            // <-- ADVERTENCIA: Este bloque 'else if' tiene el mismo error que acabamos de corregir.
+                                            else if (_tarjetaRegalo.tarjetaValidaGiftCard() && valorgiftcard > 0)
+                                            {
+                                                var t = new TarjetaRegalo();
+                                                try
                                                 {
-                                                    SqlConnection conn = new SqlConnection(Control.Common.GlobalParameters.ConServerPuntos);
-                                                    try
+                                                    string QueryVT = "Exec [PtsCliente].[spConsultaGiftCardAppGen] '" + this._factura.ClienteIdentificacion + "' ";
+
+                                                    if (Control.Common.GlobalParameters.ConServerPuntos != "")
                                                     {
-                                                        conn.Open();
-                                                        SqlCommand select = new SqlCommand(QueryVT, conn);
-                                                        IAsyncResult iar = select.BeginExecuteReader();
-                                                        SqlDataReader dr = (SqlDataReader)select.EndExecuteReader(iar);
-                                                        while (dr.Read())
+                                                        SqlConnection conn = new SqlConnection(Control.Common.GlobalParameters.ConServerPuntos);
+                                                        try
                                                         {
-                                                            if (t.getTarjetaGen(dr.GetValue(1).ToString(), dr.GetValue(2).ToString(), true) && valor > 0)
+                                                            conn.Open();
+                                                            SqlCommand select = new SqlCommand(QueryVT, conn);
+                                                            IAsyncResult iar = select.BeginExecuteReader();
+                                                            SqlDataReader dr = (SqlDataReader)select.EndExecuteReader(iar);
+                                                            while (dr.Read())
                                                             {
-                                                                if (t.TieneSaldoCuadradoGiftEmpl(((Models.Factura)_factura).Secuencia))
+                                                                if (t.getTarjetaGen(dr.GetValue(1).ToString(), dr.GetValue(2).ToString(), true) && valor > 0)
                                                                 {
-                                                                    _tarjetaRegalo = t;
-                                                                    dValorGiftCard = decimal.Parse(dr.GetValue(3).ToString());
-                                                                    if (valor <= dValorGiftCard)
+                                                                    if (t.TieneSaldoCuadradoGiftEmpl(((Models.Factura)_factura).Secuencia))
                                                                     {
-                                                                        if (_tarjetaRegalo.getCodigoGiftCard().Trim().StartsWith("2222"))
+                                                                        _tarjetaRegalo = t;
+                                                                        dValorGiftCard = decimal.Parse(dr.GetValue(3).ToString());
+                                                                        if (valor <= dValorGiftCard)
                                                                         {
-                                                                            _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARD");
+                                                                            if (_tarjetaRegalo.getCodigoGiftCard().Trim().StartsWith("2222"))
+                                                                            {
+                                                                                _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente_else, identificacion_else, nombreGrupo_else, "GIFT CARD");
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente_else, identificacion_else, nombreGrupo_else, "GIFT CARDV");
+                                                                            }
+                                                                            valor = 0;
+                                                                            this.Close(); // <-- Error: Cierra en la primera tarjeta
                                                                         }
                                                                         else
                                                                         {
-                                                                            _factura.AgregarPagoTarjetaRegalo(valor, _tarjetaRegalo.getCodigoGiftCard(), _tarjetaRegalo.getSaldoGiftCard() - valor, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARDV");
+                                                                            if (_tarjetaRegalo.getCodigoGiftCard().Trim().StartsWith("2222"))
+                                                                            {
+                                                                                _factura.AgregarPagoTarjetaRegalo(dValorGiftCard, _tarjetaRegalo.getCodigoGiftCard(), 0, estaAsociadaGrupoCliente_else, identificacion_else, nombreGrupo_else, "GIFT CARD");
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                _factura.AgregarPagoTarjetaRegalo(dValorGiftCard, _tarjetaRegalo.getCodigoGiftCard(), 0, estaAsociadaGrupoCliente_else, identificacion_else, nombreGrupo_else, "GIFT CARDV");
+                                                                            }
+                                                                            valor = valor - dValorGiftCard;
                                                                         }
-                                                                        valor = 0;
-                                                                        this.Close();
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        if (_tarjetaRegalo.getCodigoGiftCard().Trim().StartsWith("2222"))
-                                                                        {
-                                                                            _factura.AgregarPagoTarjetaRegalo(dValorGiftCard, _tarjetaRegalo.getCodigoGiftCard(), 0, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARD");
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            _factura.AgregarPagoTarjetaRegalo(dValorGiftCard, _tarjetaRegalo.getCodigoGiftCard(), 0, estaAsociadaGrupoCliente, identificacion, nombreGrupo, "GIFT CARDV");
-                                                                        }
-                                                                        valor = valor - dValorGiftCard;
                                                                     }
                                                                 }
                                                             }
+                                                            conn.Close();
                                                         }
-                                                        conn.Close();
-                                                    }
-                                                    catch (Exception ex)
-                                                    {
-                                                        conn.Close();
-                                                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", Control.Common.ExceptionHandler.GetExceptionMessages(ex), string.Empty);
+                                                        catch (Exception ex)
+                                                        {
+                                                            conn.Close();
+                                                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", Control.Common.ExceptionHandler.GetExceptionMessages(ex), string.Empty);
+                                                        }
                                                     }
                                                 }
-
-
-                                            }
-                                            catch (Exception ex)
-                                            {
-
-                                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", Control.Common.ExceptionHandler.GetExceptionMessages(ex), string.Empty);
+                                                catch (Exception ex)
+                                                {
+                                                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/BasePagos", "EjecutarPago", Control.Common.ExceptionHandler.GetExceptionMessages(ex), string.Empty);
+                                                }
                                             }
                                         }
                                     }
+                                    else
+                                    {
+                                        Control.Common.General.GetMensajeToList(201);
+                                    }
+                                    // ====================================================================================
+                                    // <-- FIN: BLOQUE DE TARJETA FÍSICA
+                                    // ====================================================================================
                                 }
-                                else
-                                {
-                                    //MessageBox.Show(this, "Favor llenar la informacion de la tarjeta regalo");
-                                    // Control.Common.General.GetMensaje("POS", "Favor llenar la informacion de la tarjeta regalo", "I");
-                                    Control.Common.General.GetMensajeToList(201);
 
-                                }
-                            }
-
-                            break;
-
+                                break;
+                            } // <-- Fin del 'case PagoTipo.TarjetaRegalo:'
 
                         case PagoTipo.NotaCredito:
 

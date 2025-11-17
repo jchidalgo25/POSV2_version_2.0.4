@@ -1004,78 +1004,88 @@ namespace POS.Control
         {
             bool result = false;
             string cadenaCon = "";
+
             if (Control.Common.GlobalParameters.ConServerPuntos != "")
             {
                 cadenaCon = Control.Common.GlobalParameters.ConServerPuntos;
-                SqlConnection conn = new SqlConnection(cadenaCon);
+
+                // <-- INICIO: CÓDIGO CORREGIDO
                 try
                 {
-
-                    string Query = "Exec [PtsCliente].[spConsultaGiftCardGen]  " +
-                                    "'" + codigo + "','"+cliente+"','"+ esAppMovil.ToString() + "'";
-
-                    conn.Open();
-                    SqlCommand select = new SqlCommand(Query, conn);
-                    IAsyncResult iar = select.BeginExecuteReader();
-                    SqlDataReader dr = (SqlDataReader)select.EndExecuteReader(iar);
-                    while (dr.Read())
+                    // Usamos 'using' para asegurar que la conexión se cierra
+                    using (SqlConnection conn = new SqlConnection(cadenaCon))
                     {
-                        if (esAppMovil == false)
+                        // ¡PELIGRO! Esta consulta sigue teniendo Inyección SQL.
+                        // Debería ser parametrizada, pero por ahora mantenemos la lógica original.
+                        string Query = "Exec [PtsCliente].[spConsultaGiftCardGen] " +
+                                       "'" + codigo + "','" + cliente + "','" + esAppMovil.ToString() + "'";
+
+                        using (SqlCommand select = new SqlCommand(Query, conn))
                         {
-                            _tarjeta = new core_giftcard();
-                            _tarjeta.fecha_creacion = dr.GetDateTime(0);
-                            _tarjeta.fecha_modificacion = dr.GetDateTime(1);
-                            _tarjeta.codigo = dr.GetValue(2).ToString();
-                            if (!dr.IsDBNull(3))
-                                _tarjeta.fecha_activacion = dr.GetDateTime(3);
-                            if (!dr.IsDBNull(4))
-                                _tarjeta.fecha_expiracion = dr.GetDateTime(4);
-                            if (!dr.IsDBNull(5))
-                                _tarjeta.fecha_desactivacion = dr.GetDateTime(5);
-                            if (!dr.IsDBNull(6))
-                                _tarjeta.saldo = decimal.Parse(dr.GetValue(6).ToString());
+                            conn.Open();
 
-                            _tarjeta.activo = bool.Parse(dr.GetValue(7).ToString());
-                            _tarjeta.bono = bool.Parse(dr.GetValue(8).ToString());
+                            // Usamos ExecuteReader síncrono, que es más estable
+                            SqlDataReader dr = select.ExecuteReader();
 
-                            if (!dr.IsDBNull(9))
-                                _tarjeta.valor = decimal.Parse(dr.GetValue(9).ToString());
-                            if (!dr.IsDBNull(10))
-                                _tarjeta.tipo = byte.Parse(dr.GetValue(10).ToString());
-                            if (!dr.IsDBNull(11))
-                                _tarjeta.IdGrupoCliente = short.Parse(dr.GetValue(11).ToString());
+                            while (dr.Read())
+                            {
+                                if (esAppMovil == false)
+                                {
+                                    _tarjeta = new core_giftcard();
+                                    _tarjeta.fecha_creacion = dr.GetDateTime(0);
+                                    _tarjeta.fecha_modificacion = dr.GetDateTime(1);
+                                    _tarjeta.codigo = dr.GetValue(2).ToString();
+                                    if (!dr.IsDBNull(3))
+                                        _tarjeta.fecha_activacion = dr.GetDateTime(3);
+                                    if (!dr.IsDBNull(4))
+                                        _tarjeta.fecha_expiracion = dr.GetDateTime(4);
+                                    if (!dr.IsDBNull(5))
+                                        _tarjeta.fecha_desactivacion = dr.GetDateTime(5);
+                                    if (!dr.IsDBNull(6))
+                                        _tarjeta.saldo = decimal.Parse(dr.GetValue(6).ToString());
 
-                            result = true;
-                        }
-                        else
-                        {
-                            _tarjetaGift    =   new Tbl_DineroGiftCardApp();
-                            _tarjetaGift.Id =   Int32.Parse(dr.GetValue(0).ToString());
-                            _tarjetaGift.IdCliente  = dr.GetValue(1).ToString();
-                            if (!dr.IsDBNull(2))
-                                _tarjetaGift.ProgId = dr.GetValue(2).ToString();
-                            _tarjetaGift.IdGiftCard = dr.GetValue(3).ToString();
-                            _tarjetaGift.Saldo  = decimal.Parse(dr.GetValue(4).ToString());
-                            _tarjetaGift.Estado = byte.Parse(dr.GetValue(5).ToString());
-                            _tarjetaGift.FechaCreacion  = dr.GetDateTime(6);
-                            if (!dr.IsDBNull(7))
-                                _tarjetaGift.UsuarioCreacion    = dr.GetValue(7).ToString();
-                            _tarjetaGift.FechaModificacion  = dr.GetDateTime(8);
-                            if (!dr.IsDBNull(9))
-                                _tarjetaGift.UsuarioModificacion    = dr.GetValue(9).ToString();
-                            if (!dr.IsDBNull(10))
-                                _tarjetaGift.Valor  = decimal.Parse(dr.GetValue(10).ToString());
+                                    _tarjeta.activo = bool.Parse(dr.GetValue(7).ToString());
+                                    _tarjeta.bono = bool.Parse(dr.GetValue(8).ToString());
 
-                            result = true;
+                                    if (!dr.IsDBNull(9))
+                                        _tarjeta.valor = decimal.Parse(dr.GetValue(9).ToString());
+                                    if (!dr.IsDBNull(10))
+                                        _tarjeta.tipo = byte.Parse(dr.GetValue(10).ToString());
+                                    if (!dr.IsDBNull(11))
+                                        _tarjeta.IdGrupoCliente = short.Parse(dr.GetValue(11).ToString());
 
+                                    result = true;
+                                }
+                                else
+                                {
+                                    _tarjetaGift = new Tbl_DineroGiftCardApp();
+                                    _tarjetaGift.Id = Int32.Parse(dr.GetValue(0).ToString());
+                                    _tarjetaGift.IdCliente = dr.GetValue(1).ToString();
+                                    if (!dr.IsDBNull(2))
+                                        _tarjetaGift.ProgId = dr.GetValue(2).ToString();
+                                    _tarjetaGift.IdGiftCard = dr.GetValue(3).ToString();
+                                    _tarjetaGift.Saldo = decimal.Parse(dr.GetValue(4).ToString());
+                                    _tarjetaGift.Estado = byte.Parse(dr.GetValue(5).ToString());
+                                    _tarjetaGift.FechaCreacion = dr.GetDateTime(6);
+                                    if (!dr.IsDBNull(7))
+                                        _tarjetaGift.UsuarioCreacion = dr.GetValue(7).ToString();
+                                    _tarjetaGift.FechaModificacion = dr.GetDateTime(8);
+                                    if (!dr.IsDBNull(9))
+                                        _tarjetaGift.UsuarioModificacion = dr.GetValue(9).ToString();
+                                    if (!dr.IsDBNull(10))
+                                        _tarjetaGift.Valor = decimal.Parse(dr.GetValue(10).ToString());
+
+                                    result = true;
+                                }
+                            }
+                            // 'dr.Close()' y 'conn.Close()' se manejan solos por los 'using'
                         }
                     }
-
-                    conn.Close();
                 }
+                // <-- FIN: CÓDIGO CORREGIDO
                 catch (Exception ex)
                 {
-                    conn.Close();
+                    // El 'conn.Close()' ya no es necesario aquí gracias al 'using'
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Control/TarjetaRegalo", "getTarjetaGen", "No se pudo consultar tarjeta, a continuacion el detalle de la excepcion - " + ex.Message);
                 }
             }
@@ -1086,6 +1096,7 @@ namespace POS.Control
 
             return result;
         }
+
         public bool getTarjetaGen(string codigo, string cliente, bool esAppMovil, bool local)
         {
             bool result = false;

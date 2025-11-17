@@ -19,7 +19,7 @@ namespace POS.Control.Main.MainTouch
         public frmMainTouchClte(Factura factura) : this()
         {
             _factura = factura;
-            FacturaService.ProductosActualizados += ActualizarTicket;
+            //FacturaService.ProductosActualizados += ActualizarTicket;
 
             // Refrescar productos iniciales
             RefrescarProductos(_factura);
@@ -39,11 +39,37 @@ namespace POS.Control.Main.MainTouch
         }
 
 
+        // (En frmMainTouchClte.cs - Constructor)
+
         public frmMainTouchClte()
         {
             InitializeComponent();
-            ClienteService.ClienteActualizado += ClienteService_ClienteActualizado;
-            FacturaService.ProductosActualizados += ActualizarTicket; // 👈 Aquí
+
+            // --- CÓDIGO FINAL (Modo "Solo Imagen") ---
+
+            // 1. Ocultar todos los otros controles
+            gridItemsClte.Visible = false;
+            panel1.Visible = false;
+            pictureBox1.Visible = false;
+            lblNombreCliente.Visible = false;
+            lblIdentificacionClte.Visible = false;
+            radLabel1.Visible = false;
+            radLabel2.Visible = false;
+            radGridView1.Visible = false;
+
+            // 2. ¡VOLVEMOS A CARGAR LA IMAGEN!
+            CargarImagenIdleDesdeDB();
+
+            // 3. Configurar y mostrar 'picInactive'
+            if (picInactive != null)
+            {
+                // YA NO USAMOS EL COLOR ROJO
+                // picInactive.BackColor = Color.Red; 
+
+                picInactive.Dock = DockStyle.Fill;
+                picInactive.Visible = true;
+                picInactive.BringToFront();
+            }
         }
 
         private  void AgregarProductoAlTicket(Producto producto)
@@ -159,42 +185,73 @@ namespace POS.Control.Main.MainTouch
             base.OnFormClosed(e);
         }
 
-  
+
         private void FacturaService_ProductosActualizados(object sender, BindingList<Producto> productos)
         {
             this.InvokeIfRequired(() =>
             {
-                if (_factura != null)
+                // --- INICIO DE LA CORRECCIÓN ---
+
+                // El problema era que "if (_factura != null)" era FALSO.
+                // Vamos a asegurarnos de que _factura exista
+                // o simplemente pasemos los productos directamente.
+
+                // 1. Asegurémonos de que _factura no sea null
+                if (_factura == null)
                 {
-                    _factura.Productos = new BindingList<Producto>(productos.ToList());
-                    RefrescarProductos(_factura);
+                    _factura = new Factura();
                 }
+
+                // 2. Asignamos la nueva lista de productos (la que viene del evento)
+                _factura.Productos = productos;
+
+                // 3. AHORA SÍ llamamos a RefrescarProductos
+                RefrescarProductos(_factura);
+
+                // --- FIN DE LA CORRECCIÓN ---
             });
         }
 
         private void ConfigurarGrid()
         {
             gridItemsClte.AutoGenerateColumns = false;
-            gridItemsClte.Columns.Clear();
+            gridItemsClte.Columns.Clear(); // Limpia columnas del diseñador
 
-            var colNombre = new GridViewTextBoxColumn("Nombre") { HeaderText = "Nombre" };
-            var colPrecio = new GridViewDecimalColumn("P.V.P") { HeaderText = "P.V.P" };
-            var colCantidad = new GridViewDecimalColumn("Cantidad") { HeaderText = "Cantidad" };
-            var colTotal = new GridViewDecimalColumn("Total") { HeaderText = "Total" };
-            var colIdTemporal = new GridViewDecimalColumn("IdTemporal") { HeaderText = "IdTemporal" };
-            
+            // Basado en tu Designer.cs, tu clase Producto usa estos nombres:
+
+            var colNombre = new GridViewTextBoxColumn("Nombre")
+            { HeaderText = "Descripción", Width = 275 };
+
+            var colCantidad = new GridViewDecimalColumn("CantidadINEC")
+            { HeaderText = "Cantidad", Width = 80 };
+
+            var colUnidades = new GridViewDecimalColumn("Unidades")
+            { HeaderText = "Unidades", Width = 80 };
+
+            var colPrecio = new GridViewDecimalColumn("Pvp")
+            { HeaderText = "P.V.P", Width = 60 };
+
+            var colTotal = new GridViewDecimalColumn("TotalPromoIVA")
+            { HeaderText = "Total", Width = 90 };
+
+            var colIdTemporal = new GridViewDecimalColumn("IdTemporal")
+            { HeaderText = "IdTemporal", IsVisible = false };
 
 
             gridItemsClte.Columns.Add(colNombre);
             gridItemsClte.Columns.Add(colCantidad);
+            gridItemsClte.Columns.Add(colUnidades);
             gridItemsClte.Columns.Add(colPrecio);
             gridItemsClte.Columns.Add(colTotal);
             gridItemsClte.Columns.Add(colIdTemporal);
 
-            // Estilo opcional
+            // Tu código de sorting (esto está bien)
             gridItemsClte.EnableCustomSorting = true;
             gridItemsClte.CustomSorting += RadGridView1_CustomSorting;
-            gridItemsClte.Columns["IdTemporal"].SortOrder = RadSortOrder.Descending;
+            if (gridItemsClte.Columns.Contains("IdTemporal"))
+            {
+                gridItemsClte.Columns["IdTemporal"].SortOrder = RadSortOrder.Descending;
+            }
         }
 
 
@@ -359,6 +416,113 @@ namespace POS.Control.Main.MainTouch
                     foreach (var child in GetAllControls(control))
                         yield return child;
                 }
+            }
+        }
+
+        //seccion para llamar una imagen estatica 
+
+        private void CargarImagenIdleDesdeDB()
+        {
+            string rutaImagen = ObtenerRutaImagenDesdeDB("WALLPAPER_CLIENTE");
+
+            if (!string.IsNullOrEmpty(rutaImagen))
+            {
+                try
+                {
+                    // Verificamos si el archivo existe
+                    if (System.IO.File.Exists(rutaImagen))
+                    {
+                        // --- INICIO DE LA MEJORA ---
+                        // En lugar de Image.FromFile(ruta), que puede fallar,
+                        // leemos el archivo en un array de bytes primero.
+
+                        byte[] imageBytes = System.IO.File.ReadAllBytes(rutaImagen);
+
+                        // Creamos un stream en memoria con esos bytes
+                        using (var ms = new System.IO.MemoryStream(imageBytes))
+                        {
+                            // Cargamos la imagen desde la memoria
+                            // Esto es mucho más robusto.
+                            picInactive.Image = Image.FromStream(ms);
+                        }
+                        // --- FIN DE LA MEJORA ---
+
+                        picInactive.SizeMode = PictureBoxSizeMode.StretchImage; // O Zoom
+                    }
+                    else
+                    {
+                        // La ruta es válida pero el archivo no existe
+                        Control.Common.Logger.LogMessage(
+                            Control.Common.Enum.LogTypes.Error,
+                            nameof(frmMainTouchClte),
+                            nameof(CargarImagenIdleDesdeDB),
+                            $"La imagen de wallpaper no se encontró en la ruta: {rutaImagen}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Error al cargar la imagen
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Error,
+                        nameof(frmMainTouchClte),
+                        nameof(CargarImagenIdleDesdeDB),
+                        $"Error al cargar imagen desde ruta: {ex.Message}");
+                }
+            }
+            else
+            {
+                // El parámetro no se encontró en la base de datos
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Warning,
+                    nameof(frmMainTouchClte),
+                    nameof(CargarImagenIdleDesdeDB),
+                    "No se encontró el parámetro 'WALLPAPER_CLIENTE' en la DB.");
+            }
+        }
+        /// <summary>
+        /// Obtiene un valor de parámetro desde la base de datos usando Entity Framework.
+        /// </summary>
+        /// <param name="identificador">El ID del parámetro a buscar (ej: "WALLPAPER_CLIENTE")</param>
+        /// <returns>El valor (la ruta) como string, o null si no se encuentra.</returns>
+        private string ObtenerRutaImagenDesdeDB(string identificador)
+        {
+            try
+            {
+                // 1. Usa tu contexto de base de datos (POSEntities)
+                using (POSEntities db = new POSEntities())
+                {
+                    // 2. Busca el parámetro específico
+                    var parametro = db.core_parametro
+                                      .FirstOrDefault(x => x.identificador == identificador);
+
+                    // 3. Verifica si se encontró
+                    if (parametro != null)
+                    {
+                        return parametro.valor; // Devuelve la ruta: "\\srvallia\Shares\..."
+                    }
+                    else
+                    {
+                        // Si no se encuentra, lo registra en el log (buena práctica)
+                        Control.Common.Logger.LogMessage(
+                            Control.Common.Enum.LogTypes.Warning,
+                            nameof(frmMainTouchClte),
+                            nameof(ObtenerRutaImagenDesdeDB),
+                            $"No se encontró el parámetro '{identificador}' en la tabla core_parametro.");
+
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Registra cualquier error de conexión o consulta
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Error,
+                    nameof(frmMainTouchClte),
+                    nameof(ObtenerRutaImagenDesdeDB),
+                    $"Error al consultar la DB por el parámetro '{identificador}'. Error: {ex.Message}");
+
+                return null;
             }
         }
 

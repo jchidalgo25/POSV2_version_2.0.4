@@ -8325,6 +8325,9 @@ namespace POS
             string identicador = string.Empty;
             string recibo = string.Empty;
 
+
+
+
             title = "REVERSO DEVOLUCION IVA ";
             identicador = "T_REVERSO_DEVOLUCION_IVA";
 
@@ -8336,7 +8339,7 @@ namespace POS
 
             var pos = new POSEntities();
             var ticket = (from deta in pos.core_recibo
-                          where deta.identificador == identicador
+                          where deta.identificador.Trim() == identicador.Trim() // <-- ¡USA TRIM()!
                           select deta).FirstOrDefault();
 
 
@@ -8349,7 +8352,7 @@ namespace POS
                 recibo = recibo.Replace("<<cedula>>", cliente);
                 recibo = recibo.Replace("<<cliente>>", nombreClte);
                 recibo = recibo.Replace("<<fecha>>", DateTime.Now.ToString());
-                recibo = recibo.Replace("<<monto>>", _factura.montoIvaDevolver.ToString());
+                recibo = recibo.Replace("<<monto>>", _factura.montoIvaDevolver.ToString("N2"));
                 //recibo = recibo.Replace("<<numero_factura>>", _factura.GetNumeroFactura());
                 printer.TextToPrint = recibo.ToString();
                 printer.Print();
@@ -9493,6 +9496,8 @@ namespace POS
                
                 // 1. Recalcular el total de la factura
                 calcularFactura();
+
+                FacturaService.NotificarCambioProductos(_factura.Productos);
 
                 // 2. Refrescar la grilla de productos
                 gridItems.SuspendLayout();
@@ -13011,6 +13016,7 @@ namespace POS
                     int reintento = 0;
                     int maxReintentos = 3;
                     RespuestaDevlucion respuestaDevIVA = new RespuestaDevlucion();
+                    
 
                     do
                     {

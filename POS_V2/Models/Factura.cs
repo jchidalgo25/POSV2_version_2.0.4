@@ -645,6 +645,7 @@ namespace POS.Models
             get { return _aplicaBeneficioDevolucionIVA; }
             set { _aplicaBeneficioDevolucionIVA = value; }
         }
+
         public bool _esBeneficiarioDevolucionIVA = false;
         public bool esBeneficiarioDevolucionIVA
         {
@@ -1274,7 +1275,7 @@ namespace POS.Models
 
         #endregion
 
-        Pago AgregarPago(string tipo, decimal valor)
+        public Pago AgregarPago(string tipo, decimal valor)
         {
             if (this.Pagos.Any(x => x.Descripcion == tipo))
             {
