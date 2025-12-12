@@ -83,7 +83,8 @@ namespace POS.Models
 
         public decimal DescuentoAX
         {
-            get { return decimal.Round(_descuentoAX, 2); } // Opozo cambio de desceuntos
+            get
+            { return decimal.Round(_descuentoAX, 6); } // Opozo cambio de desceuntos
             set { _descuentoAX = value; }
         }
 
@@ -1462,6 +1463,7 @@ namespace POS.Models
         /// <param name="descuento">Valor de descuento a aplicar</param>
         public void calcularDescuento(decimal descuento)
         {
+            // prueba de descuento en los item mayor decimales antes en 2 ahora en 6 
             this._descuentoActual = decimal.Round((descuento / 100M), 2);
             this.Descuento = decimal.Round(this._pvp * this._cantidad * (descuento / 100M), 2);
         }

@@ -1507,7 +1507,7 @@ namespace POS.Control.Pagos
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " Ejecuta proceso ProcesaPinpadBackgroundMultiRed ");
 
-                if (!Control.Common.GlobalParameters.EsAmbienteProduccion && Control.Common.GlobalParameters.EstTcpIpPinpad == false)
+                if (!Control.Common.GlobalParameters.EsAmbienteProduccion && Control.Common.GlobalParameters.EstTcpIpPinpad == false) // comebt
                 {
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " Ejecuta ProcesaPinpadDev  ");
 

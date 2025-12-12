@@ -21,3 +21,8 @@ C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\LirisLibLogger\LirisLi
 C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\LirisLibLogger\LirisLibLogger\obj\Debug\LirisLibLogger.csproj.CoreCompileInputs.cache
 C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\LirisLibLogger\LirisLibLogger\obj\Debug\LirisLibLogger.dll
 C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\LirisLibLogger\LirisLibLogger\obj\Debug\LirisLibLogger.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\LirisLibLogger\LirisLibLogger\bin\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\LirisLibLogger\LirisLibLogger\bin\Debug\LirisLibLogger.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\LirisLibLogger\LirisLibLogger\obj\Debug\LirisLibLogger.csproj.CoreCompileInputs.cache
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\LirisLibLogger\LirisLibLogger\obj\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\LirisLibLogger\LirisLibLogger\obj\Debug\LirisLibLogger.pdb

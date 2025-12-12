@@ -2495,6 +2495,7 @@ C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\obj\x86\Debug\PO
 C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\POS_V2\obj\x86\Debug\POS.pdb
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.csprojAssemblyReference.cache
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\bin\Debug\WinSCP.exe
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\bin\Debug\Blanco.png
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\bin\Debug\SQLite.Interop.dll
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\bin\Debug\DriverVerifone32.ini
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\bin\Debug\Libs\POS.db

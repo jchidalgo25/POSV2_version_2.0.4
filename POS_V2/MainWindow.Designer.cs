@@ -65,6 +65,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.clienteGroup = new Telerik.WinControls.UI.RadGroupBox();
+            this.picClienteApp = new System.Windows.Forms.PictureBox(); //opozo
             this.lblEtiquetaSaldo = new Telerik.WinControls.UI.RadLabel();
             this.lblSaldoTarjeta = new Telerik.WinControls.UI.RadLabel();
             this.lblDireccion = new Telerik.WinControls.UI.RadLabel();
@@ -140,6 +141,7 @@
             this.btnEliminarPago = new Telerik.WinControls.UI.RadButton();
             this.radButton13 = new Telerik.WinControls.UI.RadButton();
             this.telerikMetroTouchTheme2 = new Telerik.WinControls.Themes.TelerikMetroTouchTheme();
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit(); //opozo
             ((System.ComponentModel.ISupportInitialize)(this.btnGiftback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoPOS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUser)).BeginInit();
@@ -550,6 +552,7 @@
             // 
             this.clienteGroup.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.clienteGroup.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.clienteGroup.Controls.Add(this.picClienteApp); //opozo
             this.clienteGroup.Controls.Add(this.lblEtiquetaSaldo);
             this.clienteGroup.Controls.Add(this.lblSaldoTarjeta);
             this.clienteGroup.Controls.Add(this.lblDireccion);
@@ -576,6 +579,19 @@
             this.clienteGroup.Text = "F-001-001-0000000000 ";
             this.clienteGroup.ThemeName = "TelerikMetroTouch";
             this.clienteGroup.Click += new System.EventHandler(this.clienteGroup_Click);
+            // 
+            // picClienteApp - opozo
+            // 
+            this.picClienteApp.Image = global::POS.Properties.Resources.cliente_app_icon;
+            this.picClienteApp.Location = new System.Drawing.Point(262, 73);
+            this.picClienteApp.Name = "picClienteApp";
+            this.picClienteApp.Size = new System.Drawing.Size(40, 27);
+            this.picClienteApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picClienteApp.TabIndex = 25;
+            this.picClienteApp.TabStop = false;
+            this.picClienteApp.Visible = false;
+            //this.picClienteApp.Click += new System.EventHandler(this.picClienteApp_Click);
+
             // 
             // lblEtiquetaSaldo
             // 
@@ -2149,6 +2165,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).EndInit();
             this.clienteGroup.ResumeLayout(false);
             this.clienteGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit(); // opozo
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).EndInit();
@@ -2332,5 +2349,6 @@
         private Telerik.WinControls.UI.RadButton radButton1;
         private Telerik.WinControls.UI.RadButton btnDevolucionIVA;
         private Telerik.WinControls.UI.RadButton btn7;
+        private System.Windows.Forms.PictureBox picClienteApp;
     }
 }

@@ -379,27 +379,80 @@ namespace POS.Control.Pagos
             }
         }
         public void GenerarPDFLocal(string xml)
-        {             
+        {
             try
             {
-                BinaryWriter Writer = null;
+                // DEBUG 1: Inicio del proceso
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "GenerarPDFLocal", "Inicio",
+                    "Iniciando generación de PDF. Longitud XML: " + (string.IsNullOrEmpty(xml) ? "0/NULL" : xml.Length.ToString()));
+
                 string Name = _objRetEletronica.PDF;
-                ///string contents = File.ReadAllText(@"C:\DocAnbaque\GeneracionPDFRetencion\xmlretencion.xml");
+
+                // DEBUG 2: Verificando ruta de destino
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "GenerarPDFLocal", "RutaDestino",
+                    "El PDF se intentará guardar en: " + Name);
+
+                // --- CORRECCIÓN DE RUTA DE LOGO ---
+                // Usamos la ruta local donde corre el EXE
+                string rutaBase = System.Windows.Forms.Application.StartupPath;
+                string rutaLogo = System.IO.Path.Combine(rutaBase, "Blanco.png");
+
+                // DEBUG 3: Verificando existencia del Logo
+                if (System.IO.File.Exists(rutaLogo))
+                {
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "GenerarPDFLocal", "CheckLogo",
+                        "Logo encontrado correctamente en: " + rutaLogo);
+                }
+                else
+                {
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "GenerarPDFLocal", "CheckLogo",
+                        "¡ALERTA! No se encontró el logo en: " + rutaLogo + ". El PDF podría generarse nulo.");
+                }
 
                 eComp.PDF.GeneraPDF PDFDATA = new eComp.PDF.GeneraPDF();
-                var dato = PDFDATA.GeneraComprobanteRetencion(xml, Properties.Settings.Default.RETENCION_PATHLOGO);
+
+                // DEBUG 4: Llamando a la librería externa
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "GenerarPDFLocal", "Proceso",
+                    "Llamando a eComp.PDF.GeneraComprobanteRetencion...");
+
+                // Generamos el PDF usando la ruta local del logo
+                var dato = PDFDATA.GeneraComprobanteRetencion(xml, rutaLogo);
+
+                // --- CORRECCIÓN CRÍTICA PARA EVITAR CAÍDA (ERROR 462) ---
+                if (dato == null || dato.Length == 0)
+                {
+                    // DEBUG 5: Captura del error silencioso
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "GenerarPDFLocal", "Validacion",
+                        "ERROR CRÍTICO: La librería devolvió un PDF NULL o Vacio. Posible causa: XML mal formado o falta de reporte .rdlc en la carpeta del ejecutable.");
+
+                    // Salimos aquí para NO intentar escribir y evitar la excepción "Buffer cannot be null"
+                    return;
+                }
+
+                // DEBUG 6: Éxito en conversión
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "GenerarPDFLocal", "Proceso",
+                    "PDF generado en memoria correctamente. Tamaño bytes: " + dato.Length.ToString());
 
                 // Create a new stream to write to the file
-                Writer = new BinaryWriter(File.OpenWrite(Name));
+                using (BinaryWriter Writer = new BinaryWriter(File.OpenWrite(Name)))
+                {
+                    // Writer raw data                 
+                    Writer.Write(dato);
+                    Writer.Flush();
+                    // Writer.Close(); // No es necesario si usas 'using', pero puedes dejarlo si prefieres
+                }
 
-                // Writer raw data                
-                Writer.Write(dato);
-                Writer.Flush();
-                Writer.Close();
+                // DEBUG 7: Finalización exitosa
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "GenerarPDFLocal", "Fin",
+                    "Archivo PDF escrito exitosamente en disco.");
+
             }
             catch (Exception ex)
             {
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Models.RetencionElectronica", "GenerarPDFLocal", "Imposible generar comprobante en este momento, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex), "StackTrace: " + ex.StackTrace);
+                // DEBUG: Excepción general
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Models.RetencionElectronica", "GenerarPDFLocal",
+                    "Excepción capturada: " + Control.Common.ExceptionHandler.GetExceptionMessages(ex), "StackTrace: " + ex.StackTrace);
+
                 throw ex;
             }
         }

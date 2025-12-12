@@ -1155,6 +1155,7 @@ namespace POS
                             _factura.EsClienteApp = false;
                             _factura.CodigoClienteApp = "";
                             _factura.codigoclienteAPP = "";
+                            picClienteApp.Visible = _factura.EsClienteApp; //opozo
 
                             txtCedula.Text = cliente_actual.ACCOUNTNUM;
                             txtCedula.Focus();
@@ -1416,6 +1417,7 @@ namespace POS
                             _factura.porcDsctoEmpleadoLiris = clteEmpleado.PorcEmpleadoLiris;
 
                             // Solo agregamos si no existe ya
+
                             _factura.agregaDescuentoEmpleado(clteEmpleado.PorcEmpleadoLiris, "DESC_EMP", "DESC_EMP");
 
 
@@ -2061,6 +2063,11 @@ namespace POS
                 _factura.EsClienteApp = false;
                 _factura.CodigoClienteApp = "";
                 _factura.codigoclienteAPP = "";
+                // opozo - inicializa valores imagen cliente app
+                picClienteApp.Visible = _factura.EsClienteApp;
+                picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null;
+
+
 
 
                 if (_factura.Descuentos2.Any())
@@ -2273,6 +2280,9 @@ namespace POS
                     txtCodigo.SelectAll();
                     _factura.EsClienteApp = clteEmpleado.EsClienteApp;
                     _factura.CodigoClienteApp = clteEmpleado.CodigoClienteApp;
+                    // opozo - asigna valores de _factura.EsClienteApp a imagen app
+                    picClienteApp.Visible = _factura.EsClienteApp;
+                    picClienteApp.Image = _factura.EsClienteApp ? Properties.Resources.cliente_app_icon : null;
                     //insertaCabeceraFile();  //insertaCabecera();
                     insertaCabeceraFile(clteEmpleado);
                 }
@@ -14543,10 +14553,10 @@ namespace POS
                                 _factura.Cupon = new List<Cupones>();
 
                                 st8 = stopwatch.ElapsedMilliseconds;
-                                _factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
+                                //_factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
                                 st9 = stopwatch.ElapsedMilliseconds;
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "prepararImpresionCupones3", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
-                                //_factura.prepararImpresionCupones4(_factura, 0); 
+                                _factura.prepararImpresionCupones4(_factura, 0); 
 
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", "Recorro lista de Pagos ");
 
@@ -15089,6 +15099,8 @@ namespace POS
 
                 var st12 = stopwatch.ElapsedMilliseconds;
                 EliminaFacturaTmpFile();    //eliminaFacturatmp();
+                picClienteApp.Visible = false;  // se quita la visibilidad de la imagen de cliente app
+                picClienteApp.Image = null;     // se limpia la imagen de cliente app
                 var st13 = stopwatch.ElapsedMilliseconds;
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "EliminaFacturaTmpFile", st12.ToString() + " " + st13.ToString() + ":" + (st13 - st12).ToString());
 

@@ -1551,6 +1551,10 @@ namespace POS.Models
 
         bool agregarDescuentoAdicional(core_descuento descuento, string forma_pago, string codigo)
         {
+            decimal subTotalActual = this.getSubTotal();
+            System.Diagnostics.Debug.WriteLine($"[DEBUG POS - Dscto Adicional] Subtotal (getSubTotal()): {subTotalActual.ToString("N2")}");
+            System.Diagnostics.Debug.WriteLine($"[DEBUG POS - Dscto Adicional] Porcentaje aplicado: {descuento.valor}%");
+
             if (!this.Descuentos2.Any(x => x.Codigo == codigo))
             {
                 this.Descuentos2.Add(new DescuentoAdicional()
