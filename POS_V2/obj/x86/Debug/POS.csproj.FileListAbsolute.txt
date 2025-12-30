@@ -2632,6 +2632,7 @@ C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.Control.WalletPoints.ItemShelf.resources
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.Control.Security.Wallpaper.resources
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.Control.ToolBox.ToolBoxMenu.resources
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.FrmIngresoTarjeta.resources
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.SearchProductV3.resources
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.SearchProductV2.resources
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\POS_V2\obj\x86\Debug\POS.UnitTests.ConvertToAlphanumericUnitTest.resources

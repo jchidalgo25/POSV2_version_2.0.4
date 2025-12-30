@@ -110,7 +110,7 @@
         <EntityTypeShape EntityType="POSModel.VW_PromoChoose" Width="1.5" PointX="30.375" PointY="0.75" FillColor="Cyan" />
         <EntityTypeShape EntityType="POSModel.BG_Apertura" Width="1.5" PointX="30.375" PointY="11.75" />
         <EntityTypeShape EntityType="POSModel.BG_Lst_POS_no_sub_AX" Width="1.875" PointX="24.5" PointY="32.75" />
-        <EntityTypeShape EntityType="POSModel.core_TarjetaDescuento" Width="1.5" PointX="30.375" PointY="27.75" />
+        <EntityTypeShape EntityType="POSModel.core_TarjetaDescuento" Width="1.5" PointX="30.375" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="POSModel.vw_RETIVA" Width="1.5" PointX="0.75" PointY="22.75" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="POSModel.VW_NC_Motivo" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="POSModel.core_TarjetaDescuentoHistorico" Width="1.5" PointX="31.375" PointY="8.75" />

@@ -813,6 +813,7 @@ warning 6002: The table/view 'POS.dbo.core_tarjetacredito_bin' does not have a p
           <Property Name="bono" Type="bit" Nullable="false" />
           <Property Name="numeroFactura" Type="bigint" Nullable="false" />
           <Property Name="codigoCliente" Type="nvarchar" MaxLength="15" />
+          <Property Name="acepto_terminos" Type="bit" />
         </EntityType>
         <EntityType Name="core_TarjetaDescuentoHistorico">
           <Key>
@@ -5880,6 +5881,7 @@ warning 6002: The table/view 'POS.dbo.VW_SEARCHPRODUCT' does not have a primary 
           <Property Name="bono" Type="Boolean" Nullable="false" />
           <Property Name="numeroFactura" Type="Int64" Nullable="false" />
           <Property Name="codigoCliente" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="acepto_terminos" Type="Boolean" />
         </EntityType>
         <EntityType Name="vw_RETIVA">
           <Key>
@@ -8378,6 +8380,7 @@ warning 6002: The table/view 'POS.dbo.VW_SEARCHPRODUCT' does not have a primary 
           <EntitySetMapping Name="core_TarjetaDescuento">
             <EntityTypeMapping TypeName="POSModel.core_TarjetaDescuento">
               <MappingFragment StoreEntitySet="core_TarjetaDescuento">
+                <ScalarProperty Name="acepto_terminos" ColumnName="acepto_terminos" />
                 <ScalarProperty Name="codigoCliente" ColumnName="codigoCliente" />
                 <ScalarProperty Name="numeroFactura" ColumnName="numeroFactura" />
                 <ScalarProperty Name="bono" ColumnName="bono" />

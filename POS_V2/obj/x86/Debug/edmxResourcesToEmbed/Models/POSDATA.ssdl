@@ -808,6 +808,7 @@ warning 6002: The table/view 'POS.dbo.core_tarjetacredito_bin' does not have a p
     <Property Name="bono" Type="bit" Nullable="false" />
     <Property Name="numeroFactura" Type="bigint" Nullable="false" />
     <Property Name="codigoCliente" Type="nvarchar" MaxLength="15" />
+    <Property Name="acepto_terminos" Type="bit" />
   </EntityType>
   <EntityType Name="core_TarjetaDescuentoHistorico">
     <Key>

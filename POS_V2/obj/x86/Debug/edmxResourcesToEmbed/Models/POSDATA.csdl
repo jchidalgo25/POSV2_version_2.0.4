@@ -2026,6 +2026,7 @@
     <Property Name="bono" Type="Boolean" Nullable="false" />
     <Property Name="numeroFactura" Type="Int64" Nullable="false" />
     <Property Name="codigoCliente" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="acepto_terminos" Type="Boolean" />
   </EntityType>
   <EntityType Name="vw_RETIVA">
     <Key>

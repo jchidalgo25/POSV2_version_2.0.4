@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn16 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn17 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn18 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn19 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn20 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn21 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn22 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn23 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn24 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             this.tempo2minutos = new System.Windows.Forms.Timer(this.components);
             this.tempo666 = new System.Windows.Forms.Timer(this.components);
             this.tempo5min = new System.Windows.Forms.Timer(this.components);
@@ -65,7 +65,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.clienteGroup = new Telerik.WinControls.UI.RadGroupBox();
-            this.picClienteApp = new System.Windows.Forms.PictureBox(); //opozo
+            this.picClienteApp = new System.Windows.Forms.PictureBox();
             this.lblEtiquetaSaldo = new Telerik.WinControls.UI.RadLabel();
             this.lblSaldoTarjeta = new Telerik.WinControls.UI.RadLabel();
             this.lblDireccion = new Telerik.WinControls.UI.RadLabel();
@@ -141,7 +141,7 @@
             this.btnEliminarPago = new Telerik.WinControls.UI.RadButton();
             this.radButton13 = new Telerik.WinControls.UI.RadButton();
             this.telerikMetroTouchTheme2 = new Telerik.WinControls.Themes.TelerikMetroTouchTheme();
-            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit(); //opozo
+            this.btnCompraGratis = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.btnGiftback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoPOS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUser)).BeginInit();
@@ -163,6 +163,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).BeginInit();
             this.clienteGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).BeginInit();
@@ -237,6 +238,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblCambio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminarPago)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCompraGratis)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -342,6 +344,7 @@
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStripStatusLabel1.Location = new System.Drawing.Point(0, 0);
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(85, 25);
@@ -552,7 +555,7 @@
             // 
             this.clienteGroup.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.clienteGroup.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.clienteGroup.Controls.Add(this.picClienteApp); //opozo
+            this.clienteGroup.Controls.Add(this.picClienteApp);
             this.clienteGroup.Controls.Add(this.lblEtiquetaSaldo);
             this.clienteGroup.Controls.Add(this.lblSaldoTarjeta);
             this.clienteGroup.Controls.Add(this.lblDireccion);
@@ -580,7 +583,7 @@
             this.clienteGroup.ThemeName = "TelerikMetroTouch";
             this.clienteGroup.Click += new System.EventHandler(this.clienteGroup_Click);
             // 
-            // picClienteApp - opozo
+            // picClienteApp
             // 
             this.picClienteApp.Image = global::POS.Properties.Resources.cliente_app_icon;
             this.picClienteApp.Location = new System.Drawing.Point(262, 73);
@@ -590,8 +593,6 @@
             this.picClienteApp.TabIndex = 25;
             this.picClienteApp.TabStop = false;
             this.picClienteApp.Visible = false;
-            //this.picClienteApp.Click += new System.EventHandler(this.picClienteApp_Click);
-
             // 
             // lblEtiquetaSaldo
             // 
@@ -634,7 +635,7 @@
             // 
             // 
             this.lblDireccion.RootElement.ControlBounds = new System.Drawing.Rectangle(411, 42, 100, 18);
-            this.lblDireccion.Size = new System.Drawing.Size(194, 21);
+            this.lblDireccion.Size = new System.Drawing.Size(339, 21);
             this.lblDireccion.TabIndex = 24;
             this.lblDireccion.Text = "#####";
             // 
@@ -684,7 +685,7 @@
             // 
             // 
             this.lblTelefono.RootElement.ControlBounds = new System.Drawing.Rectangle(411, 73, 100, 18);
-            this.lblTelefono.Size = new System.Drawing.Size(194, 21);
+            this.lblTelefono.Size = new System.Drawing.Size(339, 21);
             this.lblTelefono.TabIndex = 7;
             this.lblTelefono.Text = "#####";
             // 
@@ -735,7 +736,7 @@
             // 
             // 
             this.lblNombre.RootElement.ControlBounds = new System.Drawing.Rectangle(411, 11, 100, 18);
-            this.lblNombre.Size = new System.Drawing.Size(194, 21);
+            this.lblNombre.Size = new System.Drawing.Size(339, 21);
             this.lblNombre.TabIndex = 5;
             this.lblNombre.Text = "#####";
             // 
@@ -1092,73 +1093,73 @@
             // 
             this.gridItems.MasterTemplate.AllowAddNewRow = false;
             this.gridItems.MasterTemplate.AllowColumnReorder = false;
-            gridViewTextBoxColumn1.FieldName = "Nombre";
-            gridViewTextBoxColumn1.HeaderText = "Descripción";
-            gridViewTextBoxColumn1.Name = "column1";
-            gridViewTextBoxColumn1.Width = 275;
-            gridViewTextBoxColumn2.FieldName = "CantidadINEC";
-            gridViewTextBoxColumn2.FormatString = "{0:00.000}";
-            gridViewTextBoxColumn2.HeaderText = "Cantidad";
-            gridViewTextBoxColumn2.Name = "column2";
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn2.Width = 80;
-            gridViewTextBoxColumn3.FieldName = "Unidades";
-            gridViewTextBoxColumn3.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn3.HeaderText = "Unidades";
-            gridViewTextBoxColumn3.Name = "column3";
-            gridViewTextBoxColumn3.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn3.Width = 80;
-            gridViewTextBoxColumn4.FieldName = "Pvp";
-            gridViewTextBoxColumn4.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn4.HeaderText = "P.V.P";
-            gridViewTextBoxColumn4.Name = "column4";
-            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn4.Width = 60;
-            gridViewTextBoxColumn5.FieldName = "SubtotalSinDescuento";
-            gridViewTextBoxColumn5.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn5.HeaderText = "Subtotal";
-            gridViewTextBoxColumn5.Name = "column6";
-            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn5.Width = 80;
-            gridViewTextBoxColumn6.FieldName = "Descuento";
-            gridViewTextBoxColumn6.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn6.HeaderText = "Descuento";
-            gridViewTextBoxColumn6.Name = "column5";
-            gridViewTextBoxColumn6.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn6.Width = 80;
-            gridViewTextBoxColumn7.FieldName = "DescuentoIVA";
-            gridViewTextBoxColumn7.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn7.HeaderText = "Dscto. IVA";
-            gridViewTextBoxColumn7.Name = "columnDsctoIVA";
-            gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn7.Width = 80;
-            gridViewTextBoxColumn8.FieldName = "Iva";
-            gridViewTextBoxColumn8.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn8.HeaderText = "I.V.A";
-            gridViewTextBoxColumn8.Name = "column8";
-            gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn8.Width = 70;
-            gridViewTextBoxColumn9.FieldName = "TotalPromoIVA";
-            gridViewTextBoxColumn9.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn9.HeaderText = "Total";
-            gridViewTextBoxColumn9.Name = "column7";
-            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn9.Width = 90;
-            gridViewTextBoxColumn10.FieldName = "IdTemporal";
-            gridViewTextBoxColumn10.HeaderText = "IdTemporal";
-            gridViewTextBoxColumn10.IsVisible = false;
-            gridViewTextBoxColumn10.Name = "IdTemporal";
+            gridViewTextBoxColumn13.FieldName = "Nombre";
+            gridViewTextBoxColumn13.HeaderText = "Descripción";
+            gridViewTextBoxColumn13.Name = "column1";
+            gridViewTextBoxColumn13.Width = 275;
+            gridViewTextBoxColumn14.FieldName = "CantidadINEC";
+            gridViewTextBoxColumn14.FormatString = "{0:00.000}";
+            gridViewTextBoxColumn14.HeaderText = "Cantidad";
+            gridViewTextBoxColumn14.Name = "column2";
+            gridViewTextBoxColumn14.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn14.Width = 80;
+            gridViewTextBoxColumn15.FieldName = "Unidades";
+            gridViewTextBoxColumn15.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn15.HeaderText = "Unidades";
+            gridViewTextBoxColumn15.Name = "column3";
+            gridViewTextBoxColumn15.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn15.Width = 80;
+            gridViewTextBoxColumn16.FieldName = "Pvp";
+            gridViewTextBoxColumn16.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn16.HeaderText = "P.V.P";
+            gridViewTextBoxColumn16.Name = "column4";
+            gridViewTextBoxColumn16.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn16.Width = 60;
+            gridViewTextBoxColumn17.FieldName = "SubtotalSinDescuento";
+            gridViewTextBoxColumn17.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn17.HeaderText = "Subtotal";
+            gridViewTextBoxColumn17.Name = "column6";
+            gridViewTextBoxColumn17.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn17.Width = 80;
+            gridViewTextBoxColumn18.FieldName = "Descuento";
+            gridViewTextBoxColumn18.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn18.HeaderText = "Descuento";
+            gridViewTextBoxColumn18.Name = "column5";
+            gridViewTextBoxColumn18.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn18.Width = 80;
+            gridViewTextBoxColumn19.FieldName = "DescuentoIVA";
+            gridViewTextBoxColumn19.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn19.HeaderText = "Dscto. IVA";
+            gridViewTextBoxColumn19.Name = "columnDsctoIVA";
+            gridViewTextBoxColumn19.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn19.Width = 80;
+            gridViewTextBoxColumn20.FieldName = "Iva";
+            gridViewTextBoxColumn20.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn20.HeaderText = "I.V.A";
+            gridViewTextBoxColumn20.Name = "column8";
+            gridViewTextBoxColumn20.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn20.Width = 70;
+            gridViewTextBoxColumn21.FieldName = "TotalPromoIVA";
+            gridViewTextBoxColumn21.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn21.HeaderText = "Total";
+            gridViewTextBoxColumn21.Name = "column7";
+            gridViewTextBoxColumn21.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn21.Width = 90;
+            gridViewTextBoxColumn22.FieldName = "IdTemporal";
+            gridViewTextBoxColumn22.HeaderText = "IdTemporal";
+            gridViewTextBoxColumn22.IsVisible = false;
+            gridViewTextBoxColumn22.Name = "IdTemporal";
             this.gridItems.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4,
-            gridViewTextBoxColumn5,
-            gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7,
-            gridViewTextBoxColumn8,
-            gridViewTextBoxColumn9,
-            gridViewTextBoxColumn10});
+            gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14,
+            gridViewTextBoxColumn15,
+            gridViewTextBoxColumn16,
+            gridViewTextBoxColumn17,
+            gridViewTextBoxColumn18,
+            gridViewTextBoxColumn19,
+            gridViewTextBoxColumn20,
+            gridViewTextBoxColumn21,
+            gridViewTextBoxColumn22});
             this.gridItems.MasterTemplate.EnableGrouping = false;
             this.gridItems.Name = "gridItems";
             this.gridItems.ReadOnly = true;
@@ -1344,6 +1345,7 @@
             this.tablePagar2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.29971F));
             this.tablePagar2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.29971F));
             this.tablePagar2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.04149F));
+            this.tablePagar2.Controls.Add(this.btnCompraGratis, 0, 4);
             this.tablePagar2.Controls.Add(this.btnDevolucionIVA, 0, 4);
             this.tablePagar2.Controls.Add(this.radButton12, 3, 3);
             this.tablePagar2.Controls.Add(this.btn0, 2, 3);
@@ -1411,7 +1413,7 @@
             // 
             this.radButton12.RootElement.ControlBounds = new System.Drawing.Rectangle(236, 123, 110, 24);
             this.radButton12.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.radButton12.Size = new System.Drawing.Size(50, 32);
+            this.radButton12.Size = new System.Drawing.Size(23, 32);
             this.radButton12.TabIndex = 41;
             this.radButton12.Text = ".";
             this.radButton12.ThemeName = "TelerikMetroTouch";
@@ -1766,13 +1768,13 @@
             // 
             this.btnDsctoPaviPlan.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDsctoPaviPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDsctoPaviPlan.Location = new System.Drawing.Point(3, 163);
+            this.btnDsctoPaviPlan.Location = new System.Drawing.Point(170, 163);
             this.btnDsctoPaviPlan.Name = "btnDsctoPaviPlan";
             // 
             // 
             // 
             this.btnDsctoPaviPlan.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 163, 110, 24);
-            this.btnDsctoPaviPlan.Size = new System.Drawing.Size(98, 35);
+            this.btnDsctoPaviPlan.Size = new System.Drawing.Size(60, 35);
             this.btnDsctoPaviPlan.TabIndex = 51;
             this.btnDsctoPaviPlan.Text = "Dscto. PaviPlan";
             this.btnDsctoPaviPlan.ThemeName = "TelerikMetroTouch";
@@ -1869,12 +1871,12 @@
             this.btnRetencion.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnRetencion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRetencion.Font = new System.Drawing.Font("Segoe UI", 10.27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRetencion.Location = new System.Drawing.Point(170, 163);
+            this.btnRetencion.Location = new System.Drawing.Point(236, 163);
             this.btnRetencion.Name = "btnRetencion";
             // 
             // 
             // 
-            this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 163, 110, 24);
+            this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 163, 60, 35);
             this.btnRetencion.Size = new System.Drawing.Size(60, 35);
             this.btnRetencion.TabIndex = 48;
             this.btnRetencion.Text = "Retención";
@@ -1888,6 +1890,7 @@
             // btn7
             // 
             this.btn7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn7.Location = new System.Drawing.Point(107, 80);
             this.btn7.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btn7.MinimumSize = new System.Drawing.Size(52, 30);
@@ -1899,7 +1902,7 @@
             this.btn7.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 80, 110, 30);
             this.btn7.RootElement.MinSize = new System.Drawing.Size(52, 30);
             this.btn7.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btn7.Size = new System.Drawing.Size(59, 39);
+            this.btn7.Size = new System.Drawing.Size(60, 40);
             this.btn7.TabIndex = 56;
             this.btn7.Text = "7";
             this.btn7.ThemeName = "TelerikMetroTouch";
@@ -2006,17 +2009,17 @@
             this.gridPagos.MasterTemplate.AllowColumnReorder = false;
             this.gridPagos.MasterTemplate.AutoGenerateColumns = false;
             this.gridPagos.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn11.FieldName = "Descripcion";
-            gridViewTextBoxColumn11.HeaderText = "Forma Pago";
-            gridViewTextBoxColumn11.Name = "column1";
-            gridViewTextBoxColumn11.Width = 185;
-            gridViewTextBoxColumn12.FieldName = "Valor";
-            gridViewTextBoxColumn12.HeaderText = "Valor";
-            gridViewTextBoxColumn12.Name = "column2";
-            gridViewTextBoxColumn12.Width = 195;
+            gridViewTextBoxColumn23.FieldName = "Descripcion";
+            gridViewTextBoxColumn23.HeaderText = "Forma Pago";
+            gridViewTextBoxColumn23.Name = "column1";
+            gridViewTextBoxColumn23.Width = 185;
+            gridViewTextBoxColumn24.FieldName = "Valor";
+            gridViewTextBoxColumn24.HeaderText = "Valor";
+            gridViewTextBoxColumn24.Name = "column2";
+            gridViewTextBoxColumn24.Width = 195;
             this.gridPagos.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn11,
-            gridViewTextBoxColumn12});
+            gridViewTextBoxColumn23,
+            gridViewTextBoxColumn24});
             this.gridPagos.MasterTemplate.EnableGrouping = false;
             this.gridPagos.Name = "gridPagos";
             this.gridPagos.ReadOnly = true;
@@ -2116,6 +2119,28 @@
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.radButton13.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.radButton13.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
             // 
+            // btnCompraGratis
+            // 
+            this.btnCompraGratis.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCompraGratis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCompraGratis.Font = new System.Drawing.Font("Segoe UI", 7.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCompraGratis.Location = new System.Drawing.Point(3, 163);
+            this.btnCompraGratis.Name = "btnCompraGratis";
+            // 
+            // 
+            // 
+            this.btnCompraGratis.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 163, 110, 24);
+            this.btnCompraGratis.Size = new System.Drawing.Size(98, 35);
+            this.btnCompraGratis.TabIndex = 56;
+            this.btnCompraGratis.Text = "Compra\r\nGratis";
+            this.btnCompraGratis.TextWrap = true;
+            this.btnCompraGratis.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCompraGratis.ThemeName = "TelerikMetroTouch";
+            this.btnCompraGratis.Click += new System.EventHandler(this.btnCompraGratis_Click);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btnCompraGratis.GetChildAt(0))).Text = "Compra\r\nGratis";
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnCompraGratis.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 7.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnCompraGratis.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2165,7 +2190,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).EndInit();
             this.clienteGroup.ResumeLayout(false);
             this.clienteGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit(); // opozo
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).EndInit();
@@ -2243,6 +2268,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblCambio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminarPago)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCompraGratis)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -2350,5 +2376,6 @@
         private Telerik.WinControls.UI.RadButton btnDevolucionIVA;
         private Telerik.WinControls.UI.RadButton btn7;
         private System.Windows.Forms.PictureBox picClienteApp;
+        private Telerik.WinControls.UI.RadButton btnCompraGratis;
     }
 }

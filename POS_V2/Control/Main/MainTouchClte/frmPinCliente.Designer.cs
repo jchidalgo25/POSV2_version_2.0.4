@@ -148,7 +148,7 @@
             this.tableNumPad.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableNumPad.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableNumPad.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableNumPad.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 112F));
+            this.tableNumPad.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.tableNumPad.Controls.Add(this.btn0, 1, 3);
             this.tableNumPad.Controls.Add(this.btn9, 2, 2);
             this.tableNumPad.Controls.Add(this.btn8, 1, 2);
@@ -163,7 +163,6 @@
             this.tableNumPad.Location = new System.Drawing.Point(3, 123);
             this.tableNumPad.Name = "tableNumPad";
             this.tableNumPad.RowCount = 4;
-            // CÓDIGO CORREGIDO ✅
             this.tableNumPad.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableNumPad.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableNumPad.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -174,9 +173,9 @@
             // btn0
             // 
             this.btn0.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn0.Location = new System.Drawing.Point(98, 208);
+            this.btn0.Location = new System.Drawing.Point(97, 210);
             this.btn0.Name = "btn0";
-            this.btn0.Size = new System.Drawing.Size(90, 67);
+            this.btn0.Size = new System.Drawing.Size(89, 65);
             this.btn0.TabIndex = 36;
             this.btn0.Text = "0";
             this.btn0.ThemeName = "TelerikMetroTouch";
@@ -188,9 +187,9 @@
             // btn9
             // 
             this.btn9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn9.Location = new System.Drawing.Point(194, 136);
+            this.btn9.Location = new System.Drawing.Point(192, 141);
             this.btn9.Name = "btn9";
-            this.btn9.Size = new System.Drawing.Size(90, 66);
+            this.btn9.Size = new System.Drawing.Size(89, 63);
             this.btn9.TabIndex = 36;
             this.btn9.Text = "9";
             this.btn9.ThemeName = "TelerikMetroTouch";
@@ -202,9 +201,9 @@
             // btn8
             // 
             this.btn8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn8.Location = new System.Drawing.Point(98, 136);
+            this.btn8.Location = new System.Drawing.Point(97, 141);
             this.btn8.Name = "btn8";
-            this.btn8.Size = new System.Drawing.Size(90, 66);
+            this.btn8.Size = new System.Drawing.Size(89, 63);
             this.btn8.TabIndex = 36;
             this.btn8.Text = "8";
             this.btn8.ThemeName = "TelerikMetroTouch";
@@ -216,9 +215,9 @@
             // btn6
             // 
             this.btn6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn6.Location = new System.Drawing.Point(194, 64);
+            this.btn6.Location = new System.Drawing.Point(192, 72);
             this.btn6.Name = "btn6";
-            this.btn6.Size = new System.Drawing.Size(90, 66);
+            this.btn6.Size = new System.Drawing.Size(89, 63);
             this.btn6.TabIndex = 36;
             this.btn6.Text = "6";
             this.btn6.ThemeName = "TelerikMetroTouch";
@@ -230,9 +229,9 @@
             // btn5
             // 
             this.btn5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn5.Location = new System.Drawing.Point(98, 64);
+            this.btn5.Location = new System.Drawing.Point(97, 72);
             this.btn5.Name = "btn5";
-            this.btn5.Size = new System.Drawing.Size(90, 66);
+            this.btn5.Size = new System.Drawing.Size(89, 63);
             this.btn5.TabIndex = 35;
             this.btn5.Text = "5";
             this.btn5.ThemeName = "TelerikMetroTouch";
@@ -244,9 +243,9 @@
             // btn4
             // 
             this.btn4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn4.Location = new System.Drawing.Point(3, 64);
+            this.btn4.Location = new System.Drawing.Point(3, 72);
             this.btn4.Name = "btn4";
-            this.btn4.Size = new System.Drawing.Size(89, 66);
+            this.btn4.Size = new System.Drawing.Size(88, 63);
             this.btn4.TabIndex = 34;
             this.btn4.Text = "4";
             this.btn4.ThemeName = "TelerikMetroTouch";
@@ -258,9 +257,9 @@
             // btn3
             // 
             this.btn3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn3.Location = new System.Drawing.Point(194, 3);
+            this.btn3.Location = new System.Drawing.Point(192, 3);
             this.btn3.Name = "btn3";
-            this.btn3.Size = new System.Drawing.Size(90, 55);
+            this.btn3.Size = new System.Drawing.Size(89, 63);
             this.btn3.TabIndex = 33;
             this.btn3.Text = "3";
             this.btn3.ThemeName = "TelerikMetroTouch";
@@ -272,9 +271,9 @@
             // btn2
             // 
             this.btn2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn2.Location = new System.Drawing.Point(98, 3);
+            this.btn2.Location = new System.Drawing.Point(97, 3);
             this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(90, 55);
+            this.btn2.Size = new System.Drawing.Size(89, 63);
             this.btn2.TabIndex = 32;
             this.btn2.Text = "2";
             this.btn2.ThemeName = "TelerikMetroTouch";
@@ -292,7 +291,7 @@
             // 
             // 
             this.btn1.RootElement.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn1.Size = new System.Drawing.Size(89, 55);
+            this.btn1.Size = new System.Drawing.Size(88, 63);
             this.btn1.TabIndex = 31;
             this.btn1.Text = "1";
             this.btn1.ThemeName = "TelerikMetroTouch";
@@ -304,9 +303,9 @@
             // btnBorrar
             // 
             this.btnBorrar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnBorrar.Location = new System.Drawing.Point(290, 3);
+            this.btnBorrar.Location = new System.Drawing.Point(287, 3);
             this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(107, 55);
+            this.btnBorrar.Size = new System.Drawing.Size(110, 63);
             this.btnBorrar.TabIndex = 30;
             this.btnBorrar.Text = "Borrar";
             this.btnBorrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -316,9 +315,9 @@
             // btn7
             // 
             this.btn7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn7.Location = new System.Drawing.Point(3, 136);
+            this.btn7.Location = new System.Drawing.Point(3, 141);
             this.btn7.Name = "btn7";
-            this.btn7.Size = new System.Drawing.Size(89, 66);
+            this.btn7.Size = new System.Drawing.Size(88, 63);
             this.btn7.TabIndex = 35;
             this.btn7.Text = "7";
             this.btn7.ThemeName = "TelerikMetroTouch";
@@ -362,7 +361,7 @@
             // 
             // frmPinCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(424, 533);

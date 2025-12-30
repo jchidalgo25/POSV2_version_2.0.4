@@ -1133,6 +1133,7 @@
     <EntitySetMapping Name="core_TarjetaDescuento">
       <EntityTypeMapping TypeName="POSModel.core_TarjetaDescuento">
         <MappingFragment StoreEntitySet="core_TarjetaDescuento">
+          <ScalarProperty Name="acepto_terminos" ColumnName="acepto_terminos" />
           <ScalarProperty Name="codigoCliente" ColumnName="codigoCliente" />
           <ScalarProperty Name="numeroFactura" ColumnName="numeroFactura" />
           <ScalarProperty Name="bono" ColumnName="bono" />

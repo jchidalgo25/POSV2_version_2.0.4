@@ -492,5 +492,7 @@ namespace POS.Control.Common
         public static int MIN_CARACTER_CODIGO_ART { get; set; }
         public static List<ProductoArticulo> ProductoArticuloList { get; set; }
 
+        public static bool EsModoImpresionBankard = false;  // jchid descuento bankard
+
     }
 }

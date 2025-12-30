@@ -1047,15 +1047,34 @@ namespace POS.Models
 
         public decimal GetTotal()
         {
+            // 1. Capturamos los valores en variables separadas para poder imprimirlos
+            decimal valSubTotal = this.getSubTotal();
+            decimal valDescMetodo = this.getDescuentos2();
+            decimal valDescPropiedad = this.Descuento2;
+            decimal valIva = this.getIVA();
+
+            // 2. Imprimimos los valores (Esto saldría en la consola o ventana de Salida)
+            string mensajeDebug = string.Format("DEBUG CÁLCULO TOTAL:\n SubTotal: {0}\n - DescMetodo: {1}\n - DescProp: {2}\n + IVA: {3}",
+                                                valSubTotal, valDescMetodo, valDescPropiedad, valIva);
+
+            // Opción A: Si es una app de Consola
+            Console.WriteLine(mensajeDebug);
+
+            // Opción B: Si es Web, Desktop o quieres verlo en la ventana "Output" de Visual Studio
+            System.Diagnostics.Debug.WriteLine(mensajeDebug);
+
+            // 3. Realizamos el cálculo usando las variables que acabamos de capturar
             decimal total_fact = 0;
+            total_fact = Math.Round(valSubTotal - valDescMetodo - valDescPropiedad + valIva, 2);
 
-            total_fact = Math.Round(this.getSubTotal() - this.getDescuentos2() - this.Descuento2 + this.getIVA(), 2);
+            // Imprimir el resultado intermedio
+            System.Diagnostics.Debug.WriteLine("Resultado (total_fact): " + total_fact);
 
+            // --- Resto de tu lógica original ---
             if (this.aplicaBeneficioDevolucionIVA)
             {
                 total_fact = total_fact - this.montoIvaDevolver;
-                //this.aplicaBeneficioDevolucionIVA = false; // prueba de cambiar esta variable para inicializarla
-
+                System.Diagnostics.Debug.WriteLine("Nuevo total tras devolución IVA: " + total_fact);
             }
 
             if (esComboPerfecto)
@@ -1066,11 +1085,7 @@ namespace POS.Models
             {
                 return Math.Round(total_fact, 2);
             }
-
-
-
         }
-
 
         public decimal getPagos()
         {
@@ -1431,6 +1446,31 @@ namespace POS.Models
             {
                 this._ordenApp = 0;
             }
+        }
+
+        // jchid compra gratis agregar a la base pago 
+
+        public void AgregarPagoCompraGratis(decimal valor, string codigo)
+        {
+            // 1. Creamos el encabezado del pago
+            // Asegúrate que "COMPRA GRATIS" es el código exacto de la forma de pago en tu BD
+            var pago = this.AgregarPago("COMPRA GRATIS", valor);
+
+            // 2. Agregamos el detalle
+            // Usamos 'PagoGiftCard' porque el requerimiento define el beneficio como una "Tarjeta de Regalo".
+            // Esto nos permite guardar el 'Codigo' que es vital para la auditoría.
+            pago.Pagos.Add(new PagoGiftCard()
+            {
+                Valor = valor,
+                Codigo = codigo, // <--- Aquí guardamos el 666... o la cédula
+                Saldo = 0        // Inicializamos saldo en 0 si la clase lo requiere
+            });
+
+            // 3. Recalculamos totales del objeto pago
+            pago.calcularTotal();
+
+            // 4. Log de auditoría
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Factura", "AgregarPagoCompraGratis", "Se aplicó beneficio Compra Gratis. Código: " + codigo + " | Valor: " + pago.Valor.ToString());
         }
 
         public void borrarDescuentoFormaPago(string codigo)
@@ -1951,6 +1991,21 @@ namespace POS.Models
                                                 }
                                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Factura", "grabar", "Se realizo consumo de giftcard : " + pGC.Codigo + " Valor:" + Convert.ToString(pGC.Valor));
                                             }
+                                            // =============================================================================
+                                            // 3. NUEVA EXCEPCIÓN PARA COMPRA GRATIS (AGREGAR ESTO)
+                                            // =============================================================================
+                                            // ... dentro del bloque else if (subp is PagoGiftCard) ...
+
+                                            // BLOQUE NUEVO (ACTUALIZADO)
+                                            else if (pago.tipo_id == "COMPRA GRATIS" || pGC.Codigo == "COMPRA GRATIS" || p.Descripcion == "COMPRA GRATIS")
+                                            {
+                                                // 1. CORRECCIÓN VITAL: Cambiamos el ID largo por el corto que registramos en SQL
+                                                pago.tipo_id = "C_GRATIS";
+
+                                                // 2. Log para confirmar
+                                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Factura", "grabar", "Procesando pago COMPRA GRATIS (Guardado como C_GRATIS).");
+                                            }
+                                            // =============================================================================
                                             else
                                             {
                                                 //Si la giftcard es de tipo Venta, cambiar el tipo de pago en consecuencia
@@ -2780,6 +2835,9 @@ namespace POS.Models
         /// <summary>
         /// 
         /// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
         public void prepararImpresion(long Secuencia = 0)
         {
             var sub1 = "";
@@ -3062,33 +3120,43 @@ namespace POS.Models
             decimal porcDsctosCuponPromocional = 0;
             decimal retencionSubtotalBase1 = 0;
             decimal retencionSubtotalBase175 = 0;
+            // Variable acumuladora para el modo Bankard (fuera del ciclo)
+            decimal totalDescuentoAgrupadoBankard = 0;
 
             foreach (var item in this.Productos)
             {
                 dsctoCompraGratis = 0;
                 string asterisk = " ";
-                if (item.Descuento > 0)
-                {
-                    //asterisk = "Dc." + (Math.Round((item.Descuento / (item.Pvp * item.Cantidad)), 2) * 100) + "%";
-                }
 
+                // =========================================================================
+                // 1. IMPRESIÓN DEL PRODUCTO (NOMBRE, CANTIDAD, PRECIO)
+                // =========================================================================
+                // ESTA PARTE ES LA QUE FALTABA O ESTABA OCULTA:
                 items.AppendLine(item.Nombre.PadRight(40, ' '));
-                //items.AppendLine(asterisk.PadRight(8, ' ') + item.Cantidad.ToString("N2").PadLeft(10, ' ') + "     " + item.Pvp.ToString("N2").PadLeft(5, ' ') + "     " + item.SubtotalSinDescuento.ToString("N2").PadLeft(5, ' '));
-                items.AppendLine(Control.Common.StringHelper.DevolverConPadding(item.Iva > 0 ? "I " : "", 1, 1, false) + Control.Common.StringHelper.DevolverConPadding(item.Cantidad.ToString("N2"), 50) + Control.Common.StringHelper.DevolverConPadding(item.Pvp.ToString("N2"), 12) + Control.Common.StringHelper.DevolverConPadding(item.SubtotalSinDescuento.ToString("N2"), 12));
 
-                //Construir lista descuentos de productos
+                // Línea de detalle (IVA, Cantidad, PVP, Subtotal)
+                items.AppendLine(
+                    Control.Common.StringHelper.DevolverConPadding(item.Iva > 0 ? "I " : "", 1, 1, false) +
+                    Control.Common.StringHelper.DevolverConPadding(item.Cantidad.ToString("N2"), 50) +
+                    Control.Common.StringHelper.DevolverConPadding(item.Pvp.ToString("N2"), 12) +
+                    Control.Common.StringHelper.DevolverConPadding(item.SubtotalSinDescuento.ToString("N2"), 12)
+                );
+
+                // =========================================================================
+                // 2. LÓGICA DE DESCUENTOS
+                // =========================================================================
                 if (item.Descuento > 0)
                 {
-                    // Quitar dscto compra gratis para no mostrar como descuento sino como forma de pago.  JM  8/7/2020
+                    // --- Lógica Compra Gratis ---
                     if (item.DescuentoTarjetasCompraGratis > 0 && this.usoTarjetaCompraGratis)
                     {
                         dsctoCompraGratis = item.DescuentoTarjetasCompraGratis;
                         totalDsctosCompraGratis += item.DescuentoTarjetasCompraGratis;
                     }
 
-                    porcDescuento = ((item.Descuento - dsctoCompraGratis) / item.SubtotalSinDescuento) * 100;
                     decimal valorDesc = item.Descuento - dsctoCompraGratis;
 
+                    // --- Lógica Cupones (SIEMPRE SE CALCULA, NO IMPORTA SI ES BANKARD O NO) ---
                     if (EsUsoCuponPromocional)
                     {
                         if (valorDesc > 0 && item.DescuentosCupon != null)
@@ -3098,45 +3166,56 @@ namespace POS.Models
                         }
                     }
 
-                    if ((valorDesc > 0 && !EsUsoCuponPromocional) || (valorDesc > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
-                    {
-                        itemsDsctos.AppendLine(String.Concat(
-                                                            "<b>"
-                                                            , (porcDescuento).ToString("N2")
-                                                            , "% "
-                                                            , item.Nombre.PadRight(14, ' ').Substring(0, 13)
-                                                            , Convert.ToChar(9)
-                                                            , ":"
-                                                            , Control.Common.StringHelper.DevolverConPadding(valorDesc.ToString("N2"), 17)
-                                                            , "</b>")
-                                                            );
+                    // --- Lógica de Impresión de Descuentos (AQUÍ ESTÁ EL CAMBIO BANKARD) ---
+                    bool esPromoBin = Control.Common.GlobalParameters.EsModoImpresionBankard;
 
+                    if (esPromoBin)
+                    {
+                        // MODO BANKARD: Acumulamos en silencio, NO imprimimos detalle
+                        totalDescuentoAgrupadoBankard += valorDesc;
 
                     }
+                    else
+                    {
+                        // MODO NORMAL: Imprimimos el detalle del descuento
+                        porcDescuento = (valorDesc / item.SubtotalSinDescuento) * 100;
 
-                    totalDsctosProductos += item.Descuento - dsctoCompraGratis;
+                        if ((valorDesc > 0 && !EsUsoCuponPromocional) || (valorDesc > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
+                        {
+                            itemsDsctos.AppendLine(String.Concat(
+                                "<b>",
+                                (porcDescuento).ToString("N2"),
+                                "% ",
+                                item.Nombre.PadRight(14, ' ').Substring(0, 13),
+                                Convert.ToChar(9),
+                                ":",
+                                Control.Common.StringHelper.DevolverConPadding(valorDesc.ToString("N2"), 17),
+                                "</b>"
+                            ));
+                        }
+                    }
 
+                    // Acumulador general matemático (siempre suma)
+                    totalDsctosProductos += valorDesc;
                 }
 
-                //Sumarizar Total Valor Comercial para presentarlo en la comparativa de ahorro del cliente
-                //Update: No considerar si es producto regalo
+                // =========================================================================
+                // 3. CÁLCULO DE VALOR COMERCIAL Y RETENCIONES (ORIGINAL)
+                // =========================================================================
                 if (!item.EsRegalo)
                 {
                     try
                     {
                         SqlConnection conexion = new SqlConnection(POS.Properties.Settings.Default.CONECTA_AX);
-                        string Query = null;
-                        SqlCommand comando = default(SqlCommand);
                         using (conexion)
                         {
                             conexion.Open();
-                            Query = "Select top 1 PRICE_PVP,PRICE from InventTableModule mod with (nolock) WHERE ModuleType = 2 and mod.ItemId = '" + item.Id + "' and DataAreaId = 'liri'";
-                            comando = new SqlCommand(Query, conexion);
+                            string Query = "Select top 1 PRICE_PVP,PRICE from InventTableModule mod with (nolock) WHERE ModuleType = 2 and mod.ItemId = '" + item.Id + "' and DataAreaId = 'liri'";
+                            SqlCommand comando = new SqlCommand(Query, conexion);
                             SqlDataReader dr = comando.ExecuteReader();
                             if (dr.HasRows)
                             {
                                 dr.Read();
-                                //Si PRICE_PVP es mayor a cero, tomar ese valor, caso contrario usar campo PRICE
                                 if (Decimal.Parse(dr.GetValue(0).ToString()) > 0)
                                     totalValorComercial += (Decimal.Parse(dr.GetValue(0).ToString()) * item.Cantidad) + (item.Iva > 0 ? ((Decimal.Parse(dr.GetValue(0).ToString()) * item.Cantidad) * Control.Common.GlobalParameters.IvaPorc / 100) : 0);
                                 else
@@ -3147,20 +3226,19 @@ namespace POS.Models
                     }
                     catch (Exception ex)
                     {
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Factura", "prepararImpresion", "No se pudo obtener el valor comercial del item '" + (item == null ? "Objeto item estaba nulo" : item.Id) + "' desde la tabla de Ax InventTableModule (Tipo 2), a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex));
-                        totalValorComercial += 0;
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Factura", "prepararImpresion", "Error al obtener valor comercial: " + ex.Message);
                     }
                 }
 
-                //Dato de Retención
                 if (POS.Control.Common.GlobalParameters.DatoRetencionEnFactura == true)
                 {
                     if (item.RetencionPorcentaje == 1)
-                        retencionSubtotalBase1 = retencionSubtotalBase1 + item.Subtotal;
+                        retencionSubtotalBase1 += item.Subtotal;
                     if (item.RetencionPorcentaje > 1)
-                        retencionSubtotalBase175 = retencionSubtotalBase175 + item.Subtotal;
+                        retencionSubtotalBase175 += item.Subtotal;
                 }
-            }
+
+            } // FIN DEL FOREACH
 
             //*****
             if (EsUsoCuponPromocional && valorDsctosCuponPromocional > 0)
@@ -3182,26 +3260,103 @@ namespace POS.Models
                                                     );
             }
             var descuento2_ = (this.Descuentos2.Count > 0) ? decimal.Round(this.Descuentos2.Max(x => x.Valor), 2, MidpointRounding.AwayFromZero) : this.Descuento2;// this.Descuentos2;
+
+
+
+            //begin JCHID  agregar descuento promocionales
+            string lineaDescuentoPromocional = string.Empty;
+
+            if (descuento2_ > 0)
+            {
+                string descripcion = "DSCTO. PROMOCIONAL";
+                string valorFormateado = descuento2_.ToString("N2");
+
+
+                lineaDescuentoPromocional = String.Concat(
+                    descripcion.PadRight(42, ' '), // Rellena hasta 30 caracteres
+                    ":",
+                    Control.Common.StringHelper.DevolverConPadding(valorFormateado, 23), // Alinea el valor final
+                    Environment.NewLine
+                );
+
+                // NOTA: No usamos las etiquetas <b> en esta versión, ya que la línea "20.00% SNACK TOTOPO" tampoco las usa.
+                // Solo el "Total descuentos" está en negrita.
+            }
+
+            // Reemplazo del placeholder
+            this.Recibo = this.Recibo.Replace("<<descuento_promocional>>", lineaDescuentoPromocional);
+
+            // end jchid agregar descuento promocionales
+
+            // jchid descuento bankard 
+            // --- INICIO CAMBIO BANKARD ---
+            string lineaDescuentoBankard = "";
+            if (totalDescuentoAgrupadoBankard > 0)
+            {
+                lineaDescuentoBankard = String.Concat(
+                    "DESCUENTO PROMOCIONAL".PadRight(42, ' '),
+                    ":",
+                    Control.Common.StringHelper.DevolverConPadding(totalDescuentoAgrupadoBankard.ToString("N2"), 23),
+                    Environment.NewLine
+                );
+            }
+            this.Recibo = this.Recibo.Replace("<<descuento_bankard>>", lineaDescuentoBankard);
+
+            // --- FIN CAMBIO BANKARD ---
+            //end jchid 
+
+
             //Por solicitud de ajSaab, las facturas no deben mostrar seccion descuentos si no hay descuentos
+            //var totalDsctos = totalDsctosProductos + descuento2_ + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0);
+            // Modifica esta línea para sumar + montoDescuentoBankard
             var totalDsctos = totalDsctosProductos + descuento2_ + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0);
             //var totalDsctos = totalDsctosProductos + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0);
+
+            // begin jchid calculo de descuento en caso de que descuento2_ sea mayor a 0
+            var descuentoLinea = totalDsctos;
+            var descuentosFinalesRestar = (descuento2_ > 0)
+                    ? (totalDsctosProductos + totalDsctosCompraGratis + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0))
+                    : (totalDsctosProductos + totalDsctosCompraGratis + descuento2_ + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0));
+            string lineaDescuento2Sustitucion = string.Empty;
+
+            if (descuento2_ > 0)
+            {
+                string nombreDescuento = "Descuento 2"; // O la etiqueta que desees
+                string valorFormateado = descuento2_.ToString("N2");
+                string parteIzquierda = nombreDescuento.PadRight(14, ' ') + ":";
+
+                lineaDescuento2Sustitucion = String.Concat(
+                    parteIzquierda,
+                    Control.Common.StringHelper.DevolverConPadding(valorFormateado, 65),
+                    Environment.NewLine
+                );
+
+                descuentoLinea = totalDsctos - descuento2_;
+            }
+
+            // end jchid calculo de descuento en caso de que descuento2_ sea mayor a 0
+
             if (totalDsctos == 0)
             {
                 this.Recibo = this.Recibo.Replace(@"
-<b>----------DETALLE DE DESCUENTOS---------------------------</b>
-<<descuentoproductos>><<promo_iva>>
-<b>Total descuentos		:<<total_descuentos>></b>", string.Empty);
+                <b>----------DETALLE DE DESCUENTOS---------------------------</b>
+                <<descuentoproductos>><<promo_iva>>
+                <b>Total descuentos		:<<total_descuentos>></b>", string.Empty);
             }
 
             this.Recibo = regex.Replace(this.Recibo, items.ToString());
             this.Recibo = this.Recibo.Replace("<<descuentoproductos>>", itemsDsctos.ToString());
 
+            this.Recibo = this.Recibo.Replace("<<descuento2>>", lineaDescuento2Sustitucion);
+
             this.Recibo = this.Recibo.Replace("<<basetotal>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() + this.GetBase12()).ToString("N2"), 65));
             //this.Recibo = this.Recibo.Replace("<<descuentototal>>", Control.Common.StringHelper.DevolverConPadding((totalDsctosProductos + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
-            this.Recibo = this.Recibo.Replace("<<descuentototal>>", Control.Common.StringHelper.DevolverConPadding((totalDsctosProductos + descuento2_ + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
-            //this.Recibo = this.Recibo.Replace("<<basecondescuentos>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() + this.GetBase12() - (totalDsctosProductos+ totalDsctosCompraGratis) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
-            this.Recibo = this.Recibo.Replace("<<basecondescuentos>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() + this.GetBase12() - (totalDsctosProductos + totalDsctosCompraGratis) - descuento2_ - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
 
+            //this.Recibo = this.Recibo.Replace("<<descuentototal>>", Control.Common.StringHelper.DevolverConPadding((totalDsctosProductos + descuento2_ + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
+            this.Recibo = this.Recibo.Replace("<<descuentototal>>", Control.Common.StringHelper.DevolverConPadding(descuentoLinea.ToString("N2"), 65));
+            //this.Recibo = this.Recibo.Replace("<<basecondescuentos>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() + this.GetBase12() - (totalDsctosProductos+ totalDsctosCompraGratis) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
+            //this.Recibo = this.Recibo.Replace("<<basecondescuentos>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() + this.GetBase12() - (totalDsctosProductos + totalDsctosCompraGratis) - descuento2_ - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
+            this.Recibo = this.Recibo.Replace("<<basecondescuentos>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() + this.GetBase12() - descuentosFinalesRestar).ToString("N2"), 65));
             this.Recibo = this.Recibo.Replace("<<total_descuentos>>", Control.Common.StringHelper.DevolverConPadding((totalDsctosProductos + descuento2_ + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 17));
             //this.Recibo = this.Recibo.Replace("<<total_descuentos>>", Control.Common.StringHelper.DevolverConPadding((totalDsctosProductos + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 17));
 
@@ -3214,8 +3369,10 @@ namespace POS.Models
                 //pagos.AppendLine(pago.Descripcion + " : " + String.Format("{0,10:0.00}", pago.Valor.ToString("N2")));
                 if (pago.Descripcion == "DINE ELECT")
                     pagos.AppendLine(POS.Control.Common.GlobalParameters.MonederoEtiquetaRecibo + Convert.ToChar(9) + ":" + Control.Common.StringHelper.DevolverConPadding(pago.Valor.ToString("N2"), 41));
-                else
+                else if (pago.Descripcion == "EFECTIVO")
                     pagos.AppendLine(pago.Descripcion + Convert.ToChar(9) + ":" + Control.Common.StringHelper.DevolverConPadding(pago.Valor.ToString("N2"), 65));
+                else
+                    pagos.AppendLine(pago.Descripcion + Convert.ToChar(9) + ":" + Control.Common.StringHelper.DevolverConPadding(pago.Valor.ToString("N2"), 53));
             }
             this.Recibo = regex.Replace(this.Recibo, pagos.ToString());
 
@@ -3272,7 +3429,67 @@ namespace POS.Models
 
             //this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", String.Format("{0,10:0.00}", (this.getBase12() - ((this.getDescuentos() + this.getDescuentos2()) - this.getDescuentos0())).ToString("N2")));
             //this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase12() - ((this.GetDescuentos() + (this.GetBase12() >= ((this.Descuentos2.Count > 0) ? this.getDescuentos2() : this.Descuento2) ? ((this.Descuentos2.Count > 0) ? this.getDescuentos2() : this.Descuento2) : 0) ) - this.getDescuentos0()) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
-            this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase12() - ((this.GetDescuentos() + (this.Descuentos2.Count > 0 ? (decimal.Round(this.Descuentos2.Max(x => x.Porcentaje), 2, MidpointRounding.AwayFromZero) / 100) : (this.Descuento2 / (this.GetBase0() + this.GetBase12()))) * this.GetBase12()) - this.getDescuentos0()) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
+            //this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase12() - ((this.GetDescuentos() + (this.Descuentos2.Count > 0 ? (decimal.Round(this.Descuentos2.Max(x => x.Porcentaje), 2, MidpointRounding.AwayFromZero) / 100) : (this.Descuento2 / (this.GetBase0() + this.GetBase12()))) * this.GetBase12()) - this.getDescuentos0()) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
+            // nueva logica 
+            this.Recibo = this.Recibo.Replace("<<subtotal_desc>>",
+                                                                    Control.Common.StringHelper.DevolverConPadding(
+                                                                        (this.GetBase12() -
+                                                                            ((this.GetDescuentos() +
+                                                                                (this.Descuentos2.Count > 0
+                                                                                    ? this.getDescuentos2()
+                                                                                    : (this.Descuento2 / (this.GetBase0() + this.GetBase12())) * this.GetBase12()
+                                                                                )
+                                                                             - this.getDescuentos0())
+                                                                             - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0))
+                                                                        ).ToString("N2"), 65));
+
+
+            System.Diagnostics.Debug.WriteLine("--------------------------------------------------");
+            System.Diagnostics.Debug.WriteLine("[DEBUG] Desglose de cálculo para <<subtotal_desc>>");
+
+            // 1. Valores base
+            decimal base12 = this.GetBase12();
+            decimal descuentosItemTotal = this.GetDescuentos();
+            decimal descuentosItemBase0 = this.getDescuentos0();
+            System.Diagnostics.Debug.WriteLine($"[DEBUG 1] Base 15% Bruta (GetBase12): {base12:N4}");
+            System.Diagnostics.Debug.WriteLine($"[DEBUG 1] Dsctos Ítem Totales (GetDescuentos): {descuentosItemTotal:N4}");
+            System.Diagnostics.Debug.WriteLine($"[DEBUG 1] Dsctos Ítem Base 0% (getDescuentos0): {descuentosItemBase0:N4}");
+
+            // 2. Cálculo del Factor de Descuento Global (Ternario)
+            decimal factorDscto2;
+            if (this.Descuentos2.Count > 0) // Condición que indicas que se cumple
+            {
+                decimal maxPorcentaje = this.Descuentos2.Max(x => x.Porcentaje);
+                factorDscto2 = decimal.Round(maxPorcentaje, 2, MidpointRounding.AwayFromZero) / 100M;
+
+                System.Diagnostics.Debug.WriteLine($"[DEBUG 2] Condición: Descuentos2.Count > 0 (VERDADERO)");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG 2] Máx Porcentaje Dscto2: {maxPorcentaje:N2}");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG 2] Factor Dscto2 (factorDscto2): {factorDscto2:N4}");
+
+                // Esta es la rama que se ejecuta: (decimal.Round(this.Descuentos2.Max(x => x.Porcentaje), 2, MidpointRounding.AwayFromZero) / 100)
+
+                decimal dsctoGlobalSobreBase12 = factorDscto2 * base12;
+                System.Diagnostics.Debug.WriteLine($"[DEBUG 3] Dscto Global solo sobre Base 15% (factorDscto2 * base12): {dsctoGlobalSobreBase12:N4}");
+
+
+                // 4. Cálculo de Descuentos Netos sobre Base 15% (El gran bloque central)
+                // Descuentos Netos = (Dsctos Ítem Total + Dscto Global sobre Base 15%) - Dsctos Ítem Base 0%
+                decimal descuentosNetos15 = (descuentosItemTotal + dsctoGlobalSobreBase12) - descuentosItemBase0;
+                System.Diagnostics.Debug.WriteLine($"[DEBUG 4] Dsctos Netos sobre Base 15%: {descuentosNetos15:N4}");
+
+                // 5. Descuento Promo IVA
+                decimal dsctoPromoIVA = this.GetPromoIva() > 0 ? this.getIVA(false) : 0M;
+                System.Diagnostics.Debug.WriteLine($"[DEBUG 5] Dscto Promo IVA: {dsctoPromoIVA:N4}");
+
+                // 6. Cálculo Final de <<subtotal_desc>>
+                decimal subTotalDescFinal = base12 - descuentosNetos15 - dsctoPromoIVA;
+                System.Diagnostics.Debug.WriteLine($"[DEBUG 6] Resultado Final (Base12 - DsctosNetos - PromoIVA): {subTotalDescFinal:N4}");
+                System.Diagnostics.Debug.WriteLine("--------------------------------------------------");
+            }
+
+
+
+
 
             this.Recibo = this.Recibo.Replace("<<factura_descuento>>", String.Format("{0,09:0.00}", (this.GetDescuentos() + this.getDescuentos2() - this.getDescuentos0()).ToString("N2")));
             this.Recibo = this.Recibo.Replace("<<factura_descuento0>>", String.Format("{0,09:0.00}", (this.getDescuentos0()).ToString("N2")));

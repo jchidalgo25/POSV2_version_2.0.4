@@ -236,7 +236,6 @@ C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\MessageDLL\Liris_MessageDLL\MensajesLibrary\bin\Debug\Microsoft.VisualStudio.TextManager.Interop.dll
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\MessageDLL\Liris_MessageDLL\MensajesLibrary\bin\Debug\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\MessageDLL\Liris_MessageDLL\MensajesLibrary\bin\Debug\Microsoft.MSXML.dll
-C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\MessageDLL\Liris_MessageDLL\MensajesLibrary\obj\Debug\Liris_MenssageDLL.csprojAssemblyReference.cache
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\MessageDLL\Liris_MessageDLL\MensajesLibrary\obj\Debug\MensajesLibrary.MsgBoxCtrl.resources
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\MessageDLL\Liris_MessageDLL\MensajesLibrary\obj\Debug\Liris_MenssageDLL.MsgBoxCtrl_v2.resources
 C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\MessageDLL\Liris_MessageDLL\MensajesLibrary\obj\Debug\Liris_MenssageDLL.Properties.Resources.resources

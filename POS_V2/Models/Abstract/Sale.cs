@@ -67,6 +67,13 @@ namespace POS.Models.Abstract
             throw new NotImplementedException();
         }
 
+        // Agrega esto en Sale.cs para cumplir con la interfaz ISale
+
+        void ISale.AgregarPagoCompraGratis(decimal valor, string codigo)
+        {
+            throw new NotImplementedException();
+        }
+
         decimal ISale.GetBase12()
         {
             return 0M;

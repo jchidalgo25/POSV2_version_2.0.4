@@ -92,12 +92,26 @@ namespace DSS.Controles.Impresion
                         string alignAttribute = parsedTag.GetAttribute("align");
                         switch (parsedTag.Name.ToLower())
                         {
-                            case "titulo": DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 14, FontStyle.Bold), ticketWidth, ref y, alignAttribute); break;
-                            case "info": DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 10, FontStyle.Regular), ticketWidth, ref y, alignAttribute); break;
-                            case "legales": DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 8, FontStyle.Regular), ticketWidth, ref y, alignAttribute); break;
-                            case "logo": ProcesarLogo_MetodoNuevo(e, parsedTag, x, ticketWidth, ref y); break;
-                            case "b": e.Graphics.DrawString(parsedTag.Content, _font_bold, Brushes.Black, x, y); y += (int)_font_bold.GetHeight(e.Graphics); break;
-                            default: e.Graphics.DrawString(linea_a_imprimir, _font, Brushes.Black, x, y); y += (int)_font.GetHeight(e.Graphics); break;
+                            case "titulo":
+                                DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 14, FontStyle.Bold), ticketWidth, ref y, alignAttribute);
+                                break;
+                            case "info":
+                                DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 10, FontStyle.Regular), ticketWidth, ref y, alignAttribute);
+                                break;
+                            case "legales":
+                                DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 8, FontStyle.Regular), ticketWidth, ref y, alignAttribute);
+                                break;
+                            case "logo":
+                                ProcesarLogo_MetodoNuevo(e, parsedTag, x, ticketWidth, ref y);
+                                break;
+                            case "b":
+                                e.Graphics.DrawString(parsedTag.Content, _font_bold, Brushes.Black, x, y); y += (int)_font_bold.GetHeight(e.Graphics);
+                                break;
+                            case "barcode":
+                                ProcesarBarcode(e, parsedTag.Content, x, ticketWidth, ref y);
+                                break;
+                            default: e.Graphics.DrawString(linea_a_imprimir, _font, Brushes.Black, x, y); y += (int)_font.GetHeight(e.Graphics);
+                                break;
                         }
                     }
                     else
@@ -344,6 +358,45 @@ namespace DSS.Controles.Impresion
             int.TryParse(strValue, out int value);
             linea_a_imprimir = linea_a_imprimir.Replace(tagInicio, "").Replace("</zoom>", "");
             e.Graphics.DrawString(linea_a_imprimir, new Font(_font.Name, _font.Size + value, _font.Style), Brushes.Black, x, y);
+        }
+
+        private void ProcesarBarcode(PrintPageEventArgs e, string content, int x, int ticketWidth, ref int y)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(content)) return;
+
+                // Configuración del generador de código de barras
+                BarcodeWriter writer = new BarcodeWriter
+                {
+                    Format = BarcodeFormat.CODE_128, // CODE_128 es ideal para recibos y longitud variable
+                    Options = new EncodingOptions
+                    {
+                        Height = 60,       // Altura de las barras
+                        Width = 250,       // Ancho aproximado
+                        PureBarcode = true, // True = Sin texto abajo (tú ya imprimes el número en la siguiente línea)
+                        Margin = 0
+                    }
+                };
+
+                using (Bitmap barcodeBitmap = writer.Write(content.Trim()))
+                {
+                    // Calcular posición para centrar el código de barras
+                    int barcodeX = x + (ticketWidth - barcodeBitmap.Width) / 2;
+                    if (barcodeX < x) barcodeX = x;
+
+                    e.Graphics.DrawImage(barcodeBitmap, new Rectangle(barcodeX, y, barcodeBitmap.Width, barcodeBitmap.Height));
+
+                    // Aumentar la posición Y para lo que siga
+                    y += barcodeBitmap.Height + 5;
+                }
+            }
+            catch (Exception)
+            {
+                // En caso de error, imprime el texto normal para no perder el dato
+                e.Graphics.DrawString("Error Barcode: " + content, _font, Brushes.Red, x, y);
+                y += (int)_font.GetHeight(e.Graphics);
+            }
         }
         #endregion
     }

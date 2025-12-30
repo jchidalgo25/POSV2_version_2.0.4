@@ -38,7 +38,8 @@ namespace POS.Interfaces
         void AgregarPagoTarjetaInterna(decimal valor, string codigo, string titularIdentificacion);
         void AgregarPagoMonedero(decimal valor);
         void AgregaOrdenApp(string ordenApp);
-        
+        void AgregarPagoCompraGratis(decimal valor, string codigo);
+
 
     }
 }

@@ -144,6 +144,9 @@ namespace POS.Control.Clientes
                         {
                             ConsultaTarjetaBines(_numTarjeta, numtarjetaTodo);
                         }
+                        //this.DialogResult = System.Windows.Forms.DialogResult.OK; // <--- AGREGAR ESTO (Indica éxito al padre)
+                        //this.Close(); // <--- AGREGAR ESTO (Cierra el formulario visual)
+                        //return;       // <--- AGREGAR ESTO (Detiene cualquier otra ejecución)
 
 
                     }
@@ -158,6 +161,9 @@ namespace POS.Control.Clientes
                             ConsultaTarjetaBines(_numTarjeta, numtarjetaTodo);
                         }
                         //txtNoTarjeta.Clear();
+                        //this.DialogResult = System.Windows.Forms.DialogResult.OK; // <--- AGREGAR ESTO (Indica éxito al padre)
+                        //this.Close(); // <--- AGREGAR ESTO (Cierra el formulario visual)
+                        //return;       // <--- AGREGAR ESTO (Detiene cualquier otra ejecución)
 
                     }
 
@@ -379,7 +385,7 @@ namespace POS.Control.Clientes
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             EjecutaConsulta();
-                //this.Close();
+            this.Close();
         }
 
 
