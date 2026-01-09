@@ -22010,7 +22010,8 @@ namespace POS
             try
             {
                 //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-                textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                //textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                textFile = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoCab);
 
                 if (File.Exists(textFile))
                 {
@@ -22073,7 +22074,8 @@ namespace POS
             try
             {
                 //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-                textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                //textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                textFile = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoCab);
 
                 if (string.IsNullOrEmpty(codigocliente))
                     codigocliente = txtCedula.Text;
@@ -22140,7 +22142,8 @@ namespace POS
             try
             {
                 //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-                textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                //textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                textFile = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoDet);
                 if (File.Exists(textFile))
                 {
                     File.Delete(textFile);
@@ -22217,7 +22220,8 @@ namespace POS
             try
             {
                 //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
-                textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                //textFile = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                textFile = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoDet);
                 if (File.Exists(textFile))
                 {
                     File.Delete(textFile);
@@ -22320,7 +22324,8 @@ namespace POS
                     string textFilecab = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + tipoCab;
                     
 
-                    textFilecab = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                    //textFilecab = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
+                    textFilecab = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoCab);
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "EliminaFacturaTmpFile", $"Ejecuta textFilecab {textFilecab}");
 
                     if (File.Exists(textFilecab))
@@ -22329,7 +22334,8 @@ namespace POS
                     }
                     //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
                     string textFiledet = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Det.txt";
-                    textFiledet = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                    //textFiledet = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoDet);
+                    textFiledet = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoDet);
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "EliminaFacturaTmpFile", $"Ejecuta textFiledet {textFiledet}");
 
                     if (File.Exists(textFiledet))
@@ -22339,7 +22345,8 @@ namespace POS
                     tieneProductosTmp = false;
                     //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
                     string textFilePag = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + "Pag.txt";
-                    textFilePag = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoPag);
+                    //textFilePag = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoPag);
+                    textFilePag = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoPag);
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "EliminaFacturaTmpFile", $"Ejecuta textFilePag {textFilePag}");
 
                     if (File.Exists(textFilePag))
@@ -22381,7 +22388,8 @@ namespace POS
                     {
                         try
                         {
-                            string rutaEjemplo = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoRuta);
+                            //string rutaEjemplo = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoRuta);
+                            string rutaEjemplo = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoRuta);
 
                             if (!string.IsNullOrEmpty(rutaEjemplo))
                             {
