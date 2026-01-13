@@ -46,6 +46,10 @@ namespace POS.Models.Abstract
         {
             throw new NotImplementedException();
         }
+        void ISale.AgregarDescuentoPagoCompraGratis(decimal valor, string codigo)
+        {
+            throw new NotImplementedException();
+        }
 
         void ISale.AgregarPagoNotaCredito(decimal valor, string codigo)
         {

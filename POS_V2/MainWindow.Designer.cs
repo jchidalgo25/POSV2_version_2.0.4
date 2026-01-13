@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn16 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn17 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn18 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn19 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn20 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn21 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn22 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn23 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn24 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             this.tempo2minutos = new System.Windows.Forms.Timer(this.components);
             this.tempo666 = new System.Windows.Forms.Timer(this.components);
             this.tempo5min = new System.Windows.Forms.Timer(this.components);
@@ -65,7 +65,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.clienteGroup = new Telerik.WinControls.UI.RadGroupBox();
-            this.picClienteApp = new System.Windows.Forms.PictureBox(); //opozo
+            this.picClienteApp = new System.Windows.Forms.PictureBox();
             this.lblEtiquetaSaldo = new Telerik.WinControls.UI.RadLabel();
             this.lblSaldoTarjeta = new Telerik.WinControls.UI.RadLabel();
             this.lblDireccion = new Telerik.WinControls.UI.RadLabel();
@@ -107,6 +107,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tablePagar2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCompraGratis = new Telerik.WinControls.UI.RadButton();
             this.btnDevolucionIVA = new Telerik.WinControls.UI.RadButton();
             this.radButton12 = new Telerik.WinControls.UI.RadButton();
             this.btn0 = new Telerik.WinControls.UI.RadButton();
@@ -141,7 +142,6 @@
             this.btnEliminarPago = new Telerik.WinControls.UI.RadButton();
             this.radButton13 = new Telerik.WinControls.UI.RadButton();
             this.telerikMetroTouchTheme2 = new Telerik.WinControls.Themes.TelerikMetroTouchTheme();
-            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit(); //opozo
             ((System.ComponentModel.ISupportInitialize)(this.btnGiftback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoPOS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUser)).BeginInit();
@@ -163,6 +163,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).BeginInit();
             this.clienteGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).BeginInit();
@@ -203,6 +204,7 @@
             this.panel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tablePagar2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCompraGratis)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDevolucionIVA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn0)).BeginInit();
@@ -342,6 +344,7 @@
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStripStatusLabel1.Location = new System.Drawing.Point(0, 0);
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(85, 25);
@@ -552,7 +555,7 @@
             // 
             this.clienteGroup.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.clienteGroup.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.clienteGroup.Controls.Add(this.picClienteApp); //opozo
+            this.clienteGroup.Controls.Add(this.picClienteApp);
             this.clienteGroup.Controls.Add(this.lblEtiquetaSaldo);
             this.clienteGroup.Controls.Add(this.lblSaldoTarjeta);
             this.clienteGroup.Controls.Add(this.lblDireccion);
@@ -568,41 +571,43 @@
             this.clienteGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clienteGroup.HeaderText = "F-001-001-0000000000 ";
             this.clienteGroup.Location = new System.Drawing.Point(0, 0);
+            this.clienteGroup.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.clienteGroup.Name = "clienteGroup";
+            this.clienteGroup.Padding = new System.Windows.Forms.Padding(1, 17, 1, 1);
             // 
             // 
             // 
             this.clienteGroup.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
-            this.clienteGroup.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.clienteGroup.RootElement.Padding = new System.Windows.Forms.Padding(1, 17, 1, 1);
             this.clienteGroup.Size = new System.Drawing.Size(610, 104);
             this.clienteGroup.TabIndex = 0;
             this.clienteGroup.Text = "F-001-001-0000000000 ";
             this.clienteGroup.ThemeName = "TelerikMetroTouch";
             this.clienteGroup.Click += new System.EventHandler(this.clienteGroup_Click);
             // 
-            // picClienteApp - opozo
+            // picClienteApp
             // 
             this.picClienteApp.Image = global::POS.Properties.Resources.cliente_app_icon;
-            this.picClienteApp.Location = new System.Drawing.Point(262, 73);
+            this.picClienteApp.Location = new System.Drawing.Point(261, 72);
+            this.picClienteApp.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.picClienteApp.Name = "picClienteApp";
-            this.picClienteApp.Size = new System.Drawing.Size(40, 27);
+            this.picClienteApp.Size = new System.Drawing.Size(39, 27);
             this.picClienteApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picClienteApp.TabIndex = 25;
             this.picClienteApp.TabStop = false;
             this.picClienteApp.Visible = false;
-            //this.picClienteApp.Click += new System.EventHandler(this.picClienteApp_Click);
-
             // 
             // lblEtiquetaSaldo
             // 
             this.lblEtiquetaSaldo.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblEtiquetaSaldo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEtiquetaSaldo.Location = new System.Drawing.Point(23, 76);
+            this.lblEtiquetaSaldo.Location = new System.Drawing.Point(21, 75);
+            this.lblEtiquetaSaldo.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblEtiquetaSaldo.Name = "lblEtiquetaSaldo";
             // 
             // 
             // 
-            this.lblEtiquetaSaldo.RootElement.ControlBounds = new System.Drawing.Rectangle(23, 76, 100, 18);
+            this.lblEtiquetaSaldo.RootElement.ControlBounds = new System.Drawing.Rectangle(51, 180, 100, 18);
             this.lblEtiquetaSaldo.Size = new System.Drawing.Size(55, 25);
             this.lblEtiquetaSaldo.TabIndex = 8;
             this.lblEtiquetaSaldo.Text = "Saldo:";
@@ -611,13 +616,14 @@
             // 
             this.lblSaldoTarjeta.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblSaldoTarjeta.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldoTarjeta.Location = new System.Drawing.Point(84, 79);
+            this.lblSaldoTarjeta.Location = new System.Drawing.Point(83, 79);
+            this.lblSaldoTarjeta.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblSaldoTarjeta.Name = "lblSaldoTarjeta";
             // 
             // 
             // 
-            this.lblSaldoTarjeta.RootElement.ControlBounds = new System.Drawing.Rectangle(84, 79, 100, 18);
-            this.lblSaldoTarjeta.Size = new System.Drawing.Size(46, 21);
+            this.lblSaldoTarjeta.RootElement.ControlBounds = new System.Drawing.Rectangle(189, 188, 100, 18);
+            this.lblSaldoTarjeta.Size = new System.Drawing.Size(46, 20);
             this.lblSaldoTarjeta.TabIndex = 9;
             this.lblSaldoTarjeta.Text = "#####";
             // 
@@ -628,13 +634,14 @@
             this.lblDireccion.AutoSize = false;
             this.lblDireccion.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblDireccion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDireccion.Location = new System.Drawing.Point(411, 42);
+            this.lblDireccion.Location = new System.Drawing.Point(409, 41);
+            this.lblDireccion.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblDireccion.Name = "lblDireccion";
             // 
             // 
             // 
-            this.lblDireccion.RootElement.ControlBounds = new System.Drawing.Rectangle(411, 42, 100, 18);
-            this.lblDireccion.Size = new System.Drawing.Size(194, 21);
+            this.lblDireccion.RootElement.ControlBounds = new System.Drawing.Rectangle(924, 100, 100, 18);
+            this.lblDireccion.Size = new System.Drawing.Size(340, 20);
             this.lblDireccion.TabIndex = 24;
             this.lblDireccion.Text = "#####";
             // 
@@ -642,13 +649,14 @@
             // 
             this.lblIdClienteApp.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblIdClienteApp.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdClienteApp.Location = new System.Drawing.Point(14, 64);
+            this.lblIdClienteApp.Location = new System.Drawing.Point(13, 63);
+            this.lblIdClienteApp.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblIdClienteApp.Name = "lblIdClienteApp";
             // 
             // 
             // 
-            this.lblIdClienteApp.RootElement.ControlBounds = new System.Drawing.Rectangle(14, 64, 100, 18);
-            this.lblIdClienteApp.Size = new System.Drawing.Size(46, 21);
+            this.lblIdClienteApp.RootElement.ControlBounds = new System.Drawing.Rectangle(32, 151, 100, 18);
+            this.lblIdClienteApp.Size = new System.Drawing.Size(46, 20);
             this.lblIdClienteApp.TabIndex = 23;
             this.lblIdClienteApp.Text = "#####";
             this.lblIdClienteApp.Visible = false;
@@ -656,16 +664,17 @@
             // btnCliente
             // 
             this.btnCliente.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCliente.Location = new System.Drawing.Point(229, 29);
-            this.btnCliente.MaximumSize = new System.Drawing.Size(40, 50);
+            this.btnCliente.Location = new System.Drawing.Point(228, 28);
+            this.btnCliente.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnCliente.MaximumSize = new System.Drawing.Size(39, 49);
             this.btnCliente.Name = "btnCliente";
             // 
             // 
             // 
             this.btnCliente.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnCliente.RootElement.ControlBounds = new System.Drawing.Rectangle(229, 29, 40, 24);
-            this.btnCliente.RootElement.MaxSize = new System.Drawing.Size(40, 50);
-            this.btnCliente.Size = new System.Drawing.Size(24, 32);
+            this.btnCliente.RootElement.ControlBounds = new System.Drawing.Rectangle(516, 69, 90, 24);
+            this.btnCliente.RootElement.MaxSize = new System.Drawing.Size(39, 49);
+            this.btnCliente.Size = new System.Drawing.Size(23, 31);
             this.btnCliente.TabIndex = 14;
             this.btnCliente.Text = "...";
             this.btnCliente.ThemeName = "TelerikMetroTouch";
@@ -678,13 +687,14 @@
             this.lblTelefono.AutoSize = false;
             this.lblTelefono.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblTelefono.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTelefono.Location = new System.Drawing.Point(411, 73);
+            this.lblTelefono.Location = new System.Drawing.Point(409, 72);
+            this.lblTelefono.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblTelefono.Name = "lblTelefono";
             // 
             // 
             // 
-            this.lblTelefono.RootElement.ControlBounds = new System.Drawing.Rectangle(411, 73, 100, 18);
-            this.lblTelefono.Size = new System.Drawing.Size(194, 21);
+            this.lblTelefono.RootElement.ControlBounds = new System.Drawing.Rectangle(924, 172, 100, 18);
+            this.lblTelefono.Size = new System.Drawing.Size(340, 20);
             this.lblTelefono.TabIndex = 7;
             this.lblTelefono.Text = "#####";
             // 
@@ -693,16 +703,17 @@
             this.btnCFinal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCFinal.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCFinal.Location = new System.Drawing.Point(262, 21);
-            this.btnCFinal.MaximumSize = new System.Drawing.Size(40, 50);
+            this.btnCFinal.Location = new System.Drawing.Point(261, 20);
+            this.btnCFinal.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnCFinal.MaximumSize = new System.Drawing.Size(39, 49);
             this.btnCFinal.Name = "btnCFinal";
             // 
             // 
             // 
             this.btnCFinal.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnCFinal.RootElement.ControlBounds = new System.Drawing.Rectangle(262, 21, 40, 24);
-            this.btnCFinal.RootElement.MaxSize = new System.Drawing.Size(40, 50);
-            this.btnCFinal.Size = new System.Drawing.Size(40, 50);
+            this.btnCFinal.RootElement.ControlBounds = new System.Drawing.Rectangle(590, 49, 90, 24);
+            this.btnCFinal.RootElement.MaxSize = new System.Drawing.Size(39, 49);
+            this.btnCFinal.Size = new System.Drawing.Size(39, 49);
             this.btnCFinal.TabIndex = 13;
             this.btnCFinal.Text = "CF";
             this.btnCFinal.ThemeName = "TelerikMetroTouch";
@@ -712,12 +723,13 @@
             // 
             this.radLabel4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel4.Location = new System.Drawing.Point(324, 73);
+            this.radLabel4.Location = new System.Drawing.Point(323, 72);
+            this.radLabel4.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel4.Name = "radLabel4";
             // 
             // 
             // 
-            this.radLabel4.RootElement.ControlBounds = new System.Drawing.Rectangle(324, 73, 100, 18);
+            this.radLabel4.RootElement.ControlBounds = new System.Drawing.Rectangle(729, 172, 100, 18);
             this.radLabel4.Size = new System.Drawing.Size(81, 25);
             this.radLabel4.TabIndex = 4;
             this.radLabel4.Text = "Teléfono:";
@@ -729,13 +741,14 @@
             this.lblNombre.AutoSize = false;
             this.lblNombre.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(411, 11);
+            this.lblNombre.Location = new System.Drawing.Point(409, 10);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblNombre.Name = "lblNombre";
             // 
             // 
             // 
-            this.lblNombre.RootElement.ControlBounds = new System.Drawing.Rectangle(411, 11, 100, 18);
-            this.lblNombre.Size = new System.Drawing.Size(194, 21);
+            this.lblNombre.RootElement.ControlBounds = new System.Drawing.Rectangle(924, 26, 100, 18);
+            this.lblNombre.Size = new System.Drawing.Size(340, 20);
             this.lblNombre.TabIndex = 5;
             this.lblNombre.Text = "#####";
             // 
@@ -743,12 +756,13 @@
             // 
             this.radLabel3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel3.Location = new System.Drawing.Point(320, 38);
+            this.radLabel3.Location = new System.Drawing.Point(319, 37);
+            this.radLabel3.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel3.Name = "radLabel3";
             // 
             // 
             // 
-            this.radLabel3.RootElement.ControlBounds = new System.Drawing.Rectangle(320, 38, 100, 18);
+            this.radLabel3.RootElement.ControlBounds = new System.Drawing.Rectangle(720, 89, 100, 18);
             this.radLabel3.Size = new System.Drawing.Size(85, 25);
             this.radLabel3.TabIndex = 3;
             this.radLabel3.Text = "Dirección:";
@@ -757,12 +771,13 @@
             // 
             this.radLabel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel2.Location = new System.Drawing.Point(329, 7);
+            this.radLabel2.Location = new System.Drawing.Point(328, 7);
+            this.radLabel2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel2.Name = "radLabel2";
             // 
             // 
             // 
-            this.radLabel2.RootElement.ControlBounds = new System.Drawing.Rectangle(329, 7, 100, 18);
+            this.radLabel2.RootElement.ControlBounds = new System.Drawing.Rectangle(741, 17, 100, 18);
             this.radLabel2.Size = new System.Drawing.Size(76, 25);
             this.radLabel2.TabIndex = 2;
             this.radLabel2.Text = "Nombre:";
@@ -771,15 +786,16 @@
             // 
             this.txtCedula.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCedula.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtCedula.Location = new System.Drawing.Point(14, 29);
+            this.txtCedula.Location = new System.Drawing.Point(13, 28);
+            this.txtCedula.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.NullText = "Cédula o R.U.C";
             // 
             // 
             // 
-            this.txtCedula.RootElement.ControlBounds = new System.Drawing.Rectangle(14, 29, 100, 20);
+            this.txtCedula.RootElement.ControlBounds = new System.Drawing.Rectangle(32, 69, 100, 20);
             this.txtCedula.ShortcutsEnabled = false;
-            this.txtCedula.Size = new System.Drawing.Size(210, 30);
+            this.txtCedula.Size = new System.Drawing.Size(209, 30);
             this.txtCedula.TabIndex = 0;
             this.txtCedula.TabStop = false;
             this.txtCedula.ThemeName = "TelerikMetroTouch";
@@ -797,6 +813,7 @@
             this.panelPagoSecundario.Controls.Add(this.radLabel9);
             this.panelPagoSecundario.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPagoSecundario.Location = new System.Drawing.Point(0, 0);
+            this.panelPagoSecundario.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panelPagoSecundario.Name = "panelPagoSecundario";
             this.panelPagoSecundario.Size = new System.Drawing.Size(412, 104);
             this.panelPagoSecundario.TabIndex = 2;
@@ -808,13 +825,14 @@
             this.lblRestante.BackColor = System.Drawing.Color.Transparent;
             this.lblRestante.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRestante.ForeColor = System.Drawing.Color.White;
-            this.lblRestante.Location = new System.Drawing.Point(178, 33);
+            this.lblRestante.Location = new System.Drawing.Point(178, 32);
+            this.lblRestante.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblRestante.Name = "lblRestante";
             // 
             // 
             // 
-            this.lblRestante.RootElement.ControlBounds = new System.Drawing.Rectangle(178, 33, 100, 18);
-            this.lblRestante.Size = new System.Drawing.Size(200, 51);
+            this.lblRestante.RootElement.ControlBounds = new System.Drawing.Rectangle(-115, 78, 100, 18);
+            this.lblRestante.Size = new System.Drawing.Size(199, 50);
             this.lblRestante.TabIndex = 6;
             this.lblRestante.Text = "00.00";
             this.lblRestante.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -826,13 +844,14 @@
             this.lblTotal2.BackColor = System.Drawing.Color.Transparent;
             this.lblTotal2.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal2.ForeColor = System.Drawing.Color.White;
-            this.lblTotal2.Location = new System.Drawing.Point(-17, 33);
+            this.lblTotal2.Location = new System.Drawing.Point(-17, 32);
+            this.lblTotal2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblTotal2.Name = "lblTotal2";
             // 
             // 
             // 
-            this.lblTotal2.RootElement.ControlBounds = new System.Drawing.Rectangle(-17, 33, 100, 18);
-            this.lblTotal2.Size = new System.Drawing.Size(200, 51);
+            this.lblTotal2.RootElement.ControlBounds = new System.Drawing.Rectangle(-554, 78, 100, 18);
+            this.lblTotal2.Size = new System.Drawing.Size(199, 50);
             this.lblTotal2.TabIndex = 8;
             this.lblTotal2.Text = "00.00";
             this.lblTotal2.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -843,12 +862,13 @@
             this.radLabel8.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel8.ForeColor = System.Drawing.Color.White;
             this.radLabel8.Location = new System.Drawing.Point(255, 3);
+            this.radLabel8.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel8.Name = "radLabel8";
             // 
             // 
             // 
-            this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(255, 3, 100, 18);
-            this.radLabel8.Size = new System.Drawing.Size(118, 37);
+            this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(58, 8, 100, 18);
+            this.radLabel8.Size = new System.Drawing.Size(118, 36);
             this.radLabel8.TabIndex = 7;
             this.radLabel8.Text = "Restante:";
             this.radLabel8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -860,12 +880,13 @@
             this.radLabel9.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel9.ForeColor = System.Drawing.Color.White;
             this.radLabel9.Location = new System.Drawing.Point(11, 0);
+            this.radLabel9.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel9.Name = "radLabel9";
             // 
             // 
             // 
-            this.radLabel9.RootElement.ControlBounds = new System.Drawing.Rectangle(11, 0, 100, 18);
-            this.radLabel9.Size = new System.Drawing.Size(171, 37);
+            this.radLabel9.RootElement.ControlBounds = new System.Drawing.Rectangle(-491, 0, 100, 18);
+            this.radLabel9.Size = new System.Drawing.Size(171, 36);
             this.radLabel9.TabIndex = 9;
             this.radLabel9.Text = "Total a pagar:";
             this.radLabel9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -1086,88 +1107,89 @@
             this.gridItems.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gridItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridItems.EnableKineticScrolling = true;
-            this.gridItems.Location = new System.Drawing.Point(0, 64);
+            this.gridItems.Location = new System.Drawing.Point(0, 63);
+            this.gridItems.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             // 
             // gridItems
             // 
             this.gridItems.MasterTemplate.AllowAddNewRow = false;
             this.gridItems.MasterTemplate.AllowColumnReorder = false;
-            gridViewTextBoxColumn1.FieldName = "Nombre";
-            gridViewTextBoxColumn1.HeaderText = "Descripción";
-            gridViewTextBoxColumn1.Name = "column1";
-            gridViewTextBoxColumn1.Width = 275;
-            gridViewTextBoxColumn2.FieldName = "CantidadINEC";
-            gridViewTextBoxColumn2.FormatString = "{0:00.000}";
-            gridViewTextBoxColumn2.HeaderText = "Cantidad";
-            gridViewTextBoxColumn2.Name = "column2";
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn2.Width = 80;
-            gridViewTextBoxColumn3.FieldName = "Unidades";
-            gridViewTextBoxColumn3.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn3.HeaderText = "Unidades";
-            gridViewTextBoxColumn3.Name = "column3";
-            gridViewTextBoxColumn3.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn3.Width = 80;
-            gridViewTextBoxColumn4.FieldName = "Pvp";
-            gridViewTextBoxColumn4.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn4.HeaderText = "P.V.P";
-            gridViewTextBoxColumn4.Name = "column4";
-            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn4.Width = 60;
-            gridViewTextBoxColumn5.FieldName = "SubtotalSinDescuento";
-            gridViewTextBoxColumn5.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn5.HeaderText = "Subtotal";
-            gridViewTextBoxColumn5.Name = "column6";
-            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn5.Width = 80;
-            gridViewTextBoxColumn6.FieldName = "Descuento";
-            gridViewTextBoxColumn6.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn6.HeaderText = "Descuento";
-            gridViewTextBoxColumn6.Name = "column5";
-            gridViewTextBoxColumn6.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn6.Width = 80;
-            gridViewTextBoxColumn7.FieldName = "DescuentoIVA";
-            gridViewTextBoxColumn7.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn7.HeaderText = "Dscto. IVA";
-            gridViewTextBoxColumn7.Name = "columnDsctoIVA";
-            gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn7.Width = 80;
-            gridViewTextBoxColumn8.FieldName = "Iva";
-            gridViewTextBoxColumn8.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn8.HeaderText = "I.V.A";
-            gridViewTextBoxColumn8.Name = "column8";
-            gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn8.Width = 70;
-            gridViewTextBoxColumn9.FieldName = "TotalPromoIVA";
-            gridViewTextBoxColumn9.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn9.HeaderText = "Total";
-            gridViewTextBoxColumn9.Name = "column7";
-            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn9.Width = 90;
-            gridViewTextBoxColumn10.FieldName = "IdTemporal";
-            gridViewTextBoxColumn10.HeaderText = "IdTemporal";
-            gridViewTextBoxColumn10.IsVisible = false;
-            gridViewTextBoxColumn10.Name = "IdTemporal";
+            gridViewTextBoxColumn13.FieldName = "Nombre";
+            gridViewTextBoxColumn13.HeaderText = "Descripción";
+            gridViewTextBoxColumn13.Name = "column1";
+            gridViewTextBoxColumn13.Width = 275;
+            gridViewTextBoxColumn14.FieldName = "CantidadINEC";
+            gridViewTextBoxColumn14.FormatString = "{0:00.000}";
+            gridViewTextBoxColumn14.HeaderText = "Cantidad";
+            gridViewTextBoxColumn14.Name = "column2";
+            gridViewTextBoxColumn14.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn14.Width = 80;
+            gridViewTextBoxColumn15.FieldName = "Unidades";
+            gridViewTextBoxColumn15.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn15.HeaderText = "Unidades";
+            gridViewTextBoxColumn15.Name = "column3";
+            gridViewTextBoxColumn15.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn15.Width = 80;
+            gridViewTextBoxColumn16.FieldName = "Pvp";
+            gridViewTextBoxColumn16.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn16.HeaderText = "P.V.P";
+            gridViewTextBoxColumn16.Name = "column4";
+            gridViewTextBoxColumn16.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn16.Width = 60;
+            gridViewTextBoxColumn17.FieldName = "SubtotalSinDescuento";
+            gridViewTextBoxColumn17.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn17.HeaderText = "Subtotal";
+            gridViewTextBoxColumn17.Name = "column6";
+            gridViewTextBoxColumn17.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn17.Width = 80;
+            gridViewTextBoxColumn18.FieldName = "Descuento";
+            gridViewTextBoxColumn18.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn18.HeaderText = "Descuento";
+            gridViewTextBoxColumn18.Name = "column5";
+            gridViewTextBoxColumn18.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn18.Width = 80;
+            gridViewTextBoxColumn19.FieldName = "DescuentoIVA";
+            gridViewTextBoxColumn19.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn19.HeaderText = "Dscto. IVA";
+            gridViewTextBoxColumn19.Name = "columnDsctoIVA";
+            gridViewTextBoxColumn19.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn19.Width = 80;
+            gridViewTextBoxColumn20.FieldName = "Iva";
+            gridViewTextBoxColumn20.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn20.HeaderText = "I.V.A";
+            gridViewTextBoxColumn20.Name = "column8";
+            gridViewTextBoxColumn20.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn20.Width = 70;
+            gridViewTextBoxColumn21.FieldName = "TotalPromoIVA";
+            gridViewTextBoxColumn21.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn21.HeaderText = "Total";
+            gridViewTextBoxColumn21.Name = "column7";
+            gridViewTextBoxColumn21.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn21.Width = 90;
+            gridViewTextBoxColumn22.FieldName = "IdTemporal";
+            gridViewTextBoxColumn22.HeaderText = "IdTemporal";
+            gridViewTextBoxColumn22.IsVisible = false;
+            gridViewTextBoxColumn22.Name = "IdTemporal";
             this.gridItems.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4,
-            gridViewTextBoxColumn5,
-            gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7,
-            gridViewTextBoxColumn8,
-            gridViewTextBoxColumn9,
-            gridViewTextBoxColumn10});
+            gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14,
+            gridViewTextBoxColumn15,
+            gridViewTextBoxColumn16,
+            gridViewTextBoxColumn17,
+            gridViewTextBoxColumn18,
+            gridViewTextBoxColumn19,
+            gridViewTextBoxColumn20,
+            gridViewTextBoxColumn21,
+            gridViewTextBoxColumn22});
             this.gridItems.MasterTemplate.EnableGrouping = false;
             this.gridItems.Name = "gridItems";
             this.gridItems.ReadOnly = true;
             // 
             // 
             // 
-            this.gridItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 64, 240, 150);
+            this.gridItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 151, 240, 150);
             this.gridItems.RootElement.Shape = null;
-            this.gridItems.Size = new System.Drawing.Size(611, 366);
+            this.gridItems.Size = new System.Drawing.Size(611, 367);
             this.gridItems.TabIndex = 2;
             this.gridItems.Text = "radGridView1";
             this.gridItems.ThemeName = "TelerikMetroTouch";
@@ -1182,24 +1204,26 @@
             this.panel5.Controls.Add(this.txtCodigo);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(611, 64);
+            this.panel5.Size = new System.Drawing.Size(611, 63);
             this.panel5.TabIndex = 1;
             // 
             // btnSearchPro
             // 
             this.btnSearchPro.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSearchPro.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnSearchPro.Location = new System.Drawing.Point(154, 4);
-            this.btnSearchPro.MaximumSize = new System.Drawing.Size(75, 50);
+            this.btnSearchPro.Location = new System.Drawing.Point(153, 3);
+            this.btnSearchPro.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnSearchPro.MaximumSize = new System.Drawing.Size(73, 49);
             this.btnSearchPro.Name = "btnSearchPro";
             // 
             // 
             // 
             this.btnSearchPro.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnSearchPro.RootElement.ControlBounds = new System.Drawing.Rectangle(154, 4, 75, 24);
-            this.btnSearchPro.RootElement.MaxSize = new System.Drawing.Size(75, 50);
-            this.btnSearchPro.Size = new System.Drawing.Size(37, 47);
+            this.btnSearchPro.RootElement.ControlBounds = new System.Drawing.Rectangle(346, 9, 110, 24);
+            this.btnSearchPro.RootElement.MaxSize = new System.Drawing.Size(73, 49);
+            this.btnSearchPro.Size = new System.Drawing.Size(36, 46);
             this.btnSearchPro.TabIndex = 15;
             this.btnSearchPro.Text = "...";
             this.btnSearchPro.ThemeName = "TelerikMetroTouch";
@@ -1209,9 +1233,10 @@
             // 
             this.panel12.Controls.Add(this.btnPrecio);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(471, 0);
+            this.panel12.Location = new System.Drawing.Point(472, 0);
+            this.panel12.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(140, 64);
+            this.panel12.Size = new System.Drawing.Size(139, 63);
             this.panel12.TabIndex = 14;
             // 
             // btnPrecio
@@ -1220,16 +1245,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrecio.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPrecio.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.btnPrecio.Location = new System.Drawing.Point(5, 5);
-            this.btnPrecio.MaximumSize = new System.Drawing.Size(200, 50);
+            this.btnPrecio.Location = new System.Drawing.Point(4, 4);
+            this.btnPrecio.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnPrecio.MaximumSize = new System.Drawing.Size(199, 49);
             this.btnPrecio.Name = "btnPrecio";
             // 
             // 
             // 
             this.btnPrecio.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnPrecio.RootElement.ControlBounds = new System.Drawing.Rectangle(5, 5, 110, 24);
-            this.btnPrecio.RootElement.MaxSize = new System.Drawing.Size(200, 50);
-            this.btnPrecio.Size = new System.Drawing.Size(130, 47);
+            this.btnPrecio.RootElement.ControlBounds = new System.Drawing.Rectangle(12, 12, 110, 24);
+            this.btnPrecio.RootElement.MaxSize = new System.Drawing.Size(199, 49);
+            this.btnPrecio.Size = new System.Drawing.Size(129, 46);
             this.btnPrecio.TabIndex = 13;
             this.btnPrecio.Text = "Consulta Precios";
             this.btnPrecio.ThemeName = "TelerikMetroTouch";
@@ -1241,15 +1267,16 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBorrarProducto.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnBorrarProducto.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnBorrarProducto.Location = new System.Drawing.Point(301, 5);
-            this.btnBorrarProducto.MaximumSize = new System.Drawing.Size(120, 50);
+            this.btnBorrarProducto.Location = new System.Drawing.Point(300, 4);
+            this.btnBorrarProducto.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnBorrarProducto.MaximumSize = new System.Drawing.Size(119, 49);
             this.btnBorrarProducto.Name = "btnBorrarProducto";
             // 
             // 
             // 
-            this.btnBorrarProducto.RootElement.ControlBounds = new System.Drawing.Rectangle(301, 5, 110, 24);
-            this.btnBorrarProducto.RootElement.MaxSize = new System.Drawing.Size(120, 50);
-            this.btnBorrarProducto.Size = new System.Drawing.Size(94, 47);
+            this.btnBorrarProducto.RootElement.ControlBounds = new System.Drawing.Rectangle(678, 12, 110, 24);
+            this.btnBorrarProducto.RootElement.MaxSize = new System.Drawing.Size(119, 49);
+            this.btnBorrarProducto.Size = new System.Drawing.Size(93, 46);
             this.btnBorrarProducto.TabIndex = 11;
             this.btnBorrarProducto.Text = "Borrar Prod.";
             this.btnBorrarProducto.ThemeName = "TelerikMetroTouch";
@@ -1259,16 +1286,17 @@
             // 
             this.btnQtyProduct.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnQtyProduct.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnQtyProduct.Location = new System.Drawing.Point(216, 6);
-            this.btnQtyProduct.MaximumSize = new System.Drawing.Size(75, 50);
+            this.btnQtyProduct.Location = new System.Drawing.Point(215, 5);
+            this.btnQtyProduct.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnQtyProduct.MaximumSize = new System.Drawing.Size(73, 49);
             this.btnQtyProduct.Name = "btnQtyProduct";
             // 
             // 
             // 
             this.btnQtyProduct.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnQtyProduct.RootElement.ControlBounds = new System.Drawing.Rectangle(216, 6, 75, 24);
-            this.btnQtyProduct.RootElement.MaxSize = new System.Drawing.Size(75, 50);
-            this.btnQtyProduct.Size = new System.Drawing.Size(75, 46);
+            this.btnQtyProduct.RootElement.ControlBounds = new System.Drawing.Rectangle(486, 14, 110, 24);
+            this.btnQtyProduct.RootElement.MaxSize = new System.Drawing.Size(73, 49);
+            this.btnQtyProduct.Size = new System.Drawing.Size(73, 45);
             this.btnQtyProduct.TabIndex = 12;
             this.btnQtyProduct.Text = "Cantidad";
             this.btnQtyProduct.ThemeName = "TelerikMetroTouch";
@@ -1278,16 +1306,17 @@
             // 
             this.txtCodigo.AcceptsReturn = true;
             this.txtCodigo.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtCodigo.Location = new System.Drawing.Point(14, 6);
+            this.txtCodigo.Location = new System.Drawing.Point(13, 5);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.NullText = "Código";
             // 
             // 
             // 
-            this.txtCodigo.RootElement.ControlBounds = new System.Drawing.Rectangle(14, 6, 100, 20);
+            this.txtCodigo.RootElement.ControlBounds = new System.Drawing.Rectangle(32, 14, 100, 20);
             this.txtCodigo.RootElement.StretchVertically = true;
             this.txtCodigo.ShortcutsEnabled = false;
-            this.txtCodigo.Size = new System.Drawing.Size(136, 46);
+            this.txtCodigo.Size = new System.Drawing.Size(135, 45);
             this.txtCodigo.TabIndex = 4;
             this.txtCodigo.TabStop = false;
             this.txtCodigo.ThemeName = "TelerikMetroTouch";
@@ -1301,9 +1330,10 @@
             this.panelgrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(88)))), ((int)(((byte)(42)))));
             this.panelgrid.Controls.Add(this.panel6);
             this.panelgrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelgrid.Location = new System.Drawing.Point(0, 59);
+            this.panelgrid.Location = new System.Drawing.Point(0, 58);
+            this.panelgrid.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panelgrid.Name = "panelgrid";
-            this.panelgrid.Size = new System.Drawing.Size(411, 371);
+            this.panelgrid.Size = new System.Drawing.Size(411, 372);
             this.panelgrid.TabIndex = 3;
             // 
             // panel6
@@ -1312,8 +1342,9 @@
             this.panel6.Controls.Add(this.tableLayoutPanel1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(411, 371);
+            this.panel6.Size = new System.Drawing.Size(411, 372);
             this.panel6.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -1326,13 +1357,14 @@
             this.tableLayoutPanel1.Controls.Add(this.gridPagos, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.12998F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.12583F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.74419F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 371);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 372);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tablePagar2
@@ -1344,6 +1376,7 @@
             this.tablePagar2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.29971F));
             this.tablePagar2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.29971F));
             this.tablePagar2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.04149F));
+            this.tablePagar2.Controls.Add(this.btnCompraGratis, 0, 4);
             this.tablePagar2.Controls.Add(this.btnDevolucionIVA, 0, 4);
             this.tablePagar2.Controls.Add(this.radButton12, 3, 3);
             this.tablePagar2.Controls.Add(this.btn0, 2, 3);
@@ -1368,7 +1401,8 @@
             this.tablePagar2.Controls.Add(this.btnRetencion, 1, 4);
             this.tablePagar2.Controls.Add(this.btn7, 1, 2);
             this.tablePagar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePagar2.Location = new System.Drawing.Point(3, 167);
+            this.tablePagar2.Location = new System.Drawing.Point(1, 167);
+            this.tablePagar2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.tablePagar2.Name = "tablePagar2";
             this.tablePagar2.RowCount = 5;
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -1376,21 +1410,45 @@
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tablePagar2.Size = new System.Drawing.Size(405, 201);
+            this.tablePagar2.Size = new System.Drawing.Size(409, 202);
             this.tablePagar2.TabIndex = 36;
+            // 
+            // btnCompraGratis
+            // 
+            this.btnCompraGratis.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCompraGratis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCompraGratis.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCompraGratis.Location = new System.Drawing.Point(1, 163);
+            this.btnCompraGratis.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnCompraGratis.Name = "btnCompraGratis";
+            // 
+            // 
+            // 
+            this.btnCompraGratis.RootElement.ControlBounds = new System.Drawing.Rectangle(6, 124, 110, 24);
+            this.btnCompraGratis.Size = new System.Drawing.Size(103, 36);
+            this.btnCompraGratis.TabIndex = 56;
+            this.btnCompraGratis.Text = "Compra\r\nGratis";
+            this.btnCompraGratis.TextWrap = true;
+            this.btnCompraGratis.ThemeName = "TelerikMetroTouch";
+            this.btnCompraGratis.Click += new System.EventHandler(this.btnCompraGratis_Click);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btnCompraGratis.GetChildAt(0))).Text = "Compra\r\nGratis";
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnCompraGratis.GetChildAt(0).GetChildAt(1).GetChildAt(1))).TextWrap = true;
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnCompraGratis.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnCompraGratis.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnDevolucionIVA
             // 
             this.btnDevolucionIVA.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDevolucionIVA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDevolucionIVA.Font = new System.Drawing.Font("Segoe UI", 10.27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDevolucionIVA.Location = new System.Drawing.Point(107, 163);
+            this.btnDevolucionIVA.Location = new System.Drawing.Point(106, 163);
+            this.btnDevolucionIVA.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnDevolucionIVA.Name = "btnDevolucionIVA";
             // 
             // 
             // 
-            this.btnDevolucionIVA.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 163, 110, 24);
-            this.btnDevolucionIVA.Size = new System.Drawing.Size(57, 35);
+            this.btnDevolucionIVA.RootElement.ControlBounds = new System.Drawing.Rectangle(108, 124, 110, 24);
+            this.btnDevolucionIVA.Size = new System.Drawing.Size(61, 36);
             this.btnDevolucionIVA.TabIndex = 55;
             this.btnDevolucionIVA.Text = "Dev. IVA";
             this.btnDevolucionIVA.ThemeName = "TelerikMetroTouch";
@@ -1403,21 +1461,21 @@
             // 
             this.radButton12.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radButton12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.radButton12.Location = new System.Drawing.Point(236, 123);
+            this.radButton12.Location = new System.Drawing.Point(235, 123);
+            this.radButton12.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radButton12.Name = "radButton12";
-            this.radButton12.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.radButton12.RootElement.ControlBounds = new System.Drawing.Rectangle(236, 123, 110, 24);
-            this.radButton12.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.radButton12.Size = new System.Drawing.Size(50, 32);
+            this.radButton12.RootElement.ControlBounds = new System.Drawing.Rectangle(235, 95, 110, 24);
+            this.radButton12.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.radButton12.Size = new System.Drawing.Size(21, 32);
             this.radButton12.TabIndex = 41;
             this.radButton12.Text = ".";
             this.radButton12.ThemeName = "TelerikMetroTouch";
             this.radButton12.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.radButton12.GetChildAt(0))).Text = ".";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.radButton12.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.radButton12.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.radButton12.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.radButton12.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.radButton12.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
@@ -1428,15 +1486,15 @@
             this.btn0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn0.ImageAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btn0.ImageScalingSize = new System.Drawing.Size(15, 15);
-            this.btn0.Location = new System.Drawing.Point(170, 123);
+            this.btn0.Location = new System.Drawing.Point(169, 123);
+            this.btn0.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btn0.Name = "btn0";
-            this.btn0.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn0.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 123, 110, 24);
-            this.btn0.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btn0.Size = new System.Drawing.Size(60, 34);
+            this.btn0.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 95, 110, 24);
+            this.btn0.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.btn0.Size = new System.Drawing.Size(64, 34);
             this.btn0.TabIndex = 36;
             this.btn0.Text = "0";
             this.btn0.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -1445,7 +1503,7 @@
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn0.GetChildAt(0))).TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn0.GetChildAt(0))).ImageAlignment = System.Drawing.ContentAlignment.BottomCenter;
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn0.GetChildAt(0))).Text = "0";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn0.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn0.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn0.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn0.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn0.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
@@ -1454,15 +1512,14 @@
             // 
             this.btn9.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn9.Location = new System.Drawing.Point(233, 80);
+            this.btn9.Location = new System.Drawing.Point(234, 80);
             this.btn9.Margin = new System.Windows.Forms.Padding(0);
             this.btn9.Name = "btn9";
-            this.btn9.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn9.RootElement.ControlBounds = new System.Drawing.Rectangle(233, 80, 110, 24);
-            this.btn9.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn9.RootElement.ControlBounds = new System.Drawing.Rectangle(229, 58, 110, 24);
+            this.btn9.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.btn9.Size = new System.Drawing.Size(66, 40);
             this.btn9.TabIndex = 36;
             this.btn9.Text = "9";
@@ -1471,7 +1528,7 @@
             this.btn9.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn9.GetChildAt(0))).TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn9.GetChildAt(0))).Text = "9";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn9.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn9.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn9.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn9.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn9.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
@@ -1480,22 +1537,21 @@
             // 
             this.btn8.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn8.Location = new System.Drawing.Point(167, 80);
+            this.btn8.Location = new System.Drawing.Point(168, 80);
             this.btn8.Margin = new System.Windows.Forms.Padding(0);
             this.btn8.Name = "btn8";
-            this.btn8.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn8.RootElement.ControlBounds = new System.Drawing.Rectangle(167, 80, 110, 24);
-            this.btn8.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn8.RootElement.ControlBounds = new System.Drawing.Rectangle(164, 58, 110, 24);
+            this.btn8.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.btn8.Size = new System.Drawing.Size(66, 40);
             this.btn8.TabIndex = 36;
             this.btn8.Text = "8";
             this.btn8.ThemeName = "TelerikMetroTouch";
             this.btn8.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn8.GetChildAt(0))).Text = "8";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn8.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn8.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn8.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn8.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn8.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
@@ -1505,15 +1561,14 @@
             this.btn6.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn6.DisplayStyle = Telerik.WinControls.DisplayStyle.Text;
             this.btn6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn6.Location = new System.Drawing.Point(233, 40);
+            this.btn6.Location = new System.Drawing.Point(234, 40);
             this.btn6.Margin = new System.Windows.Forms.Padding(0);
             this.btn6.Name = "btn6";
-            this.btn6.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn6.RootElement.ControlBounds = new System.Drawing.Rectangle(233, 40, 110, 24);
-            this.btn6.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn6.RootElement.ControlBounds = new System.Drawing.Rectangle(229, 29, 110, 24);
+            this.btn6.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.btn6.Size = new System.Drawing.Size(66, 40);
             this.btn6.TabIndex = 36;
             this.btn6.Text = "6";
@@ -1523,7 +1578,7 @@
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn6.GetChildAt(0))).TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn6.GetChildAt(0))).DisplayStyle = Telerik.WinControls.DisplayStyle.Text;
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn6.GetChildAt(0))).Text = "6";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn6.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn6.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn6.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn6.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn6.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
@@ -1532,22 +1587,21 @@
             // 
             this.btn5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn5.Location = new System.Drawing.Point(167, 40);
+            this.btn5.Location = new System.Drawing.Point(168, 40);
             this.btn5.Margin = new System.Windows.Forms.Padding(0);
             this.btn5.Name = "btn5";
-            this.btn5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn5.RootElement.ControlBounds = new System.Drawing.Rectangle(167, 40, 110, 24);
-            this.btn5.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn5.RootElement.ControlBounds = new System.Drawing.Rectangle(164, 29, 110, 24);
+            this.btn5.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.btn5.Size = new System.Drawing.Size(66, 40);
             this.btn5.TabIndex = 35;
             this.btn5.Text = "5";
             this.btn5.ThemeName = "TelerikMetroTouch";
             this.btn5.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn5.GetChildAt(0))).Text = "5";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn5.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn5.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn5.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn5.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn5.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -1556,24 +1610,23 @@
             // 
             this.btn4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn4.Location = new System.Drawing.Point(107, 40);
-            this.btn4.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btn4.MinimumSize = new System.Drawing.Size(52, 30);
+            this.btn4.Location = new System.Drawing.Point(106, 40);
+            this.btn4.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            this.btn4.MinimumSize = new System.Drawing.Size(51, 29);
             this.btn4.Name = "btn4";
-            this.btn4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn4.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 40, 110, 30);
-            this.btn4.RootElement.MinSize = new System.Drawing.Size(52, 30);
-            this.btn4.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btn4.Size = new System.Drawing.Size(60, 40);
+            this.btn4.RootElement.ControlBounds = new System.Drawing.Rectangle(108, 29, 117, 71);
+            this.btn4.RootElement.MinSize = new System.Drawing.Size(51, 29);
+            this.btn4.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.btn4.Size = new System.Drawing.Size(62, 40);
             this.btn4.TabIndex = 34;
             this.btn4.Text = "4";
             this.btn4.ThemeName = "TelerikMetroTouch";
             this.btn4.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn4.GetChildAt(0))).Text = "4";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn4.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn4.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn4.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn4.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn4.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -1582,22 +1635,21 @@
             // 
             this.btn3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn3.Location = new System.Drawing.Point(233, 0);
+            this.btn3.Location = new System.Drawing.Point(234, 0);
             this.btn3.Margin = new System.Windows.Forms.Padding(0);
             this.btn3.Name = "btn3";
-            this.btn3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn3.RootElement.ControlBounds = new System.Drawing.Rectangle(233, 0, 110, 24);
-            this.btn3.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn3.RootElement.ControlBounds = new System.Drawing.Rectangle(229, 0, 110, 24);
+            this.btn3.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.btn3.Size = new System.Drawing.Size(66, 40);
             this.btn3.TabIndex = 33;
             this.btn3.Text = "3";
             this.btn3.ThemeName = "TelerikMetroTouch";
             this.btn3.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn3.GetChildAt(0))).Text = "3";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn3.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn3.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn3.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn3.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn3.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -1606,15 +1658,14 @@
             // 
             this.btn2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn2.Location = new System.Drawing.Point(167, 0);
+            this.btn2.Location = new System.Drawing.Point(168, 0);
             this.btn2.Margin = new System.Windows.Forms.Padding(0);
             this.btn2.Name = "btn2";
-            this.btn2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn2.RootElement.ControlBounds = new System.Drawing.Rectangle(167, 0, 110, 24);
-            this.btn2.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn2.RootElement.ControlBounds = new System.Drawing.Rectangle(164, 0, 110, 24);
+            this.btn2.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.btn2.Size = new System.Drawing.Size(66, 40);
             this.btn2.TabIndex = 32;
             this.btn2.Text = "2";
@@ -1623,7 +1674,7 @@
             this.btn2.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn2.GetChildAt(0))).TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn2.GetChildAt(0))).Text = "2";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn2.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn2.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn2.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn2.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn2.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -1633,19 +1684,18 @@
             this.btn1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btn1.Location = new System.Drawing.Point(107, 0);
-            this.btn1.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btn1.MinimumSize = new System.Drawing.Size(52, 30);
+            this.btn1.Location = new System.Drawing.Point(106, 0);
+            this.btn1.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            this.btn1.MinimumSize = new System.Drawing.Size(51, 29);
             this.btn1.Name = "btn1";
-            this.btn1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
             this.btn1.RootElement.AutoSize = false;
-            this.btn1.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 0, 110, 30);
-            this.btn1.RootElement.MinSize = new System.Drawing.Size(52, 30);
-            this.btn1.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btn1.Size = new System.Drawing.Size(60, 40);
+            this.btn1.RootElement.ControlBounds = new System.Drawing.Rectangle(108, 0, 117, 71);
+            this.btn1.RootElement.MinSize = new System.Drawing.Size(51, 29);
+            this.btn1.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.btn1.Size = new System.Drawing.Size(62, 40);
             this.btn1.TabIndex = 31;
             this.btn1.Text = "1";
             this.btn1.ThemeName = "TelerikMetroTouch";
@@ -1653,7 +1703,7 @@
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn1.GetChildAt(0))).TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn1.GetChildAt(0))).Text = "1";
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn1.GetChildAt(0))).BackColor = System.Drawing.Color.Transparent;
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn1.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn1.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn1.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn1.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn1.GetChildAt(0).GetChildAt(2))).BoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder;
@@ -1669,13 +1719,14 @@
             this.btnTCredito.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnTCredito.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTCredito.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnTCredito.Location = new System.Drawing.Point(3, 3);
+            this.btnTCredito.Location = new System.Drawing.Point(1, 3);
+            this.btnTCredito.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnTCredito.Name = "btnTCredito";
             // 
             // 
             // 
-            this.btnTCredito.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 3, 110, 24);
-            this.btnTCredito.Size = new System.Drawing.Size(98, 34);
+            this.btnTCredito.RootElement.ControlBounds = new System.Drawing.Rectangle(6, 8, 110, 24);
+            this.btnTCredito.Size = new System.Drawing.Size(103, 34);
             this.btnTCredito.TabIndex = 43;
             this.btnTCredito.Text = "T.Crédito";
             this.btnTCredito.ThemeName = "TelerikMetroTouch";
@@ -1689,13 +1740,14 @@
             this.btnCreditoInterno.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCreditoInterno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCreditoInterno.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnCreditoInterno.Location = new System.Drawing.Point(3, 43);
+            this.btnCreditoInterno.Location = new System.Drawing.Point(1, 43);
+            this.btnCreditoInterno.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnCreditoInterno.Name = "btnCreditoInterno";
             // 
             // 
             // 
-            this.btnCreditoInterno.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 43, 110, 24);
-            this.btnCreditoInterno.Size = new System.Drawing.Size(98, 34);
+            this.btnCreditoInterno.RootElement.ControlBounds = new System.Drawing.Rectangle(6, 37, 110, 24);
+            this.btnCreditoInterno.Size = new System.Drawing.Size(103, 34);
             this.btnCreditoInterno.TabIndex = 45;
             this.btnCreditoInterno.Text = "T.Delportal";
             this.btnCreditoInterno.ThemeName = "TelerikMetroTouch";
@@ -1708,13 +1760,14 @@
             // 
             this.btnDsctoEsp.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDsctoEsp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDsctoEsp.Location = new System.Drawing.Point(302, 43);
+            this.btnDsctoEsp.Location = new System.Drawing.Point(301, 43);
+            this.btnDsctoEsp.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnDsctoEsp.Name = "btnDsctoEsp";
             // 
             // 
             // 
-            this.btnDsctoEsp.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 43, 110, 24);
-            this.btnDsctoEsp.Size = new System.Drawing.Size(100, 34);
+            this.btnDsctoEsp.RootElement.ControlBounds = new System.Drawing.Rectangle(300, 37, 110, 24);
+            this.btnDsctoEsp.Size = new System.Drawing.Size(107, 34);
             this.btnDsctoEsp.TabIndex = 46;
             this.btnDsctoEsp.Text = "Dscto. Promo";
             this.btnDsctoEsp.ThemeName = "TelerikMetroTouch";
@@ -1728,9 +1781,10 @@
             this.btnOrdenDelivery.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOrdenDelivery.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOrdenDelivery.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnOrdenDelivery.Location = new System.Drawing.Point(302, 123);
+            this.btnOrdenDelivery.Location = new System.Drawing.Point(301, 123);
+            this.btnOrdenDelivery.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnOrdenDelivery.Name = "btnOrdenDelivery";
-            this.btnOrdenDelivery.Size = new System.Drawing.Size(100, 34);
+            this.btnOrdenDelivery.Size = new System.Drawing.Size(107, 34);
             this.btnOrdenDelivery.TabIndex = 50;
             this.btnOrdenDelivery.Text = "Servicio Domicilio";
             this.btnOrdenDelivery.TextWrap = true;
@@ -1747,13 +1801,14 @@
             this.btnCheque.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCheque.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCheque.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnCheque.Location = new System.Drawing.Point(3, 123);
+            this.btnCheque.Location = new System.Drawing.Point(1, 123);
+            this.btnCheque.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnCheque.Name = "btnCheque";
             // 
             // 
             // 
-            this.btnCheque.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 123, 110, 24);
-            this.btnCheque.Size = new System.Drawing.Size(98, 34);
+            this.btnCheque.RootElement.ControlBounds = new System.Drawing.Rectangle(6, 95, 110, 24);
+            this.btnCheque.Size = new System.Drawing.Size(103, 34);
             this.btnCheque.TabIndex = 47;
             this.btnCheque.Text = "Cheque";
             this.btnCheque.ThemeName = "TelerikMetroTouch";
@@ -1766,13 +1821,14 @@
             // 
             this.btnDsctoPaviPlan.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDsctoPaviPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDsctoPaviPlan.Location = new System.Drawing.Point(3, 163);
+            this.btnDsctoPaviPlan.Location = new System.Drawing.Point(169, 163);
+            this.btnDsctoPaviPlan.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnDsctoPaviPlan.Name = "btnDsctoPaviPlan";
             // 
             // 
             // 
-            this.btnDsctoPaviPlan.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 163, 110, 24);
-            this.btnDsctoPaviPlan.Size = new System.Drawing.Size(98, 35);
+            this.btnDsctoPaviPlan.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 124, 110, 24);
+            this.btnDsctoPaviPlan.Size = new System.Drawing.Size(64, 36);
             this.btnDsctoPaviPlan.TabIndex = 51;
             this.btnDsctoPaviPlan.Text = "Dscto. PaviPlan";
             this.btnDsctoPaviPlan.ThemeName = "TelerikMetroTouch";
@@ -1786,13 +1842,14 @@
             this.btnPagoAtras.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPagoAtras.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPagoAtras.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnPagoAtras.Location = new System.Drawing.Point(302, 163);
+            this.btnPagoAtras.Location = new System.Drawing.Point(301, 163);
+            this.btnPagoAtras.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnPagoAtras.Name = "btnPagoAtras";
             // 
             // 
             // 
-            this.btnPagoAtras.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 163, 110, 24);
-            this.btnPagoAtras.Size = new System.Drawing.Size(100, 35);
+            this.btnPagoAtras.RootElement.ControlBounds = new System.Drawing.Rectangle(300, 124, 110, 24);
+            this.btnPagoAtras.Size = new System.Drawing.Size(107, 36);
             this.btnPagoAtras.TabIndex = 52;
             this.btnPagoAtras.Text = "Cancelar";
             this.btnPagoAtras.ThemeName = "TelerikMetroTouch";
@@ -1806,13 +1863,14 @@
             this.btnPagoGiftCard.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPagoGiftCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPagoGiftCard.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnPagoGiftCard.Location = new System.Drawing.Point(302, 3);
+            this.btnPagoGiftCard.Location = new System.Drawing.Point(301, 3);
+            this.btnPagoGiftCard.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnPagoGiftCard.Name = "btnPagoGiftCard";
             // 
             // 
             // 
-            this.btnPagoGiftCard.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 3, 110, 24);
-            this.btnPagoGiftCard.Size = new System.Drawing.Size(100, 34);
+            this.btnPagoGiftCard.RootElement.ControlBounds = new System.Drawing.Rectangle(300, 8, 110, 24);
+            this.btnPagoGiftCard.Size = new System.Drawing.Size(107, 34);
             this.btnPagoGiftCard.TabIndex = 53;
             this.btnPagoGiftCard.Text = "Gift Card";
             this.btnPagoGiftCard.ThemeName = "TelerikMetroTouch";
@@ -1826,20 +1884,21 @@
             this.btnMonedero.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnMonedero.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnMonedero.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnMonedero.Location = new System.Drawing.Point(302, 83);
+            this.btnMonedero.Location = new System.Drawing.Point(301, 83);
+            this.btnMonedero.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnMonedero.Name = "btnMonedero";
             // 
             // 
             // 
-            this.btnMonedero.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 83, 110, 24);
-            this.btnMonedero.Size = new System.Drawing.Size(100, 34);
+            this.btnMonedero.RootElement.ControlBounds = new System.Drawing.Rectangle(300, 66, 110, 24);
+            this.btnMonedero.Size = new System.Drawing.Size(107, 34);
             this.btnMonedero.TabIndex = 49;
-            this.btnMonedero.Text = "Billetera Electrónica";
+            this.btnMonedero.Text = "Dinero Electrónico";
             this.btnMonedero.TextWrap = true;
             this.btnMonedero.ThemeName = "TelerikMetroTouch";
             this.btnMonedero.Visible = false;
             this.btnMonedero.Click += new System.EventHandler(this.btnMonedero_Click);
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btnMonedero.GetChildAt(0))).Text = "Billetera Electrónica";
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btnMonedero.GetChildAt(0))).Text = "Dinero Electrónico";
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnMonedero.GetChildAt(0).GetChildAt(1).GetChildAt(1))).TextWrap = true;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnMonedero.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 8.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnMonedero.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1849,13 +1908,14 @@
             this.btnNC.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnNC.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnNC.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnNC.Location = new System.Drawing.Point(3, 83);
+            this.btnNC.Location = new System.Drawing.Point(1, 83);
+            this.btnNC.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnNC.Name = "btnNC";
             // 
             // 
             // 
-            this.btnNC.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 83, 110, 24);
-            this.btnNC.Size = new System.Drawing.Size(98, 34);
+            this.btnNC.RootElement.ControlBounds = new System.Drawing.Rectangle(6, 66, 110, 24);
+            this.btnNC.Size = new System.Drawing.Size(103, 34);
             this.btnNC.TabIndex = 44;
             this.btnNC.Text = "N. CREDITO";
             this.btnNC.ThemeName = "TelerikMetroTouch";
@@ -1869,13 +1929,14 @@
             this.btnRetencion.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnRetencion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRetencion.Font = new System.Drawing.Font("Segoe UI", 10.27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRetencion.Location = new System.Drawing.Point(170, 163);
+            this.btnRetencion.Location = new System.Drawing.Point(235, 163);
+            this.btnRetencion.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnRetencion.Name = "btnRetencion";
             // 
             // 
             // 
-            this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 163, 110, 24);
-            this.btnRetencion.Size = new System.Drawing.Size(60, 35);
+            this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(235, 124, 110, 24);
+            this.btnRetencion.Size = new System.Drawing.Size(64, 36);
             this.btnRetencion.TabIndex = 48;
             this.btnRetencion.Text = "Retención";
             this.btnRetencion.ThemeName = "TelerikMetroTouch";
@@ -1888,24 +1949,24 @@
             // btn7
             // 
             this.btn7.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn7.Location = new System.Drawing.Point(107, 80);
-            this.btn7.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btn7.MinimumSize = new System.Drawing.Size(52, 30);
+            this.btn7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn7.Location = new System.Drawing.Point(106, 80);
+            this.btn7.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            this.btn7.MinimumSize = new System.Drawing.Size(51, 29);
             this.btn7.Name = "btn7";
-            this.btn7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             // 
             // 
             // 
-            this.btn7.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 80, 110, 30);
-            this.btn7.RootElement.MinSize = new System.Drawing.Size(52, 30);
-            this.btn7.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btn7.Size = new System.Drawing.Size(59, 39);
+            this.btn7.RootElement.ControlBounds = new System.Drawing.Rectangle(108, 58, 117, 71);
+            this.btn7.RootElement.MinSize = new System.Drawing.Size(51, 29);
+            this.btn7.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.btn7.Size = new System.Drawing.Size(62, 40);
             this.btn7.TabIndex = 56;
             this.btn7.Text = "7";
             this.btn7.ThemeName = "TelerikMetroTouch";
             this.btn7.Click += new System.EventHandler(this.pagoBotonEvent);
             ((Telerik.WinControls.UI.RadButtonElement)(this.btn7.GetChildAt(0))).Text = "7";
-            ((Telerik.WinControls.UI.RadButtonElement)(this.btn7.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            ((Telerik.WinControls.UI.RadButtonElement)(this.btn7.GetChildAt(0))).Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn7.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.btn7.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.btn7.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -1922,11 +1983,12 @@
             this.tableLayoutPanel2.Controls.Add(this.btnPagoBorrar, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtPagoValor, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 111);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 111);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(405, 50);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(409, 50);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // btnEfectivo
@@ -1934,13 +1996,14 @@
             this.btnEfectivo.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnEfectivo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEfectivo.Font = new System.Drawing.Font("Segoe UI", 27F, System.Drawing.FontStyle.Bold);
-            this.btnEfectivo.Location = new System.Drawing.Point(4, 4);
+            this.btnEfectivo.Location = new System.Drawing.Point(2, 4);
+            this.btnEfectivo.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnEfectivo.Name = "btnEfectivo";
             // 
             // 
             // 
-            this.btnEfectivo.RootElement.ControlBounds = new System.Drawing.Rectangle(4, 4, 110, 24);
-            this.btnEfectivo.Size = new System.Drawing.Size(94, 42);
+            this.btnEfectivo.RootElement.ControlBounds = new System.Drawing.Rectangle(7, 9, 110, 24);
+            this.btnEfectivo.Size = new System.Drawing.Size(99, 42);
             this.btnEfectivo.TabIndex = 42;
             this.btnEfectivo.Text = "Efectivo";
             this.btnEfectivo.ThemeName = "TelerikMetroTouch";
@@ -1955,13 +2018,14 @@
             this.btnPagoBorrar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPagoBorrar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPagoBorrar.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPagoBorrar.Location = new System.Drawing.Point(306, 4);
+            this.btnPagoBorrar.Location = new System.Drawing.Point(307, 4);
+            this.btnPagoBorrar.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnPagoBorrar.Name = "btnPagoBorrar";
             // 
             // 
             // 
-            this.btnPagoBorrar.RootElement.ControlBounds = new System.Drawing.Rectangle(306, 4, 110, 24);
-            this.btnPagoBorrar.Size = new System.Drawing.Size(95, 42);
+            this.btnPagoBorrar.RootElement.ControlBounds = new System.Drawing.Rectangle(304, 9, 110, 24);
+            this.btnPagoBorrar.Size = new System.Drawing.Size(100, 42);
             this.btnPagoBorrar.TabIndex = 38;
             this.btnPagoBorrar.Text = "Borrar";
             this.btnPagoBorrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -1979,13 +2043,14 @@
             this.txtPagoValor.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtPagoValor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPagoValor.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPagoValor.Location = new System.Drawing.Point(105, 4);
+            this.txtPagoValor.Location = new System.Drawing.Point(104, 4);
+            this.txtPagoValor.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.txtPagoValor.Name = "txtPagoValor";
             // 
             // 
             // 
-            this.txtPagoValor.RootElement.ControlBounds = new System.Drawing.Rectangle(105, 4, 100, 20);
-            this.txtPagoValor.Size = new System.Drawing.Size(194, 42);
+            this.txtPagoValor.RootElement.ControlBounds = new System.Drawing.Rectangle(106, 9, 100, 20);
+            this.txtPagoValor.Size = new System.Drawing.Size(200, 42);
             this.txtPagoValor.TabIndex = 37;
             this.txtPagoValor.TabStop = false;
             this.txtPagoValor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1997,8 +2062,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridPagos.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gridPagos.Location = new System.Drawing.Point(5, 5);
-            this.gridPagos.Margin = new System.Windows.Forms.Padding(5);
+            this.gridPagos.Location = new System.Drawing.Point(4, 4);
+            this.gridPagos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             // 
             // gridPagos
             // 
@@ -2006,25 +2071,25 @@
             this.gridPagos.MasterTemplate.AllowColumnReorder = false;
             this.gridPagos.MasterTemplate.AutoGenerateColumns = false;
             this.gridPagos.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn11.FieldName = "Descripcion";
-            gridViewTextBoxColumn11.HeaderText = "Forma Pago";
-            gridViewTextBoxColumn11.Name = "column1";
-            gridViewTextBoxColumn11.Width = 185;
-            gridViewTextBoxColumn12.FieldName = "Valor";
-            gridViewTextBoxColumn12.HeaderText = "Valor";
-            gridViewTextBoxColumn12.Name = "column2";
-            gridViewTextBoxColumn12.Width = 195;
+            gridViewTextBoxColumn23.FieldName = "Descripcion";
+            gridViewTextBoxColumn23.HeaderText = "Forma Pago";
+            gridViewTextBoxColumn23.Name = "column1";
+            gridViewTextBoxColumn23.Width = 185;
+            gridViewTextBoxColumn24.FieldName = "Valor";
+            gridViewTextBoxColumn24.HeaderText = "Valor";
+            gridViewTextBoxColumn24.Name = "column2";
+            gridViewTextBoxColumn24.Width = 197;
             this.gridPagos.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn11,
-            gridViewTextBoxColumn12});
+            gridViewTextBoxColumn23,
+            gridViewTextBoxColumn24});
             this.gridPagos.MasterTemplate.EnableGrouping = false;
             this.gridPagos.Name = "gridPagos";
             this.gridPagos.ReadOnly = true;
             // 
             // 
             // 
-            this.gridPagos.RootElement.ControlBounds = new System.Drawing.Rectangle(5, 5, 240, 150);
-            this.gridPagos.Size = new System.Drawing.Size(401, 98);
+            this.gridPagos.RootElement.ControlBounds = new System.Drawing.Rectangle(12, 12, 240, 150);
+            this.gridPagos.Size = new System.Drawing.Size(403, 100);
             this.gridPagos.TabIndex = 10;
             this.gridPagos.Text = "radGridView1";
             this.gridPagos.ThemeName = "TelerikMetroTouch";
@@ -2037,21 +2102,23 @@
             this.panel10.Controls.Add(this.btnEliminarPago);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(411, 59);
+            this.panel10.Size = new System.Drawing.Size(411, 58);
             this.panel10.TabIndex = 2;
             // 
             // radLabel7
             // 
             this.radLabel7.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel7.ForeColor = System.Drawing.Color.White;
-            this.radLabel7.Location = new System.Drawing.Point(116, 12);
+            this.radLabel7.Location = new System.Drawing.Point(115, 11);
+            this.radLabel7.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel7.Name = "radLabel7";
             // 
             // 
             // 
-            this.radLabel7.RootElement.ControlBounds = new System.Drawing.Rectangle(116, 12, 100, 18);
-            this.radLabel7.Size = new System.Drawing.Size(106, 37);
+            this.radLabel7.RootElement.ControlBounds = new System.Drawing.Rectangle(261, 28, 100, 18);
+            this.radLabel7.Size = new System.Drawing.Size(106, 36);
             this.radLabel7.TabIndex = 8;
             this.radLabel7.Text = "Cambio:";
             this.radLabel7.ThemeName = "TelerikMetroTouch";
@@ -2063,13 +2130,14 @@
             this.lblCambio.BackColor = System.Drawing.Color.Transparent;
             this.lblCambio.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCambio.ForeColor = System.Drawing.Color.White;
-            this.lblCambio.Location = new System.Drawing.Point(119, 2);
+            this.lblCambio.Location = new System.Drawing.Point(120, 1);
+            this.lblCambio.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblCambio.Name = "lblCambio";
             // 
             // 
             // 
-            this.lblCambio.RootElement.ControlBounds = new System.Drawing.Rectangle(119, 2, 100, 18);
-            this.lblCambio.Size = new System.Drawing.Size(253, 51);
+            this.lblCambio.RootElement.ControlBounds = new System.Drawing.Rectangle(-246, 5, 100, 18);
+            this.lblCambio.Size = new System.Drawing.Size(252, 50);
             this.lblCambio.TabIndex = 9;
             this.lblCambio.Text = "00.00";
             this.lblCambio.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -2077,13 +2145,14 @@
             // btnEliminarPago
             // 
             this.btnEliminarPago.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEliminarPago.Location = new System.Drawing.Point(3, 9);
+            this.btnEliminarPago.Location = new System.Drawing.Point(1, 9);
+            this.btnEliminarPago.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnEliminarPago.Name = "btnEliminarPago";
             // 
             // 
             // 
-            this.btnEliminarPago.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 9, 110, 24);
-            this.btnEliminarPago.Size = new System.Drawing.Size(107, 47);
+            this.btnEliminarPago.RootElement.ControlBounds = new System.Drawing.Rectangle(6, 22, 110, 24);
+            this.btnEliminarPago.Size = new System.Drawing.Size(105, 46);
             this.btnEliminarPago.TabIndex = 10;
             this.btnEliminarPago.Text = "Borrar Pago";
             this.btnEliminarPago.ThemeName = "TelerikMetroTouch";
@@ -2165,7 +2234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).EndInit();
             this.clienteGroup.ResumeLayout(false);
             this.clienteGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit(); // opozo
+            ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).EndInit();
@@ -2208,6 +2277,7 @@
             this.panel6.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tablePagar2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnCompraGratis)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDevolucionIVA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn0)).EndInit();
@@ -2350,5 +2420,6 @@
         private Telerik.WinControls.UI.RadButton btnDevolucionIVA;
         private Telerik.WinControls.UI.RadButton btn7;
         private System.Windows.Forms.PictureBox picClienteApp;
+        private Telerik.WinControls.UI.RadButton btnCompraGratis;
     }
 }

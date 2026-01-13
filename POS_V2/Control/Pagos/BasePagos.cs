@@ -36,7 +36,8 @@ namespace POS.Control.Pagos
             Retencion,
             NotaCredito,
             DineroElectronico, 
-            Efectivo
+            Efectivo,
+            CompraGratis  // jchid agregado para la nueva modalidad de compra gratis 
         }
 
         public PagoTipo _pagoTipo;
@@ -78,7 +79,7 @@ namespace POS.Control.Pagos
         public bool aplicaDsctoPromoTarjetaBines = false;
         public string binTarjetaPromoDscto = string.Empty;
         public MainWindow _mainWindow;
-
+        private bool _compraGratisCalculada = false;
         public bool EsUsoAppMovil
         {
             get { return _EsUsoAppMovil; }
@@ -1610,28 +1611,68 @@ namespace POS.Control.Pagos
                         return;
                     }
 
-                
 
-                    if (validaBin.binTieneDescuento)
+
+                    //if (validaBin.binTieneDescuento)
+                    //{
+
+                    //    this.aplicaDsctoPromoTarjetaBines = validaBin.binTieneDescuento;
+                    //    this.binTarjetaPromoDscto = numBinTC;
+                    //    this.DescuentoPromoTarjBines = validaBin.porcDsctoBin;
+
+
+                    //    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed: ", ResponseBackground);
+
+                    //    _factura.BinNumeroTarjetaPromo = validaBin.NumeroBin.ToString();
+                    //    AplicarDescuentoTarjetaBines(validaBin.porcDsctoBin);
+
+                    //    txtValor.Text = _factura.GetTotal().ToString();
+
+                    //    ResponseBackground = validaBin.TxtDsctBin;
+                    //    On_Off_Controles(true);
+                    //    return;
+
+                    //}
+
+                    // Nuevo metodo para ver si el bin tiene  descuento JCHID 
+                    decimal valorACobrar = Decimal.Parse(txtValor.Text);
+                    decimal totalFactura = _factura.GetTotal();
+
+                    bool esPagoTotal = valorACobrar >= (totalFactura - 0.01m);
+
+                    if (validaBin.binTieneDescuento && esPagoTotal)
                     {
-   
-                        this.aplicaDsctoPromoTarjetaBines = validaBin.binTieneDescuento;
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "IntegracionTotal", "¡Descuento Detectado! Aplicando...");
+                        decimal valorDescuentoDinero = 0;
+                        // Aplicamos el descuento a la factura interna
+                        this.aplicaDsctoPromoTarjetaBines = true;
                         this.binTarjetaPromoDscto = numBinTC;
                         this.DescuentoPromoTarjBines = validaBin.porcDsctoBin;
+                        Control.Common.GlobalParameters.EsModoImpresionBankard = true;
+                        _factura.BinNumeroTarjetaPromo = Convert.ToString(validaBin.NumeroBin);
 
-                        
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed: ", ResponseBackground);
-
-                        _factura.BinNumeroTarjetaPromo = validaBin.NumeroBin.ToString();
+                        // Método que recalcula los totales dentro del objeto _factura
                         AplicarDescuentoTarjetaBines(validaBin.porcDsctoBin);
 
-                        txtValor.Text = _factura.GetTotal().ToString();
+                        // Actualizamos la pantalla para que el cajero vea que bajó el precio
+                        txtValor.Text = _factura.GetTotal().ToString("N2");
 
-                        ResponseBackground = validaBin.TxtDsctBin;
-                        On_Off_Controles(true);
-                        return;
+                        // *** PASO CRÍTICO: ACTUALIZAR LAS VARIABLES DE COBRO ***
+                        // Si no hacemos esto, cobraremos el precio original sin descuento
+                        valor = _factura.GetTotal();
+                        // Regeneramos el string de pago (Ej: de "100" baja a "90")
+                        valpag = valor.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
 
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "IntegracionTotal", $"Nuevo monto a cobrar: {valor} ({valpag})");
                     }
+                    else
+                    {
+                        // Si no hubo descuento, nos aseguramos que 'valor' sea el actual de la caja de texto
+                        valor = Decimal.Parse(txtValor.Text);
+                        valpag = valor.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                        Control.Common.GlobalParameters.EsModoImpresionBankard = false;
+                    }
+                    // Nuevo metodo para ver si el bin tiene  descuento JCHID 
 
 
                     //var validaBin = (from deta in pos.core_parametro
@@ -1642,7 +1683,7 @@ namespace POS.Control.Pagos
 
                     //if (validaBin != null) { textValidacion = validaBin.documento; }
 
-                    
+
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "Valida contingente PINPAD; por defecto MEDIANET se encuentra configurado por defecto ");
                     if (Control.Common.GlobalParameters.ConectContingente.PinPadContingente)
                     {
@@ -4942,6 +4983,39 @@ namespace POS.Control.Pagos
 
 
                             break;
+                        case PagoTipo.CompraGratis:
+
+                            // 1. VALIDACIÓN DE SEGURIDAD: ¿Ya se verificó la tarjeta y el saldo?
+                            if (!_compraGratisCalculada)
+                            {
+                                // Mensaje: "Debe verificar la tarjeta y el saldo antes de aplicar el pago."
+                                // Puedes usar un ID de mensaje existente o este genérico:
+                                Control.Common.General.GetMensaje("POS - Compra Gratis", "Debe presionar 'Enter' o verificar la tarjeta para calcular el saldo autorizado antes de pagar.", "I");
+                                txtCuenta.Focus();
+                                return; // <--- ESTO DETIENE LA EJECUCIÓN Y EVITA EL PAGO EN FALSO
+                            }
+
+                            string codigoCG = !string.IsNullOrEmpty(_textoOriginal) ? _textoOriginal : txtCuenta.Text.Trim();
+
+                            // 2. Validación extra: Que el código no se haya borrado
+                            if (string.IsNullOrEmpty(codigoCG))
+                            {
+                                Control.Common.General.GetMensaje("POS - Compra Gratis", "No se detectó el código de la tarjeta.", "I");
+                                txtCuenta.Focus();
+                                return;
+                            }
+
+                            // 3. Validación de consistencia (Opcional pero recomendada)
+                            // Aseguramos que el valor a pagar no sea mayor al permitido por la regla del 10% que calculamos antes
+                            // (Asumiendo que txtValor ya tiene el valor correcto tras la verificación)
+
+                            // JCHID Compra Gratis 
+                            _factura.AgregarDescuentoPagoCompraGratis(valor, codigoCG);
+
+                            this.Close();
+
+                            break;
+
 
                         default:
                             break;
@@ -5869,6 +5943,52 @@ namespace POS.Control.Pagos
                     }
 
 
+                }
+
+                // -------------------------------------------------------
+                // NUEVO BLOQUE: LOGICA PARA COMPRA GRATIS
+                // -------------------------------------------------------
+                if (_pagoTipo == PagoTipo.CompraGratis)
+                {
+                    // 1. Configurar Títulos y Visibilidad
+                    lblGiftCard.Visible = true;
+                    lblGiftCard.Text = "Compra Gratis"; // Título del campo
+                    lblBanco.Visible = false;
+                    lblGiftCardSaldo.Visible = false; // En compra gratis no solemos mostrar saldo
+
+                    lblCuenta.Visible = true;
+                    txtCuenta.Visible = true;
+                    btnVerificar.Visible = true; // Botón para validar el código
+
+                    txtCuenta.Text = "";
+                    txtCuenta.NullText = "";
+
+                    // Opcional: Si es una clave secreta, descomenta la siguiente línea:
+                    // txtCuenta.PasswordChar = '*'; 
+
+                    // 2. Crear el Label de Instrucciones (letras rojas)
+                    Label nuevoLabelGratis = new Label();
+                    nuevoLabelGratis.Text = "Por favor, pistolee el código de Cliente App";
+                    nuevoLabelGratis.Location = new Point(170, 170);
+                    nuevoLabelGratis.Visible = true;
+                    nuevoLabelGratis.Font = new Font("Arial", 12, FontStyle.Bold);
+                    nuevoLabelGratis.ForeColor = Color.Red;
+                    nuevoLabelGratis.Size = new Size(255, 60);
+                    nuevoLabelGratis.Name = "lblInstruccionGratis";
+
+                    splitContainer1.Panel1.Controls.Add(nuevoLabelGratis);
+
+                    // 3. Cargar pagos previos si existen (para evitar duplicados visuales)
+                    // Asegúrate que el string coincida con lo que guardas en base de datos
+                    if (_factura.Pagos.Any(x => x.Descripcion == "COMPRA GRATIS"))
+                    {
+                        gridPagos.DataSource = _factura.Pagos.First(x => x.Descripcion == "COMPRA GRATIS").Pagos;
+                    }
+
+                    // 4. Forzar el foco al campo de texto
+                    this.BeginInvoke((MethodInvoker)delegate {
+                        txtCuenta.Focus();
+                    });
                 }
 
 
@@ -7111,11 +7231,177 @@ namespace POS.Control.Pagos
                             lblGiftCard.Visible = true;
                             lblGiftCardSaldo.Visible = true;
                             lblGiftCardSaldo.Text = validaMonedero.SaldoMonedero.ToString("N2");
-
+                           
                             flagTarjetaValida = true;
                         }
                     }
                 }
+                // Coloca esto dentro de btnVerificar_Click, justo antes de cerrar el método
+
+                if (_pagoTipo == PagoTipo.CompraGratis)
+                {
+                    // 1. BLOQUEO DE SEGURIDAD (Evita doble clic)
+                    if (_compraGratisCalculada) return;
+
+                    try
+                    {
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "btnVerificar", "Iniciando validación");
+
+                        // A. OBTENEMOS EL TEXTO CRUDO
+                        string codigoIngresado = !string.IsNullOrEmpty(_textoOriginal) ? _textoOriginal : txtCuenta.Text.Trim();
+
+                        // LOGICA DEL SPLIT (Limpiar guion si existe)
+                        if (!string.IsNullOrEmpty(codigoIngresado) && codigoIngresado.Contains("-"))
+                        {
+                            string[] partes = codigoIngresado.Split('-');
+                            if (partes.Length > 0)
+                            {
+                                codigoIngresado = partes[0].Trim();
+                                txtCuenta.Text = codigoIngresado; // Visual
+                            }
+                        }
+
+                        // Validación básica de texto vacío
+                        if (string.IsNullOrEmpty(codigoIngresado) || codigoIngresado.Contains("*"))
+                        {
+                            Control.Common.General.GetMensajeToList(10005);
+                            txtCuenta.Text = "";
+                            _textoOriginal = "";
+                            txtCuenta.Focus();
+                            return;
+                        }
+
+                        // =========================================================================
+                        // PASO CRÍTICO: VALIDACIÓN DE PERTENENCIA (CÉDULA FACTURA VS TARJETA)
+                        // =========================================================================
+
+                        string cedulaClienteActual = "";
+                        if (this._facturaApp != null)
+                        {
+                            cedulaClienteActual = this._facturaApp.ClienteIdentificacion;
+                        }
+                        else if (this._factura != null)
+                        {
+                            cedulaClienteActual = this._factura.ClienteIdentificacion;
+                        }
+
+                        if (string.IsNullOrEmpty(cedulaClienteActual))
+                        {
+                            MessageBox.Show("No se pudo identificar la cédula del cliente en la factura.", "Error Técnico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        string codigoEsperado = "666" + cedulaClienteActual.Trim();
+
+                        if (codigoIngresado != codigoEsperado)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "BasePagos", "btnVerificar",
+                                "Tarjeta ajena. Esperado: " + codigoEsperado + " - Leído: " + codigoIngresado);
+                            Control.Common.General.GetMensajeToList(10003); // Mensaje Tarjeta Ajena
+
+                            txtCuenta.Text = "";
+                            _textoOriginal = "";
+                            txtCuenta.Focus();
+                            return;
+                        }
+
+                        // =========================================================================
+                        // VALIDACIÓN CON BASE DE DATOS
+                        // =========================================================================
+
+                        using (var db = new POSEntities())
+                        {
+                            // Consultamos la tarjeta en BD
+                            var tarjeta = db.core_TarjetaDescuento.AsNoTracking()
+                                            .FirstOrDefault(x => x.codigo == codigoIngresado && x.activo == true);
+
+                            if (tarjeta == null)
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "btnVerificar", "Código no encontrado en BD: " + codigoIngresado);
+                                Control.Common.General.GetMensajeToList(10006); // Mensaje Tarjeta Ajena
+
+                                txtCuenta.Text = "";
+                                _textoOriginal = "";
+                                return;
+                            }
+
+                            // ----------------------------------------------------------------------------------
+                            // CORRECCIÓN SQL DIRECTO: Validar Términos y Condiciones sin modificar Entity Framework
+                            // ----------------------------------------------------------------------------------
+                            bool terminosAceptados = false;
+                            try
+                            {
+                                // Consulta directa a la tabla para evitar error de propiedad no mapeada en EF
+                                // Asegúrate que el nombre de tabla y columna sean correctos en tu BD
+                                string querySQL = "SELECT TOP 1 acepto_terminos FROM core_TarjetaDescuento WHERE codigo = @p0";
+                                bool? resultadoBD = db.Database.SqlQuery<bool?>(querySQL, codigoIngresado).FirstOrDefault();
+                                terminosAceptados = resultadoBD.GetValueOrDefault();
+                            }
+                            catch (Exception ex)
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "ValidarTerminosSQL", "Error obteniendo acepto_terminos: " + ex.Message);
+                                // Si falla la consulta directa, asumimos false por seguridad
+                                terminosAceptados = false;
+                            }
+                            // ----------------------------------------------------------------------------------
+
+                            if (!terminosAceptados)
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "BasePagos", "btnVerificar", "Bloqueo por TyC.");
+                                Control.Common.General.GetMensajeToList(10001);
+
+                                lblGiftCardSaldo.ForeColor = System.Drawing.Color.Red;
+                                lblGiftCardSaldo.Text = "BLOQUEADO";
+                                txtCuenta.Focus();
+                                return;
+                            }
+
+                            // Obtener Saldo
+                            decimal saldoEnTarjeta = tarjeta.saldo;
+                            lblGiftCardSaldo.Visible = true;
+                            lblGiftCardSaldo.ForeColor = System.Drawing.Color.Black;
+                            lblGiftCardSaldo.Text = saldoEnTarjeta.ToString("N2");
+
+                            if (saldoEnTarjeta <= 0)
+                            {
+                                Control.Common.General.GetMensajeToList(10004); // Mensaje "Sin saldo tarjeta"
+                                return;
+                            }
+
+                            // Calcular Monto a Pagar (Regla del 10%)
+                            decimal totalFactura = 0;
+                            decimal.TryParse(txtValor.Text.Replace("$", "").Trim(), out totalFactura);
+                            if (totalFactura <= 0) totalFactura = this.valorRestante;
+
+                            decimal montoMaximo = Math.Round(totalFactura * 0.10m, 2);
+                            decimal valorAPagar = (saldoEnTarjeta >= montoMaximo) ? montoMaximo : saldoEnTarjeta;
+
+                            // Mostrar Resultado
+                            txtValor.Text = valorAPagar.ToString("N2");
+
+                            // Mensajes de éxito
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "btnVerificar", "Aplicado: $" + valorAPagar);
+
+                            List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
+                            parametros.Add(new ParametrosMensajes() { codigo = "[valorAplicado]", valor = "$" + valorAPagar.ToString("N2") });
+                            Control.Common.General.GetMensajeToList(10000, parametros);
+
+                            // Bloqueo Final
+                            _compraGratisCalculada = true;
+                            txtCuenta.Enabled = false;
+                            btnVerificar.Enabled = false;
+                            txtValor.Focus();
+                            txtValor.SelectAll();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error técnico: " + ex.Message);
+                        _compraGratisCalculada = false;
+                        txtCuenta.Enabled = true;
+                    }
+                }
+
 
 
             }

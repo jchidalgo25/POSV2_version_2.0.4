@@ -89,6 +89,12 @@ namespace POS.Models.TarjeEmpresa
             }
         }
 
+        public void AgregarDescuentoPagoCompraGratis(decimal valor, string codigo)
+        {
+            // Implementación vacía para cumplir la interfaz ISale
+            throw new NotImplementedException();
+        }
+
         public override string GetNumeroFactura()
         {
             //Ajuste realizado porque tabla POS_VOUCHER admite un tope de 20 caracteres en el campo factura

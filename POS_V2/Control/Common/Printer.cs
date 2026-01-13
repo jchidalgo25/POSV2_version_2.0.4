@@ -117,9 +117,78 @@ namespace POS.Control.Common
             }
         }
 
+        //public static void Imprimir(string texto, int tipo = 1, int ptosInterlineado = 15)
+        //{
+
+        //    try
+        //    {
+        //        if (string.IsNullOrWhiteSpace(texto?.Trim('\r', '\n')))
+        //        {
+        //            Control.Common.Logger.LogMessage(
+        //                Control.Common.Enum.LogTypes.Info,
+        //                "Printer", "Imprimir",
+        //                "Se omitió impresión porque el texto está vacío");
+        //            return;
+        //        }
+
+        //        using (DSS.Controles.Impresion.DSSPrint printer = new DSS.Controles.Impresion.DSSPrint())
+        //        {
+        //            Console.Write(printer.PrinterSettings);
+
+        //            //printer.PrinterSettings.PrinterName = @"\\192.168.131.193\pos_demo";
+        //            printer.YLineSpacing = ptosInterlineado;
+        //            switch (tipo)
+        //            {
+        //                case 1:
+        //                    printer.PrinterFont = new System.Drawing.Font("COURIER NEW", 7, FontStyle.Bold);
+        //                    break;
+        //                case 2:
+        //                    printer.PrinterFont = new System.Drawing.Font("VERDANA", 8, FontStyle.Bold);
+        //                    break;
+        //                case 3:
+        //                    printer.PrinterFont = new System.Drawing.Font("VERDANA", 6, FontStyle.Bold);
+        //                    break;
+        //                case 4:
+        //                    printer.PrinterFont = new System.Drawing.Font("VERDANA", 5, FontStyle.Bold);
+        //                    break;
+        //                case 5:
+        //                    if (texto.Contains("<barcode>") && texto.Contains("</barcode>"))
+        //                    {
+        //                        string codigo = texto.Substring(
+        //                            texto.IndexOf("<barcode>") + 9,
+        //                            texto.IndexOf("</barcode>") - texto.IndexOf("<barcode>") - 9
+        //                        );
+
+        //                        // Eliminar las etiquetas y reemplazar por el valor directamente
+        //                        texto = texto.Replace("<barcode>", "")
+        //                                    .Replace("</barcode>", "")
+        //                                    .Replace(codigo, codigo.Trim());
+        //                    }
+        //                    break;
+
+        //                default:
+        //                    printer.PrinterFont = new System.Drawing.Font("COURIER NEW", 7, FontStyle.Bold);
+        //                    break;
+        //            }
+
+
+        //            printer.TextToPrint = texto;
+        //            printer.Print();
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Printer", "Imprimir", "error: " + ex.Message);
+        //    }
+
+        //}
+
+
+        //NUEVO METODO PARA IMPRIMIR EN EL POS NUEVO JCHID
+
         public static void Imprimir(string texto, int tipo = 1, int ptosInterlineado = 15)
         {
-
             try
             {
                 if (string.IsNullOrWhiteSpace(texto?.Trim('\r', '\n')))
@@ -133,10 +202,28 @@ namespace POS.Control.Common
 
                 using (DSS.Controles.Impresion.DSSPrint printer = new DSS.Controles.Impresion.DSSPrint())
                 {
-                    Console.Write(printer.PrinterSettings);
+                    // --------------------------------------------------------------------------
+                    // INICIO CORRECCIÓN: Error "Value '0' is not valid for Duplex"
+                    // --------------------------------------------------------------------------
+                    try
+                    {
+                        // Forzamos a Simplex (impresión simple) para sobrescribir el valor 0 inválido del driver
+                        printer.PrinterSettings.Duplex = System.Drawing.Printing.Duplex.Simplex;
+                    }
+                    catch
+                    {
+                        // Si falla, continuamos (el driver podría ignorarlo, pero evitamos que el programa se detenga)
+                    }
+                    // --------------------------------------------------------------------------
+                    // FIN CORRECCIÓN
+                    // --------------------------------------------------------------------------
 
-                    //printer.PrinterSettings.PrinterName = @"\\192.168.131.193\pos_demo";
+                    // IMPORTANTE: Esta línea se comenta porque al leer los settings para imprimirlos en consola,
+                    // puede detonar el error antes de imprimir.
+                    // Console.Write(printer.PrinterSettings);
+
                     printer.YLineSpacing = ptosInterlineado;
+
                     switch (tipo)
                     {
                         case 1:
@@ -161,8 +248,8 @@ namespace POS.Control.Common
 
                                 // Eliminar las etiquetas y reemplazar por el valor directamente
                                 texto = texto.Replace("<barcode>", "")
-                                            .Replace("</barcode>", "")
-                                            .Replace(codigo, codigo.Trim());
+                                                .Replace("</barcode>", "")
+                                                .Replace(codigo, codigo.Trim());
                             }
                             break;
 
@@ -171,7 +258,6 @@ namespace POS.Control.Common
                             break;
                     }
 
-                    
                     printer.TextToPrint = texto;
                     printer.Print();
                 }
@@ -181,8 +267,13 @@ namespace POS.Control.Common
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Printer", "Imprimir", "error: " + ex.Message);
             }
-           
         }
+        //NUEVO METODO PARA IMPRIMIR EN EL POS NUEVO JCHID
+
+
+
+
+
 
         public static void ImprimirVoucherTarjetaCredito(string tipoVoucher, Models.PrinterRecipes.VoucherTarjetaCredito recipe, bool esCopia = false)
         {

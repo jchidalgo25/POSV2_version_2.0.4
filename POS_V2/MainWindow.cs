@@ -12308,6 +12308,37 @@ namespace POS
                 EjecutaBotonPago(OrigenBoton.Pago);
                 flagProcesarDsct = false;
 
+                // =========================================================================
+                // NUEVO: VALIDACIÓN DE VISIBILIDAD DE BOTÓN COMPRA GRATIS
+                // =========================================================================
+                if (btnCompraGratis != null)
+                {
+                    // 1. Por defecto ocultamos el botón
+                    btnCompraGratis.Enabled = false;
+                    btnCompraGratis.Visible = false;
+
+                    // 2. Consultamos parámetros de fechas (Usamos AsNoTracking para velocidad)
+                    var paramInicio = db.core_parametro.AsNoTracking().FirstOrDefault(x => x.identificador == "COMPRA_GRATIS_FECHA_INICIO_CONSUMO");
+                    var paramFin = db.core_parametro.AsNoTracking().FirstOrDefault(x => x.identificador == "COMPRA_GRATIS_FECHA_FIN_CONSUMO");
+
+                    if (paramInicio != null && paramFin != null)
+                    {
+                        DateTime fechaHoy = DateTime.Now.Date;
+                        DateTime fechaInicio = DateTime.Parse(paramInicio.valor);
+                        DateTime fechaFin = DateTime.Parse(paramFin.valor);
+
+                        // 3. Primer Filtro: Fechas
+                        if (fechaHoy >= fechaInicio && fechaHoy <= fechaFin)
+                        {
+                            // ¡Cumple Fecha Mostramos el botón
+                            btnCompraGratis.Enabled = true;
+                            btnCompraGratis.Visible = true;
+
+                        }
+                    }
+                }
+                // =========================================================================
+
                 //Boton Pagar
                 List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
                 if (AplicaPromoDescuentoProductos != "")
@@ -14068,66 +14099,183 @@ namespace POS
         }
 
 
+        //public bool grabarAcumulaCompraGratis(string msj_error, Factura factura)
+        //{
+        //    try
+        //    {
+        //        if (msj_error == "" && ClienteCompraGratis != "")
+        //        {
+        //            using (POSEntities db = new POSEntities())
+        //            {
+        //                SqlParameter paramResult = new SqlParameter("@respuesta", SqlDbType.VarChar, -1);
+        //                paramResult.Direction = System.Data.ParameterDirection.Output;
+
+        //                var addParameters = new List<SqlParameter>
+        //             {
+        //                new SqlParameter("@idFactura", factura.IdFacturaPOS),
+        //                paramResult
+        //             };
+
+        //                db.Database.ExecuteSqlCommand("PtsCliente.spAcumularCompraGratis @idFactura, @respuesta out", addParameters.ToArray());
+        //                string response = (string)paramResult.Value;
+
+        //                if (!string.IsNullOrEmpty(response))
+        //                {
+        //                    factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
+        //                    return false;
+        //                }
+
+        //                var plantillaCompra = db.core_recibo.Where(x => x.identificador == "COMPRA_GRATIS").FirstOrDefault();
+
+        //                var puntoscab = db.TblPuntosCab.Where(x => x.AccountNum == ClienteCompraGratis && x.Estado == 1).ToList();
+        //                if (puntoscab != null && puntoscab.Count > 0)
+        //                {
+        //                    int idptocab = puntoscab.FirstOrDefault().IdTblPuntosCab;
+        //                    decimal saldoPuntos = puntoscab.Sum(x => x.Saldo);
+        //                    var acumulaFactura = db.TblPuntos.Where(x => x.IdTblPuntosCab == idptocab && x.Id_Factura == factura.IdFacturaPOS).ToList();
+        //                    string mensaje = "";
+        //                    if (acumulaFactura != null && acumulaFactura.Count > 0)
+        //                    {
+        //                        mensaje = plantillaCompra.cuerpo;
+
+        //                        mensaje = mensaje.Replace("<<PTOSNUEVOS>>", acumulaFactura.FirstOrDefault().Saldo.ToString("N2"));
+        //                        mensaje = mensaje.Replace("<<PTOSACUMULADOS>>", saldoPuntos.ToString("N2"));
+        //                    }
+        //                    factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", mensaje);
+        //                }
+        //            }
+        //        }
+        //        factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
+
+        //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "grabarAcumulaCompraGratis", "Finaliza grabarAcumulaCompraGratis");
+        //        return true;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", $"Finaliza grabarAcumulaCompraGratis, error: {ex.Message}");
+        //        return false;
+        //    }
+
+        //}
+
+        // Nuevo metodo de grabarAcumulaCompraGratis desarrollado por JCHID
         public bool grabarAcumulaCompraGratis(string msj_error, Factura factura)
         {
             try
             {
-                if (msj_error == "" && ClienteCompraGratis != "")
+                // 1. Validaciones
+                if (!string.IsNullOrEmpty(msj_error)) return false;
+
+                if (!factura.EsClienteApp)
                 {
-                    using (POSEntities db = new POSEntities())
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "grabarAcumulaCompraGratis", "Cliente NO es usuario APP. Se omite.");
+                    if (factura.Recibo != null)
+                        factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
+                    return true;
+                }
+
+                using (POSEntities db = new POSEntities())
+                {
+                    // 2. Ejecutar SP
+                    SqlParameter paramResult = new SqlParameter("@respuesta", SqlDbType.VarChar, -1);
+                    paramResult.Direction = System.Data.ParameterDirection.Output;
+
+                    var addParameters = new List<SqlParameter>
+            {
+                new SqlParameter("@idFactura", factura.IdFacturaPOS),
+                paramResult
+            };
+
+                    db.Database.ExecuteSqlCommand("PtsCliente.spAcumularCompraGratis @idFactura, @respuesta out", addParameters.ToArray());
+
+                    string response = (string)paramResult.Value;
+
+                    if (!string.IsNullOrEmpty(response))
                     {
-                        SqlParameter paramResult = new SqlParameter("@respuesta", SqlDbType.VarChar, -1);
-                        paramResult.Direction = System.Data.ParameterDirection.Output;
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "MainWindow", "grabarAcumulaCompraGratis", "SP respondió: " + response);
+                        if (factura.Recibo != null) factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
+                        return false;
+                    }
 
-                        var addParameters = new List<SqlParameter>
-                     {
-                        new SqlParameter("@idFactura", factura.IdFacturaPOS),
-                        paramResult
-                     };
+                    // =========================================================================
+                    // 3. LECTURA DE PUNTOS
+                    // =========================================================================
 
-                        db.Database.ExecuteSqlCommand("PtsCliente.spAcumularCompraGratis @idFactura, @respuesta out", addParameters.ToArray());
-                        string response = (string)paramResult.Value;
+                    var plantillaCompra = db.core_recibo.AsNoTracking()
+                                            .Where(x => x.identificador == "COMPRA_GRATIS")
+                                            .FirstOrDefault();
 
-                        if (!string.IsNullOrEmpty(response))
+                    var puntosCompraGratis = db.TblPuntos.AsNoTracking()
+                        .Where(x => x.Id_Factura == factura.IdFacturaPOS && x.IdLstCampania == 7)
+                        .ToList();
+
+                    if (puntosCompraGratis != null && puntosCompraGratis.Count > 0 && plantillaCompra != null)
+                    {
+                        decimal ganadoHoy = puntosCompraGratis.Sum(x => x.Saldo);
+
+                        // ---------------------------------------------------------------------
+                        // PASO NUEVO: MOSTRAR MENSAJE EN PANTALLA (ID 10002)
+                        // ---------------------------------------------------------------------
+                        try
                         {
-                            factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
-                            return false;
-                        }
-
-                        var plantillaCompra = db.core_recibo.Where(x => x.identificador == "COMPRA_GRATIS").FirstOrDefault();
-
-                        var puntoscab = db.TblPuntosCab.Where(x => x.AccountNum == ClienteCompraGratis && x.Estado == 1).ToList();
-                        if (puntoscab != null && puntoscab.Count > 0)
-                        {
-                            int idptocab = puntoscab.FirstOrDefault().IdTblPuntosCab;
-                            decimal saldoPuntos = puntoscab.Sum(x => x.Saldo);
-                            var acumulaFactura = db.TblPuntos.Where(x => x.IdTblPuntosCab == idptocab && x.Id_Factura == factura.IdFacturaPOS).ToList();
-                            string mensaje = "";
-                            if (acumulaFactura != null && acumulaFactura.Count > 0)
+                            // Preparamos el parámetro para reemplazar [totalCG] por el valor real
+                            List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
+                            parametros.Add(new ParametrosMensajes()
                             {
-                                mensaje = plantillaCompra.cuerpo;
+                                codigo = "[totalCG]",
+                                valor = "$" + ganadoHoy.ToString("N2")
+                            });
 
-                                mensaje = mensaje.Replace("<<PTOSNUEVOS>>", acumulaFactura.FirstOrDefault().Saldo.ToString("N2"));
-                                mensaje = mensaje.Replace("<<PTOSACUMULADOS>>", saldoPuntos.ToString("N2"));
-                            }
-                            factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", mensaje);
+                            // Lanzamos el mensaje visual al cajero
+                            Control.Common.General.GetMensajeToList(10002, parametros);
                         }
+                        catch (Exception ex)
+                        {
+                            // Protegemos con try-catch para que un error visual no detenga la impresión de la factura
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "MainWindow", "grabarAcumulaCompraGratis", "No se pudo mostrar mensaje 10002: " + ex.Message);
+                        }
+                        // ---------------------------------------------------------------------
+
+                        int idCabeceraCorrecta = puntosCompraGratis.FirstOrDefault().IdTblPuntosCab;
+
+                        // C. CORRECCIÓN: Calculamos el Saldo Total REAL (Ignorando expirados)
+                        DateTime fechaHoy = DateTime.Now;
+
+                        decimal saldoTotal = db.TblPuntos.AsNoTracking()
+                            .Where(x => x.IdTblPuntosCab == idCabeceraCorrecta
+                                                    && x.Saldo > 0
+                                                    && x.FechaExpiracion >= fechaHoy)
+                            .Sum(x => (decimal?)x.Saldo) ?? 0;
+
+                        // D. Reemplazamos en el recibo
+                        string mensaje = plantillaCompra.cuerpo;
+                        mensaje = mensaje.Replace("<<PTOSNUEVOS>>", ganadoHoy.ToString("N2"));
+                        mensaje = mensaje.Replace("<<PTOSACUMULADOS>>", saldoTotal.ToString("N2"));
+
+                        if (factura.Recibo != null)
+                            factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", mensaje);
+
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "grabarAcumulaCompraGratis", "Ticket actualizado con éxito. Ganado: " + ganadoHoy);
+                    }
+                    else
+                    {
+                        // Limpieza si no encontró puntos
+                        if (factura.Recibo != null)
+                            factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
                     }
                 }
-                factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
 
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "grabarAcumulaCompraGratis", "Finaliza grabarAcumulaCompraGratis");
                 return true;
-
             }
             catch (Exception ex)
             {
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", $"Finaliza grabarAcumulaCompraGratis, error: {ex.Message}");
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "grabarAcumulaCompraGratis", $"Error crítico: {ex.Message}");
+                if (factura.Recibo != null) factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
                 return false;
             }
-
         }
-
+        // Nuevo metodo de grabarAcumulaCompraGratis desarrollado por JCHID
 
 
         private void ejecutaGrabar()
@@ -21539,6 +21687,102 @@ namespace POS
         }
 
 
+        private void btnCompraGratis_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 1. Log de auditoría
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnCompraGratis_Click", "El cajero ha pulsado el botón Compra Gratis");
+
+                // =============================================================================
+                // PASO 1: APLICAR DESCUENTOS Y RECALCULAR (IGUAL QUE BOTÓN EFECTIVO)
+                // =============================================================================
+                // Primero quitamos promociones de tarjeta para limpiar
+                QuitarDescuentoPromocionTarjetaBines();
+
+                // Si es empleado, aplicamos la lógica de "revisarCambioEnTotal" para que baje el precio (ej. de 7.96 a 7.56)
+                if (_factura.EsEmpleadoLiris && _factura.PedidoOtraApp.Tipo == (byte)CANALVENTA.VENTANORMALPOS)
+                {
+                    revisarCambioEnTotal("TAR PORTAL", "TAR PORTAL");
+                }
+
+                // =============================================================================
+                // PASO 2: OBTENER EL VALOR RESTANTE ACTUALIZADO
+                // =============================================================================
+                // Leemos el label AHORA, después de haber hecho el recálculo de arriba.
+                //decimal valorRestante = 0;
+                //decimal.TryParse(this.lblRestante.Text.Replace("$", ""), out valorRestante);
+                decimal valorRestante = _factura.getSubTotal();
+
+
+
+                // Validación de seguridad
+                if (valorRestante <= 0)
+                {
+                    MessageBox.Show("No hay saldo pendiente por cobrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // =============================================================================
+                // PASO 3: ACTUALIZAR LA UI PRINCIPAL
+                // =============================================================================
+                // Llenamos la cajita de texto principal para que todo el sistema sepa cuánto vamos a cobrar
+                this.txtPagoValor.Text = valorRestante.ToString("N2");
+
+                // Define el nombre para reportes (opcional, por si tu lógica interna lo usa)
+                string formaPago = "COMPRA GRATIS";
+                // revisarCambioEnTotal(formaPago, formaPago); // <-- OJO: Si habilitas esto, asegúrate que no te quite el descuento de empleado. Si funciona bien con el bloque de arriba, déjalo comentado.
+
+                // =============================================================================
+                // PASO 4: ABRIR LA VENTANA DE PAGO (BasePagos)
+                // =============================================================================
+
+                var tipoDePagoAUsar = Control.Pagos.BasePagos.PagoTipo.CompraGratis;
+
+                // Pasamos 'valorRestante' que ya tiene el descuento aplicado (7.56)
+                using (var basePago = new POS.Control.Pagos.BasePagos(
+                                                tipoDePagoAUsar,
+                                                ref _factura,
+                                                valorRestante))
+                {
+                    // Configuración de la ventana emergente
+                    basePago._mainWindow = this;
+                    basePago.StartPosition = FormStartPosition.CenterParent;
+                    basePago.Owner = this;
+
+                    // Muestra la ventana y espera a que el cajero termine
+                    var result = basePago.ShowDialog(this);
+
+                    // =========================================================================
+                    // PASO 5: PROCESAR EL RESULTADO AL CERRAR
+                    // =========================================================================
+
+                    // Liberamos bloqueos de foco
+                    _bloquearFocoEnActivacion = false;
+
+                    // Limpiamos y ejecutamos la lógica final de cobro
+                    txtPagoValor.Clear();
+                    flagEjecutaPago = true;
+                    EjecutaBotonPago(OrigenBoton.Pago); // Esto dispara el guardado final
+                    flagProcesarDsct = false;
+
+                    calcularFactura();
+                    agregaFormasPagoTmpFile();
+
+                    // Devolver el foco al campo principal
+                    this.BeginInvoke((MethodInvoker)delegate {
+                        txtPagoValor.Focus();
+                        if (txtPagoValor is Telerik.WinControls.UI.RadTextBox textBox)
+                            textBox.SelectAll();
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "btnCompraGratis_Click", "Error al abrir Compra Gratis - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex), "StackTrace: " + ex.StackTrace);
+            }
+        }
+
 
         // Carga la temporal.  JM 11-09-2019 
         //public void CargaFacturaTmpFile(object sender, DoWorkEventArgs e)
@@ -22725,9 +22969,10 @@ namespace POS
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "VerificarSaldoCompraGratis"
                         , "El saldo actual de la Billetera Electrónica es $ " + saldoCompraGratis.ToString());
 
-                    List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
-                    parametros.Add(new ParametrosMensajes() { codigo = "[saldoCompraGratis]", valor = saldoCompraGratis.ToString() });
-                    Control.Common.General.GetMensajeToList(310, parametros);
+                    //comentar esto por que asi no funciona tu compra gratis JCHID
+                    //List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
+                    //parametros.Add(new ParametrosMensajes() { codigo = "[saldoCompraGratis]", valor = saldoCompraGratis.ToString() });
+                    //Control.Common.General.GetMensajeToList(310, parametros);
 
 
                     btnMonedero.Visible = true;
@@ -22813,41 +23058,143 @@ namespace POS
                 }
             }
         }
-        
+
+
+        //private Boolean grabarConsumoCompraGratis(string msj_error, string codigoCompraGratis)
+        //{
+        //    if (msj_error == "" && _factura.usoTarjetaCompraGratis == true)
+        //    {
+        //        POSEntities db = new POSEntities();
+        //        SqlParameter paramResult = new SqlParameter("@respuesta", "");
+        //        paramResult.Direction = System.Data.ParameterDirection.Output;
+        //        string xmlconsumo = "<root><req idf='" + _factura.IdFacturaPOS + "' cliente='" + _factura.ClienteIdentificacion + "' monto='" + montoCompraGratis + "' fecha='" + DateTime.Now.ToString("yyyyMMdd") + "' /></root>";
+        //        var addParameters = new List<SqlParameter>
+        //             {
+        //                new SqlParameter("@xmlRequest", xmlconsumo),
+        //                paramResult
+        //             };
+
+        //        db.Database.ExecuteSqlCommand("PtsCliente.spConsumoCompraGratis @xmlRequest, @respuesta out", addParameters.ToArray());
+        //        string response = (string)paramResult.Value;
+
+        //        if (!string.IsNullOrEmpty(response))
+        //            return false;
+
+        //        //core_parametro parametro = new core_parametro();
+        //        //core_TarjetaDescuento ctd;
+        //        //ctd = db.core_TarjetaDescuento.Where(x => x.codigo == codigoCompraGratis).FirstOrDefault();
+        //        //ctd.fecha_modificacion = DateTime.Now;
+        //        //ctd.saldo = saldoCompraGratis;
+        //        //ctd.fecha_activacion = activaConsumoCompraGratis;
+        //        //ctd.fecha_expiracion = expiraConsumoCompraGratis;
+        //        //ctd.codigoCliente = _factura.Cliente_codigo;
+        //        //db.SaveChanges();
+
+        //    }
+        //    return true;
+        //}
+
 
         private Boolean grabarConsumoCompraGratis(string msj_error, string codigoCompraGratis)
         {
-            if (msj_error == "" && _factura.usoTarjetaCompraGratis == true)
+            try
             {
-                POSEntities db = new POSEntities();
-                SqlParameter paramResult = new SqlParameter("@respuesta", "");
-                paramResult.Direction = System.Data.ParameterDirection.Output;
-                string xmlconsumo = "<root><req idf='" + _factura.IdFacturaPOS + "' cliente='" + _factura.ClienteIdentificacion + "' monto='" + montoCompraGratis + "' fecha='" + DateTime.Now.ToString("yyyyMMdd") + "' /></root>";
-                var addParameters = new List<SqlParameter>
-                     {
-                        new SqlParameter("@xmlRequest", xmlconsumo),
-                        paramResult
-                     };
+                // 1. VALIDACIONES INICIALES
+                if (!string.IsNullOrEmpty(msj_error)) return false;
 
-                db.Database.ExecuteSqlCommand("PtsCliente.spConsumoCompraGratis @xmlRequest, @respuesta out", addParameters.ToArray());
-                string response = (string)paramResult.Value;
+                // -----------------------------------------------------------------------------------
+                // CORRECCIÓN: BUSCAMOS EN DESCUENTOS, NO EN PAGOS
+                // -----------------------------------------------------------------------------------
 
-                if (!string.IsNullOrEmpty(response))
-                    return false;
+                // Antes (Mal porque ya no es pago): 
+                // var pagoCG = _factura.Pagos.FirstOrDefault(x => x.Descripcion == "COMPRA GRATIS");
 
-                //core_parametro parametro = new core_parametro();
-                //core_TarjetaDescuento ctd;
-                //ctd = db.core_TarjetaDescuento.Where(x => x.codigo == codigoCompraGratis).FirstOrDefault();
-                //ctd.fecha_modificacion = DateTime.Now;
-                //ctd.saldo = saldoCompraGratis;
-                //ctd.fecha_activacion = activaConsumoCompraGratis;
-                //ctd.fecha_expiracion = expiraConsumoCompraGratis;
-                //ctd.codigoCliente = _factura.Cliente_codigo;
-                //db.SaveChanges();
+                // Ahora (Bien, buscamos en la lista de descuentos que calculamos antes):
+                // Asegúrate de que 'this.Descuentos2' esté accesible aquí. Si este método está en la misma
+                // clase que 'prepararImpresion', funcionará perfecto.
+                var dsctoCG = _factura.Descuentos2.FirstOrDefault(x => x.Tipo == "COMPRA GRATIS");
 
+                // Si no existe el descuento o es 0, no hay nada que consumir en la nube
+                if (dsctoCG == null || dsctoCG.Valor <= 0) return true;
+
+                // El monto a descontar de la nube es el valor del descuento aplicado
+                decimal montoDescontar = dsctoCG.Valor;
+
+                // -----------------------------------------------------------------------------------
+
+                // 2. PREPARAR DATOS PARA EL XML
+
+                // A. ID Factura
+                string idFactura = _factura.IdFacturaPOS.ToString();
+                if (_factura.IdFacturaPOS == 0)
+                {
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "MainWindow", "grabarConsumoCompraGratis", "Alerta: ID de factura es 0");
+                }
+
+                // B. Cliente
+                string idCliente = _factura.ClienteIdentificacion;
+
+                // C. Monto (Invariant Culture para decimales con punto)
+                string montoStr = montoDescontar.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+                // D. Fecha
+                string fechaStr = DateTime.Now.ToString("yyyy-MM-dd");
+
+                // 3. CONSTRUIR XML
+                string xmlConsumo = string.Format(
+                    "<root><req idf=\"{0}\" cliente=\"{1}\" monto=\"{2}\" fecha=\"{3}\" /></root>",
+                    idFactura,
+                    idCliente,
+                    montoStr,
+                    fechaStr
+                );
+
+                // 4. EJECUTAR EL STORED PROCEDURE
+                using (POSEntities db = new POSEntities())
+                {
+                    var paramXml = new SqlParameter("@xmlRequest", System.Data.SqlDbType.Xml)
+                    {
+                        Value = xmlConsumo
+                    };
+
+                    var paramRespuesta = new SqlParameter("@respuesta", System.Data.SqlDbType.VarChar, -1)
+                    {
+                        Direction = System.Data.ParameterDirection.Output
+                    };
+
+                    // Ejecutamos el SP: [PtsCliente].[spConsumoCompraGratis]
+                    // NOTA: Asegúrate de que ya actualizaste el SP en la base de datos con la corrección
+                    // de UPPER/TRIM que vimos antes para que no falle la validación.
+                    db.Database.ExecuteSqlCommand(
+                        "Exec [PtsCliente].[spConsumoCompraGratis] @xmlRequest, @respuesta OUT",
+                        paramXml,
+                        paramRespuesta
+                    );
+
+                    // 5. ANALIZAR RESPUESTA
+                    string respuestaSP = paramRespuesta.Value != null ? paramRespuesta.Value.ToString() : "";
+
+                    // LOG DE RESULTADO
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info,
+                        "MainWindow",
+                        "grabarConsumoCompraGratis",
+                        string.Format("Consumo Puntos > XML: {0} | Respuesta SP: {1} | Monto: {2}", xmlConsumo, respuestaSP, montoStr));
+                }
+
+                return true;
             }
-            return true;
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error,
+                    "MainWindow",
+                    "grabarConsumoCompraGratis",
+                    "Error Crítico al descontar saldo: " + ex.Message);
+
+                return false;
+            }
         }
+
+
 
         public void AnulaDsctoCompraGratis()
         {

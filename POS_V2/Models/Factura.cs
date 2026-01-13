@@ -1433,6 +1433,21 @@ namespace POS.Models
             }
         }
 
+        public void AgregarDescuentoPagoCompraGratis(decimal valor, string codigo)
+        {
+            this.Descuentos2.Add(new DescuentoAdicional()
+            {
+                Tipo = "COMPRA GRATIS",
+                Valor = valor,
+                Porcentaje = 0,
+                Codigo = codigo
+            });
+            CalcularPagos();
+
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Factura", "AgregarPagoCompraGratis", "Se aplicó beneficio Compra Gratis...");
+        }
+
+
         public void borrarDescuentoFormaPago(string codigo)
         {
             for (var i = 0; i < this.Descuentos2.Count; i++)
@@ -3181,16 +3196,61 @@ namespace POS.Models
                                                     , "</b>")
                                                     );
             }
-            var descuento2_ = (this.Descuentos2.Count > 0) ? decimal.Round(this.Descuentos2.Max(x => x.Valor), 2, MidpointRounding.AwayFromZero) : this.Descuento2;// this.Descuentos2;
+
+            // -----------------------------------------------------------------------------------------
+            // BLOQUE 1: DESCUENTO PROMOCIONAL (Empleado, VIP, Otros)
+            // -----------------------------------------------------------------------------------------
+            // Sumamos todo lo que NO sea Compra Gratis
+            var valorOtrosDescuentos = this.Descuentos2
+                                           .Where(x => x.Tipo != "COMPRA GRATIS")
+                                           .Sum(x => x.Valor);
+
+            string textoPromocional = "";
+
+            if (valorOtrosDescuentos > 0)
+            {
+                // Usamos la misma alineación (52) para que se vea ordenado
+                textoPromocional = "Desc. Promocional".PadRight(48, ' ')
+                                   + ":"
+                                   + Control.Common.StringHelper.DevolverConPadding(valorOtrosDescuentos.ToString("N2"), 23)
+                                   + "\r\n";
+            }
+
+            // Reemplazamos la etiqueta <<descuentopromocional>>
+            // Si no hay descuento, se reemplaza por vacío y no imprime nada.
+            this.Recibo = this.Recibo.Replace("<<descuentopromocional>>", textoPromocional);
+
+            // -----------------------------------------------------------------------------------------
+            // 2. NUEVO CÓDIGO: GENERAR LÍNEA DE COMPRA GRATIS (Aquí empieza la magia)
+            // -----------------------------------------------------------------------------------------
+            // Buscamos el descuento en la lista usando "Tipo"
+            var objCompraGratis = this.Descuentos2.FirstOrDefault(x => x.Tipo == "COMPRA GRATIS");
+            string textoCompraGratis = "";
+
+            // Usamos .Valor porque es la propiedad que usas en tu código (según vi en tu línea de Max(x=>x.Valor))
+            if (objCompraGratis != null && objCompraGratis.Valor > 0)
+            {
+                // Formato: Texto alineado + tabulador + : + Valor alineado + salto de linea
+                textoCompraGratis = "Compra Gratis".PadRight(51, ' ')
+                                    + ":"
+                                    + Control.Common.StringHelper.DevolverConPadding(objCompraGratis.Valor.ToString("N2"), 23)
+                                    + "\r\n";
+            }
+
+            // REEMPLAZAMOS LA ETIQUETA EN LA FACTURA AHORA MISMO
+            this.Recibo = this.Recibo.Replace("<<det_compragratis>>", textoCompraGratis);
+            // -----------------------------------------------------------------------------------------
+
+            var descuento2_ = (this.Descuentos2.Count > 0) ? decimal.Round(this.Descuentos2.Sum(x => x.Valor), 2, MidpointRounding.AwayFromZero) : this.Descuento2;// this.Descuentos2;
             //Por solicitud de ajSaab, las facturas no deben mostrar seccion descuentos si no hay descuentos
             var totalDsctos = totalDsctosProductos + descuento2_ + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0);
             //var totalDsctos = totalDsctosProductos + (this.GetPromoIva() > 0 ? this.getIVA(false) : 0);
             if (totalDsctos == 0)
             {
                 this.Recibo = this.Recibo.Replace(@"
-<b>----------DETALLE DE DESCUENTOS---------------------------</b>
-<<descuentoproductos>><<promo_iva>>
-<b>Total descuentos		:<<total_descuentos>></b>", string.Empty);
+                <b>----------DETALLE DE DESCUENTOS---------------------------</b>
+                <<descuentoproductos>><<det_compragratis>><<promo_iva>>
+                <b>Total descuentos		:<<total_descuentos>></b>", string.Empty);
             }
 
             this.Recibo = regex.Replace(this.Recibo, items.ToString());
@@ -3214,8 +3274,10 @@ namespace POS.Models
                 //pagos.AppendLine(pago.Descripcion + " : " + String.Format("{0,10:0.00}", pago.Valor.ToString("N2")));
                 if (pago.Descripcion == "DINE ELECT")
                     pagos.AppendLine(POS.Control.Common.GlobalParameters.MonederoEtiquetaRecibo + Convert.ToChar(9) + ":" + Control.Common.StringHelper.DevolverConPadding(pago.Valor.ToString("N2"), 41));
-                else
+                else if (pago.Descripcion == "EFECTIVO")
                     pagos.AppendLine(pago.Descripcion + Convert.ToChar(9) + ":" + Control.Common.StringHelper.DevolverConPadding(pago.Valor.ToString("N2"), 65));
+                else
+                    pagos.AppendLine(pago.Descripcion + Convert.ToChar(9) + ":" + Control.Common.StringHelper.DevolverConPadding(pago.Valor.ToString("N2"), 53));
             }
             this.Recibo = regex.Replace(this.Recibo, pagos.ToString());
 
@@ -3272,14 +3334,65 @@ namespace POS.Models
 
             //this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", String.Format("{0,10:0.00}", (this.getBase12() - ((this.getDescuentos() + this.getDescuentos2()) - this.getDescuentos0())).ToString("N2")));
             //this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase12() - ((this.GetDescuentos() + (this.GetBase12() >= ((this.Descuentos2.Count > 0) ? this.getDescuentos2() : this.Descuento2) ? ((this.Descuentos2.Count > 0) ? this.getDescuentos2() : this.Descuento2) : 0) ) - this.getDescuentos0()) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
-            this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase12() - ((this.GetDescuentos() + (this.Descuentos2.Count > 0 ? (decimal.Round(this.Descuentos2.Max(x => x.Porcentaje), 2, MidpointRounding.AwayFromZero) / 100) : (this.Descuento2 / (this.GetBase0() + this.GetBase12()))) * this.GetBase12()) - this.getDescuentos0()) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
+            //this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase12() - ((this.GetDescuentos() + (this.Descuentos2.Count > 0 ? (decimal.Round(this.Descuentos2.Max(x => x.Porcentaje), 2, MidpointRounding.AwayFromZero) / 100) : (this.Descuento2 / (this.GetBase0() + this.GetBase12()))) * this.GetBase12()) - this.getDescuentos0()) - (this.GetPromoIva() > 0 ? this.getIVA(false) : 0)).ToString("N2"), 65));
+            //decimal valorTarifa15Simple = this.GetBase12()
+            //                  - (this.GetDescuentos() - this.getDescuentos0()) // Descuentos normales de producto
+            //                  - descuento2_;                                   // Tu Compra Gratis + Empleado
+
+            //// 3. Reemplazo en la factura
+            //this.Recibo = this.Recibo.Replace("<<subtotal_desc>>", Control.Common.StringHelper.DevolverConPadding(valorTarifa15Simple.ToString("N2"), 65));
+
+            // -----------------------------------------------------------------------------------------
+            // CÁLCULO DEFINITIVO DE TARIFAS NETAS (Soporte para descuentos de línea + globales)
+            // -----------------------------------------------------------------------------------------
+
+            // 1. Obtenemos bases BRUTAS (Sumatoria de precios full) y Descuentos de LÍNEA
+            decimal b0_Bruta = this.GetBase0();
+            decimal b12_Bruta = this.GetBase12();
+
+            decimal dsctoLineaTotal = this.GetDescuentos();
+            decimal dsctoLinea0 = this.getDescuentos0();
+            // El descuento de línea para tarifa 12 es el total menos el de tarifa 0
+            decimal dsctoLinea12 = dsctoLineaTotal - dsctoLinea0;
+
+            // 2. Calculamos las BASES "SEMI-NETAS"
+            // (Esto es lo que realmente cuestan los productos antes de aplicar descuentos globales)
+            // ESTA ES LA CORRECCIÓN CLAVE: Restamos el descuento de línea ANTES de calcular factores.
+            decimal b0_SemiNeta = b0_Bruta - dsctoLinea0;
+            decimal b12_SemiNeta = b12_Bruta - dsctoLinea12;
+            decimal totalSemiNeto = b0_SemiNeta + b12_SemiNeta; // Esto debería coincidir con tu Subtotal
+
+            // 3. Calculamos los FACTORES (Pesos) basados en las bases Semi-Netas
+            decimal factor0 = (totalSemiNeto > 0) ? (b0_SemiNeta / totalSemiNeto) : 0;
+            decimal factor12 = (totalSemiNeto > 0) ? (b12_SemiNeta / totalSemiNeto) : 0;
+
+            // 4. Obtenemos y repartimos el DESCUENTO GLOBAL (Compra Gratis, Empleado, etc.)
+            decimal dineroDescuentoGlobal = this.Descuentos2.Sum(x => x.Valor);
+
+            decimal globalPara0 = dineroDescuentoGlobal * factor0;
+            decimal globalPara12 = dineroDescuentoGlobal * factor12;
+
+            // 5. Calculamos los VALORES FINALES A IMPRIMIR
+            // Base SemiNeta - Su parte del Descuento Global
+            decimal valorFinalTarifa0 = b0_SemiNeta - globalPara0;
+            decimal valorFinalTarifa15 = b12_SemiNeta - globalPara12;
+
+            // -----------------------------------------------------------------------------------------
+            // INYECCIÓN EN EL RECIBO
+            // -----------------------------------------------------------------------------------------
+            this.Recibo = this.Recibo.Replace("<<subtotal_desc0>>",
+                Control.Common.StringHelper.DevolverConPadding(valorFinalTarifa0.ToString("N2"), 65));
+
+            this.Recibo = this.Recibo.Replace("<<subtotal_desc>>",
+                Control.Common.StringHelper.DevolverConPadding(valorFinalTarifa15.ToString("N2"), 65));
+
 
             this.Recibo = this.Recibo.Replace("<<factura_descuento>>", String.Format("{0,09:0.00}", (this.GetDescuentos() + this.getDescuentos2() - this.getDescuentos0()).ToString("N2")));
             this.Recibo = this.Recibo.Replace("<<factura_descuento0>>", String.Format("{0,09:0.00}", (this.getDescuentos0()).ToString("N2")));
             this.Recibo = this.Recibo.Replace("<<factura_total>>", Control.Common.StringHelper.DevolverConPadding(this.GetTotal().ToString("N2"), 65));
             this.Recibo = this.Recibo.Replace("<<total_pagar>>", String.Format("{0,10:0.00}", this.GetTotal().ToString("N2")));
 
-            this.Recibo = this.Recibo.Replace("<<subtotal_desc0>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() - ((this.Descuentos2.Count > 0 ? (decimal.Round(this.Descuentos2.Max(x => x.Porcentaje), 2, MidpointRounding.AwayFromZero) / 100) : (this.Descuento2 / (this.GetBase0() + this.GetBase12()))) * this.GetBase0()) - this.getDescuentos0()).ToString("N2"), 65));
+            //this.Recibo = this.Recibo.Replace("<<subtotal_desc0>>", Control.Common.StringHelper.DevolverConPadding((this.GetBase0() - ((this.Descuentos2.Count > 0 ? (decimal.Round(this.Descuentos2.Max(x => x.Porcentaje), 2, MidpointRounding.AwayFromZero) / 100) : (this.Descuento2 / (this.GetBase0() + this.GetBase12()))) * this.GetBase0()) - this.getDescuentos0()).ToString("N2"), 65));
             if (this.GetBase12Desc() > 0) this.Recibo = this.Recibo.Replace("<<desc_iva>>", String.Format("{0,10:0.00}", ((this.getDescuentos2() / this.GetBase12Desc()) * this.GetBase12Desc()).ToString("N2"))); //*100/12=8.33 regla de 3 para calculo de subtotal con descuento para productos iva 12
             else this.Recibo = this.Recibo.Replace("<<desc_iva>>", String.Format("{0,10:0.00}", "0.00"));
             this.Recibo = this.Recibo.Replace("<<factura_iva>>", Control.Common.StringHelper.DevolverConPadding(this.getIVA().ToString("N2"), 65));

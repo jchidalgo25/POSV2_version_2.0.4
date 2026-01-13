@@ -55,6 +55,14 @@ namespace POS.Models.Giftcard
             set { _atendidoPor = value; }
         }
 
+        public void AgregarDescuentoPagoCompraGratis(decimal valor, string codigo)
+        {
+            // Dejamos esto vacío o lanzamos error porque la venta de GiftCards 
+            // probablemente no soporta "Compra Gratis".
+            // Esto es solo para satisfacer al compilador.
+            throw new NotImplementedException();
+        }
+
         private decimal _purchaseValue = 0M;
         public decimal PurchaseValue { get { return _purchaseValue; } set { _purchaseValue = value; } }
 

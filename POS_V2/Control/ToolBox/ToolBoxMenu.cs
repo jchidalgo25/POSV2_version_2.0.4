@@ -747,56 +747,123 @@ namespace POS.Control.ToolBox
         }
 
         //
+        //public static void MostrarPantallaClteTouch()
+        //{
+
+        //    try
+        //    {
+        //        //Control.Common.GlobalParameters.PANTALLA_CLIENTE = false;
+        //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.ToolBox.ToolBoxMenu", "MostrarPantallaClteTouch", "Ejecuta metodo para ver pantalla de cliente");
+
+        //        var pantallas = Screen.AllScreens;
+        //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.ToolBox.ToolBoxMenu", "MostrarPantallaClteTouch", "Ejecuta metodo para ver pantalla de cliente");
+
+        //        // Posicionar en otra pantalla si es posible
+        //        if (Screen.AllScreens.Length > 1)
+        //        {
+        //            // Define las dimensiones que buscas
+        //            int targetWidth = Control.Common.GlobalParameters.targetWidth;
+        //            int targetHeight = Control.Common.GlobalParameters.targetHeight;
+
+        //            if (Control.Common.GlobalParameters.PANTALLA_CLIENTE)
+        //            {
+
+        //                Rectangle areaToUse = Control.Common.General.GetRectangleClte();
+        //                frmMainTouchClte frmTouchClte = new frmMainTouchClte(); //para pruebas JCHID
+        //                //frmPromocionPantallaCliente frmTouchClte = new frmPromocionPantallaCliente();
+        //                frmTouchClte.StartPosition = FormStartPosition.Manual;
+        //                frmTouchClte.Location = new Point(areaToUse.Left, areaToUse.Top);
+        //                frmTouchClte.Size = areaToUse.Size; // Ocupa toda la pantalla
+        //                frmTouchClte.TopMost = true; // Forzar que esté encima de otros formularios
+        //                frmTouchClte.Show();
+        //                frmTouchClte.BringToFront();
+
+        //                Control.Common.GlobalParameters.frmTouchClte = frmTouchClte; //comentado para pruebas JCHID
+        //                //Control.Common.GlobalParameters.frmPromocionPantallaCliente = frmTouchClte;
+
+        //                // Forzar la posición usando SetWindowPos (opcional)
+        //                IntPtr handle = frmTouchClte.Handle;
+        //                const uint SWP_SHOWWINDOW = 0x0040;
+        //                SetWindowPos(handle, IntPtr.Zero, areaToUse.Left, areaToUse.Top, areaToUse.Width, areaToUse.Height, SWP_SHOWWINDOW);
+
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MostrarPantallaClteTouch", $"Error: {ex.Message}");
+        //    }
+            
+
+        //}
+
+
+        // correcion del metodo para mostrar la pantalla de publicidad 
         public static void MostrarPantallaClteTouch()
         {
-
             try
             {
-                //Control.Common.GlobalParameters.PANTALLA_CLIENTE = false;
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.ToolBox.ToolBoxMenu", "MostrarPantallaClteTouch", "Ejecuta metodo para ver pantalla de cliente");
 
-                var pantallas = Screen.AllScreens;
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.ToolBox.ToolBoxMenu", "MostrarPantallaClteTouch", "Ejecuta metodo para ver pantalla de cliente");
-
-                // Posicionar en otra pantalla si es posible
+                // Validar si hay más de una pantalla conectada
                 if (Screen.AllScreens.Length > 1)
                 {
-                    // Define las dimensiones que buscas
-                    int targetWidth = Control.Common.GlobalParameters.targetWidth;
-                    int targetHeight = Control.Common.GlobalParameters.targetHeight;
-
+                    // Verificamos si la funcionalidad está activa por configuración
                     if (Control.Common.GlobalParameters.PANTALLA_CLIENTE)
                     {
-
+                        // 1. Obtener el rectángulo de la segunda pantalla (usando tu método que ya validamos que funciona)
                         Rectangle areaToUse = Control.Common.General.GetRectangleClte();
-                        frmMainTouchClte frmTouchClte = new frmMainTouchClte(); //para pruebas JCHID
-                        //frmPromocionPantallaCliente frmTouchClte = new frmPromocionPantallaCliente();
+
+                        // 2. Instanciar el formulario
+                        frmMainTouchClte frmTouchClte = new frmMainTouchClte();
+
+                        // --------------------------------------------------------------------------
+                        // INICIO DE LA CORRECCIÓN: "Salto de Pantalla"
+                        // --------------------------------------------------------------------------
+
+                        // PASO A: Resetear estado. Si nace Maximized, Windows ignora la ubicación.
+                        frmTouchClte.WindowState = FormWindowState.Normal;
+
+                        // PASO B: Decirle a Windows que nosotros controlamos la posición
                         frmTouchClte.StartPosition = FormStartPosition.Manual;
-                        frmTouchClte.Location = new Point(areaToUse.Left, areaToUse.Top);
-                        frmTouchClte.Size = areaToUse.Size; // Ocupa toda la pantalla
-                        frmTouchClte.TopMost = true; // Forzar que esté encima de otros formularios
+
+                        // PASO C: Asignar la posición y tamaño exactos de la segunda pantalla
+                        frmTouchClte.Bounds = areaToUse;
+
+                        // PASO D: Quitar bordes para estética de Pantalla Cliente
+                        frmTouchClte.FormBorderStyle = FormBorderStyle.None;
+
+                        // PASO E: Forzar que esté siempre visible
+                        frmTouchClte.TopMost = true;
+
+                        // PASO F: Mostrar la ventana (aparecerá en la pantalla 2, tamaño normal)
                         frmTouchClte.Show();
+
+                        // PASO G: AHORA SÍ, Maximizar (se expandirá en el monitor donde ya está ubicada)
+                        frmTouchClte.WindowState = FormWindowState.Maximized;
+
+                        // --------------------------------------------------------------------------
+                        // FIN DE LA CORRECCIÓN
+                        // --------------------------------------------------------------------------
+
+                        // Guardar la referencia en variables globales para poder cerrarla o actualizarla luego
+                        Control.Common.GlobalParameters.frmTouchClte = frmTouchClte;
+
+                        // Traer al frente por seguridad
                         frmTouchClte.BringToFront();
-
-                        Control.Common.GlobalParameters.frmTouchClte = frmTouchClte; //comentado para pruebas JCHID
-                        //Control.Common.GlobalParameters.frmPromocionPantallaCliente = frmTouchClte;
-
-                        // Forzar la posición usando SetWindowPos (opcional)
-                        IntPtr handle = frmTouchClte.Handle;
-                        const uint SWP_SHOWWINDOW = 0x0040;
-                        SetWindowPos(handle, IntPtr.Zero, areaToUse.Left, areaToUse.Top, areaToUse.Width, areaToUse.Height, SWP_SHOWWINDOW);
-
                     }
+                }
+                else
+                {
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.ToolBox.ToolBoxMenu", "MostrarPantallaClteTouch", "No se detectaron múltiples pantallas. Se omite apertura.");
                 }
             }
             catch (Exception ex)
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MostrarPantallaClteTouch", $"Error: {ex.Message}");
             }
-            
-
         }
-
+        // correcion del metodo para mostrar la pantalla de publicidad 
 
         public static Screen GetScreenByDeviceName(string targetDeviceName)
         {
