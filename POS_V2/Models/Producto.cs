@@ -2628,7 +2628,7 @@ namespace POS.Models
                       this.Subtotal = this.Subtotal + this.Ajuste;
                   }*/
 
-                this.Descuento = this.Descuento + this.DescuentoAX;
+                this.Descuento = this.Descuento + this.DescuentoAX + this.DescuentoCuponPromocional;
                 //Los descuentos de un producto no pueden ser mayor al subtotal
                 if (this.Descuento > this.SubtotalSinDescuento)
                 {

@@ -40,6 +40,7 @@ using POS.Control.Main.MainTouch;
 using POS.Models.DevolucionIVA;
 using System.Data.Entity.SqlServer; // Necesario para SqlFunctions
 using POS.Models.SRI;
+using POS.Models.AppCupones;
 //using POS.Control.Main.MainTouchClte;
 //using POS.Services;
 
@@ -99,6 +100,7 @@ namespace POS
         private bool _ejecutandoPago = false;
         private bool _isProcessingBarCode = false;
         private bool _isProcessing = false;
+        private int _idCuponAplicado = 0;
 
         //private BackgroundWorker backgroundWorkerMensajes;
         // En MainWindow.cs o clase donde lo estés creando
@@ -212,6 +214,10 @@ namespace POS
 
         List<Control.WalletPoints.ClsListPoints> listPoints = new List<Control.WalletPoints.ClsListPoints>();
         public static List<Promocion> listPromociones = new List<Promocion>();
+
+        // Lista para guardar TODOS los IDs de cupones usados en esta venta JCHID
+        private List<int> _cuponesAplicados = new List<int>();
+        private bool _existeCuponExclusivoAplicado = false;
 
         // Esta bandera controla si el scanner está enviando datos en el txtCodigo
         private bool scannerEnTxtCodigo = false;
@@ -1188,6 +1194,13 @@ namespace POS
             Screen targetScreenCajero = Control.Common.General.GetScreenCajero();
             Screen targetScreenClte = Control.Common.General.GetScreenClte();
 
+            this._existeCuponExclusivoAplicado = false;
+
+            if (this._cuponesAplicados != null)
+            {
+                this._cuponesAplicados.Clear();
+            }
+
             try
             {
                 if (string.IsNullOrEmpty(itendifacionCompleta))
@@ -1325,6 +1338,13 @@ namespace POS
                 {
                     custclassificationgroup custClass = Control.Common.General.ValidaClienteEmpresarial(itendifacionCompleta);
 
+                    // Logica para el nuevo boton  de descuento de app  JCHID
+
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info,"MainWindow", "txtCedula_KeyPress", "Se define paarametros btnCuponApp.Visible = false");
+                    btnDescuentoCupon.Visible = false;
+
+                    // Logica para el nuevo boton  de descuento de app  JCHID
+
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "txtCedula_KeyPress", "Se define paarametros btnCuponApp.Visible = false");
                     btnCuponApp.Visible = false;
@@ -1372,6 +1392,7 @@ namespace POS
                     _factura.CodigoClienteApp = clteEmpleado.CodigoClienteApp;
 
                     this.btnCuponApp.Visible = false;
+                    this.btnDescuentoCupon.Visible = false;
                     /*Recuerpo si es Cliente App. */
                     if (clteEmpleado.EsClienteApp)
                     {
@@ -1383,7 +1404,26 @@ namespace POS
                         txtCedula.Text = clteEmpleado.Identificacion;
                         codigoclienteAPP = clteEmpleado.CodigoClienteApp;
 
-                        this.btnCuponApp.Visible = true;
+                        string botonAPP = POS.Control.Common.GlobalParameters.botonappcuponparametro;
+                        bool mostrarBoton = false;
+
+                        using (var db = new POSEntities())
+                        {
+                            // Buscamos en la tabla core_parametro
+                            var registro = db.core_parametro
+                                             .FirstOrDefault(x => x.identificador == botonAPP);
+
+                            if (registro != null && registro.valor == "TRUE")
+                            {
+                                mostrarBoton = true;
+                            }
+                        }
+
+                        // 4. Aplicamos la visibilidad
+                        this.btnCuponApp.Visible = mostrarBoton;
+
+
+                        //this.btnCuponApp.Visible = true; 
                         this.lblIdClienteApp.Text = codigoclienteAPP;
 
                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "txtCedula_KeyPress", "validaClienteSp - EsUsoAppMovil =  " + _factura.EsUsoAppMovil);
@@ -1406,6 +1446,11 @@ namespace POS
                         //    // Validar si tiene puntos acumulados para activar boton pagar con monedero.
                         //    ValidarMonederoCampania(clteEmpleado.Identificacion);
                         //}
+
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "txtCedula_KeyPress", "validaClienteSp - Presenta el boton de descuento cupon de APP");
+                        this.btnDescuentoCupon.Visible = true;
+
+
                     }
 
 
@@ -14206,9 +14251,14 @@ namespace POS
                                             .Where(x => x.identificador == "COMPRA_GRATIS")
                                             .FirstOrDefault();
 
-                    var puntosCompraGratis = db.TblPuntos.AsNoTracking()
-                        .Where(x => x.Id_Factura == factura.IdFacturaPOS && x.IdLstCampania == 7)
-                        .ToList();
+                    // REEMPLAZA TU BLOQUE ANTERIOR POR ESTE:
+
+                    string sqlConsulta = @"SELECT * FROM [SRV-POS].pos.PtsCliente.TblPuntos 
+                       WHERE Id_Factura = @idFactura AND IdLstCampania = 7";
+
+                    var puntosCompraGratis = db.Database.SqlQuery<TblPuntos>(sqlConsulta,
+                                             new SqlParameter("@idFactura", factura.IdFacturaPOS))
+                                             .ToList();
 
                     if (puntosCompraGratis != null && puntosCompraGratis.Count > 0 && plantillaCompra != null)
                     {
@@ -14284,7 +14334,8 @@ namespace POS
             stopwatch.Start();
             var st1 = stopwatch.ElapsedMilliseconds;
             var facturaGrabada = false;
-        
+            string cedulaClienteParaCupon = this.txtCedula.Text;
+
             btnGrabar.Enabled = false;
             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", "Inactiva Botón de Grabar");
 
@@ -15184,7 +15235,7 @@ namespace POS
 
 
 
-                }
+                 }
                 else
                 {
                     _validafactura = false;
@@ -15247,6 +15298,35 @@ namespace POS
 
                 var st12 = stopwatch.ElapsedMilliseconds;
                 EliminaFacturaTmpFile();    //eliminaFacturatmp();
+
+                // jchid registor de los cupones usados desde la APP 19/01/2026
+
+                if (this._cuponesAplicados != null && this._cuponesAplicados.Count > 0)
+                {
+                    foreach (int idCupon in this._cuponesAplicados)
+                    {
+                        try
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "ejecutaGrabar", $"Registrando uso cupón ID: {idCupon}");
+
+                            POS.Models.AppCupones.CuponesLogica.RegistrarUsoCupon(
+                                idCupon,
+                                cedulaClienteParaCupon,
+                                _factura.Secuencia.ToString()
+                            );
+                        }
+                        catch (Exception ex)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "ejecutaGrabar", $"Error quemando cupón {idCupon}: " + ex.Message);
+                        }
+                    }
+
+                    // Limpiamos la lista para la siguiente venta
+                    this._cuponesAplicados.Clear();
+                }
+                // jchid registor de los cupones usados desde la APP 19/01/2026
+
+
                 picClienteApp.Visible = false;  // se quita la visibilidad de la imagen de cliente app
                 picClienteApp.Image = null;     // se limpia la imagen de cliente app
                 var st13 = stopwatch.ElapsedMilliseconds;
@@ -16806,6 +16886,118 @@ namespace POS
             return validaItem;
         }
 
+
+        // limpiar el buffer de los cupones cuando se elimine un producto que tenga jchid
+
+        private void RecalcularCuponAppExistente()
+        {
+            if (_factura.ObjCuponAppModerno == null || _factura.ObjCuponAppModerno.ReglasAlcance == null) return;
+
+            // 1. Obtenemos las reglas y datos del cupón que ya está aplicado en la factura.
+            var reglas = _factura.ObjCuponAppModerno.ReglasAlcance;
+            var tipoDescuento = _factura.ObjCuponAppModerno.Codigo; // Re-usamos el campo Código para el Tipo
+            var valorDescuentoOriginal = _factura.ObjCuponAppModerno.Valor;
+
+            // 2. Limpiamos los descuentos de cupón existentes en todos los productos.
+            foreach (var prod in _factura.Productos)
+            {
+                if (prod.DescuentoCuponPromocional > 0)
+                {
+                    prod.DescuentoCuponPromocional = 0;
+                }
+            }
+
+            // 3. Re-aplicamos la lógica del descuento a los productos que quedan.
+            foreach (var item in _factura.Productos)
+            {
+                var reglaAplicada = reglas.FirstOrDefault(r =>
+                    (r.TipoAlcance == "GLOBAL") ||
+                    (r.TipoAlcance == "PRODUCTO" && r.ValorAlcance == item.Id) ||
+                    (r.TipoAlcance == "CATEGORIA" && r.ValorAlcance == item.Categoria) ||
+                    (r.TipoAlcance == "PROVEEDOR" && r.ValorAlcance == item.ProveedorPricipal) ||
+                    (r.TipoAlcance == "SUBGRUPO" && r.ValorAlcance == item.Variedad)
+                );
+
+                if (reglaAplicada != null)
+                {
+                    decimal valorDescuento = 0;
+                    decimal baseCalculo = (reglaAplicada.TipoAlcance == "PRODUCTO") ? item.Pvp : (item.Pvp * item.Cantidad);
+
+                    if (tipoDescuento == "PORCENTAJE")
+                    {
+                        valorDescuento = baseCalculo * (valorDescuentoOriginal / 100);
+                    }
+                    else // VALOR FIJO
+                    {
+                        valorDescuento = valorDescuentoOriginal;
+                    }
+
+                    decimal totalLinea = item.Pvp * item.Cantidad;
+                    if (valorDescuento > totalLinea) valorDescuento = totalLinea;
+
+                    item.DescuentoCuponPromocional += valorDescuento;
+                }
+            }
+        }
+
+        private void ReiniciarCuponesPorSeguridad(POS.Models.Producto itemBorrado = null)
+        {
+            // Si no hay cupón moderno aplicado o el item borrado es nulo, no hacemos nada.
+            if (_factura.ObjCuponAppModerno == null || itemBorrado == null) return;
+
+            // Solo actuamos si el producto que se borró TENÍA un descuento de cupón aplicado.
+            if (itemBorrado.DescuentoCuponPromocional > 0)
+            {
+                // Verificamos si, después de borrar el item, aún queda algún producto que cumpla las reglas del cupón.
+                var productosRestantes = _factura.Productos.Where(p => p.IdTemporal != itemBorrado.IdTemporal).ToList();
+                bool aunAplica = false;
+                if (productosRestantes.Count > 0)
+                {
+                    foreach (var item in productosRestantes)
+                    {
+                        if (_factura.ObjCuponAppModerno.ReglasAlcance.Any(r =>
+                            (r.TipoAlcance == "GLOBAL") ||
+                            (r.TipoAlcance == "PRODUCTO" && r.ValorAlcance == item.Id) ||
+                            (r.TipoAlcance == "CATEGORIA" && r.ValorAlcance == item.Categoria) ||
+                            (r.TipoAlcance == "PROVEEDOR" && r.ValorAlcance == item.ProveedorPricipal) ||
+                            (r.TipoAlcance == "SUBGRUPO" && r.ValorAlcance == item.Variedad)))
+                        {
+                            aunAplica = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (aunAplica)
+                {
+                    // Si el cupón sigue siendo válido para otros productos, solo recalculamos.
+                    RecalcularCuponAppExistente();
+                }
+                else
+                {
+                    // Si ya no aplica a nada, hacemos un reseteo total y notificamos.
+                    _cuponesAplicados.Clear();
+                    _existeCuponExclusivoAplicado = false;
+                    _factura.ObjCuponAppModerno = null;
+
+                    // Limpiamos el descuento de los productos que quedan
+                    foreach (var prod in productosRestantes)
+                    {
+                        if (prod.DescuentoCuponPromocional > 0)
+                        {
+                            prod.DescuentoCuponPromocional = 0;
+                            prod.update();
+                        }
+                    }
+                    Control.Common.General.GetMensajeToList(10017); // "El último producto aplicable fue eliminado..."
+                }
+            }
+        }
+
+        // limpiar el buffer de los cupones cuando se elimine un producto que tenga jchid
+
+
+
         private void btnBorrarProducto_Click(object sender, EventArgs e)
         {
             using (var db = new POSEntities())
@@ -16814,6 +17006,9 @@ namespace POS
                 {
                     //  if (MessageBox.Show(this,"Esta seguro de borrar producto?", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                     var item = gridItems.SelectedRows[0].DataBoundItem as POS.Models.Producto;
+
+                    // Llamamos a la nueva lógica inteligente, pasándole el item que se va a borrar.
+                    ReiniciarCuponesPorSeguridad(item);
 
                     if (db.core_parametro.Where(x => x.identificador == "DELETE_FACT_PRO" && x.parametro2 == establecimiento_inicio).First().valor == "TRUE")
                     {
@@ -16825,6 +17020,8 @@ namespace POS
                             {
                                 _factura.Descuentos2.Clear();
                             }
+
+                            ReiniciarCuponesPorSeguridad(item); // jchid borrar cupon 
 
                             gridItems.SelectedRows[0].Delete();
 
@@ -16970,6 +17167,8 @@ namespace POS
                                         _factura.Pagos.Clear();
                                     }
 
+                                    ReiniciarCuponesPorSeguridad(item); // jchid borrar cupon 
+
                                     gridItems.SelectedRows[0].Delete();
                                     quitar_de_estructura(item);
                                     promobonella(_factura, item);
@@ -17085,6 +17284,8 @@ namespace POS
                                         _factura.Pagos.Clear();
                                     }
 
+                                    ReiniciarCuponesPorSeguridad(item); // jchid borrar cupon 
+
                                     gridItems.SelectedRows[0].Delete();
                                     quitar_de_estructura(item);
                                     AnulaDsctoCompraGratis();
@@ -17144,6 +17345,8 @@ namespace POS
                             _factura.Pagos.Clear();
                         }
 
+                        ReiniciarCuponesPorSeguridad(); // jchid borrar cupon
+
                         gridItems.SelectedRows[0].Delete();
                         quitar_de_estructura(item);
                         AnulaDsctoCompraGratis();
@@ -17179,6 +17382,8 @@ namespace POS
 
             CalcularParqueo();
         }
+
+
 
         private void RefrescarGridItems()
         {
@@ -23413,9 +23618,211 @@ namespace POS
 
         private void btnCuponApp_Click(object sender, EventArgs e)
         {
+            
             SolicitarCuponApp();
+                        
         }
 
+
+        private void btnDescuentoCupon_Click(object sender, EventArgs e)
+        {
+            POS.Control.Pagos.DescuentoAPP frmScan = new POS.Control.Pagos.DescuentoAPP("Escanear Cupón APP");
+            frmScan.ShowDialog();
+
+            // 3. Obtener el código
+            string codigoEscaneado = frmScan.codigo;
+
+            // Si el usuario cerró la ventana o no escaneó nada
+            if (string.IsNullOrEmpty(codigoEscaneado) || codigoEscaneado == "CLOSEFORM")
+            {
+                return;
+            }
+
+            // 4. Procesar la validación
+            ProcesarCuponApp(codigoEscaneado);
+        }
+
+        // METODO NUEVO PARA VALIDAR CUPONES DE APP JCHID
+        private void ProcesarCuponApp(string codigo)
+        {
+            try
+            {
+                // 1. Validar Cliente y Almacén
+                string idCliente = this.txtCedula.Text;
+                string idAlmacen = _factura.Establecimiento;
+
+                // 2. Consultar a BD
+                CuponRespuesta resultado = CuponesLogica.ValidarCuponEnBD(codigo, idCliente, idAlmacen);
+
+                // Validación: ¿Ya aplicó este mismo cupón en esta venta?
+                if (_cuponesAplicados.Contains(resultado.IdCupon))
+                {
+                    Control.Common.General.GetMensajeToList(10010); // Mensaje: "Ya aplicado"
+                    return;
+                }
+
+                // Validación: ¿El cupón es válido según la BD?
+                if (!resultado.EsValido)
+                {
+                    // Lógica flexible: Si la BD devuelve un código de error específico (mayor a 0), úsalo.
+                    // De lo contrario, usa el mensaje genérico (10008).
+                    int mensajeId = (resultado.CodigoMensaje > 0) ? resultado.CodigoMensaje : 10008;
+                    Control.Common.General.GetMensajeToList(mensajeId); 
+                    return;
+                }
+
+                // =========================================================================
+                // NUEVA IMPLEMENTACIÓN: VALIDACIÓN DE MEZCLA (EXCLUSIVIDAD)
+                // =========================================================================
+
+                // CASO 1: El cupón nuevo es INDIVIDUAL (No permite combinar)
+                // Si intenta entrar y ya hay alguien más en la fiesta (_cuponesAplicados > 0), lo bloqueamos.
+                if (!resultado.PermiteCombinar && this._cuponesAplicados.Count > 0)
+                {
+                    Control.Common.General.GetMensajeToList(10011);
+                    return;
+                }
+
+                // CASO 2: El cupón nuevo es AMIGABLE, pero... ¿ya hay un "Celoso" adentro?
+                // Si ya existe un cupón exclusivo aplicado, nadie más puede entrar.
+                if (this._existeCuponExclusivoAplicado)
+                {
+                    Control.Common.General.GetMensajeToList(10012);
+                    return;
+                }
+                // =========================================================================
+
+
+                bool seAplicoAlguno = false;
+
+                foreach (var item in _factura.Productos)
+                {
+                    string idProducto = item.Id;
+
+                    // --- CARGA INTELIGENTE DE DATOS (Lazy Loading) ---
+                    bool esGlobal = resultado.Alcance.Any(r => r.TipoAlcance == "GLOBAL");
+                    bool requiereDatos = resultado.Alcance.Any(r => r.TipoAlcance == "PROVEEDOR" || r.TipoAlcance == "CATEGORIA" || r.TipoAlcance == "SUBGRUPO");
+
+                    if (!esGlobal && requiereDatos && string.IsNullOrEmpty(item.ProveedorPricipal))
+                    {
+                        try
+                        {
+                            item.FillProductSalesInfo(item.Id);
+                        }
+                        catch (Exception ex)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "ProcesarCuponApp", "CargaDatos", "Error: " + ex.Message);
+                        }
+                    }
+
+                    // --- BUSCAR QUÉ REGLA APLICA ---
+                    var reglaAplicada = resultado.Alcance.FirstOrDefault(r =>
+                        (r.TipoAlcance == "GLOBAL") ||
+                        (r.TipoAlcance == "PRODUCTO" && r.ValorAlcance == idProducto) ||
+                        (r.TipoAlcance == "CATEGORIA" && r.ValorAlcance == item.Categoria) ||
+                        (r.TipoAlcance == "PROVEEDOR" && r.ValorAlcance == item.ProveedorPricipal) ||
+                        (r.TipoAlcance == "SUBGRUPO" && r.ValorAlcance == item.Variedad) // Asumo Variedad = Subgrupo
+                    );
+
+                    if (reglaAplicada != null)
+                    {
+                        decimal valorDescuento = 0;
+                        decimal baseCalculo = 0;
+
+                        // LÓGICA DE CÁLCULO (Unitario vs Global)
+                        if (reglaAplicada.TipoAlcance == "PRODUCTO")
+                        {
+                            // Si es cupón de producto específico, solo descontamos 1 unidad
+                            baseCalculo = item.Pvp;
+                        }
+                        else
+                        {
+                            // Si es Categoría, Proveedor o Global, descontamos sobre TODO lo que lleve
+                            baseCalculo = item.Pvp * item.Cantidad;
+                        }
+
+                        // CALCULO MATEMÁTICO
+                        if (resultado.TipoDescuento == "PORCENTAJE")
+                        {
+                            decimal porcentaje = resultado.ValorDescuento / 100;
+                            valorDescuento = baseCalculo * porcentaje;
+                        }
+                        else // VALOR FIJO
+                        {
+                            valorDescuento = resultado.ValorDescuento;
+                        }
+
+                        // Seguridad: No descontar más que el total de la línea
+                        decimal totalLinea = item.Pvp * item.Cantidad;
+                        if (valorDescuento > totalLinea) valorDescuento = totalLinea;
+
+                        // Aplicar al objeto en su propiedad dedicada
+                        item.DescuentoCuponPromocional += valorDescuento;
+                        item.update();
+
+                        seAplicoAlguno = true;
+                    }
+                }
+
+                if (seAplicoAlguno)
+                {
+                    // Agregamos a listas de control
+                    this._cuponesAplicados.Add(resultado.IdCupon);
+                    this._idCuponAplicado = resultado.IdCupon;
+
+                    // =========================================================
+                    // NUEVO: ACTUALIZAR BANDERA DE EXCLUSIVIDAD
+                    // Si el cupón que acabamos de meter era exclusivo, cerramos la puerta
+                    if (!resultado.PermiteCombinar)
+                    {
+                        this._existeCuponExclusivoAplicado = true;
+                    }
+                    // =========================================================
+
+                    // Preparar objeto para Impresión y Factura
+                    if (_factura.ObjCuponAppModerno == null)
+                    {
+                        _factura.ObjCuponAppModerno = new POS.Control.WalletPoints.ClsCuponApp();
+                    }
+
+                    // Guardamos el estado completo del cupón para futuros recálculos.
+                    _factura.ObjCuponAppModerno.SeUsoCuponApp = true;
+                    _factura.ObjCuponAppModerno.IdCupon = resultado.IdCupon;
+                    _factura.ObjCuponAppModerno.Descripcion = resultado.Descripcion;
+                    _factura.ObjCuponAppModerno.ReglasAlcance = resultado.Alcance; // <-- La regla más importante
+                    _factura.ObjCuponAppModerno.Valor = resultado.ValorDescuento; // El valor/porcentaje del descuento
+                    _factura.ObjCuponAppModerno.Codigo = resultado.TipoDescuento; // Re-usamos el campo Código para el Tipo (PORCENTAJE/VALOR FIJO)
+
+                    // Recalcular Total Factura
+                    calcularFactura();
+
+                    // Mensaje de Éxito
+                    List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
+                    parametros.Add(new ParametrosMensajes()
+                    {
+                        codigo = "[ValorDescuento]",
+                        valor = resultado.ValorDescuento.ToString("0") // Muestra entero si puedes, o "N2"
+                    });
+
+                    Control.Common.General.GetMensajeToList(10007, parametros);
+
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "ProcesarCuponApp", $"Cupón App {codigo} aplicado. Exclusivo: {!resultado.PermiteCombinar}");
+                }
+                else
+                {
+                    Control.Common.General.GetMensajeToList(10009); // No aplicó a ningún producto
+                }
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "ProcesarCuponApp", ex.Message);
+                MessageBox.Show("Error al procesar cupón: " + ex.Message);
+            }
+        }
+
+
+
+        // METODO NUEVO PARA VALIDAR CUPONES DE APP JCHID
 
 
         private void btnPagoEnter_Click(object sender, EventArgs e)

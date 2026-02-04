@@ -54,6 +54,9 @@ namespace POS.Models
         public Models.Parking.clsParking ObjParkingLost { get; set; }
         public Control.WalletPoints.ClsCuponApp ObjCuponApp { get; set; }
 
+        // Objeto de estado para el nuevo sistema de cupones (MODERNO), para aislarlo del sistema antiguo.
+        public Control.WalletPoints.ClsCuponApp ObjCuponAppModerno { get; set; }
+
         string razon_social_matriz;
 
         public string Razon_social_matriz
@@ -3113,21 +3116,67 @@ namespace POS.Models
                         }
                     }
 
+                    // cambio por descuentos de app en la factura JCHID
+
+                    //if ((valorDesc > 0 && !EsUsoCuponPromocional) || (valorDesc > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
+                    //{
+                    //    itemsDsctos.AppendLine(String.Concat(
+                    //                                        "<b>"
+                    //                                        , (porcDescuento).ToString("N2")
+                    //                                        , "% "
+                    //                                        , item.Nombre.PadRight(14, ' ').Substring(0, 13)
+                    //                                        , Convert.ToChar(9)
+                    //                                        , ":"
+                    //                                        , Control.Common.StringHelper.DevolverConPadding(valorDesc.ToString("N2"), 17)
+                    //                                        , "</b>")
+                    //                                        );
+
+
+                    //}
+
+                    // cambio por descuentos de app en la factura JCHID
+
                     if ((valorDesc > 0 && !EsUsoCuponPromocional) || (valorDesc > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
                     {
+                        // 1. DEFINIR LA ETIQUETA (Porcentaje o Texto Cupón)
+                        string etiquetaMostrar = "";
+
+                        // Verificamos si la factura tiene activo el flag de Cupón APP
+                        if (this.ObjCuponApp != null && this.ObjCuponApp.SeUsoCuponApp)
+                        {
+                            // Si es APP, mostramos texto fijo (9 caracteres aprox para cuadrar)
+                            etiquetaMostrar = "CUPON APP ";
+                        }
+                        else
+                        {
+                            // Si es descuento normal, mostramos el porcentaje calculado
+                            etiquetaMostrar = (porcDescuento).ToString("N2") + "% ";
+                        }
+
+                        // 2. RECORTAR EL NOMBRE (Para que no rompa la línea si es muy largo)
+                        // Tu código original usaba 13 caracteres, mantenemos eso para seguridad.
+                        string nombreProductoCorto = item.Nombre;
+                        if (nombreProductoCorto.Length > 13)
+                        {
+                            nombreProductoCorto = nombreProductoCorto.Substring(0, 13);
+                        }
+                        else
+                        {
+                            nombreProductoCorto = nombreProductoCorto.PadRight(13, ' '); // Rellenar espacios
+                        }
+
+                     
+                        // 3. ARMAR LA LÍNEA MÁS COMPACTA
                         itemsDsctos.AppendLine(String.Concat(
-                                                            "<b>"
-                                                            , (porcDescuento).ToString("N2")
-                                                            , "% "
-                                                            , item.Nombre.PadRight(14, ' ').Substring(0, 13)
-                                                            , Convert.ToChar(9)
-                                                            , ":"
-                                                            , Control.Common.StringHelper.DevolverConPadding(valorDesc.ToString("N2"), 17)
-                                                            , "</b>")
-                                                            );
-
-
+                                        "<b>",
+                                        etiquetaMostrar,                   // "CUPON APP "
+                                        nombreProductoCorto,               // Nombre cortado a 13 letras
+                                        " :",                              // CAMBIO 1: Quitamos el Tabulador, usamos espacio y dos puntos
+                                        Control.Common.StringHelper.DevolverConPadding(valorDesc.ToString("N2"), 10), // CAMBIO 2: Reducimos de 17 a 10 el padding
+                                        "</b>"
+                                        ));
                     }
+
 
                     totalDsctosProductos += item.Descuento - dsctoCompraGratis;
 

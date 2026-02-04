@@ -96,6 +96,9 @@ namespace DSS.Controles.Impresion
                             case "info": DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 10, FontStyle.Regular), ticketWidth, ref y, alignAttribute); break;
                             case "legales": DrawStringWrapped(e.Graphics, parsedTag.Content, new Font(_font.Name, 8, FontStyle.Regular), ticketWidth, ref y, alignAttribute); break;
                             case "logo": ProcesarLogo_MetodoNuevo(e, parsedTag, x, ticketWidth, ref y); break;
+                            case "barcode":
+                                ProcesarBarcode(e, parsedTag, x, ticketWidth, ref y);
+                                break;
                             case "b": e.Graphics.DrawString(parsedTag.Content, _font_bold, Brushes.Black, x, y); y += (int)_font_bold.GetHeight(e.Graphics); break;
                             default: e.Graphics.DrawString(linea_a_imprimir, _font, Brushes.Black, x, y); y += (int)_font.GetHeight(e.Graphics); break;
                         }
@@ -345,6 +348,44 @@ namespace DSS.Controles.Impresion
             linea_a_imprimir = linea_a_imprimir.Replace(tagInicio, "").Replace("</zoom>", "");
             e.Graphics.DrawString(linea_a_imprimir, new Font(_font.Name, _font.Size + value, _font.Style), Brushes.Black, x, y);
         }
+
+        private void ProcesarBarcode(PrintPageEventArgs e, ParsedTag parsedTag, int defaultX, int ticketWidth, ref int y)
+        {
+            try
+            {
+                // Configurar el generador de código de barras (Code 128 es el más estándar)
+                var writer = new BarcodeWriter
+                {
+                    Format = BarcodeFormat.CODE_128,
+                    Options = new EncodingOptions
+                    {
+                        Height = 60, // Altura de las barras
+                        Width = 250,  // Ancho de las barras
+                        Margin = 2,
+                        PureBarcode = false // True si NO quieres que aparezca el número abajo
+                    }
+                };
+
+                using (Bitmap bitmap = writer.Write(parsedTag.Content.Trim()))
+                {
+                    int barcodeX = defaultX;
+                    // Alinear al centro si se solicita
+                    if (parsedTag.GetAttribute("align") == "center" || true) // Por defecto centrado
+                    {
+                        barcodeX = (ticketWidth - bitmap.Width) / 2;
+                    }
+
+                    e.Graphics.DrawImage(bitmap, new Rectangle(barcodeX, y, bitmap.Width, bitmap.Height));
+                    y += bitmap.Height + 5; // Espacio después del código
+                }
+            }
+            catch (Exception ex)
+            {
+                e.Graphics.DrawString("[Error Barcode: " + ex.Message + "]", _font, Brushes.Red, defaultX, y);
+                y += 15;
+            }
+        }
+
         #endregion
     }
 }

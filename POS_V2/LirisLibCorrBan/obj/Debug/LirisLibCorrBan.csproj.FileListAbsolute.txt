@@ -148,8 +148,8 @@ C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\Liris
 C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\LirisLibLogger.dll
 C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\EntityFramework.xml
 C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csprojAssemblyReference.cache
 C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csproj.CoreCompileInputs.cache
-C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csproj.CopyComplete
 C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.dll
 C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.pdb
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLibCorrBan.csproj.AssemblyReference.cache
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\POS_V2\LirisLibCorrBan\obj\Debug\LirisLib.BAD7C65F.Up2Date

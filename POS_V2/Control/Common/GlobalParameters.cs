@@ -105,6 +105,8 @@ namespace POS.Control.Common
         public static string ComprobanteVoucherAnula { get { return "T_VOUCHER_ANULA" /* "VOUCHER_ANULA" */ ; } }
 
         public static string ComprobanteFactura { get { return "T_FACTURA" /* "FACTURA_ALT" "FACTURA_E" */ ; } }
+
+        public static string botonappcuponparametro { get { return "BOTON_CUPON_APP" /* "FACTURA_ALT" "FACTURA_E" */ ; } }
         public static string ComprobanteNota_Credito { get { return "NOTA_CREDITO"; } }
         public static string ComprobanteNota_Credito_Dev_Iva { get { return "NOTA_CREDITO_DEV_IVA"; } }
         public static Boolean NCConsumidorFinal { get; set; }

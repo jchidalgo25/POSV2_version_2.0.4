@@ -114,6 +114,16 @@ namespace POS.Control.Pagos
                 var objNC = notaCreditoModel.GetFactura(_factura.Establecimiento.PadLeft(3, '0'), txtPtoEmision.Text.PadLeft(3, '0'), txtNum.Text);
 
 
+                if (objNC.cabNotaCredito == null || string.IsNullOrEmpty(objNC.cabNotaCredito.cliente))
+                {
+                    notaCreditoModel.codError = -1;
+                    notaCreditoModel.msjError = $"Error:";
+
+                    // Usa un código de mensaje que indique "Factura no encontrada" 
+                    // en lugar del 429 que es "Ya aplicada"
+                    Control.Common.General.GetMensajeToList(671);
+                    return notaCreditoModel;
+                }
 
                 if (objNC.cabNotaCredito.esConsumidorFinal)
                 {
@@ -2467,11 +2477,11 @@ namespace POS.Control.Pagos
 
 
 
-                    string secuenciaNC = "000" + lblSecuenciaNC.Text.Replace("-", "");
+                    string secuenciaNC = "000" + lblSecuenciaNC.Text.Replace("-", "").Trim();
 
 
                     coded = bc.encodeString("000" + lblSecuenciaNC.Text.Replace("-", ""));
-                    addCL(printer, lineas_impresion, "<barcode>" + "           " + secuenciaNC + "</barcode>");
+                    addCL(printer, lineas_impresion, "<barcode>" + secuenciaNC + "</barcode>");
                     addCL(printer, lineas_impresion, "     ");
                     addCL(printer, lineas_impresion, "     ");
                     addCL(printer, lineas_impresion, "     ");

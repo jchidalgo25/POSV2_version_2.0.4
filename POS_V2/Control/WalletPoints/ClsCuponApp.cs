@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using POS.Models.AppCupones;
 
 namespace POS.Control.WalletPoints
 {
    public class ClsCuponApp
     {
         public int IdTblPremio { get; set; }
+        public int IdCupon { get; set; }
         public string Descripcion { get; set; }
-		public int Procesado{ get; set; }
-		public string Codigo { get; set; }
+        public int Procesado{ get; set; }
+        public string Codigo { get; set; }
         public int CantAplicar { get; set; }
         public decimal Valor { get; set; }
         public bool EstaConfirmado { get; set; }
         public bool SeUsoCuponApp { get; set; }
         public List<Items> Lstitem{ get; set; }
+
+        // Nueva propiedad para guardar las reglas y el alcance del cupón de App.
+        public List<AlcanceCupon> ReglasAlcance { get; set; } = new List<AlcanceCupon>();
+
         public Control.WalletPoints.ClsCuponApp Clone()
         {
             var cloned = (Control.WalletPoints.ClsCuponApp)this.MemberwiseClone();
