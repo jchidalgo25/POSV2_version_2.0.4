@@ -38,7 +38,7 @@
     <PublisherName>Liris</PublisherName>
     <WebPage>publish.htm</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationRevision>48</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -170,6 +170,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>Libs\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>packages\Guna.UI2.WinForms.2.0.4.7\lib\net45\Guna.UI2.dll</HintPath>
+    </Reference>
     <Reference Include="IKVM.AWT.WinForms, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.AWT.WinForms.dll</HintPath>
     </Reference>
@@ -266,6 +269,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Control\PINPAD\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>packages\MetroFramework.Design.1.2.0.3\lib\net40\MetroFramework.Design.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -307,11 +320,14 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SQLite.Linq.1.0.105.2\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -633,6 +649,12 @@
     <Compile Include="Control\ToolBox\MenuInicial.Designer.cs">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\UcProductoTarjeta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UcProductoTarjeta.Designer.cs">
+      <DependentUpon>UcProductoTarjeta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\WalletPoints\CapturaCupon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -685,6 +707,12 @@
     </Compile>
     <Compile Include="Control\ToolBox\ToolBoxMenu.Designer.cs">
       <DependentUpon>ToolBoxMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSeleccionMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSeleccionMenu.Designer.cs">
+      <DependentUpon>FrmSeleccionMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AppCupones\AppCupones.cs" />
     <Compile Include="Models\AppCupones\CuponesLogica.cs" />
@@ -1825,6 +1853,7 @@
     <None Include="Resources\Iconos_Intranet_LIRIS-05.png" />
     <None Include="Resources\Iconos_Intranet_LIRIS-03.png" />
     <None Include="Resources\Iconos_Retencion_Electronica_DELPORTAL-011.png" />
+    <Content Include="MetroFramework.txt" />
     <Content Include="Models\POSDATA.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>POSDATA.edmx</DependentUpon>
@@ -2125,6 +2154,9 @@
       <DependentUpon>MenuInicial.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Control\UcProductoTarjeta.resx">
+      <DependentUpon>UcProductoTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\WalletPoints\CapturaCupon.resx">
       <DependentUpon>CapturaCupon.cs</DependentUpon>
     </EmbeddedResource>
@@ -2148,6 +2180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\ToolBox\ToolBoxMenu.resx">
       <DependentUpon>ToolBoxMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSeleccionMenu.resx">
+      <DependentUpon>FrmSeleccionMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchProductV3.resx">
       <DependentUpon>SearchProductV3.cs</DependentUpon>

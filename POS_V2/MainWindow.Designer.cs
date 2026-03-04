@@ -1,4 +1,6 @@
-﻿namespace POS
+﻿using System.Drawing;
+
+namespace POS
 {
     partial class MainWindow
     {
@@ -30,18 +32,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn25 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn26 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn27 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn28 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn29 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn30 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn31 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn32 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn33 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn34 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn35 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn36 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             this.tempo2minutos = new System.Windows.Forms.Timer(this.components);
             this.tempo666 = new System.Windows.Forms.Timer(this.components);
             this.tempo5min = new System.Windows.Forms.Timer(this.components);
@@ -65,6 +67,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.clienteGroup = new Telerik.WinControls.UI.RadGroupBox();
+            this.btnCFinal = new Telerik.WinControls.UI.RadButton();
             this.picClienteApp = new System.Windows.Forms.PictureBox();
             this.lblEtiquetaSaldo = new Telerik.WinControls.UI.RadLabel();
             this.lblSaldoTarjeta = new Telerik.WinControls.UI.RadLabel();
@@ -72,7 +75,6 @@
             this.lblIdClienteApp = new Telerik.WinControls.UI.RadLabel();
             this.btnCliente = new Telerik.WinControls.UI.RadButton();
             this.lblTelefono = new Telerik.WinControls.UI.RadLabel();
-            this.btnCFinal = new Telerik.WinControls.UI.RadButton();
             this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
             this.lblNombre = new Telerik.WinControls.UI.RadLabel();
             this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
@@ -84,6 +86,9 @@
             this.radLabel8 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel9 = new Telerik.WinControls.UI.RadLabel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnFlechaDer = new Telerik.WinControls.UI.RadButton();
+            this.btnFlechaIzq = new Telerik.WinControls.UI.RadButton();
+            this.flowPanelBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.lblTotal = new Telerik.WinControls.UI.RadLabel();
             this.BTN_DIREC_5 = new System.Windows.Forms.Button();
             this.BTN_DIREC_4 = new System.Windows.Forms.Button();
@@ -165,6 +170,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).BeginInit();
             this.clienteGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCFinal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).BeginInit();
@@ -172,7 +178,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblIdClienteApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTelefono)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCFinal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNombre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
@@ -184,6 +189,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnFlechaDer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnFlechaIzq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBusqProd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnKbd)).BeginInit();
@@ -560,6 +567,7 @@
             // 
             this.clienteGroup.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.clienteGroup.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.clienteGroup.Controls.Add(this.btnCFinal);
             this.clienteGroup.Controls.Add(this.picClienteApp);
             this.clienteGroup.Controls.Add(this.lblEtiquetaSaldo);
             this.clienteGroup.Controls.Add(this.lblSaldoTarjeta);
@@ -567,7 +575,6 @@
             this.clienteGroup.Controls.Add(this.lblIdClienteApp);
             this.clienteGroup.Controls.Add(this.btnCliente);
             this.clienteGroup.Controls.Add(this.lblTelefono);
-            this.clienteGroup.Controls.Add(this.btnCFinal);
             this.clienteGroup.Controls.Add(this.radLabel4);
             this.clienteGroup.Controls.Add(this.lblNombre);
             this.clienteGroup.Controls.Add(this.radLabel3);
@@ -589,6 +596,25 @@
             this.clienteGroup.Text = "F-001-001-0000000000 ";
             this.clienteGroup.ThemeName = "TelerikMetroTouch";
             this.clienteGroup.Click += new System.EventHandler(this.clienteGroup_Click);
+            // 
+            // btnCFinal
+            // 
+            this.btnCFinal.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCFinal.Location = new System.Drawing.Point(261, 20);
+            this.btnCFinal.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnCFinal.MaximumSize = new System.Drawing.Size(39, 49);
+            this.btnCFinal.Name = "btnCFinal";
+            // 
+            // 
+            // 
+            this.btnCFinal.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
+            this.btnCFinal.RootElement.ControlBounds = new System.Drawing.Rectangle(261, 20, 39, 24);
+            this.btnCFinal.RootElement.MaxSize = new System.Drawing.Size(39, 49);
+            this.btnCFinal.Size = new System.Drawing.Size(39, 49);
+            this.btnCFinal.TabIndex = 13;
+            this.btnCFinal.Text = "CF";
+            this.btnCFinal.ThemeName = "TelerikMetroTouch";
+            this.btnCFinal.Click += new System.EventHandler(this.btnCFinal_Click);
             // 
             // picClienteApp
             // 
@@ -612,7 +638,7 @@
             // 
             // 
             // 
-            this.lblEtiquetaSaldo.RootElement.ControlBounds = new System.Drawing.Rectangle(48, 177, 100, 18);
+            this.lblEtiquetaSaldo.RootElement.ControlBounds = new System.Drawing.Rectangle(21, 75, 100, 18);
             this.lblEtiquetaSaldo.Size = new System.Drawing.Size(55, 25);
             this.lblEtiquetaSaldo.TabIndex = 8;
             this.lblEtiquetaSaldo.Text = "Saldo:";
@@ -627,7 +653,7 @@
             // 
             // 
             // 
-            this.lblSaldoTarjeta.RootElement.ControlBounds = new System.Drawing.Rectangle(186, 188, 100, 18);
+            this.lblSaldoTarjeta.RootElement.ControlBounds = new System.Drawing.Rectangle(83, 79, 100, 18);
             this.lblSaldoTarjeta.Size = new System.Drawing.Size(46, 21);
             this.lblSaldoTarjeta.TabIndex = 9;
             this.lblSaldoTarjeta.Text = "#####";
@@ -645,7 +671,7 @@
             // 
             // 
             // 
-            this.lblDireccion.RootElement.ControlBounds = new System.Drawing.Rectangle(921, 97, 100, 18);
+            this.lblDireccion.RootElement.ControlBounds = new System.Drawing.Rectangle(409, 41, 100, 18);
             this.lblDireccion.Size = new System.Drawing.Size(438, 20);
             this.lblDireccion.TabIndex = 24;
             this.lblDireccion.Text = "#####";
@@ -660,7 +686,7 @@
             // 
             // 
             // 
-            this.lblIdClienteApp.RootElement.ControlBounds = new System.Drawing.Rectangle(30, 149, 100, 18);
+            this.lblIdClienteApp.RootElement.ControlBounds = new System.Drawing.Rectangle(13, 63, 100, 18);
             this.lblIdClienteApp.Size = new System.Drawing.Size(46, 21);
             this.lblIdClienteApp.TabIndex = 23;
             this.lblIdClienteApp.Text = "#####";
@@ -677,7 +703,7 @@
             // 
             // 
             this.btnCliente.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnCliente.RootElement.ControlBounds = new System.Drawing.Rectangle(513, 66, 87, 24);
+            this.btnCliente.RootElement.ControlBounds = new System.Drawing.Rectangle(228, 28, 39, 24);
             this.btnCliente.RootElement.MaxSize = new System.Drawing.Size(39, 49);
             this.btnCliente.Size = new System.Drawing.Size(23, 32);
             this.btnCliente.TabIndex = 14;
@@ -698,31 +724,10 @@
             // 
             // 
             // 
-            this.lblTelefono.RootElement.ControlBounds = new System.Drawing.Rectangle(921, 171, 100, 18);
+            this.lblTelefono.RootElement.ControlBounds = new System.Drawing.Rectangle(409, 72, 100, 18);
             this.lblTelefono.Size = new System.Drawing.Size(438, 20);
             this.lblTelefono.TabIndex = 7;
             this.lblTelefono.Text = "#####";
-            // 
-            // btnCFinal
-            // 
-            this.btnCFinal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCFinal.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCFinal.Location = new System.Drawing.Point(261, 20);
-            this.btnCFinal.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.btnCFinal.MaximumSize = new System.Drawing.Size(39, 49);
-            this.btnCFinal.Name = "btnCFinal";
-            // 
-            // 
-            // 
-            this.btnCFinal.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnCFinal.RootElement.ControlBounds = new System.Drawing.Rectangle(588, 48, 87, 24);
-            this.btnCFinal.RootElement.MaxSize = new System.Drawing.Size(39, 49);
-            this.btnCFinal.Size = new System.Drawing.Size(39, 49);
-            this.btnCFinal.TabIndex = 13;
-            this.btnCFinal.Text = "CF";
-            this.btnCFinal.ThemeName = "TelerikMetroTouch";
-            this.btnCFinal.Click += new System.EventHandler(this.btnCFinal_Click);
             // 
             // radLabel4
             // 
@@ -734,7 +739,7 @@
             // 
             // 
             // 
-            this.radLabel4.RootElement.ControlBounds = new System.Drawing.Rectangle(726, 171, 100, 18);
+            this.radLabel4.RootElement.ControlBounds = new System.Drawing.Rectangle(323, 72, 100, 18);
             this.radLabel4.Size = new System.Drawing.Size(81, 25);
             this.radLabel4.TabIndex = 4;
             this.radLabel4.Text = "Teléfono:";
@@ -752,7 +757,7 @@
             // 
             // 
             // 
-            this.lblNombre.RootElement.ControlBounds = new System.Drawing.Rectangle(921, 23, 100, 18);
+            this.lblNombre.RootElement.ControlBounds = new System.Drawing.Rectangle(409, 10, 100, 18);
             this.lblNombre.Size = new System.Drawing.Size(438, 20);
             this.lblNombre.TabIndex = 5;
             this.lblNombre.Text = "#####";
@@ -767,7 +772,7 @@
             // 
             // 
             // 
-            this.radLabel3.RootElement.ControlBounds = new System.Drawing.Rectangle(717, 88, 100, 18);
+            this.radLabel3.RootElement.ControlBounds = new System.Drawing.Rectangle(319, 37, 100, 18);
             this.radLabel3.Size = new System.Drawing.Size(85, 25);
             this.radLabel3.TabIndex = 3;
             this.radLabel3.Text = "Dirección:";
@@ -782,7 +787,7 @@
             // 
             // 
             // 
-            this.radLabel2.RootElement.ControlBounds = new System.Drawing.Rectangle(738, 17, 100, 18);
+            this.radLabel2.RootElement.ControlBounds = new System.Drawing.Rectangle(328, 7, 100, 18);
             this.radLabel2.Size = new System.Drawing.Size(76, 25);
             this.radLabel2.TabIndex = 2;
             this.radLabel2.Text = "Nombre:";
@@ -798,7 +803,7 @@
             // 
             // 
             // 
-            this.txtCedula.RootElement.ControlBounds = new System.Drawing.Rectangle(30, 66, 100, 20);
+            this.txtCedula.RootElement.ControlBounds = new System.Drawing.Rectangle(13, 28, 100, 20);
             this.txtCedula.ShortcutsEnabled = false;
             this.txtCedula.Size = new System.Drawing.Size(209, 30);
             this.txtCedula.TabIndex = 0;
@@ -836,7 +841,7 @@
             // 
             // 
             // 
-            this.lblRestante.RootElement.ControlBounds = new System.Drawing.Rectangle(-46, 75, 100, 18);
+            this.lblRestante.RootElement.ControlBounds = new System.Drawing.Rectangle(245, 32, 100, 18);
             this.lblRestante.Size = new System.Drawing.Size(199, 50);
             this.lblRestante.TabIndex = 6;
             this.lblRestante.Text = "00.00";
@@ -855,7 +860,7 @@
             // 
             // 
             // 
-            this.lblTotal2.RootElement.ControlBounds = new System.Drawing.Rectangle(-487, 75, 100, 18);
+            this.lblTotal2.RootElement.ControlBounds = new System.Drawing.Rectangle(49, 32, 100, 18);
             this.lblTotal2.Size = new System.Drawing.Size(199, 50);
             this.lblTotal2.TabIndex = 8;
             this.lblTotal2.Text = "00.00";
@@ -872,7 +877,7 @@
             // 
             // 
             // 
-            this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(125, 8, 100, 18);
+            this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(321, 3, 100, 18);
             this.radLabel8.Size = new System.Drawing.Size(118, 37);
             this.radLabel8.TabIndex = 7;
             this.radLabel8.Text = "Restante:";
@@ -890,7 +895,7 @@
             // 
             // 
             // 
-            this.radLabel9.RootElement.ControlBounds = new System.Drawing.Rectangle(-424, 0, 100, 18);
+            this.radLabel9.RootElement.ControlBounds = new System.Drawing.Rectangle(77, 0, 100, 18);
             this.radLabel9.Size = new System.Drawing.Size(171, 37);
             this.radLabel9.TabIndex = 9;
             this.radLabel9.Text = "Total a pagar:";
@@ -899,6 +904,9 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnFlechaDer);
+            this.panel3.Controls.Add(this.btnFlechaIzq);
+            this.panel3.Controls.Add(this.flowPanelBotones);
             this.panel3.Controls.Add(this.lblTotal);
             this.panel3.Controls.Add(this.BTN_DIREC_5);
             this.panel3.Controls.Add(this.BTN_DIREC_4);
@@ -913,6 +921,40 @@
             this.panel3.Size = new System.Drawing.Size(1191, 70);
             this.panel3.TabIndex = 1;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // btnFlechaDer
+            // 
+            this.btnFlechaDer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFlechaDer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.btnFlechaDer.Location = new System.Drawing.Point(1148, 15);
+            this.btnFlechaDer.Name = "btnFlechaDer";
+            this.btnFlechaDer.Size = new System.Drawing.Size(33, 40);
+            this.btnFlechaDer.TabIndex = 1;
+            this.btnFlechaDer.Text = "►";
+            this.btnFlechaDer.Click += new System.EventHandler(this.BtnFlechaDer_Click);
+            // 
+            // btnFlechaIzq
+            // 
+            this.btnFlechaIzq.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.btnFlechaIzq.Location = new System.Drawing.Point(8, 16);
+            this.btnFlechaIzq.Name = "btnFlechaIzq";
+            this.btnFlechaIzq.Size = new System.Drawing.Size(33, 40);
+            this.btnFlechaIzq.TabIndex = 0;
+            this.btnFlechaIzq.Text = "◄";
+            this.btnFlechaIzq.Click += new System.EventHandler(this.BtnFlechaIzq_Click);
+            // 
+            // flowPanelBotones
+            // 
+            this.flowPanelBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowPanelBotones.AutoScroll = true;
+            this.flowPanelBotones.BackColor = System.Drawing.Color.White;
+            this.flowPanelBotones.Location = new System.Drawing.Point(45, 0);
+            this.flowPanelBotones.Name = "flowPanelBotones";
+            this.flowPanelBotones.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.flowPanelBotones.Size = new System.Drawing.Size(1094, 100);
+            this.flowPanelBotones.TabIndex = 99;
+            this.flowPanelBotones.WrapContents = false;
             // 
             // lblTotal
             // 
@@ -1119,80 +1161,80 @@
             // 
             this.gridItems.MasterTemplate.AllowAddNewRow = false;
             this.gridItems.MasterTemplate.AllowColumnReorder = false;
-            gridViewTextBoxColumn1.FieldName = "Nombre";
-            gridViewTextBoxColumn1.HeaderText = "Descripción";
-            gridViewTextBoxColumn1.Name = "column1";
-            gridViewTextBoxColumn1.Width = 275;
-            gridViewTextBoxColumn2.FieldName = "CantidadINEC";
-            gridViewTextBoxColumn2.FormatString = "{0:00.000}";
-            gridViewTextBoxColumn2.HeaderText = "Cantidad";
-            gridViewTextBoxColumn2.Name = "column2";
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn2.Width = 80;
-            gridViewTextBoxColumn3.FieldName = "Unidades";
-            gridViewTextBoxColumn3.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn3.HeaderText = "Unidades";
-            gridViewTextBoxColumn3.Name = "column3";
-            gridViewTextBoxColumn3.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn3.Width = 80;
-            gridViewTextBoxColumn4.FieldName = "Pvp";
-            gridViewTextBoxColumn4.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn4.HeaderText = "P.V.P";
-            gridViewTextBoxColumn4.Name = "column4";
-            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn4.Width = 60;
-            gridViewTextBoxColumn5.FieldName = "SubtotalSinDescuento";
-            gridViewTextBoxColumn5.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn5.HeaderText = "Subtotal";
-            gridViewTextBoxColumn5.Name = "column6";
-            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn5.Width = 80;
-            gridViewTextBoxColumn6.FieldName = "Descuento";
-            gridViewTextBoxColumn6.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn6.HeaderText = "Descuento";
-            gridViewTextBoxColumn6.Name = "column5";
-            gridViewTextBoxColumn6.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn6.Width = 80;
-            gridViewTextBoxColumn7.FieldName = "DescuentoIVA";
-            gridViewTextBoxColumn7.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn7.HeaderText = "Dscto. IVA";
-            gridViewTextBoxColumn7.Name = "columnDsctoIVA";
-            gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn7.Width = 80;
-            gridViewTextBoxColumn8.FieldName = "Iva";
-            gridViewTextBoxColumn8.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn8.HeaderText = "I.V.A";
-            gridViewTextBoxColumn8.Name = "column8";
-            gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn8.Width = 70;
-            gridViewTextBoxColumn9.FieldName = "TotalPromoIVA";
-            gridViewTextBoxColumn9.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn9.HeaderText = "Total";
-            gridViewTextBoxColumn9.Name = "column7";
-            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn9.Width = 90;
-            gridViewTextBoxColumn10.FieldName = "IdTemporal";
-            gridViewTextBoxColumn10.HeaderText = "IdTemporal";
-            gridViewTextBoxColumn10.IsVisible = false;
-            gridViewTextBoxColumn10.Name = "IdTemporal";
+            gridViewTextBoxColumn25.FieldName = "Nombre";
+            gridViewTextBoxColumn25.HeaderText = "Descripción";
+            gridViewTextBoxColumn25.Name = "column1";
+            gridViewTextBoxColumn25.Width = 275;
+            gridViewTextBoxColumn26.FieldName = "CantidadINEC";
+            gridViewTextBoxColumn26.FormatString = "{0:00.000}";
+            gridViewTextBoxColumn26.HeaderText = "Cantidad";
+            gridViewTextBoxColumn26.Name = "column2";
+            gridViewTextBoxColumn26.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn26.Width = 80;
+            gridViewTextBoxColumn27.FieldName = "Unidades";
+            gridViewTextBoxColumn27.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn27.HeaderText = "Unidades";
+            gridViewTextBoxColumn27.Name = "column3";
+            gridViewTextBoxColumn27.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn27.Width = 80;
+            gridViewTextBoxColumn28.FieldName = "Pvp";
+            gridViewTextBoxColumn28.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn28.HeaderText = "P.V.P";
+            gridViewTextBoxColumn28.Name = "column4";
+            gridViewTextBoxColumn28.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn28.Width = 60;
+            gridViewTextBoxColumn29.FieldName = "SubtotalSinDescuento";
+            gridViewTextBoxColumn29.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn29.HeaderText = "Subtotal";
+            gridViewTextBoxColumn29.Name = "column6";
+            gridViewTextBoxColumn29.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn29.Width = 80;
+            gridViewTextBoxColumn30.FieldName = "Descuento";
+            gridViewTextBoxColumn30.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn30.HeaderText = "Descuento";
+            gridViewTextBoxColumn30.Name = "column5";
+            gridViewTextBoxColumn30.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn30.Width = 80;
+            gridViewTextBoxColumn31.FieldName = "DescuentoIVA";
+            gridViewTextBoxColumn31.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn31.HeaderText = "Dscto. IVA";
+            gridViewTextBoxColumn31.Name = "columnDsctoIVA";
+            gridViewTextBoxColumn31.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn31.Width = 80;
+            gridViewTextBoxColumn32.FieldName = "Iva";
+            gridViewTextBoxColumn32.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn32.HeaderText = "I.V.A";
+            gridViewTextBoxColumn32.Name = "column8";
+            gridViewTextBoxColumn32.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn32.Width = 70;
+            gridViewTextBoxColumn33.FieldName = "TotalPromoIVA";
+            gridViewTextBoxColumn33.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn33.HeaderText = "Total";
+            gridViewTextBoxColumn33.Name = "column7";
+            gridViewTextBoxColumn33.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn33.Width = 90;
+            gridViewTextBoxColumn34.FieldName = "IdTemporal";
+            gridViewTextBoxColumn34.HeaderText = "IdTemporal";
+            gridViewTextBoxColumn34.IsVisible = false;
+            gridViewTextBoxColumn34.Name = "IdTemporal";
             this.gridItems.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4,
-            gridViewTextBoxColumn5,
-            gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7,
-            gridViewTextBoxColumn8,
-            gridViewTextBoxColumn9,
-            gridViewTextBoxColumn10});
+            gridViewTextBoxColumn25,
+            gridViewTextBoxColumn26,
+            gridViewTextBoxColumn27,
+            gridViewTextBoxColumn28,
+            gridViewTextBoxColumn29,
+            gridViewTextBoxColumn30,
+            gridViewTextBoxColumn31,
+            gridViewTextBoxColumn32,
+            gridViewTextBoxColumn33,
+            gridViewTextBoxColumn34});
             this.gridItems.MasterTemplate.EnableGrouping = false;
             this.gridItems.Name = "gridItems";
             this.gridItems.ReadOnly = true;
             // 
             // 
             // 
-            this.gridItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 149, 240, 150);
+            this.gridItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 63, 240, 150);
             this.gridItems.RootElement.Shape = null;
             this.gridItems.Size = new System.Drawing.Size(709, 503);
             this.gridItems.TabIndex = 2;
@@ -1227,7 +1269,7 @@
             // 
             // 
             this.btnDescuentoCupon.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnDescuentoCupon.RootElement.ControlBounds = new System.Drawing.Rectangle(894, 9, 110, 24);
+            this.btnDescuentoCupon.RootElement.ControlBounds = new System.Drawing.Rectangle(397, 4, 73, 24);
             this.btnDescuentoCupon.RootElement.MaxSize = new System.Drawing.Size(73, 49);
             this.btnDescuentoCupon.Size = new System.Drawing.Size(73, 45);
             this.btnDescuentoCupon.TabIndex = 16;
@@ -1248,7 +1290,7 @@
             // 
             // 
             this.btnSearchPro.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnSearchPro.RootElement.ControlBounds = new System.Drawing.Rectangle(345, 8, 110, 24);
+            this.btnSearchPro.RootElement.ControlBounds = new System.Drawing.Rectangle(153, 3, 73, 24);
             this.btnSearchPro.RootElement.MaxSize = new System.Drawing.Size(73, 49);
             this.btnSearchPro.Size = new System.Drawing.Size(36, 46);
             this.btnSearchPro.TabIndex = 15;
@@ -1280,7 +1322,7 @@
             // 
             // 
             this.btnPrecio.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnPrecio.RootElement.ControlBounds = new System.Drawing.Rectangle(9, 9, 110, 24);
+            this.btnPrecio.RootElement.ControlBounds = new System.Drawing.Rectangle(4, 4, 110, 24);
             this.btnPrecio.RootElement.MaxSize = new System.Drawing.Size(199, 49);
             this.btnPrecio.Size = new System.Drawing.Size(129, 46);
             this.btnPrecio.TabIndex = 13;
@@ -1302,7 +1344,7 @@
             // 
             // 
             // 
-            this.btnBorrarProducto.RootElement.ControlBounds = new System.Drawing.Rectangle(675, 9, 110, 24);
+            this.btnBorrarProducto.RootElement.ControlBounds = new System.Drawing.Rectangle(300, 4, 110, 24);
             this.btnBorrarProducto.RootElement.MaxSize = new System.Drawing.Size(119, 49);
             this.btnBorrarProducto.Size = new System.Drawing.Size(93, 46);
             this.btnBorrarProducto.TabIndex = 11;
@@ -1343,7 +1385,7 @@
             // 
             // 
             this.btnQtyProduct.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-            this.btnQtyProduct.RootElement.ControlBounds = new System.Drawing.Rectangle(483, 12, 110, 24);
+            this.btnQtyProduct.RootElement.ControlBounds = new System.Drawing.Rectangle(215, 5, 73, 24);
             this.btnQtyProduct.RootElement.MaxSize = new System.Drawing.Size(73, 49);
             this.btnQtyProduct.Size = new System.Drawing.Size(73, 45);
             this.btnQtyProduct.TabIndex = 12;
@@ -1362,7 +1404,7 @@
             // 
             // 
             // 
-            this.txtCodigo.RootElement.ControlBounds = new System.Drawing.Rectangle(30, 12, 100, 20);
+            this.txtCodigo.RootElement.ControlBounds = new System.Drawing.Rectangle(13, 5, 100, 20);
             this.txtCodigo.RootElement.StretchVertically = true;
             this.txtCodigo.ShortcutsEnabled = false;
             this.txtCodigo.Size = new System.Drawing.Size(135, 45);
@@ -1473,7 +1515,7 @@
             // 
             // 
             // 
-            this.btnCompraGratis.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 188, 110, 24);
+            this.btnCompraGratis.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 223, 110, 24);
             this.btnCompraGratis.Size = new System.Drawing.Size(120, 53);
             this.btnCompraGratis.TabIndex = 56;
             this.btnCompraGratis.Text = "Compra\r\nGratis";
@@ -1496,7 +1538,7 @@
             // 
             // 
             // 
-            this.btnDevolucionIVA.RootElement.ControlBounds = new System.Drawing.Rectangle(124, 188, 110, 24);
+            this.btnDevolucionIVA.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 223, 110, 24);
             this.btnDevolucionIVA.Size = new System.Drawing.Size(72, 53);
             this.btnDevolucionIVA.TabIndex = 55;
             this.btnDevolucionIVA.Text = "Dev. IVA";
@@ -1516,7 +1558,7 @@
             // 
             // 
             // 
-            this.radButton12.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 143, 110, 24);
+            this.radButton12.RootElement.ControlBounds = new System.Drawing.Rectangle(274, 168, 110, 24);
             this.radButton12.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.radButton12.Size = new System.Drawing.Size(21, 32);
             this.radButton12.TabIndex = 41;
@@ -1541,7 +1583,7 @@
             // 
             // 
             // 
-            this.btn0.RootElement.ControlBounds = new System.Drawing.Rectangle(197, 143, 110, 24);
+            this.btn0.RootElement.ControlBounds = new System.Drawing.Rectangle(197, 168, 110, 24);
             this.btn0.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn0.Size = new System.Drawing.Size(75, 49);
             this.btn0.TabIndex = 36;
@@ -1567,7 +1609,7 @@
             // 
             // 
             // 
-            this.btn9.RootElement.ControlBounds = new System.Drawing.Rectangle(270, 90, 110, 24);
+            this.btn9.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 110, 110, 24);
             this.btn9.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn9.Size = new System.Drawing.Size(77, 55);
             this.btn9.TabIndex = 36;
@@ -1592,7 +1634,7 @@
             // 
             // 
             // 
-            this.btn8.RootElement.ControlBounds = new System.Drawing.Rectangle(194, 90, 110, 24);
+            this.btn8.RootElement.ControlBounds = new System.Drawing.Rectangle(196, 110, 110, 24);
             this.btn8.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn8.Size = new System.Drawing.Size(77, 55);
             this.btn8.TabIndex = 36;
@@ -1616,7 +1658,7 @@
             // 
             // 
             // 
-            this.btn6.RootElement.ControlBounds = new System.Drawing.Rectangle(270, 45, 110, 24);
+            this.btn6.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 55, 110, 24);
             this.btn6.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn6.Size = new System.Drawing.Size(77, 55);
             this.btn6.TabIndex = 36;
@@ -1642,7 +1684,7 @@
             // 
             // 
             // 
-            this.btn5.RootElement.ControlBounds = new System.Drawing.Rectangle(194, 45, 110, 24);
+            this.btn5.RootElement.ControlBounds = new System.Drawing.Rectangle(196, 55, 110, 24);
             this.btn5.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn5.Size = new System.Drawing.Size(77, 55);
             this.btn5.TabIndex = 35;
@@ -1666,7 +1708,7 @@
             // 
             // 
             // 
-            this.btn4.RootElement.ControlBounds = new System.Drawing.Rectangle(124, 45, 114, 69);
+            this.btn4.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 55, 110, 29);
             this.btn4.RootElement.MinSize = new System.Drawing.Size(51, 29);
             this.btn4.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn4.Size = new System.Drawing.Size(73, 55);
@@ -1690,7 +1732,7 @@
             // 
             // 
             // 
-            this.btn3.RootElement.ControlBounds = new System.Drawing.Rectangle(270, 0, 110, 24);
+            this.btn3.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 0, 110, 24);
             this.btn3.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn3.Size = new System.Drawing.Size(77, 55);
             this.btn3.TabIndex = 33;
@@ -1713,7 +1755,7 @@
             // 
             // 
             // 
-            this.btn2.RootElement.ControlBounds = new System.Drawing.Rectangle(194, 0, 110, 24);
+            this.btn2.RootElement.ControlBounds = new System.Drawing.Rectangle(196, 0, 110, 24);
             this.btn2.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn2.Size = new System.Drawing.Size(77, 55);
             this.btn2.TabIndex = 32;
@@ -1741,7 +1783,7 @@
             // 
             // 
             this.btn1.RootElement.AutoSize = false;
-            this.btn1.RootElement.ControlBounds = new System.Drawing.Rectangle(124, 0, 114, 69);
+            this.btn1.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 0, 110, 29);
             this.btn1.RootElement.MinSize = new System.Drawing.Size(51, 29);
             this.btn1.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn1.Size = new System.Drawing.Size(73, 55);
@@ -1774,7 +1816,7 @@
             // 
             // 
             // 
-            this.btnTCredito.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 8, 110, 24);
+            this.btnTCredito.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 3, 110, 24);
             this.btnTCredito.Size = new System.Drawing.Size(120, 49);
             this.btnTCredito.TabIndex = 43;
             this.btnTCredito.Text = "T.Crédito";
@@ -1795,7 +1837,7 @@
             // 
             // 
             // 
-            this.btnCreditoInterno.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 53, 110, 24);
+            this.btnCreditoInterno.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 58, 110, 24);
             this.btnCreditoInterno.Size = new System.Drawing.Size(120, 49);
             this.btnCreditoInterno.TabIndex = 45;
             this.btnCreditoInterno.Text = "T.Delportal";
@@ -1815,7 +1857,7 @@
             // 
             // 
             // 
-            this.btnDsctoEsp.RootElement.ControlBounds = new System.Drawing.Rectangle(349, 53, 110, 24);
+            this.btnDsctoEsp.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 58, 110, 24);
             this.btnDsctoEsp.Size = new System.Drawing.Size(124, 49);
             this.btnDsctoEsp.TabIndex = 46;
             this.btnDsctoEsp.Text = "Dscto. Promo";
@@ -1856,7 +1898,7 @@
             // 
             // 
             // 
-            this.btnCheque.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 143, 110, 24);
+            this.btnCheque.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 168, 110, 24);
             this.btnCheque.Size = new System.Drawing.Size(120, 49);
             this.btnCheque.TabIndex = 47;
             this.btnCheque.Text = "Cheque";
@@ -1876,7 +1918,7 @@
             // 
             // 
             // 
-            this.btnDsctoPaviPlan.RootElement.ControlBounds = new System.Drawing.Rectangle(197, 188, 110, 24);
+            this.btnDsctoPaviPlan.RootElement.ControlBounds = new System.Drawing.Rectangle(197, 223, 110, 24);
             this.btnDsctoPaviPlan.Size = new System.Drawing.Size(75, 53);
             this.btnDsctoPaviPlan.TabIndex = 51;
             this.btnDsctoPaviPlan.Text = "Dscto. PaviPlan";
@@ -1897,7 +1939,7 @@
             // 
             // 
             // 
-            this.btnPagoAtras.RootElement.ControlBounds = new System.Drawing.Rectangle(349, 188, 110, 24);
+            this.btnPagoAtras.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 223, 110, 24);
             this.btnPagoAtras.Size = new System.Drawing.Size(124, 53);
             this.btnPagoAtras.TabIndex = 52;
             this.btnPagoAtras.Text = "Cancelar";
@@ -1918,7 +1960,7 @@
             // 
             // 
             // 
-            this.btnPagoGiftCard.RootElement.ControlBounds = new System.Drawing.Rectangle(349, 8, 110, 24);
+            this.btnPagoGiftCard.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 3, 110, 24);
             this.btnPagoGiftCard.Size = new System.Drawing.Size(124, 49);
             this.btnPagoGiftCard.TabIndex = 53;
             this.btnPagoGiftCard.Text = "Gift Card";
@@ -1939,7 +1981,7 @@
             // 
             // 
             // 
-            this.btnMonedero.RootElement.ControlBounds = new System.Drawing.Rectangle(349, 98, 110, 24);
+            this.btnMonedero.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 113, 110, 24);
             this.btnMonedero.Size = new System.Drawing.Size(124, 49);
             this.btnMonedero.TabIndex = 49;
             this.btnMonedero.Text = "Dinero Electrónico";
@@ -1963,7 +2005,7 @@
             // 
             // 
             // 
-            this.btnNC.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 98, 110, 24);
+            this.btnNC.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 113, 110, 24);
             this.btnNC.Size = new System.Drawing.Size(120, 49);
             this.btnNC.TabIndex = 44;
             this.btnNC.Text = "N. CREDITO";
@@ -1984,7 +2026,7 @@
             // 
             // 
             // 
-            this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 188, 110, 24);
+            this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(274, 223, 110, 24);
             this.btnRetencion.Size = new System.Drawing.Size(75, 53);
             this.btnRetencion.TabIndex = 48;
             this.btnRetencion.Text = "Retención";
@@ -2006,7 +2048,7 @@
             // 
             // 
             // 
-            this.btn7.RootElement.ControlBounds = new System.Drawing.Rectangle(124, 90, 114, 69);
+            this.btn7.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 110, 110, 29);
             this.btn7.RootElement.MinSize = new System.Drawing.Size(51, 29);
             this.btn7.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.btn7.Size = new System.Drawing.Size(73, 55);
@@ -2051,7 +2093,7 @@
             // 
             // 
             // 
-            this.btnEfectivo.RootElement.ControlBounds = new System.Drawing.Rectangle(4, 9, 110, 24);
+            this.btnEfectivo.RootElement.ControlBounds = new System.Drawing.Rectangle(2, 4, 110, 24);
             this.btnEfectivo.Size = new System.Drawing.Size(115, 62);
             this.btnEfectivo.TabIndex = 42;
             this.btnEfectivo.Text = "Efectivo";
@@ -2073,7 +2115,7 @@
             // 
             // 
             // 
-            this.btnPagoBorrar.RootElement.ControlBounds = new System.Drawing.Rectangle(355, 9, 110, 24);
+            this.btnPagoBorrar.RootElement.ControlBounds = new System.Drawing.Rectangle(356, 4, 110, 24);
             this.btnPagoBorrar.Size = new System.Drawing.Size(118, 62);
             this.btnPagoBorrar.TabIndex = 38;
             this.btnPagoBorrar.Text = "Borrar";
@@ -2098,7 +2140,7 @@
             // 
             // 
             // 
-            this.txtPagoValor.RootElement.ControlBounds = new System.Drawing.Rectangle(121, 9, 100, 20);
+            this.txtPagoValor.RootElement.ControlBounds = new System.Drawing.Rectangle(120, 4, 100, 20);
             this.txtPagoValor.Size = new System.Drawing.Size(233, 62);
             this.txtPagoValor.TabIndex = 37;
             this.txtPagoValor.TabStop = false;
@@ -2112,7 +2154,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridPagos.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gridPagos.Location = new System.Drawing.Point(4, 4);
-            this.gridPagos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridPagos.Margin = new System.Windows.Forms.Padding(4);
             // 
             // gridPagos
             // 
@@ -2120,24 +2162,24 @@
             this.gridPagos.MasterTemplate.AllowColumnReorder = false;
             this.gridPagos.MasterTemplate.AutoGenerateColumns = false;
             this.gridPagos.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn11.FieldName = "Descripcion";
-            gridViewTextBoxColumn11.HeaderText = "Forma Pago";
-            gridViewTextBoxColumn11.Name = "column1";
-            gridViewTextBoxColumn11.Width = 215;
-            gridViewTextBoxColumn12.FieldName = "Valor";
-            gridViewTextBoxColumn12.HeaderText = "Valor";
-            gridViewTextBoxColumn12.Name = "column2";
-            gridViewTextBoxColumn12.Width = 234;
+            gridViewTextBoxColumn35.FieldName = "Descripcion";
+            gridViewTextBoxColumn35.HeaderText = "Forma Pago";
+            gridViewTextBoxColumn35.Name = "column1";
+            gridViewTextBoxColumn35.Width = 215;
+            gridViewTextBoxColumn36.FieldName = "Valor";
+            gridViewTextBoxColumn36.HeaderText = "Valor";
+            gridViewTextBoxColumn36.Name = "column2";
+            gridViewTextBoxColumn36.Width = 234;
             this.gridPagos.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn11,
-            gridViewTextBoxColumn12});
+            gridViewTextBoxColumn35,
+            gridViewTextBoxColumn36});
             this.gridPagos.MasterTemplate.EnableGrouping = false;
             this.gridPagos.Name = "gridPagos";
             this.gridPagos.ReadOnly = true;
             // 
             // 
             // 
-            this.gridPagos.RootElement.ControlBounds = new System.Drawing.Rectangle(9, 9, 240, 150);
+            this.gridPagos.RootElement.ControlBounds = new System.Drawing.Rectangle(4, 4, 240, 150);
             this.gridPagos.Size = new System.Drawing.Size(470, 139);
             this.gridPagos.TabIndex = 10;
             this.gridPagos.Text = "radGridView1";
@@ -2166,7 +2208,7 @@
             // 
             // 
             // 
-            this.radLabel7.RootElement.ControlBounds = new System.Drawing.Rectangle(258, 26, 100, 18);
+            this.radLabel7.RootElement.ControlBounds = new System.Drawing.Rectangle(115, 11, 100, 18);
             this.radLabel7.Size = new System.Drawing.Size(106, 37);
             this.radLabel7.TabIndex = 8;
             this.radLabel7.Text = "Cambio:";
@@ -2179,13 +2221,13 @@
             this.lblCambio.BackColor = System.Drawing.Color.Transparent;
             this.lblCambio.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCambio.ForeColor = System.Drawing.Color.White;
-            this.lblCambio.Location = new System.Drawing.Point(186, 1);
+            this.lblCambio.Location = new System.Drawing.Point(184, 1);
             this.lblCambio.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblCambio.Name = "lblCambio";
             // 
             // 
             // 
-            this.lblCambio.RootElement.ControlBounds = new System.Drawing.Rectangle(-178, 3, 100, 18);
+            this.lblCambio.RootElement.ControlBounds = new System.Drawing.Rectangle(184, 1, 100, 18);
             this.lblCambio.Size = new System.Drawing.Size(252, 50);
             this.lblCambio.TabIndex = 9;
             this.lblCambio.Text = "00.00";
@@ -2200,7 +2242,7 @@
             // 
             // 
             // 
-            this.btnEliminarPago.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 22, 110, 24);
+            this.btnEliminarPago.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 9, 110, 24);
             this.btnEliminarPago.Size = new System.Drawing.Size(105, 46);
             this.btnEliminarPago.TabIndex = 10;
             this.btnEliminarPago.Text = "Borrar Pago";
@@ -2283,6 +2325,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).EndInit();
             this.clienteGroup.ResumeLayout(false);
             this.clienteGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCFinal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).EndInit();
@@ -2290,7 +2333,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblIdClienteApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCliente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTelefono)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCFinal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNombre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
@@ -2303,6 +2345,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).EndInit();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnFlechaDer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnFlechaIzq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTotal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBusqProd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnKbd)).EndInit();
@@ -2475,5 +2519,8 @@
         private Telerik.WinControls.UI.RadButton btnCompraGratis;
         private Telerik.WinControls.UI.RadButton btnDescuentoCupon;
         private Telerik.WinControls.UI.RadButton radButton2;
+        private System.Windows.Forms.FlowLayoutPanel flowPanelBotones;
+        private Telerik.WinControls.UI.RadButton btnFlechaDer;
+        private Telerik.WinControls.UI.RadButton btnFlechaIzq;
     }
 }

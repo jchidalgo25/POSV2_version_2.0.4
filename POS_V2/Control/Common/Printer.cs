@@ -351,12 +351,12 @@ namespace POS.Control.Common
                 texto = texto.Replace("<<cliente_telefono>>", receipt.ClienteTelefono);
                 texto = texto.Replace("<<facConcepto>>", receipt.ConceptoTransaccion);
                 //Enmascarar tarjeta
-                if (receipt.CodigoTarjeta.Length > 6)
-                {
-                    string first = receipt.CodigoTarjeta.Substring(0, 3);
-                    string last = receipt.CodigoTarjeta.Substring(receipt.CodigoTarjeta.Length - 3, 3);
-                    receipt.CodigoTarjeta = first + string.Empty.PadRight(receipt.CodigoTarjeta.Length - 6, 'X') + last;
-                }
+                //if (receipt.CodigoTarjeta.Length > 6)
+                //{
+                //    string first = receipt.CodigoTarjeta.Substring(0, 3);
+                //    string last = receipt.CodigoTarjeta.Substring(receipt.CodigoTarjeta.Length - 3, 3);
+                //    receipt.CodigoTarjeta = first + string.Empty.PadRight(receipt.CodigoTarjeta.Length - 6, 'X') + last;
+                //}
 
                 //Muchas GC
 
@@ -389,7 +389,7 @@ namespace POS.Control.Common
                 // texto = texto.Replace("<<itemValor>>", Common.StringHelper.DevolverConPadding(receipt.ItemValor.ToString("N2"), 45));
 
 
-                texto = texto.Replace("<<codigoTarjeta>>", receipt.CodigoTarjeta);
+                //texto = texto.Replace("<<codigoTarjeta>>", receipt.CodigoTarjeta);
 
                 texto = texto.Replace("<<total_pagar>>", receipt.TotalTransacccion.ToString("N2"));
                 texto = texto.Replace("<<factura_cambio>>", Control.Common.StringHelper.DevolverConPadding(receipt.CambioTransacccion.ToString("N2"), 65));

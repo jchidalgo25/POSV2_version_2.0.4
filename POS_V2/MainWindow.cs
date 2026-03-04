@@ -41,6 +41,7 @@ using POS.Models.DevolucionIVA;
 using System.Data.Entity.SqlServer; // Necesario para SqlFunctions
 using POS.Models.SRI;
 using POS.Models.AppCupones;
+using Telerik.WinControls;
 //using POS.Control.Main.MainTouchClte;
 //using POS.Services;
 
@@ -49,6 +50,8 @@ namespace POS
 
     public partial class MainWindow : Telerik.WinControls.UI.RadForm
     {
+       
+
         /* Code to Disable WinKey, Alt+Tab, Ctrl+Esc Starts Here */
         // Structure contain information about low-level keyboard input event 
         [StructLayout(LayoutKind.Sequential)]
@@ -101,6 +104,10 @@ namespace POS
         private bool _isProcessingBarCode = false;
         private bool _isProcessing = false;
         private int _idCuponAplicado = 0;
+        // Esta lista recordará los ramos que están en la grilla esperando ser pagados
+        private List<string> _ramosPendientesDeCobro = new List<string>();
+
+
 
         //private BackgroundWorker backgroundWorkerMensajes;
         // En MainWindow.cs o clase donde lo estés creando
@@ -561,6 +568,10 @@ namespace POS
 
             InitializeComponent();
 
+            //CargarBotonesPrueba();
+
+            //CargarCarouselCategorias();
+
             //CloseTaskManager();
             //StartHiddenTaskManager();
             //HideTaskManager();
@@ -901,6 +912,13 @@ namespace POS
         //    }
         //}
 
+
+
+
+
+       
+
+
         private void agregaProductosTmp(string codigo)
         {
             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "agregaProductosTmp", "Ejecuta agregaProductosTmp ");
@@ -1185,6 +1203,7 @@ namespace POS
 
         }
 
+     
 
         private void validaClienteSp(string itendifacionCompleta)
         {
@@ -1975,7 +1994,7 @@ namespace POS
 
                     lblEtiquetaSaldo.Visible = true;
                     lblSaldoTarjeta.Visible = true;
-                    lblSaldoTarjeta.Text = string.Format("{0:C}", (tarjetaAdicional == null) ? tarjeta.saldo : tarjetaAdicional.saldo);
+                    lblSaldoTarjeta.Text = string.Format("{0:C}", (tarjetaAdicional == null) ? tarjeta.saldo : tarjetaAdicional.saldo); // cambiar por compra gratis JCHID
 
                 }
                 if (nuevo_cliente != null)
@@ -3990,8 +4009,8 @@ namespace POS
 
             string sQuery = string.Empty;
             //SqlConnection conexion2 = new SqlConnection(POS.Properties.Settings.Default.CONECTA_AX);
-            //string connectionString = posEF.Database.Connection.ConnectionString;
-            string connectionString = POS.Properties.Settings.Default.CONECTA_AX;
+            string connectionString = posEF.Database.Connection.ConnectionString;
+            //string connectionString = POS.Properties.Settings.Default.CONECTA_AX;
             string parametro2 = string.Empty;
             string valor = string.Empty;
 
@@ -4056,6 +4075,243 @@ namespace POS
             }
         }
 
+        private void CargarBotonesDinamicos(string axCode, string puntoEmision, POSEntities db)
+        {
+            // 1. Limpieza y Configuración visual
+            flowPanelBotones.Controls.Clear();
+            flowPanelBotones.WrapContents = false; // Mantiene los botones en una sola fila
+            flowPanelBotones.AutoScroll = true;    // Habilita la lógica de desplazamiento
+
+            // AJUSTE: Si tus botones ahora miden 50 de alto (como pusiste en CrearBotonTelerik), 
+            // el cálculo del padding debe ser con 50 para que queden centrados exactos.
+            int paddingSuperior = (flowPanelBotones.Height - 50) / 2;
+            flowPanelBotones.Padding = new Padding(0, Math.Max(0, paddingSuperior), 0, 0);
+
+            // --- BLOQUE 1: BOTONES DIRECCIÓN (1 al 20) ---
+            for (int i = 1; i <= 20; i++)
+            {
+                // AJUSTE: Usar axCode.Trim() para evitar fallos por espacios en blanco en la DB
+                var objBoton = GetBotonDirec(i, axCode.Trim(), db);
+
+                if (objBoton.CodError == 0 && !string.IsNullOrEmpty(objBoton.valor) && objBoton.valor != "NINGUNO")
+                {
+                    CrearBotonTelerik(objBoton.valor, objBoton.parametro2);
+                }
+            }
+
+            // --- BLOQUE 2: NUEVOS BOTONES (FILTRADOS POR PUNTO DE EMISIÓN) ---
+            // Este método usa el LIKE 'MENU_%_LOCAL_PTO' que definimos
+            DataSet dtsMenus = GetTodosLosMenusPorPuntoEmision(axCode, puntoEmision);
+
+            if (dtsMenus != null && dtsMenus.Tables.Count > 0)
+            {
+                foreach (DataRow row in dtsMenus.Tables[0].Rows)
+                {
+                    string nombreMenu = row["valor"]?.ToString() ?? "";
+                    string codigoMenu = row["parametro2"]?.ToString() ?? "";
+                    string rutaIcono = row["documento"]?.ToString() ?? "";
+
+
+
+                    if (!string.IsNullOrEmpty(nombreMenu))
+                    {
+                        string tagValue = $"{codigoMenu}|{rutaIcono}";
+                        CrearBotonTelerik(nombreMenu, tagValue);
+                    }
+                }
+            }
+
+            // 3. Finalizar (Ocultar barras para estética)
+            flowPanelBotones.VerticalScroll.Visible = false;
+            flowPanelBotones.HorizontalScroll.Visible = false;
+        }
+
+        private void CrearBotonTelerik(string texto, string tagValue)
+        {
+            Telerik.WinControls.UI.RadButton boton = new Telerik.WinControls.UI.RadButton();
+            boton.Text = texto.ToUpper();
+            boton.Tag = tagValue ?? "";
+            boton.Size = new Size(140, 50);
+            boton.Margin = new Padding(7, 0, 7, 0);
+
+            // --- DISEÑO VERDE DELPORTAL ---
+            boton.ButtonElement.ButtonFillElement.BackColor = Color.FromArgb(0, 88, 42);
+            boton.ButtonElement.ButtonFillElement.BackColor2 = Color.FromArgb(0, 88, 42);
+            boton.ButtonElement.ButtonFillElement.BackColor3 = Color.FromArgb(0, 88, 42);
+            boton.ButtonElement.ButtonFillElement.BackColor4 = Color.FromArgb(0, 88, 42);
+            boton.ButtonElement.ButtonFillElement.GradientStyle = Telerik.WinControls.GradientStyles.Solid;
+
+            boton.ForeColor = Color.White;
+            boton.ButtonElement.TextElement.ForeColor = Color.White;
+            boton.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            boton.TextWrap = true;
+            boton.TextAlignment = ContentAlignment.MiddleCenter;
+            boton.ButtonElement.BorderElement.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+
+            // --- LÓGICA DE CLICK UNIFICADA ---
+            boton.Click += (s, e) => {
+                string tagData = boton.Tag?.ToString() ?? "";
+
+                if (!string.IsNullOrEmpty(tagData))
+                {
+                    // Separamos el código de la ruta de la imagen
+                    string[] partes = tagData.Split('|');
+                    string codigo = partes[0];
+                    string rutaImagen = partes.Length > 1 ? partes[1] : "";
+
+                    if (codigo.StartsWith("MENU_"))
+                    {
+                        using (FrmSeleccionMenu modal = new FrmSeleccionMenu(boton.Text, codigo, rutaImagen))
+                        {
+                            modal.OnProductosConfirmados += (listaDeProductos) => {
+
+                                // Recorremos la lista que nos devuelve el modal
+                                foreach (var prod in listaDeProductos)
+                                {
+                                    // 1. Ponemos el código en el textbox principal del POS
+                                    txtCodigo.Text = prod.Barras;
+
+                                    // 2. Ejecutamos el evento KeyPress simulando un ENTER
+                                    // Esto hará que tu sistema procese el producto como si lo hubieran escaneado
+                                    txtCodigo_KeyPress(this, new KeyPressEventArgs((char)Keys.Enter));
+                                }
+                            };
+                            modal.ShowDialog(this);
+                        }
+                    }
+                    else
+                    {
+                        // Lógica normal para canastas
+                        txtCodigo.Text = codigo;
+                        txtCodigo_KeyPress(this, new KeyPressEventArgs((char)(Keys.Enter)));
+                    }
+                }
+            };
+
+            flowPanelBotones.Controls.Add(boton);
+        }
+
+        private DataSet GetTodosLosMenusPorPuntoEmision(string EstablecimientoAxCode, string PuntoEmision)
+        {
+            string connectionString = POS.Properties.Settings.Default.CONECTA_AX;
+
+            // Filtro dinámico: MENU + CUALQUIER_COSA + LOCAL + PUNTO_EMISION
+            // Ejemplo: MENU_%_ARDP-0023_995
+            string filtroIdentificador = $"MENU_%_{EstablecimientoAxCode.Trim()}_{PuntoEmision.Trim()}";
+
+            string sQuery = $@"SELECT valor, parametro2, documento
+                       FROM POS.dbo.core_parametro 
+                       WHERE identificador LIKE '{filtroIdentificador}'";
+
+            return Control.Common.General.GetDataSet(sQuery, connectionString);
+        }
+
+        //private void CargarBotonesPrueba()
+        //{
+        //    flowPanelBotones.Controls.Clear();
+
+        //    for (int i = 1; i <= 15; i++)
+        //    {
+        //        Telerik.WinControls.UI.RadButton boton = new Telerik.WinControls.UI.RadButton();
+
+        //        boton.Text = "CATEGORÍA " + i;
+        //        boton.Tag = "CODIGO-" + i;
+        //        boton.Size = new Size(140, 45);
+        //        boton.Margin = new Padding(3);
+
+        //        // CONFIGURACIÓN CORRECTA DEL COLOR VERDE - Todos los estados
+        //        boton.ButtonElement.ButtonFillElement.BackColor = Color.FromArgb(0, 88, 42);
+        //        boton.ButtonElement.ButtonFillElement.BackColor2 = Color.FromArgb(0, 88, 42);
+        //        boton.ButtonElement.ButtonFillElement.BackColor3 = Color.FromArgb(0, 88, 42);
+        //        boton.ButtonElement.ButtonFillElement.BackColor4 = Color.FromArgb(0, 88, 42);
+        //        boton.ButtonElement.ButtonFillElement.GradientStyle = Telerik.WinControls.GradientStyles.Solid;
+
+        //        // Color del texto
+        //        boton.ForeColor = Color.White;
+        //        boton.ButtonElement.ForeColor = Color.White;
+        //        boton.ButtonElement.TextElement.ForeColor = Color.White;
+
+        //        boton.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+        //        boton.TextWrap = true;
+        //        boton.TextAlignment = ContentAlignment.MiddleCenter;
+
+        //        // Quitar bordes
+        //        boton.ButtonElement.BorderElement.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+
+        //        // Evento Click
+        //        boton.Click += (s, e) => {
+        //            MessageBox.Show("Clic en: " + boton.Text);
+        //        };
+
+        //        flowPanelBotones.Controls.Add(boton);
+        //    }
+        //}
+
+        private void BtnFlechaDer_Click(object sender, EventArgs e)
+        {
+            // Forzamos el valor del scroll directamente
+            int actual = flowPanelBotones.HorizontalScroll.Value;
+            int salto = 150; // Un valor fijo para probar primero
+
+            // IMPORTANTE: WinForms a veces requiere que el valor sea asignado a AutoScrollPosition
+            // pero de forma negativa para que responda correctamente
+            flowPanelBotones.AutoScrollPosition = new Point(actual + salto, 0);
+        }
+
+        private void BtnFlechaIzq_Click(object sender, EventArgs e)
+        {
+            int actual = flowPanelBotones.HorizontalScroll.Value;
+            int salto = 150;
+            flowPanelBotones.AutoScrollPosition = new Point(actual - salto, 0);
+        }
+
+        //private void CargarBotonesDinamicosCarrusel(string axCode, POSEntities db)
+        //{
+        //    radCarousel1.Items.Clear();
+
+        //    for (int i = 1; i <= 20; i++)
+        //    {
+        //        var objBoton = GetBotonDirec(i, axCode, db);
+
+        //        if (objBoton.CodError == 0 && !string.IsNullOrEmpty(objBoton.valor) && objBoton.valor != "NINGUNO")
+        //        {
+        //            Telerik.WinControls.UI.RadButtonElement item = new Telerik.WinControls.UI.RadButtonElement();
+
+        //            item.Text = objBoton.valor.ToUpper();
+        //            item.Tag = objBoton.parametro2;
+
+        //            // Tamaño fijo importante
+        //            item.MinSize = new Size(120, 50);
+        //            item.MaxSize = new Size(120, 50);
+
+        //            // Estilo
+        //            item.ButtonFillElement.BackColor = Color.FromArgb(0, 88, 42);
+        //            item.ButtonFillElement.NumberOfColors = 1;
+        //            item.ButtonFillElement.GradientStyle = Telerik.WinControls.GradientStyles.Solid;
+        //            item.BorderElement.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+        //            item.ForeColor = Color.White;
+        //            item.TextElement.ForeColor = Color.White;
+        //            item.Font = new Font("Segoe UI", 8, FontStyle.Bold);
+        //            item.TextWrap = true;
+        //            item.Margin = new System.Windows.Forms.Padding(5); // Separación entre botones
+
+        //            item.Click += (s, e) => {
+        //                string codigoProducto = item.Tag.ToString();
+        //                agregaProductosTmp(codigoProducto);
+        //            };
+
+        //            radCarousel1.Items.Add(item);
+        //        }
+        //    }
+
+        //    // Después de agregar todos
+        //    if (radCarousel1.Items.Count > 0)
+        //    {
+        //        radCarousel1.VisibleItemCount = Math.Min(5, radCarousel1.Items.Count);
+        //        radCarousel1.SelectedIndex = 0; // Seleccionar el primero
+        //    }
+        //}
+
 
         private void CargarMainWindow()
         {
@@ -4097,35 +4353,43 @@ namespace POS
                 {
 
                     string EstablecimientoAxCode = string.Empty;
+                    string PuntoEmision = string.Empty;
                     if (_factura.User.username != "1234")
                     {
                         EstablecimientoAxCode = Control.Common.GlobalParameters.EstablecimientoAxCode;
                     }
-
-                    var objBoton1 = GetBotonDirec(1, EstablecimientoAxCode, db);
-                    var objBoton2 = GetBotonDirec(2, EstablecimientoAxCode, db);
-                    var objBoton3 = GetBotonDirec(3, EstablecimientoAxCode, db);
-                    var objBoton4 = GetBotonDirec(4, EstablecimientoAxCode, db);
-                    var objBoton5 = GetBotonDirec(5, EstablecimientoAxCode, db);
+                    EstablecimientoAxCode = Control.Common.GlobalParameters.EstablecimientoAxCode;
+                    PuntoEmision = POS.Control.Common.GlobalParameters.PuntoEmision;
 
 
-                    BotonDirec1 = objBoton1.parametro2;
-                    BTN_DIREC_1.Text = objBoton1.valor;
-                    BotonDirec2 = objBoton2.parametro2;
-                    BTN_DIREC_2.Text = objBoton2.valor;
-                    BotonDirec3 = objBoton3.parametro2;
-                    BTN_DIREC_3.Text = objBoton3.valor;
-                    BotonDirec4 = objBoton4.parametro2;
-                    BTN_DIREC_4.Text = objBoton4.valor;
-                    BotonDirec5 = objBoton5.parametro2;
-                    BTN_DIREC_5.Text = objBoton5.valor;
 
+                    //var objBoton1 = GetBotonDirec(1, EstablecimientoAxCode, db);
+                    //var objBoton2 = GetBotonDirec(2, EstablecimientoAxCode, db);
+                    //var objBoton3 = GetBotonDirec(3, EstablecimientoAxCode, db);
+                    //var objBoton4 = GetBotonDirec(4, EstablecimientoAxCode, db);
+                    //var objBoton5 = GetBotonDirec(5, EstablecimientoAxCode, db);
+
+
+                    //BotonDirec1 = objBoton1.parametro2;
+                    //BTN_DIREC_1.Text = objBoton1.valor;
+                    //BotonDirec2 = objBoton2.parametro2;
+                    //BTN_DIREC_2.Text = objBoton2.valor;
+                    //BotonDirec3 = objBoton3.parametro2;
+                    //BTN_DIREC_3.Text = objBoton3.valor;
+                    //BotonDirec4 = objBoton4.parametro2;
+                    //BTN_DIREC_4.Text = objBoton4.valor;
+                    //BotonDirec5 = objBoton5.parametro2;
+                    //BTN_DIREC_5.Text = objBoton5.valor;
+
+                    //CargarBotonesDinamicosCarrusel(EstablecimientoAxCode, db);
+
+                    CargarBotonesDinamicos(EstablecimientoAxCode, PuntoEmision, db);
 
                     ////Ejecución no Graba Base Temporal
                     //if (db.core_parametro.Where(x => x.identificador == "NO_GRABA_TMP_DB" && x.valor == _factura.Establecimiento && x.parametro2 == _factura.PtoEmision).FirstOrDefault() != null)
                     //{ NoGrabaTMP = "TRUE"; }
 
-                   
+
 
                     this.btnCuponApp.Name = "btnCuponApp";
 
@@ -5263,6 +5527,18 @@ namespace POS
                 return;
             }
 
+            if (codigo.StartsWith("FL") && codigo.Length >= 5)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "EjecutaConsultaCodigoItem", $"Interceptado código de ramo: {codigo}");
+
+                ProcesarCodigoRamo(codigo, sender);
+
+                // Limpiamos la caja de texto y SALIMOS para que no llame a getProducto("FL00003")
+                txtCodigo.Clear();
+                txtCodigo.Focus();
+                return;
+            }
+
             Control.Common.Logger.LogMessage(
                 Control.Common.Enum.LogTypes.Info,
                 "MainWindows",
@@ -5358,6 +5634,68 @@ namespace POS
             }
         }
 
+        private void ProcesarCodigoRamo(string idRamo, object sender)
+        {
+            if (_ramosPendientesDeCobro != null && _ramosPendientesDeCobro.Contains(idRamo))
+            {
+                Control.Common.General.GetMensajeToList(10023);
+                //MessageBox.Show("Este arreglo floral ya fue agregado a la factura actual. No puede escanear el mismo ramo dos veces.", "Doble Escaneo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salimos inmediatamente
+            }
+
+            try
+            {
+                using (POS.Models.POSEntities db = new POS.Models.POSEntities())
+                {
+                    var estadoRamo = db.Database.SqlQuery<int?>(
+                        "SELECT Estado FROM dbo.tbl_ramo_cab WHERE IdRamo = @p0",
+                        new System.Data.SqlClient.SqlParameter("@p0", idRamo)
+                    ).FirstOrDefault();
+
+                    if (estadoRamo == null)
+                    {
+                        //MessageBox.Show("El código de ramo escaneado no existe.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Control.Common.General.GetMensajeToList(10021);
+                        return;
+                    }
+
+                    if (estadoRamo == 0)
+                    {
+                        //MessageBox.Show("Este arreglo floral ya fue cobrado o escaneado anteriormente.", "Ramo Invalido", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        Control.Common.General.GetMensajeToList(10022);
+                        return;
+                    }
+
+                    // Traer las flores
+                    string sqlDetalle = "SELECT BARRAS, Cantidad FROM dbo.tbl_ramo_det WHERE IdRamo = @p0";
+                    var flores = db.Database.SqlQuery<FlorDelRamoTemp>(sqlDetalle,
+                        new System.Data.SqlClient.SqlParameter("@p0", idRamo)).ToList();
+
+                    if (flores.Count == 0) return;
+
+                    // 🌟 MAGIA: Inyectamos cada flor simulando un escaneo normal 🌟
+                    foreach (var flor in flores)
+                    {
+                        for (int i = 0; i < flor.Cantidad; i++)
+                        {
+                            // Llamamos a EjecutaConsultaCodigoItem con el código de barras real (ej: 7861000...)
+                            // Esto pasará por validaciones, cupones, y getProducto sin ningún problema
+                            EjecutaConsultaCodigoItem(flor.BARRAS, sender);
+                        }
+                    }
+
+                    if (!_ramosPendientesDeCobro.Contains(idRamo))
+                    {
+                        _ramosPendientesDeCobro.Add(idRamo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al extraer los productos: " + ex.Message, "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void EjecutaConsultaCodigoItemAnt(string codigo, object sender)
         {
 
@@ -5446,6 +5784,8 @@ namespace POS
                 e.Handled = true;
                 return;
             }
+
+
 
             // 3. Evitar reentrada
             if (_isProcessing)
@@ -14327,6 +14667,35 @@ namespace POS
         }
         // Nuevo metodo de grabarAcumulaCompraGratis desarrollado por JCHID
 
+        private void ActualizarEstadoRamosVendidos()
+        {
+            // Si la lista está vacía (no se vendieron ramos en esta factura), no hacemos nada
+            if (_ramosPendientesDeCobro == null || _ramosPendientesDeCobro.Count == 0) return;
+
+            try
+            {
+                using (POS.Models.POSEntities db = new POS.Models.POSEntities())
+                {
+                    foreach (string idRamo in _ramosPendientesDeCobro)
+                    {
+                        db.Database.ExecuteSqlCommand(
+                            "UPDATE dbo.tbl_ramo_cab SET Estado = 0 WHERE IdRamo = @p0",
+                            new System.Data.SqlClient.SqlParameter("@p0", idRamo)
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindows", "ActualizarEstadoRamosVendidos", $"Error al quemar códigos FL: {ex.Message}");
+            }
+            finally
+            {
+                // Muy importante: Limpiar la lista para el próximo cliente
+                _ramosPendientesDeCobro.Clear();
+            }
+        }
+
 
         private void ejecutaGrabar()
         {
@@ -15325,6 +15694,8 @@ namespace POS
                     this._cuponesAplicados.Clear();
                 }
                 // jchid registor de los cupones usados desde la APP 19/01/2026
+
+                ActualizarEstadoRamosVendidos();
 
 
                 picClienteApp.Visible = false;  // se quita la visibilidad de la imagen de cliente app
@@ -20449,6 +20820,11 @@ namespace POS
             }
         }
 
+
+        // creaccion de slider para heladeria panaderia y flores JCHID 
+
+
+       
         private void BTN_DIREC_1_Click(object sender, EventArgs e)
         {
             txtCodigo.Text = BotonDirec1;
@@ -24363,6 +24739,12 @@ namespace POS
             ////System.Threading.Thread.Sleep(500);
         }
 
+        private void panelContenedorCategorias_Paint(object sender, PaintEventArgs e)
+        {
+            HorizontalScroll.Visible = false;
+            VerticalScroll.Visible = false;
+        }
+
         void bgw2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
@@ -24437,5 +24819,11 @@ namespace POS
             return existe;
         }
 
+    }
+
+    public class FlorDelRamoTemp
+    {
+        public string BARRAS { get; set; }
+        public decimal Cantidad { get; set; }
     }
 }
