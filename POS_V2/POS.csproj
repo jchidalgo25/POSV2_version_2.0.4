@@ -38,7 +38,7 @@
     <PublisherName>Liris</PublisherName>
     <WebPage>publish.htm</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationRevision>36</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -685,6 +685,12 @@
     </Compile>
     <Compile Include="Control\ToolBox\ToolBoxMenu.Designer.cs">
       <DependentUpon>ToolBoxMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIngresoTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIngresoTarjeta.Designer.cs">
+      <DependentUpon>FrmIngresoTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AppCupones\AppCupones.cs" />
     <Compile Include="Models\AppCupones\CuponesLogica.cs" />
@@ -2482,6 +2488,16 @@
     <None Include="Resources\ds2icon1.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <PublishFile Include=".nuget\log4net.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
     <PublishFile Include="Microsoft.MSXML">
       <Visible>False</Visible>
       <Group>

@@ -1549,7 +1549,13 @@ namespace POS.Control.Pagos
 
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " Lectura Pinpad ");
-                    resultadolectura = envioGen.LecturaTarjeta(IPPinPad, PuertoPinPad, 65000, "LT", "", 1);
+
+                    //comentar esta parte para validar el funcionamiento del manual JCHID
+                    // resultadolectura = envioGen.LecturaTarjeta(IPPinPad, PuertoPinPad, 65000, "LT", "", 1);
+                    //JCHID END
+
+                    resultadolectura = envioGen.LecturaTarjetaManual();
+
 
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", $" Trama Repuesta (LT): {resultadolectura.TramaRespuesta}");
@@ -1634,7 +1640,6 @@ namespace POS.Control.Pagos
 
                     //}
 
-                    // Nuevo metodo para ver si el bin tiene  descuento JCHID 
                     decimal valorACobrar = Decimal.Parse(txtValor.Text);
                     decimal totalFactura = _factura.GetTotal();
 
@@ -1672,8 +1677,6 @@ namespace POS.Control.Pagos
                         valpag = valor.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
                         Control.Common.GlobalParameters.EsModoImpresionBankard = false;
                     }
-                    // Nuevo metodo para ver si el bin tiene  descuento JCHID 
-
 
                     //var validaBin = (from deta in pos.core_parametro
                     //                 where deta.identificador == "BLOQUEO_BINES"
@@ -1812,10 +1815,10 @@ namespace POS.Control.Pagos
                     porc_Desc2 = 0;
                 }
                 else
-               if (_facturaApp.Descuentos2.Count > 0)
-                {
-                    porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                }
+                    if (_facturaApp.Descuentos2.Count > 0)
+                    {
+                        porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
+                    }
 
                 var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
                 base0 = base0 - (base0 * (porc_Desc2 / 100));
@@ -1895,7 +1898,80 @@ namespace POS.Control.Pagos
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "Ejecuta metoro EjecutaTramaMultired");
 
                     PagoResp = new PinPadRespuesta();
-                    PagoResp = envioGenResponse.EjecutaTrama(IPPinPad, PuertoPinPad, timeOutCP, strTrama, "", 1, "PP");
+                    //PagoResp = envioGenResponse.EjecutaTrama(IPPinPad, PuertoPinPad, timeOutCP, strTrama, "", 1, "PP");
+
+                    // jchid incio para simular la comunicaicon a lo que se le envia la trama de lectura para el pinpad
+
+                    bool modoManual = true; // <--- OJO: Controla esto con tu parámetro global si existe
+
+                    if (modoManual)
+                    {
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "GENERANDO TRAMA A PROBA DE ERRORES...");
+
+                        // 1. Datos base
+                        string tarjetaMask = (resultadolectura != null && !string.IsNullOrEmpty(resultadolectura.NumeroTarjeta))
+                                              ? resultadolectura.NumeroTarjeta
+                                              : "411111******1111";
+                        // Recortamos por seguridad si es muy larga
+                        if (tarjetaMask.Length > 25) tarjetaMask = tarjetaMask.Substring(0, 25);
+
+                        // 2. Construcción AUTOMÁTICA de espacios (PadRight)
+                        // Esto garantiza que no falte ni un solo milímetro en la trama
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+                        // -- CABECERA --
+                        sb.Append("PP");        // Pos 4-5
+                        sb.Append("00");        // Pos 6-7 (CodResp: 00 Exito)
+                        sb.Append("02");        // Pos 8-9 (Red)
+                        sb.Append("00");        // Pos 10-11 (CodMsj)
+                        sb.Append("APROBADO MANUAL".PadRight(20, ' ')); // Pos 12-32 (20 chars exactos)
+
+                        // -- DATOS TRANSACCION --
+                        sb.Append("000001");    // Pos 32-38 (Secuencial)
+                        sb.Append("000001");    // Pos 38-44 (Lote)
+                        sb.Append(DateTime.Now.ToString("HHmmss"));   // Pos 44-50 (Hora)
+                        sb.Append(DateTime.Now.ToString("yyyyMMdd")); // Pos 50-58 (Fecha)
+                        sb.Append("123456");    // Pos 58-64 (Autorizacion)
+                        sb.Append("TIDMAN01");  // Pos 64-72 (Terminal)
+                        sb.Append("MIDMANUAL001".PadRight(15, ' ')); // Pos 72-87 (Merchant ID - 15 chars)
+                        sb.Append("000000000000");    // Pos 87-99 (Interes)
+
+                        // -- RELLENO PUBLICIDAD --
+                        sb.Append(new string(' ', 80)); // Pos 99-179 (80 espacios exactos)
+
+                        // -- DATOS BANCO --
+                        sb.Append("010");       // Pos 179-182 (Cod Bco)
+                        sb.Append("BANCO MANUAL".PadRight(30, ' ')); // Pos 182-212 (30 chars exactos)
+                        sb.Append("VISA/MC MANUAL".PadRight(25, ' ')); // Pos 212-237 (25 chars exactos)
+                        sb.Append("01");        // Pos 237-239 (Modo Lectura)
+                        sb.Append("CLIENTE POS".PadRight(40, ' ')); // Pos 239-279 (40 chars exactos)
+                        sb.Append("000000000000"); // Pos 279-291 (Monto Fijo)
+
+                        // -- DATOS EMV (CHIP) --
+                        // El método GetDatosPago lee varios campos aquí que suman 132 caracteres
+                        sb.Append(new string(' ', 132));
+
+                        // -- CIERRE --
+                        sb.Append("2512"); // Pos 423-427 (Vencimiento MMYY)
+                        sb.Append(new string('0', 64)); // Pos 427-491 (Trama Encriptada dummy)
+                        sb.Append(tarjetaMask.PadRight(25, ' ')); // Pos 491+ (Tarjeta truncada)
+
+                        // 3. Asignación
+                        PagoResp.TramaRespuesta = sb.ToString();
+                        PagoResp.CodigoRespuesta = "00";
+                        PagoResp.CodigoRespuestaEntidad = "00";
+                        PagoResp.MensajeRespuesta = "APROBADO";
+
+                        // Log para verificar longitud (Debe ser > 516)
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "TramaManual", "Longitud Trama: " + PagoResp.TramaRespuesta.Length);
+                    }
+                    else
+                    {
+                        // LÓGICA ORIGINAL (CON HARDWARE)
+                        PagoResp = envioGenResponse.EjecutaTrama(IPPinPad, PuertoPinPad, timeOutCP, strTrama, "", 1, "PP");
+                    }
+
+                    // end jchid
 
                     if (PagoResp.CodigoRespuesta != "00" || PagoResp.CodigoRespuestaEntidad != "00")
                     {
@@ -2265,6 +2341,8 @@ namespace POS.Control.Pagos
 
 
         }
+
+
         public void ProcesaPinpadBackgroundMultiRedAnt ()
         {
             ResponseBackground = string.Empty;
