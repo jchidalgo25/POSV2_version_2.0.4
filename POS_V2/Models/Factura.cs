@@ -953,7 +953,7 @@ namespace POS.Models
         public decimal getDescuentos2()
         {
             if (this.Descuentos2.Count > 0)
-                return decimal.Round(this.Descuentos2.Max(x => x.Valor), 2, MidpointRounding.AwayFromZero);
+                return decimal.Round(this.Descuentos2.Sum(x => x.Valor), 2, MidpointRounding.AwayFromZero);
             else
                 return 0M;
         }
@@ -1442,7 +1442,7 @@ namespace POS.Models
             {
                 Tipo = "COMPRA GRATIS",
                 Valor = valor,
-                Porcentaje = 0,
+                Porcentaje = 10,
                 Codigo = codigo
             });
             CalcularPagos();
@@ -3080,6 +3080,22 @@ namespace POS.Models
             decimal porcDsctosCuponPromocional = 0;
             decimal retencionSubtotalBase1 = 0;
             decimal retencionSubtotalBase175 = 0;
+            decimal granTotalAhorradoApp = 0;
+            Dictionary<string, decimal> dsctoAppPorProducto = new Dictionary<string, decimal>();
+
+            if (this.ObjCuponAppModerno != null && !string.IsNullOrEmpty(this.ObjCuponAppModerno.Codigo) && this.ObjCuponAppModerno.Codigo.Contains(";"))
+            {
+                string[] arrayItems = this.ObjCuponAppModerno.Codigo.Split('|');
+                foreach (string iStr in arrayItems)
+                {
+                    string[] partes = iStr.Split(';');
+                    if (partes.Length == 2)
+                    {
+                        if (decimal.TryParse(partes[1], out decimal valor))
+                            dsctoAppPorProducto[partes[0]] = valor;
+                    }
+                }
+            }
 
             foreach (var item in this.Productos)
             {
@@ -3090,100 +3106,81 @@ namespace POS.Models
                     //asterisk = "Dc." + (Math.Round((item.Descuento / (item.Pvp * item.Cantidad)), 2) * 100) + "%";
                 }
 
+                // 1. DIBUJAR LA LÍNEA DEL PRODUCTO (Se mantiene igual)
                 items.AppendLine(item.Nombre.PadRight(40, ' '));
-                //items.AppendLine(asterisk.PadRight(8, ' ') + item.Cantidad.ToString("N2").PadLeft(10, ' ') + "     " + item.Pvp.ToString("N2").PadLeft(5, ' ') + "     " + item.SubtotalSinDescuento.ToString("N2").PadLeft(5, ' '));
                 items.AppendLine(Control.Common.StringHelper.DevolverConPadding(item.Iva > 0 ? "I " : "", 1, 1, false) + Control.Common.StringHelper.DevolverConPadding(item.Cantidad.ToString("N2"), 50) + Control.Common.StringHelper.DevolverConPadding(item.Pvp.ToString("N2"), 12) + Control.Common.StringHelper.DevolverConPadding(item.SubtotalSinDescuento.ToString("N2"), 12));
 
-                //Construir lista descuentos de productos
-                if (item.Descuento > 0)
+
+                // -----------------------------------------------------------------------------------
+                // 2. MATEMÁTICA PURA: SEPARAR DINERO DE APP VS DINERO DE TIENDA
+                // -----------------------------------------------------------------------------------
+
+                // A. ¿Cuánto de este producto se pagó con cupón? (Desempaquetado previamente)
+                decimal descuentoTotalApp = dsctoAppPorProducto.ContainsKey(item.Id) ? dsctoAppPorProducto[item.Id] : 0;
+
+                // B. ¿Cuánto de este producto es descuento REAL de la tienda?
+                decimal descuentoRealTienda = item.Descuento - descuentoTotalApp;
+                if (descuentoRealTienda < 0) descuentoRealTienda = 0; // Freno de seguridad
+
+                // C. Acumulador para el TOTAL GLOBAL de la factura (Esto debe estar afuera de los ifs)
+                // El total global necesita TODO el dinero (Tienda + App)
+                if (item.DescuentoTarjetasCompraGratis > 0 && this.usoTarjetaCompraGratis)
                 {
-                    // Quitar dscto compra gratis para no mostrar como descuento sino como forma de pago.  JM  8/7/2020
-                    if (item.DescuentoTarjetasCompraGratis > 0 && this.usoTarjetaCompraGratis)
-                    {
-                        dsctoCompraGratis = item.DescuentoTarjetasCompraGratis;
-                        totalDsctosCompraGratis += item.DescuentoTarjetasCompraGratis;
-                    }
+                    dsctoCompraGratis = item.DescuentoTarjetasCompraGratis;
+                    totalDsctosCompraGratis += item.DescuentoTarjetasCompraGratis;
+                }
+                totalDsctosProductos += (item.Descuento - dsctoCompraGratis);
 
-                    porcDescuento = ((item.Descuento - dsctoCompraGratis) / item.SubtotalSinDescuento) * 100;
-                    decimal valorDesc = item.Descuento - dsctoCompraGratis;
+                // -----------------------------------------------------------------------------------
+                // 3. SECCIÓN ANTIGUA: DETALLE DE DESCUENTOS (Solo se imprime si sobra plata de Tienda)
+                // -----------------------------------------------------------------------------------
 
+                if (descuentoRealTienda > 0)
+                {
+                    // CALCULO DE PORCENTAJES BASADO SOLO EN TIENDA
+                    decimal valorDescSoloTienda = descuentoRealTienda - dsctoCompraGratis;
+                    porcDescuento = (valorDescSoloTienda / item.SubtotalSinDescuento) * 100;
+
+                    // Lógica antigua (se mantiene por si acaso)
                     if (EsUsoCuponPromocional)
                     {
-                        if (valorDesc > 0 && item.DescuentosCupon != null)
+                        if (valorDescSoloTienda > 0 && item.DescuentosCupon != null)
                         {
-                            valorDsctosCuponPromocional += item.Descuento;
-                            porcDsctosCuponPromocional = ((item.Descuento - dsctoCompraGratis) / item.SubtotalSinDescuento) * 100;
+                            // Usamos el real de tienda, no el total
+                            valorDsctosCuponPromocional += descuentoRealTienda;
+                            porcDsctosCuponPromocional = porcDescuento;
                         }
                     }
 
-                    // cambio por descuentos de app en la factura JCHID
-
-                    //if ((valorDesc > 0 && !EsUsoCuponPromocional) || (valorDesc > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
-                    //{
-                    //    itemsDsctos.AppendLine(String.Concat(
-                    //                                        "<b>"
-                    //                                        , (porcDescuento).ToString("N2")
-                    //                                        , "% "
-                    //                                        , item.Nombre.PadRight(14, ' ').Substring(0, 13)
-                    //                                        , Convert.ToChar(9)
-                    //                                        , ":"
-                    //                                        , Control.Common.StringHelper.DevolverConPadding(valorDesc.ToString("N2"), 17)
-                    //                                        , "</b>")
-                    //                                        );
-
-
-                    //}
-
-                    // cambio por descuentos de app en la factura JCHID
-
-                    if ((valorDesc > 0 && !EsUsoCuponPromocional) || (valorDesc > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
+                    // CONDICIONAL PARA IMPRIMIR EN LA LISTA VIEJA
+                    if ((valorDescSoloTienda > 0 && !EsUsoCuponPromocional) || (valorDescSoloTienda > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
                     {
-                        // 1. DEFINIR LA ETIQUETA (Porcentaje o Texto Cupón)
-                        string etiquetaMostrar = "";
+                        // ✅ Etiqueta con PadLeft para que siempre ocupe 7 chars ("25.00% ")
+                        string etiquetaMostrar = ((porcDescuento).ToString("N2") + "% ").PadLeft(7);
 
-                        // Verificamos si la factura tiene activo el flag de Cupón APP
-                        if (this.ObjCuponApp != null && this.ObjCuponApp.SeUsoCuponApp)
-                        {
-                            // Si es APP, mostramos texto fijo (9 caracteres aprox para cuadrar)
-                            etiquetaMostrar = "CUPON APP ";
-                        }
-                        else
-                        {
-                            // Si es descuento normal, mostramos el porcentaje calculado
-                            etiquetaMostrar = (porcDescuento).ToString("N2") + "% ";
-                        }
-
-                        // 2. RECORTAR EL NOMBRE (Para que no rompa la línea si es muy largo)
-                        // Tu código original usaba 13 caracteres, mantenemos eso para seguridad.
+                        // ✅ Nombre recortado — ahora puede ser más corto porque la etiqueta ya ocupa 7 chars
                         string nombreProductoCorto = item.Nombre;
-                        if (nombreProductoCorto.Length > 13)
-                        {
-                            nombreProductoCorto = nombreProductoCorto.Substring(0, 13);
-                        }
+                        if (nombreProductoCorto.Length > 11)
+                            nombreProductoCorto = nombreProductoCorto.Substring(0, 11);
                         else
-                        {
-                            nombreProductoCorto = nombreProductoCorto.PadRight(13, ' '); // Rellenar espacios
-                        }
+                            nombreProductoCorto = nombreProductoCorto.PadRight(11, ' ');
 
-                     
-                        // 3. ARMAR LA LÍNEA MÁS COMPACTA
+                        // ✅ ARMAR LÍNEA CON <bcol> — el "|" separa lo que va antes y después del ":"
                         itemsDsctos.AppendLine(String.Concat(
-                                        "<b>",
-                                        etiquetaMostrar,                   // "CUPON APP "
-                                        nombreProductoCorto,               // Nombre cortado a 13 letras
-                                        " :",                              // CAMBIO 1: Quitamos el Tabulador, usamos espacio y dos puntos
-                                        Control.Common.StringHelper.DevolverConPadding(valorDesc.ToString("N2"), 10), // CAMBIO 2: Reducimos de 17 a 10 el padding
-                                        "</b>"
-                                        ));
+                            "<bcol>",
+                            etiquetaMostrar,        // 7 chars  → "25.00% "
+                            nombreProductoCorto,    // 11 chars → "CERVEZA CLUB"
+                            "|",                    // separador bcol (7+11 = 18 chars antes del ":")
+                            valorDescSoloTienda.ToString("N2"),
+                            "</bcol>"
+                        ));
                     }
-
-
-                    totalDsctosProductos += item.Descuento - dsctoCompraGratis;
-
                 }
 
-                //Sumarizar Total Valor Comercial para presentarlo en la comparativa de ahorro del cliente
-                //Update: No considerar si es producto regalo
+                // -----------------------------------------------------------------------------------
+                // 4. LÓGICA DE VALOR COMERCIAL Y RETENCIÓN (Intacta)
+                // -----------------------------------------------------------------------------------
+
                 if (!item.EsRegalo)
                 {
                     try
@@ -3200,7 +3197,6 @@ namespace POS.Models
                             if (dr.HasRows)
                             {
                                 dr.Read();
-                                //Si PRICE_PVP es mayor a cero, tomar ese valor, caso contrario usar campo PRICE
                                 if (Decimal.Parse(dr.GetValue(0).ToString()) > 0)
                                     totalValorComercial += (Decimal.Parse(dr.GetValue(0).ToString()) * item.Cantidad) + (item.Iva > 0 ? ((Decimal.Parse(dr.GetValue(0).ToString()) * item.Cantidad) * Control.Common.GlobalParameters.IvaPorc / 100) : 0);
                                 else
@@ -3211,12 +3207,11 @@ namespace POS.Models
                     }
                     catch (Exception ex)
                     {
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Factura", "prepararImpresion", "No se pudo obtener el valor comercial del item '" + (item == null ? "Objeto item estaba nulo" : item.Id) + "' desde la tabla de Ax InventTableModule (Tipo 2), a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex));
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Factura", "prepararImpresion", "Error InventTableModule - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex));
                         totalValorComercial += 0;
                     }
                 }
 
-                //Dato de Retención
                 if (POS.Control.Common.GlobalParameters.DatoRetencionEnFactura == true)
                 {
                     if (item.RetencionPorcentaje == 1)
@@ -3224,6 +3219,65 @@ namespace POS.Models
                     if (item.RetencionPorcentaje > 1)
                         retencionSubtotalBase175 = retencionSubtotalBase175 + item.Subtotal;
                 }
+            }
+
+            // =========================================================================
+            // NUEVA SECCIÓN: CUPONES APLICADOS (Sin puntos, sin $, letra resaltada)
+            // =========================================================================
+            if (this.ObjCuponAppModerno != null && !string.IsNullOrEmpty(this.ObjCuponAppModerno.Descripcion))
+            {
+                StringBuilder sbCupones = new StringBuilder();
+                // Opcional: También le ponemos <b> al título para que resalte más
+                sbCupones.AppendLine("<b>CUPONES APLICADOS</b>");
+                
+                decimal granTotalApp = 0;
+                string[] arrayCupones = this.ObjCuponAppModerno.Descripcion.Split('|');
+
+                foreach (string cStr in arrayCupones)
+                {
+                    if (string.IsNullOrEmpty(cStr)) continue;
+
+                    string[] partes = cStr.Split(';');
+                    string nombre = partes[0].Trim();
+                    decimal valorCup = 0;
+
+                    if (partes.Length > 1 && decimal.TryParse(partes[1], out decimal v))
+                        valorCup = v;
+
+                    granTotalApp += valorCup;
+
+                    string valorTexto = valorCup.ToString("N2");
+
+                    // ✅ Ajusta este número hasta que visualmente quede bien
+                    // Cuenta los caracteres que tiene "25.00% CERVEZA CLUB" como referencia
+                    int anchoNombre = 18;
+
+                    // Recortar nombre si excede el ancho máximo
+                    if (nombre.Length > anchoNombre)
+                        nombre = nombre.Substring(0, anchoNombre).TrimEnd();
+
+                    // PadRight para que todos los nombres tengan el mismo ancho
+                    string nombreAlineado = nombre.PadRight(anchoNombre);
+
+                    // Formato: NOMBRE__________: 0.17
+                    string linea = $"<bcol>{nombre}|{valorTexto}</bcol>";
+                    sbCupones.AppendLine(linea);
+                }
+
+                sbCupones.AppendLine("");
+
+                // Aplicamos lo mismo al Total (Sin $ y en negrita)
+                //string textoTotal = "TOTAL AHORRADO APP".PadRight(38, ' ');
+                //sbCupones.AppendLine("<b>" + textoTotal + "</b>" + granTotalApp.ToString("N2"));
+
+                //sbCupones.AppendLine("---------------------------------------------------------------------");
+                //sbCupones.AppendLine("");
+
+                this.Recibo = this.Recibo.Replace("<<BLOQUE_CUPONES>>", sbCupones.ToString());
+            }
+            else
+            {
+                this.Recibo = this.Recibo.Replace("<<BLOQUE_CUPONES>>", "");
             }
 
             //*****

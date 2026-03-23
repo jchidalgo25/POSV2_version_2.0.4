@@ -1,47 +1,48 @@
-﻿using System;
+﻿using MensajesLibrary;
+using Microsoft.Win32;
+using POS.Control;
+using POS.Control.Auditor;
+using POS.Control.CajaPinpad.Modelo;
+using POS.Control.Clientes;
+using POS.Control.Fingerprint;
+using POS.Control.Garancheck;
+using POS.Control.Main.MainTouch;
+using POS.Control.Pagos;
+using POS.Control.ToolBox;
+using POS.Models;
+using POS.Models.AppCupones;
+using POS.Models.DevolucionIVA;
+using POS.Models.Monedero;
+using POS.Models.SRI;
+using System;
+using System.Collections.Concurrent;
 //using System.Reflection;
 //using System.Deployment.Application;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.SqlServer; // Necesario para SqlFunctions
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Messaging;
+using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS.Control;
-using POS.Control.Auditor;
-using POS.Control.Fingerprint;
-using POS.Control.Garancheck;
-using POS.Models;
+using System.Xml;
+using Telerik.WinControls;
 using Telerik.WinControls.Primitives;
 using Telerik.WinControls.UI;
-using static POS.Models.ClsMessageQueue;
-using System.Messaging;
-using System.Net;
-using POS.Control.Clientes;
-using POS.Control.Pagos;
-using POS.Control.ToolBox;
-using System.Globalization;
-using System.Xml;
 using ZXing;
-using POS.Control.CajaPinpad.Modelo;
-using MensajesLibrary;
-using Microsoft.Win32;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
-using POS.Control.Main.MainTouch;
-using POS.Models.DevolucionIVA;
-using System.Data.Entity.SqlServer; // Necesario para SqlFunctions
-using POS.Models.SRI;
-using POS.Models.AppCupones;
-using Telerik.WinControls;
+using static POS.Models.ClsMessageQueue;
 //using POS.Control.Main.MainTouchClte;
 //using POS.Services;
 
@@ -50,7 +51,7 @@ namespace POS
 
     public partial class MainWindow : Telerik.WinControls.UI.RadForm
     {
-       
+
 
         /* Code to Disable WinKey, Alt+Tab, Ctrl+Esc Starts Here */
         // Structure contain information about low-level keyboard input event 
@@ -107,6 +108,8 @@ namespace POS
         // Esta lista recordará los ramos que están en la grilla esperando ser pagados
         private List<string> _ramosPendientesDeCobro = new List<string>();
 
+        private List<CuponRespuesta> _historialCuponesSesion = new List<CuponRespuesta>();
+        private Dictionary<string, decimal> _dineroYaAplicadoPorItem = new Dictionary<string, decimal>();
 
 
         //private BackgroundWorker backgroundWorkerMensajes;
@@ -163,7 +166,7 @@ namespace POS
 
         System.Windows.Forms.Control focused;
         User _current_user;
-        
+
 
         private TomaPeso scanner; // Tu balanza
         private OposScanner_CCO.OPOSScanner scannerDL; // Scanner OPOS
@@ -643,7 +646,7 @@ namespace POS
                 pbLogoPOS.Image = Image.FromFile(Control.Common.GlobalParameters.LogoLocal);
             }
 
-         
+
         }
 
 
@@ -916,7 +919,7 @@ namespace POS
 
 
 
-       
+
 
 
         private void agregaProductosTmp(string codigo)
@@ -1093,6 +1096,7 @@ namespace POS
                                 txtCedula.Text = cliente_actual.ACCOUNTNUM;
                                 txtCedula.Focus();
                             }
+                            ActualizarSaldoCliente();
                         }
                         else
                         {
@@ -1203,7 +1207,113 @@ namespace POS
 
         }
 
-     
+
+        private void ActualizarSaldoCliente()
+        {
+            try
+            {
+                string identificacion = txtCedula.Text.Trim();
+
+                if (string.IsNullOrEmpty(identificacion) || identificacion == "9999999999999")
+                {
+                    lblEtiquetaSaldo.Visible = false;
+                    lblSaldoTarjeta.Visible = false;
+                    return;
+                }
+
+                // Normalización (Manejo de prefijo 666 y escaneo de App)
+                if (identificacion.StartsWith("666"))
+                {
+                    if (identificacion.Contains("-")) identificacion = identificacion.Split('-')[0];
+                }
+                else
+                {
+                    identificacion = "666" + identificacion;
+                }
+
+                using (var db = new POSEntities())
+                {
+                    // 1. Obtener los parámetros de fechas desde la tabla local
+                    var paramInicio = db.core_parametro
+                        .FirstOrDefault(x => x.identificador == "COMPRA_GRATIS_FECHA_INICIO_CONSUMO");
+                    var paramFin = db.core_parametro
+                        .FirstOrDefault(x => x.identificador == "COMPRA_GRATIS_FECHA_FIN_CONSUMO");
+
+                    if (paramInicio != null && paramFin != null)
+                    {
+                        DateTime fechaInicio = DateTime.Parse(paramInicio.valor);
+                        DateTime fechaFin = DateTime.Parse(paramFin.valor);
+                        DateTime hoy = DateTime.Now.Date;
+
+                        // 2. Validar si hoy estamos dentro del rango permitido
+                        if (hoy < fechaInicio || hoy > fechaFin)
+                        {
+                            lblEtiquetaSaldo.Visible = false;
+                            lblSaldoTarjeta.Visible = false;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        lblEtiquetaSaldo.Visible = false;
+                        lblSaldoTarjeta.Visible = false;
+                        return;
+                    }
+
+                    // =========================================================================
+                    // 3. CONSULTA DE SALDO AL SERVIDOR CENTRAL (CAMBIO SOLICITADO)
+                    // =========================================================================
+                    decimal saldoCentral = 0;
+                    bool tarjetaEncontrada = false;
+                    string connectionStringCentral = Control.Common.GlobalParameters.ConServerPuntos;
+
+                    try
+                    {
+                        using (System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(connectionStringCentral))
+                        {
+                            cn.Open();
+                            string sql = "SELECT TOP 1 saldo FROM core_TarjetaDescuento WHERE codigo = @cod AND activo = 1";
+                            using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sql, cn))
+                            {
+                                cmd.Parameters.AddWithValue("@cod", identificacion);
+                                var result = cmd.ExecuteScalar();
+                                if (result != null && result != DBNull.Value)
+                                {
+                                    saldoCentral = Convert.ToDecimal(result);
+                                    tarjetaEncontrada = true;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "ActualizarSaldoCliente_Central", "Error al consultar saldo central: " + ex.Message);
+                        // Si falla la conexión, por seguridad ocultamos el saldo
+                        lblEtiquetaSaldo.Visible = false;
+                        lblSaldoTarjeta.Visible = false;
+                        return;
+                    }
+
+                    if (tarjetaEncontrada)
+                    {
+                        lblEtiquetaSaldo.Visible = true;
+                        lblSaldoTarjeta.Visible = true;
+                        lblSaldoTarjeta.Text = "$ " + saldoCentral.ToString("N2");
+                    }
+                    else
+                    {
+                        lblEtiquetaSaldo.Visible = false;
+                        lblSaldoTarjeta.Visible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "ActualizarSaldoCliente", ex.Message);
+            }
+        }
+
+
 
         private void validaClienteSp(string itendifacionCompleta)
         {
@@ -1294,7 +1404,7 @@ namespace POS
 
                                 if (result == MsgBoxCtrl.MessageBoxResult.Yes || result == MsgBoxCtrl.MessageBoxResult.Ok)
                                 {
-                           
+
                                     var fClte = new POS.Control.Clientes.ClienteForm();
                                     fClte._cliente = null;
 
@@ -1359,7 +1469,7 @@ namespace POS
 
                     // Logica para el nuevo boton  de descuento de app  JCHID
 
-                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info,"MainWindow", "txtCedula_KeyPress", "Se define paarametros btnCuponApp.Visible = false");
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "txtCedula_KeyPress", "Se define paarametros btnCuponApp.Visible = false");
                     btnDescuentoCupon.Visible = false;
 
                     // Logica para el nuevo boton  de descuento de app  JCHID
@@ -1467,7 +1577,7 @@ namespace POS
                         //}
 
                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "txtCedula_KeyPress", "validaClienteSp - Presenta el boton de descuento cupon de APP");
-                        this.btnDescuentoCupon.Visible = true;
+                        this.btnDescuentoCupon.Visible = true; // por ahora comentar jchid version de produccion 
 
 
                     }
@@ -1664,7 +1774,7 @@ namespace POS
 
                 //        // Solo agregamos si no existe ya
                 //        _factura.agregaDescuentoEmpleado(clteEmpleado.PorcEmpleadoLiris, "DESC_EMP", "DESC_EMP");
-                        
+
 
                 //        // Paso 2: Volver al hilo de la UI para mostrar el mensaje
                 //        this.BeginInvoke((MethodInvoker)delegate
@@ -1675,7 +1785,7 @@ namespace POS
                 //    }
                 //}
 
-                
+
                 //string ClaveAccesoSRI = string.Empty;
                 //_factura.Documento = "F";
 
@@ -1696,7 +1806,7 @@ namespace POS
                 //        {
                 //            Control.Common.General.GetMensajeToList(646, targetScreenCajero);
                 //        });
-                        
+
                 //    }
                 //}
 
@@ -2163,7 +2273,7 @@ namespace POS
                 //Valida: al cambiar el cliente se borre el pedido app
                 if (_factura.EsPedidoOtraApp == true)
                 {
-                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "cambiarCliente", $"_factura.EsPedidoOtraApp : {_factura.EsPedidoOtraApp }");
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "cambiarCliente", $"_factura.EsPedidoOtraApp : {_factura.EsPedidoOtraApp}");
 
                     _factura.EsPedidoOtraApp = false;
                     _factura.PedidoOtraApp.Pedido = string.Empty;
@@ -3486,6 +3596,8 @@ namespace POS
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindows_Load", "Ejecuta llamaMenuInicial ");
                 llamaMenuInicial();
 
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindows_Load", "Saldo Compra Gratis ");
+                ActualizarSaldoCliente();
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow_Shown", "PANTALLA_CLIENTE");
                 if (Control.Common.GlobalParameters.PANTALLA_CLIENTE)
@@ -3517,7 +3629,7 @@ namespace POS
                 this.btnQtyProduct.Left = 220;
 
 
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow(Constructor)", $"SRI_ACTIVAR_CLAVE_ACCESO: {Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO }");
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow(Constructor)", $"SRI_ACTIVAR_CLAVE_ACCESO: {Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO}");
                 if (Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO)
                 {
 
@@ -3533,7 +3645,8 @@ namespace POS
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow(Constructor)", "frmTouchClte");
                     frmTouchClte = Control.Common.GlobalParameters.frmTouchClte;
                     //frmPromocionPantallaCliente = Control.Common.GlobalParameters.frmPromocionPantallaCliente;
-                };
+                }
+                ;
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow(Constructor)", "tokenResponse");
                 Control.Common.GlobalParameters.tokenResponse = new RespuestaToken();
@@ -3888,7 +4001,7 @@ namespace POS
                 {
                     //El query enviado devuelve la ip del servidor sql, esto permitira hacer comparacion entre segementos de red
                     POS.Control.Common.GlobalParameters.SelectedServerIp = db.Database.SqlQuery<string>("select LOCAL_NET_ADDRESS from SYS.DM_EXEC_CONNECTIONS where SESSION_ID = @@SPID").FirstOrDefault();
-                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "SetGlobalParameters", $" SelectedServerIp:{POS.Control.Common.GlobalParameters.SelectedServerIp }");
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "SetGlobalParameters", $" SelectedServerIp:{POS.Control.Common.GlobalParameters.SelectedServerIp}");
 
 
                 }
@@ -4642,7 +4755,7 @@ namespace POS
             //uC_Loading.Visible = true;
             //uC_Loading.Show();
             //EjecutarCargaArchivosTmp();//CargaFacturaTmpFile(); //cargaFacturatmp();
-            
+
             // COMENTANDO SE MOVIO AL BOTON  DE VENTA NORMAL PARA LA CARGA DE ARCHIVOS TEMPORALES JCHID
             //if (ValidaExisteTmp())
             //{
@@ -5061,7 +5174,7 @@ namespace POS
                         .FirstOrDefault();
 
 
-                    if(cupon == null)
+                    if (cupon == null)
                     {
                         Control.Common.Logger.LogMessage(
                                  Control.Common.Enum.LogTypes.Info,
@@ -5080,7 +5193,7 @@ namespace POS
                         return false;
                     }
 
-           
+
 
                     // 2. Validar que no haya pagos cargados
                     if (_factura.Pagos.Count > 0)
@@ -5098,7 +5211,7 @@ namespace POS
 
                     // 4. Determinar tipo de cupón: general o por producto
                     bool esCuponGeneral = !itemsCupon.Any();
-                     decimal porcDescuento = cupon.saldo / 100M; // Convertir saldo % a decimal (ej: 1500 → 15%)
+                    decimal porcDescuento = cupon.saldo / 100M; // Convertir saldo % a decimal (ej: 1500 → 15%)
 
                     if (porcDescuento < 0 || porcDescuento > 100)
                     {
@@ -5118,7 +5231,7 @@ namespace POS
 
                     foreach (var producto in _factura.Productos.ToList()) // .ToList() para evitar modificación durante iteración
                     {
-                       
+
 
                         // Buscar si este producto tiene un descuento específico en core_descuento
                         var itemCuponProducto = itemsCupon.FirstOrDefault(x => x.parametro == producto.Id.ToString());
@@ -5139,7 +5252,7 @@ namespace POS
                             // Calcular valor del descuento
                             decimal valorDsctoTotal = 0;
                             //valorDsctoUnaUnidad = (producto.SubtotalSinDescuento / producto.Unidades) * porcDescuento;
-                            valorDsctoTotal = (producto.Pvp * porcDescuento); 
+                            valorDsctoTotal = (producto.Pvp * porcDescuento);
                             //valorDsctoUnaUnidad = producto.Pvp * producto.Cantidad * porcDescuento;
 
 
@@ -5189,7 +5302,7 @@ namespace POS
                         _factura.EsUsoCuponPromocional = true;
                         _factura.CuponPromocionalPorcDesc = porcDescuento;
                         _factura.CuponPromocionalCodigo = cupon.codigo;
-                        
+
                         Control.Common.Logger.LogMessage(
                             Control.Common.Enum.LogTypes.Info,
                             "MainWindow",
@@ -5431,7 +5544,7 @@ namespace POS
                                  "AplicarDescuentoCupon",
                                  " cupon es NULL ");
                     }
-                    
+
 
 
                 }
@@ -5555,7 +5668,7 @@ namespace POS
                         "IntentarAplicarCupon");
 
                 var cuponAplicado = IntentarAplicarCupon(codigo);
-                
+
                 // 3. Intentar aplicar cupón
                 if (cuponAplicado)
                 {
@@ -5798,7 +5911,7 @@ namespace POS
 
             try
             {
-               
+
 
                 // Caso 1: App móvil
                 if (codigo.StartsWith(POS.Control.Common.GlobalParameters.AppMovil_PrefijoUsaApp))
@@ -5879,7 +5992,7 @@ namespace POS
 
         //}
 
-            
+
 
         private System.Windows.Forms.Control GetFocusedControl(System.Windows.Forms.Control container)
         {
@@ -6229,7 +6342,7 @@ namespace POS
 
         private bool ProcesarCodigoDeBarras(string codigoBarra)
         {
-            
+
 
             if (string.IsNullOrWhiteSpace(codigoBarra))
                 return false;
@@ -6636,13 +6749,13 @@ namespace POS
                 RecargaParametrosWallpapersClte();
             }
 
-            if (Control.Common.GlobalParameters.ProductoArticuloList == null  || Control.Common.GlobalParameters.ProductoArticuloList.ToList().Count ==0)
+            if (Control.Common.GlobalParameters.ProductoArticuloList == null || Control.Common.GlobalParameters.ProductoArticuloList.ToList().Count == 0)
             {
                 CreateFileProducts cfp = new CreateFileProducts(_factura.Establecimiento);
                 cfp.CrearArchivoProductosXML();
             }
-            
-        
+
+
 
         }
 
@@ -7485,6 +7598,11 @@ namespace POS
                         POS.Control.Common.GlobalParameters.ConServerPuntos = param.valor.Trim();
                     }
 
+                    param = db.core_parametro.Where(x => x.identificador == "CON_SERVER_MARKETING").FirstOrDefault();
+                    if (param != null)
+                    {
+                        POS.Control.Common.GlobalParameters.ConServerMarketing = param.valor.Trim();
+                    }
 
                     param = db.core_parametro.Where(x => x.identificador == "VIGENCIA_IVA12_SEGUN_FECHA_NC").FirstOrDefault();
                     if (param != null)
@@ -7842,7 +7960,7 @@ namespace POS
                             Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO = true;
                         }
 
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "CargarMainWindow", $"Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO : {Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO }");
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "CargarMainWindow", $"Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO : {Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO}");
                     }
 
                     Control.Common.GlobalParameters.MIN_CARACTER_CODIGO_ART = 0;
@@ -7850,8 +7968,8 @@ namespace POS
                     if (param != null)
                     {
                         Control.Common.GlobalParameters.MIN_CARACTER_CODIGO_ART = Int32.Parse(param.valor.ToString());
-                        
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "CargarMainWindow", $"Control.Common.GlobalParameters.MIN_CARACTER_CODIGO_ART : {Control.Common.GlobalParameters.MIN_CARACTER_CODIGO_ART }");
+
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "CargarMainWindow", $"Control.Common.GlobalParameters.MIN_CARACTER_CODIGO_ART : {Control.Common.GlobalParameters.MIN_CARACTER_CODIGO_ART}");
                     }
 
 
@@ -7909,10 +8027,10 @@ namespace POS
                     }
 
 
-                    
+
                     //bool _UsaCachePrecios = false;
                     //Control.Common.GlobalParameters.UsaCachePrecios = false;
-                    
+
                     //param = db.core_parametro.Where(x => x.identificador == "LISTA_PRECIO_CACHE").FirstOrDefault();
                     //if (param != null)
                     //{
@@ -7920,7 +8038,7 @@ namespace POS
                     //    Control.Common.GlobalParameters.UsaCachePrecios = _UsaCachePrecios;
                     //    Control.Common.GlobalParameters.RutaCachePrecios = param.parametro2;
                     //    Control.Common.GlobalParameters.NombreArchivoListaPrecio = param.documento;
-                       
+
                     //}
 
 
@@ -8654,14 +8772,14 @@ namespace POS
             _factura.codigoclienteAPP = "";
             _factura.aplicaBeneficioDevolucionIVA = false;
             _factura.esBeneficiarioDevolucionIVA = false;
-            
+
 
             _factura.EsClienteApp = false;
             _factura.CodigoClienteApp = "";
             _factura.codigoclienteAPP = "";
             _factura.aplicaBeneficioDevolucionIVA = false;
             _factura.esBeneficiarioDevolucionIVA = false;
-            
+
 
             this.btnCreditoInterno.Visible = false;
             this.btnMonedero.Visible = false;
@@ -8879,7 +8997,7 @@ namespace POS
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto", " valida reverso por Devolución de IVA. ");
                             ReversaDevolucionIVA_Items();
                         }
-                        
+
 
                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto", " AnulaDsctoCompraGratis ");
                         AnulaDsctoCompraGratis();
@@ -8928,7 +9046,7 @@ namespace POS
                                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto ", $" Ingresa a while para recuperar el peso de la balanza: validaPeso: {validaPeso}");
                                     while (peso <= 0)
                                     {
-                                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto",  $"Ejecuta metodo de tomarPeso");
+                                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto", $"Ejecuta metodo de tomarPeso");
 
                                         peso = tomarPeso(producto);
                                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto ", $" Recupera valor de varibale peso: {peso}");
@@ -8994,7 +9112,7 @@ namespace POS
 
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" CantidadINEC: {producto.CantidadINEC}");
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" Cantidad: {producto.Cantidad}");
-                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" Operador: {producto.Operador }");
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" Operador: {producto.Operador}");
 
                                 //cliente_actual.CUSTGROUP != "07" && cliente_actual.CUSTGROUP != "09" /*&& cliente_actual.CUSTGROUP != "EM"*/ && cliente_actual.CUSTGROUP != "CE")
                                 if (POS.Control.Common.Promo.PuedeConjuntoClienteRecibirDescGestor(cliente_actual.CUSTGROUP))
@@ -9041,8 +9159,8 @@ namespace POS
                             producto.Cantidad = decimal.Round(peso, 2);
                             producto.CantidadINEC = peso;
 
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" Cantidad: {producto.Cantidad }");
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" CantidadINEC: {producto.CantidadINEC }");
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" Cantidad: {producto.Cantidad}");
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" CantidadINEC: {producto.CantidadINEC}");
 
                             if (POS.Control.Common.Promo.PuedeConjuntoClienteRecibirDescGestor(cliente_actual.CUSTGROUP))//cliente_actual.CUSTGROUP != "07" && cliente_actual.CUSTGROUP != "09" /*&& cliente_actual.CUSTGROUP != "EM"*/ && cliente_actual.CUSTGROUP != "CE")
                             {
@@ -9424,7 +9542,7 @@ namespace POS
                         return;
                     }
 
-                   
+
                     Decimal porcdesc = 0M;
                     string ItemId = string.Empty;
                     string FacturaPOS = string.Empty;
@@ -9441,18 +9559,18 @@ namespace POS
                     Query = "Select top 1 ITEMID,INACTIVO,PORCENTAJE,FACTURAPOS from tblliquidacion WHERE CODIGOCUPON = '" + codigo + "'";
                     dtsConsulta = Control.Common.General.GetDataSet(Query, cadenaConexion);
 
-                    if(dtsConsulta.Tables.Count > 0)
+                    if (dtsConsulta.Tables.Count > 0)
                     {
-                        if(dtsConsulta.Tables[0].Rows.Count > 0)
+                        if (dtsConsulta.Tables[0].Rows.Count > 0)
                         {
-                            foreach(DataRow data in dtsConsulta.Tables[0].Rows)
+                            foreach (DataRow data in dtsConsulta.Tables[0].Rows)
                             {
                                 ItemId = data["ITEMID"].ToString();
                                 Inactivo = int.Parse(data["INACTIVO"].ToString());
                                 porcdesc = Decimal.Parse(data["PORCENTAJE"].ToString());
                                 FacturaPOS = data["FACTURAPOS"].ToString();
                             }
-                            
+
                         }
 
                     }
@@ -9504,7 +9622,7 @@ namespace POS
                         }
                     }
 
-                    
+
                 }
 
                 calcularFactura();
@@ -9524,7 +9642,7 @@ namespace POS
             //if (productotmp.Id != null)
             agregaProductosTmpFile();  //agregaProductosTmp(codigo);
 
-   
+
             //// Si ya existe la pantalla cliente, actualízala
             //FacturaService.NotificarProductosActualizados(_factura.Productos);
 
@@ -9546,6 +9664,7 @@ namespace POS
             try
             {
                 // 1. Normalización del código
+
                 codigo = NormalizarCodigo(codigo);
                 if (!PermiteAgregarItemPorParqueo(codigo)) return;
 
@@ -9596,7 +9715,7 @@ namespace POS
                    "getProducto",
                    $"Ejecuta GuardarProductoTemporal");
                 GuardarProductoTemporal(codigo);
-                
+
 
             }
             catch (Exception ex)
@@ -9606,13 +9725,17 @@ namespace POS
                    "MainWindows",
                    "getProducto",
                    $"Error al procesar producto {codigo}: {ex.Message}");
-                
+
 
                 parametros = new List<ParametrosMensajes>();
-                parametros.Add(new ParametrosMensajes() { codigo = "[Message]"
-                    , valor = ex.Message });
+                parametros.Add(new ParametrosMensajes()
+                {
+                    codigo = "[Message]"
+                    ,
+                    valor = ex.Message
+                });
 
-                
+
                 Control.Common.General.GetMensajeToList(999, parametros, ex.StackTrace); // Error genérico
             }
 
@@ -9782,7 +9905,7 @@ namespace POS
                 // Aplicar cupón promocional
                 //ReaplicarDescuentosAcumulados(producto);
                 AplicarDescuentoCuponPromocional(producto, codigo);
-                
+
 
             }
         }
@@ -9888,7 +10011,7 @@ namespace POS
             try
             {
 
-               
+
                 // 1. Recalcular el total de la factura
                 calcularFactura();
 
@@ -10290,7 +10413,7 @@ namespace POS
                     existefac = db.core_factura.Any(x => x.establecimiento == estab && x.punto_emision == ptoemi && x.numero == numfac);
                 }
 
-                
+
                 if ((inactivo == 1 && existefac)) // || _factura.Productos.Count(x => x.Id == ItemId) > 0)
                 {
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "ProcesarCuponTipo30", " Esta inactivo y se encuentra en factura; Cupon ya fue utilizado");
@@ -10303,7 +10426,7 @@ namespace POS
                     //txtCodigo_KeyPress(this, new KeyPressEventArgs((char)(Keys.Enter)));
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "ProcesarCuponTipo30", " EjecutaConsultaCodigoItem ");
                     EjecutaConsultaCodigoItem(itemId, this);
-                    
+
 
                     using (var conexion = new SqlConnection(POS.Properties.Settings.Default.CONECTA_AX))
                     {
@@ -10334,7 +10457,7 @@ namespace POS
 
                                 SqlCommand comandoupd = new SqlCommand(Query1, conexion);
                                 comandoupd.ExecuteNonQuery();
-                                
+
                             }
                         }
                         catch (Exception ex)
@@ -10416,7 +10539,7 @@ namespace POS
 
                 throw;
             }
-            
+
         }
         private void recalcularDsctosProducto(string codigo, Producto _product)
         {
@@ -11968,12 +12091,12 @@ namespace POS
 
             if (codigo.Length >= 16)
             {
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "existeEnLista", 
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "existeEnLista",
                      $"Código largo detectado. Usando solo los primeros 13 caracteres: {codigoAct}");
             }
 
             // Verifica si ya existe el producto por ID o código de barras (con o sin F)
-            bool respuesta = _factura.Productos.Any(producto => 
+            bool respuesta = _factura.Productos.Any(producto =>
                                     producto.Id == codigoAct ||
                                     producto.CodigosBarra.Any(cb =>
                                                 cb.codigo == codigoAct ||
@@ -11984,7 +12107,7 @@ namespace POS
                 (codigo.StartsWith(Control.Common.GlobalParameters.ProductoIdentificadorItemPeso) ||
                  codigo.StartsWith(Control.Common.GlobalParameters.ProductoIdentificadorItemPesoAlt)))
             {
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info,"MainWindows","existeEnLista",
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "existeEnLista",
                    "Código de peso detectado. Aplicando lógica especial para productos por peso.");
 
                 respuesta = _factura.Productos.Any(x => x.CodigosBarra.Any(cb =>
@@ -11996,7 +12119,7 @@ namespace POS
             return respuesta;
         }
 
-       
+
 
         //private void llenarProductosDescuentosDesdeDB(Promocion promo, String codigo)
         //{
@@ -12063,7 +12186,7 @@ namespace POS
                 }
 
                 var todasPromocionesItem = db.vw_DescuentosDetalleAX
-                    .Where(x => x.ITEMID == itemId && 
+                    .Where(x => x.ITEMID == itemId &&
                                 x.POS == 1) // Solo promociones para POS
                     .OrderByDescending(x => x.DESCUENTO) // Mayor descuento primero
                     .ToList();
@@ -12093,7 +12216,7 @@ namespace POS
                 long recIdPromocion = mejorPromocionAplicable.REFRECID;
 
                 // Buscar si esa promoción está en la lista actual
-                var promoDestino = listaPromociones.FirstOrDefault(p => p.RecId == recIdPromocion );
+                var promoDestino = listaPromociones.FirstOrDefault(p => p.RecId == recIdPromocion);
 
                 if (promoDestino == null)
                 {
@@ -12130,7 +12253,7 @@ namespace POS
             }
         }
 
-        
+
 
 
 
@@ -12348,7 +12471,7 @@ namespace POS
 
                             break;
                         case DialogResult.Retry:
-                          
+
                             break;
 
                     }
@@ -12658,7 +12781,8 @@ namespace POS
                             //});
                             break;
 
-                    };
+                    }
+                    ;
 
                     validaReverso = false;
                 }
@@ -12674,7 +12798,7 @@ namespace POS
                     Control.Common.General.GetMensajeToList(999, parametros, ex.StackTrace); // Mensaje genérico de error
                 });
             }
-         
+
 
             return validaReverso;
 
@@ -12806,7 +12930,7 @@ namespace POS
 
 
             }
-            
+
 
         }
 
@@ -12837,7 +12961,8 @@ namespace POS
                         splitDetalle.Panel2Collapsed = true;
                     }
 
-                    if (origenBtn == OrigenBoton.Return) {
+                    if (origenBtn == OrigenBoton.Return)
+                    {
                         splitDetalle.Panel2Collapsed = true;
                     }
 
@@ -12919,7 +13044,7 @@ namespace POS
                     {
                         var reverso = ejecutaReversoDevolucionIVA();
 
-                        if(!reverso)
+                        if (!reverso)
                         {
                             _factura.aplicaBeneficioDevolucionIVA = false;
                             _factura.montoIvaDevolver = 0;
@@ -12928,7 +13053,7 @@ namespace POS
                             btnBorrarProducto.Enabled = true; // jchid activar el boton borrar productos 
 
                         }
-                        
+
                     }
                 }
                 else
@@ -13005,8 +13130,8 @@ namespace POS
             //MainWindow clonedMainWindow = this;
             this.Enabled = false;
             using (var basePago = new POS.Control.Pagos.BasePagos(
-                Control.Pagos.BasePagos.PagoTipo.TarjetaCredito, 
-                ref _factura, 
+                Control.Pagos.BasePagos.PagoTipo.TarjetaCredito,
+                ref _factura,
                 valorRetante
                 ))
             {
@@ -13063,7 +13188,7 @@ namespace POS
             // Capturar posición y tamaño del MainWindow en el hilo principal
             Point mainWindowLocation = this.PointToScreen(Point.Empty);
 
-          
+
             // Delegado para actualizar UI al finalizar
             MethodInvoker actualizarUI = delegate
             {
@@ -13160,33 +13285,33 @@ namespace POS
                 }
                 finally
                 {
-                // Asegurarse de restaurar el estado del MainWindow
-                try
-                {
-                    this.Invoke(new MethodInvoker(delegate
+                    // Asegurarse de restaurar el estado del MainWindow
+                    try
                     {
-                        this.TopMost = true;
-                        this.Enabled = true;
-                        this.BringToFront(); // Evita que quede atrás
-                        this.Focus();
-                    }));
-                }
-                catch { }
-
-            // Liberar formulario
-                if (formPagoTarjeta != null && !formPagoTarjeta.IsDisposed)
-                {
-                    try { formPagoTarjeta.Dispose(); } catch { }
-                }
-            }
-
-            // Actualizar UI después del cierre
-            try
-                    {
-                        this.Invoke(actualizarUI);
+                        this.Invoke(new MethodInvoker(delegate
+                        {
+                            this.TopMost = true;
+                            this.Enabled = true;
+                            this.BringToFront(); // Evita que quede atrás
+                            this.Focus();
+                        }));
                     }
                     catch { }
-                })
+
+                    // Liberar formulario
+                    if (formPagoTarjeta != null && !formPagoTarjeta.IsDisposed)
+                    {
+                        try { formPagoTarjeta.Dispose(); } catch { }
+                    }
+                }
+
+                // Actualizar UI después del cierre
+                try
+                {
+                    this.Invoke(actualizarUI);
+                }
+                catch { }
+            })
             );
 
             // ⚠️ Obligatorio para WinForms
@@ -13228,7 +13353,7 @@ namespace POS
                         binTarjetaPromoDscto = promBines.BinTarjetaPromo;
 
                         _factura.BinNumeroTarjetaPromo = binTarjetaPromoDscto;
-                        
+
                         agregarDescuentoPromocionTarjetaBines(DescuentoPromoTarjBines);
                     }
 
@@ -13360,7 +13485,7 @@ namespace POS
 
                 if (Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO == false)
                 {
-                    
+
                     Control.Common.General.GetMensajeToList(678);
                     return false;
                 }
@@ -13442,7 +13567,7 @@ namespace POS
                     int reintento = 0;
                     int maxReintentos = 3;
                     RespuestaDevlucion respuestaDevIVA = new RespuestaDevlucion();
-                    
+
 
                     do
                     {
@@ -13559,7 +13684,7 @@ namespace POS
 
                                 _factura.Documento = "F";
                                 string ClaveAccesoSRI = string.Empty;
-                                
+
                                 if (Control.Common.GlobalParameters.SRI_ACTIVAR_CLAVE_ACCESO)
                                 {
                                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto", " Regenera Clave de Acceso.");
@@ -13567,7 +13692,7 @@ namespace POS
                                 }
 
                                 _factura.ClaveAccesoSRI = ClaveAccesoSRI;
-                                
+
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto", " reverso de IVA realizado correctamente.");
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", "getProducto", " variables fueron enceradas");
                             }
@@ -13591,10 +13716,11 @@ namespace POS
                             //parametros.Add(new ParametrosMensajes() { codigo = "[MENSAJE]", valor = respuestaDevIVA.mensaje });
                             Task.Run(() => Control.Common.General.GetMensajeToList(codMensaje, screenClte));
                         }
-                        else {
+                        else
+                        {
                             Task.Run(() => Control.Common.General.GetMensajeToList(codMensaje, screenClte));
                         }
-                        
+
                         return false;
                     }
                 }
@@ -13656,8 +13782,8 @@ namespace POS
                 // Proceso normal de pago en efectivo
                 if (!EfectivoExactoButton)
                 {
-                    
-//                    revisarCambioEnTotal("TAR PORTAL", "EFECTIVO");
+
+                    //                    revisarCambioEnTotal("TAR PORTAL", "EFECTIVO");
                     flagEjecutaPago = true;
                     EjecutaBotonPago(OrigenBoton.Pago);
                     flagProcesarDsct = false;
@@ -13967,6 +14093,8 @@ namespace POS
                 core_parametro parametro = new core_parametro(); // Objeto para la validación - Tarjeta de Descuento Española
                                                                  //core_TarjetaDescuento tarjetaDescuento = new core_TarjetaDescuento(); // Modelo que tenga la info para el Descuento
                 #region Facturación
+
+
 
                 seguimiento.AppendLine("Antes de entrar al metodo de validar factura");
                 if (_factura.validar())
@@ -14562,7 +14690,7 @@ namespace POS
 
                 using (POSEntities db = new POSEntities())
                 {
-                    // 2. Ejecutar SP
+                    // 2. Ejecutar SP Local (que inserta en el central)
                     SqlParameter paramResult = new SqlParameter("@respuesta", SqlDbType.VarChar, -1);
                     paramResult.Direction = System.Data.ParameterDirection.Output;
 
@@ -14584,75 +14712,98 @@ namespace POS
                     }
 
                     // =========================================================================
-                    // 3. LECTURA DE PUNTOS
+                    // 3. LECTURA DE DATOS DESDE EL SERVIDOR CENTRAL (CONEXIÓN DIRECTA)
                     // =========================================================================
 
                     var plantillaCompra = db.core_recibo.AsNoTracking()
                                             .Where(x => x.identificador == "COMPRA_GRATIS")
                                             .FirstOrDefault();
 
-                    // REEMPLAZA TU BLOQUE ANTERIOR POR ESTE:
+                    decimal ganadoHoy = 0;
+                    decimal saldoTotalReal = 0;
+                    bool tienePuntos = false;
+                    string connStringCentral = POS.Control.Common.GlobalParameters.ConServerPuntos;
 
-                    string sqlConsulta = @"SELECT * FROM [SRV-POS].pos.PtsCliente.TblPuntos 
-                       WHERE Id_Factura = @idFactura AND IdLstCampania = 7";
-
-                    var puntosCompraGratis = db.Database.SqlQuery<TblPuntos>(sqlConsulta,
-                                             new SqlParameter("@idFactura", factura.IdFacturaPOS))
-                                             .ToList();
-
-                    if (puntosCompraGratis != null && puntosCompraGratis.Count > 0 && plantillaCompra != null)
+                    try
                     {
-                        decimal ganadoHoy = puntosCompraGratis.Sum(x => x.Saldo);
+                        using (System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(connStringCentral))
+                        {
+                            cn.Open();
 
-                        // ---------------------------------------------------------------------
-                        // PASO NUEVO: MOSTRAR MENSAJE EN PANTALLA (ID 10002)
-                        // ---------------------------------------------------------------------
+                            // A. Obtener puntos de la factura actual
+                            string sqlPuntosHoy = @"SELECT ISNULL(SUM(Saldo), 0) as Ganado, MAX(IdTblPuntosCab) as IdCab 
+                                            FROM PtsCliente.TblPuntos 
+                                            WHERE Id_Factura = @idFactura AND IdLstCampania = 7";
+
+                            int idCabecera = 0;
+
+                            using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sqlPuntosHoy, cn))
+                            {
+                                cmd.Parameters.AddWithValue("@idFactura", factura.IdFacturaPOS);
+                                using (var reader = cmd.ExecuteReader())
+                                {
+                                    if (reader.Read() && Convert.ToDecimal(reader["Ganado"]) > 0)
+                                    {
+                                        ganadoHoy = Convert.ToDecimal(reader["Ganado"]);
+                                        idCabecera = Convert.ToInt32(reader["IdCab"]);
+                                        tienePuntos = true;
+                                    }
+                                }
+                            }
+
+                            // B. Obtener Saldo Total Acumulado (Lógica original: No expirados y Saldo > 0)
+                            if (tienePuntos && idCabecera > 0)
+                            {
+                                string sqlSaldoTotal = @"SELECT ISNULL(SUM(Saldo), 0) 
+                                               FROM PtsCliente.TblPuntos 
+                                               WHERE IdTblPuntosCab = @idCab 
+                                               AND Saldo > 0 
+                                               AND FechaExpiracion >= GETDATE()";
+
+                                using (System.Data.SqlClient.SqlCommand cmdTotal = new System.Data.SqlClient.SqlCommand(sqlSaldoTotal, cn))
+                                {
+                                    cmdTotal.Parameters.AddWithValue("@idCab", idCabecera);
+                                    saldoTotalReal = Convert.ToDecimal(cmdTotal.ExecuteScalar());
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "grabarAcumulaCompraGratis", "Fallo de conexión al Central: " + ex.Message);
+                    }
+
+                    // 4. Actualización de Interfaz y Recibo
+                    if (tienePuntos && plantillaCompra != null)
+                    {
+                        // Mensaje en pantalla (ID 10002)
                         try
                         {
-                            // Preparamos el parámetro para reemplazar [totalCG] por el valor real
                             List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
-                            parametros.Add(new ParametrosMensajes()
-                            {
-                                codigo = "[totalCG]",
-                                valor = "$" + ganadoHoy.ToString("N2")
-                            });
-
-                            // Lanzamos el mensaje visual al cajero
+                            parametros.Add(new ParametrosMensajes() { codigo = "[totalCG]", valor = "$" + ganadoHoy.ToString("N2") });
                             Control.Common.General.GetMensajeToList(10002, parametros);
                         }
                         catch (Exception ex)
                         {
-                            // Protegemos con try-catch para que un error visual no detenga la impresión de la factura
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "MainWindow", "grabarAcumulaCompraGratis", "No se pudo mostrar mensaje 10002: " + ex.Message);
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "MainWindow", "grabarAcumulaCompraGratis", "Error Visual: " + ex.Message);
                         }
-                        // ---------------------------------------------------------------------
 
-                        int idCabeceraCorrecta = puntosCompraGratis.FirstOrDefault().IdTblPuntosCab;
-
-                        // C. CORRECCIÓN: Calculamos el Saldo Total REAL (Ignorando expirados)
-                        DateTime fechaHoy = DateTime.Now;
-
-                        decimal saldoTotal = db.TblPuntos.AsNoTracking()
-                            .Where(x => x.IdTblPuntosCab == idCabeceraCorrecta
-                                                    && x.Saldo > 0
-                                                    && x.FechaExpiracion >= fechaHoy)
-                            .Sum(x => (decimal?)x.Saldo) ?? 0;
-
-                        // D. Reemplazamos en el recibo
-                        string mensaje = plantillaCompra.cuerpo;
-                        mensaje = mensaje.Replace("<<PTOSNUEVOS>>", ganadoHoy.ToString("N2"));
-                        mensaje = mensaje.Replace("<<PTOSACUMULADOS>>", saldoTotal.ToString("N2"));
+                        // Reemplazo en el texto del recibo
+                        string mensajeFinal = plantillaCompra.cuerpo;
+                        mensajeFinal = mensajeFinal.Replace("<<PTOSNUEVOS>>", ganadoHoy.ToString("N2"));
+                        mensajeFinal = mensajeFinal.Replace("<<PTOSACUMULADOS>>", saldoTotalReal.ToString("N2"));
 
                         if (factura.Recibo != null)
-                            factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", mensaje);
+                            factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", mensajeFinal);
 
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "grabarAcumulaCompraGratis", "Ticket actualizado con éxito. Ganado: " + ganadoHoy);
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "grabarAcumulaCompraGratis", $"Proceso exitoso. Central respondió Ganado: {ganadoHoy} / Total: {saldoTotalReal}");
                     }
                     else
                     {
-                        // Limpieza si no encontró puntos
                         if (factura.Recibo != null)
                             factura.Recibo = factura.Recibo.Replace("<<COMPRAGRATIS>>", "");
+
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "MainWindow", "grabarAcumulaCompraGratis", "No se encontraron registros en el servidor central para esta factura.");
                     }
                 }
 
@@ -14786,7 +14937,7 @@ namespace POS
 
                     MsjError = string.Empty;
                     MsjError = string.Concat(MsjError, $"Procediendo a cambiar la factura con el cliente principal del grupo : '{gcGrupoClienteNoFactura.IdentificacionGrupoCliente}'");
-                    
+
 
                     parametros = new List<ParametrosMensajes>();
                     parametros.Add(new ParametrosMensajes() { codigo = "[MsjError]", valor = MsjError });
@@ -14804,7 +14955,7 @@ namespace POS
             {
                 return;
             }
-            
+
             //Registrar en log el click del boton Grabar y cantidad de Pagos/Productos en el momento
             string strLogPagosProductos = "Usuario ha pulsado botón Grabar, la factura en este momento es '" + (_factura == null ? "Objeto _factura está nulo" : _factura.GetNumeroFactura()) + "'. Total factura: " + lblTotal2.Text + ". ";
             if (_factura == null)
@@ -14875,7 +15026,7 @@ namespace POS
 
                                 break;
                             case DialogResult.Retry:
-                              
+
                                 btnGrabar.Enabled = true;
                                 return;
                         }
@@ -14896,6 +15047,16 @@ namespace POS
                 core_parametro parametro = new core_parametro(); // Objeto para la validación - Tarjeta de Descuento Española
                                                                  //core_TarjetaDescuento tarjetaDescuento = new core_TarjetaDescuento(); // Modelo que tenga la info para el Descuento
                 #region Facturación
+
+                if (!_factura.aplicaBeneficioDevolucionIVA)
+                {
+                    _factura.ClaveAccesoSRI = _factura.generarClaveAccesoSRI(_factura.Documento ?? "F");
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "ejecutaGrabar", "Clave Acceso Generada (Cliente Normal): " + _factura.ClaveAccesoSRI);
+                }
+                else
+                {
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "ejecutaGrabar", "Salto generación de clave: Cliente beneficiario de IVA ya posee clave.");
+                }
 
                 seguimiento.AppendLine("Antes de entrar al metodo de validar factura");
                 if (_factura.validar())
@@ -14931,7 +15092,7 @@ namespace POS
                     }
 
 
-                   
+
 
 
                     var st5 = stopwatch.ElapsedMilliseconds;
@@ -15123,8 +15284,8 @@ namespace POS
                                 st8 = stopwatch.ElapsedMilliseconds;
                                 //_factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
                                 st9 = stopwatch.ElapsedMilliseconds;
-                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "prepararImpresionCupones3", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
-                                _factura.prepararImpresionCupones4(_factura, 0); 
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "prepararImpresionCupones4", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
+                                _factura.prepararImpresionCupones4(_factura, 0);
 
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", "Recorro lista de Pagos ");
 
@@ -15604,7 +15765,7 @@ namespace POS
 
 
 
-                 }
+                }
                 else
                 {
                     _validafactura = false;
@@ -15693,6 +15854,18 @@ namespace POS
                     // Limpiamos la lista para la siguiente venta
                     this._cuponesAplicados.Clear();
                 }
+                if (_historialCuponesSesion != null)
+                {
+                    _historialCuponesSesion.Clear();
+                }
+
+                if (_dineroYaAplicadoPorItem != null)
+                {
+                    _dineroYaAplicadoPorItem.Clear();
+                }
+
+                _existeCuponExclusivoAplicado = false;
+
                 // jchid registor de los cupones usados desde la APP 19/01/2026
 
                 ActualizarEstadoRamosVendidos();
@@ -16386,7 +16559,7 @@ namespace POS
             //usotarjetadscto = false;
             POSEntities db = new POSEntities();
 
-          
+
 
             // Dscto con codigo de promocion. JM 29-11-2019
             VerificarAplicaDsctoCodigoPromocion(db);
@@ -17225,7 +17398,7 @@ namespace POS
                                 ClaveAccesoSRI = _factura.generarClaveAccesoSRI(_factura.Documento);
                             }
                             _factura.ClaveAccesoSRI = ClaveAccesoSRI;
-                            
+
                             HabilitaControlesFormaPago("FORMAPAGO_GENERAL");
 
                             validaItem = true;
@@ -17482,7 +17655,7 @@ namespace POS
                                     // Mostrar modalmente respecto al formulario actual (this)
                                     verificador = Verifier.ShowDialog(this);
 
-                                   
+
                                     //using (var verifier = new VerificationForm(Data, _factura))
                                     //{
                                     //    verifier.Tag = Tag = POS.Control.Common.GlobalParameters.DeleteProductUsrAdm;
@@ -17590,9 +17763,9 @@ namespace POS
                             }
                             catch (Exception error)
                             {
-                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "btnBorrarProducto_Click", "No se pudo desenlazar los cupones de liquidacion al borrar de la factura '" + 
-                                    _factura.GetNumeroFactura() + "' el producto con ItemId '" + item.Id + 
-                                    "', verificar en tblliquidacion de la base Ax, a continuacion las excepciones encontradas - " + 
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "btnBorrarProducto_Click", "No se pudo desenlazar los cupones de liquidacion al borrar de la factura '" +
+                                    _factura.GetNumeroFactura() + "' el producto con ItemId '" + item.Id +
+                                    "', verificar en tblliquidacion de la base Ax, a continuacion las excepciones encontradas - " +
                                     Control.Common.ExceptionHandler.GetExceptionMessages(error));
                             }
 
@@ -17760,6 +17933,8 @@ namespace POS
         {
             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "RefrescarGridItems", "Ejecuta RefrescarGridItems: gridItems.MasterTemplate.Refresh");
             gridItems.MasterTemplate.Refresh();
+
+
         }
 
         private void ScrollLastGridItems()
@@ -17794,7 +17969,7 @@ namespace POS
                     scannerDL.Close();
                 }
 
-                
+
             }
             catch (Exception ex)
             {
@@ -18010,14 +18185,14 @@ namespace POS
                     qty.ShowDialog();
                     //var item = _factura.Productos.Last();
                     var item = gridItems.SelectedRows[0].DataBoundItem as POS.Models.Producto;
-                    
+
                     //if (focused.Text.ToString() != "")
                     if (qty.txtQty.Text != "")
                     {
                         if (item.Unidad.ToUpper() == "UND")
                         {
                             var producto = new Producto();
-                            
+
                             //item.Cantidad = int.Parse(focused.Text.ToString()) - 1;
                             //item.Unidades = int.Parse(focused.Text.ToString()) - 1;
                             if (qty.q > item.Cantidad)
@@ -18035,7 +18210,7 @@ namespace POS
                                 //itemsuma.Unidades = qty.q - 1;
                                 //getProducto(itemsuma.Id);
 
-                   
+
 
 
                             }
@@ -18089,6 +18264,7 @@ namespace POS
             //ValidarMonederoCampania(txtCedula.Text);
             LimpiarClienteCompraGratis();
             btnBorrarProducto.Enabled = true; // para cuando es devolución de IVA JCHID
+            ActualizarSaldoCliente();
         }
 
         private void btnSearchPro_Click(object sender, EventArgs e)
@@ -18368,7 +18544,7 @@ namespace POS
 
             POS.Control.Common.GlobalParameters.MustCloseApplication = false;
 
-            
+
         }
 
         private void btnDescuentoEspecial_Click(object sender, EventArgs e)
@@ -18624,7 +18800,7 @@ namespace POS
                 basePago.ShowDialog(); // No necesitas pasar 'this' como parámetro
                 _bloquearFocoEnActivacion = false;
                 // 🔴 MARCA: BasePagos está por abrirse
-                
+
             }
 
             _basePagoAbierto = false;
@@ -18894,9 +19070,9 @@ namespace POS
                                     fact.AppendLine("");
                                     fact.AppendLine("Punto Emision:" + _factura.PtoEmision);
                                     fact.AppendLine(string.Format("Valor del Anticipo Efectivo: $ {0}", (monto_avance + 1)));
-                                    fact.AppendLine(string.Format("Valor del Anticipo Cheque: $ {0}", (PagoTotalCheque)));
+                                    //fact.AppendLine(string.Format("Valor del Anticipo Cheque: $ {0}", (PagoTotalCheque)));
                                     fact.AppendLine("--------------------------------------------");
-                                    fact.AppendLine(string.Format("Valor Total del Anticipo: $ {0}", (monto_avance + 1) + PagoTotalCheque));
+                                    fact.AppendLine(string.Format("Valor Total del Anticipo: $ {0}", (monto_avance + 1)));
 
                                     fact.AppendLine("");
                                     texto = regexfact.Replace(texto, fact.ToString());
@@ -20824,7 +21000,7 @@ namespace POS
         // creaccion de slider para heladeria panaderia y flores JCHID 
 
 
-       
+
         private void BTN_DIREC_1_Click(object sender, EventArgs e)
         {
             txtCodigo.Text = BotonDirec1;
@@ -21000,7 +21176,7 @@ namespace POS
             // Mostrar como modal
             frmPriceViewer.ShowDialog(this);
 
-            
+
         }
 
         private void btnWallet_Click(object sender, EventArgs e)
@@ -21829,7 +22005,7 @@ namespace POS
 
             _inicioCompletado = true;
 
-            
+
 
         }
 
@@ -21925,7 +22101,7 @@ namespace POS
                                         Ruta = deta.parametro2
                                     }).ToList();
 
-                if(DetWallPaper != null || DetWallPaper.ToList().Count > 0)
+                if (DetWallPaper != null || DetWallPaper.ToList().Count > 0)
                 {
                     foreach (var deta in DetWallPaper)
                     {
@@ -21992,7 +22168,7 @@ namespace POS
                     }
                 }
 
-             
+
             }
 
             // Asignar lista final
@@ -22149,7 +22325,7 @@ namespace POS
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "ValidarMonederoCampania", "Billetera Electrónica esta fuera de línea, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex), "StackTrace: " + ex.StackTrace);
                         }
 
-                        
+
 
 
                     }
@@ -22408,7 +22584,7 @@ namespace POS
                                 datos.EsEmpleadoLiris = lineCab[1] == "True";
                                 datos.EsClienteApp = bool.Parse(lineCab[2]);
                                 datos.CodigoClienteApp = GlobalclteEmpleado.CodigoClienteApp;
-                                
+
                             }
                             file.Close();
 
@@ -23147,7 +23323,7 @@ namespace POS
                     tipoPag = "Pag.txt";
                     //Verifica conectividad al recurso compartido, si no existe conectividad, entonces que tome los parametros del recurso Local.
                     string textFilecab = POS.Control.Common.GlobalParameters.DBIdCaja + Program.ID_Caja_POS + tipoCab;
-                    
+
 
                     //textFilecab = ConectividadSharedTmpFile(POS.Control.Common.GlobalParameters.DBIdCaja, Program.ID_Caja_POS, tipoCab);
                     textFilecab = ObtenerRutaLocalTmpFile(Program.ID_Caja_POS, tipoCab);
@@ -23317,7 +23493,7 @@ namespace POS
 
         private string ObtenerRutaLocalTmpFile(string idPOS, string tipo)
         {
-   
+
             POS.Control.Common.GlobalParameters.DBIdCaja = POS.Control.Common.GlobalParameters.DBIdCajaLocal;
             return POS.Control.Common.GlobalParameters.DBIdCajaLocal + idPOS + tipo;
         }
@@ -23616,7 +23792,7 @@ namespace POS
 
                         if (_factura.usoTarjetaCompraGratis)
                         {
-                            porcenDsctoCompraGratis = valor; 
+                            porcenDsctoCompraGratis = valor;
                             calcularFactura();
 
 
@@ -23899,7 +24075,7 @@ namespace POS
 
                 if (msj_error == "" && _factura.EsUsoCuponPromocional)
                 {
-                    
+
                     using (var db = new POSEntities())
                     {
 
@@ -23951,7 +24127,7 @@ namespace POS
 
                 return false;
             }
-            
+
         }
 
         private void clienteGroup_Click(object sender, EventArgs e)
@@ -23994,9 +24170,9 @@ namespace POS
 
         private void btnCuponApp_Click(object sender, EventArgs e)
         {
-            
+
             SolicitarCuponApp();
-                        
+
         }
 
 
@@ -24023,176 +24199,203 @@ namespace POS
         {
             try
             {
-                // 1. Validar Cliente y Almacén
+                // ---------------------------------------------------------------------
+                // 1. VALIDACIONES INICIALES
+                // ---------------------------------------------------------------------
                 string idCliente = this.txtCedula.Text;
                 string idAlmacen = _factura.Establecimiento;
-
-                // 2. Consultar a BD
                 CuponRespuesta resultado = CuponesLogica.ValidarCuponEnBD(codigo, idCliente, idAlmacen);
 
-                // Validación: ¿Ya aplicó este mismo cupón en esta venta?
-                if (_cuponesAplicados.Contains(resultado.IdCupon))
-                {
-                    Control.Common.General.GetMensajeToList(10010); // Mensaje: "Ya aplicado"
-                    return;
-                }
-
-                // Validación: ¿El cupón es válido según la BD?
                 if (!resultado.EsValido)
                 {
-                    // Lógica flexible: Si la BD devuelve un código de error específico (mayor a 0), úsalo.
-                    // De lo contrario, usa el mensaje genérico (10008).
-                    int mensajeId = (resultado.CodigoMensaje > 0) ? resultado.CodigoMensaje : 10008;
-                    Control.Common.General.GetMensajeToList(mensajeId); 
+                    int mensajeId = (resultado.CodigoMensaje > 0) ? resultado.CodigoMensaje : 1000810008;
+                    Control.Common.General.GetMensajeToList(mensajeId);
                     return;
                 }
 
-                // =========================================================================
-                // NUEVA IMPLEMENTACIÓN: VALIDACIÓN DE MEZCLA (EXCLUSIVIDAD)
-                // =========================================================================
+                if (_historialCuponesSesion.Any(c => c.IdCupon == resultado.IdCupon))
+                {
+                    Control.Common.General.GetMensajeToList(10010);
+                    return;
+                }
 
-                // CASO 1: El cupón nuevo es INDIVIDUAL (No permite combinar)
-                // Si intenta entrar y ya hay alguien más en la fiesta (_cuponesAplicados > 0), lo bloqueamos.
-                if (!resultado.PermiteCombinar && this._cuponesAplicados.Count > 0)
+                if (!resultado.PermiteCombinar && _historialCuponesSesion.Count > 0)
                 {
                     Control.Common.General.GetMensajeToList(10011);
                     return;
                 }
-
-                // CASO 2: El cupón nuevo es AMIGABLE, pero... ¿ya hay un "Celoso" adentro?
-                // Si ya existe un cupón exclusivo aplicado, nadie más puede entrar.
-                if (this._existeCuponExclusivoAplicado)
+                if (_historialCuponesSesion.Any(c => !c.PermiteCombinar))
                 {
                     Control.Common.General.GetMensajeToList(10012);
                     return;
                 }
-                // =========================================================================
+
+                // Agregamos a la lista
+                _historialCuponesSesion.Add(resultado);
 
 
-                bool seAplicoAlguno = false;
+                // ---------------------------------------------------------------------
+                // 2. EL CEREBRO MATEMÁTICO (CÁLCULO DELTA)
+                // ---------------------------------------------------------------------
+
+                // A. Ordenamos SIEMPRE de Mayor a Menor para respetar la cascada
+                var cuponesOrdenados = _historialCuponesSesion.OrderByDescending(c => c.ValorDescuento).ToList();
+
+                // B. Mapa temporal para calcular el "Objetivo Ideal" de cada producto
+                //    (Calculamos cuánto DEBERÍA tener de descuento el producto en un mundo perfecto)
+                Dictionary<string, decimal> objetivoDescuentoPorItem = new Dictionary<string, decimal>();
+                // NUEVO: Diccionario para saber exactamente cuántos dólares dio cada cupón
+                Dictionary<int, decimal> dolaresPorCupon = new Dictionary<int, decimal>();
 
                 foreach (var item in _factura.Productos)
                 {
-                    string idProducto = item.Id;
+                    // Inicializamos en 0 para este cálculo ideal
+                    decimal descuentoAcumuladoIdeal = 0;
+                    string id = item.Id;
 
-                    // --- CARGA INTELIGENTE DE DATOS (Lazy Loading) ---
-                    bool esGlobal = resultado.Alcance.Any(r => r.TipoAlcance == "GLOBAL");
-                    bool requiereDatos = resultado.Alcance.Any(r => r.TipoAlcance == "PROVEEDOR" || r.TipoAlcance == "CATEGORIA" || r.TipoAlcance == "SUBGRUPO");
-
-                    if (!esGlobal && requiereDatos && string.IsNullOrEmpty(item.ProveedorPricipal))
+                    // Recorremos los cupones en orden correcto
+                    foreach (var cupon in cuponesOrdenados)
                     {
-                        try
+                        // -- Lógica de Validación de Alcance --
+                        bool aplica = false;
+                        bool requiereDatos = cupon.Alcance.Any(r => r.TipoAlcance == "PROVEEDOR" || r.TipoAlcance == "CATEGORIA");
+                        if (requiereDatos && string.IsNullOrEmpty(item.ProveedorPricipal)) try { item.FillProductSalesInfo(item.Id); } catch { }
+
+                        var regla = cupon.Alcance.FirstOrDefault(r =>
+                            (r.TipoAlcance == "GLOBAL") ||
+                            (r.TipoAlcance == "PRODUCTO" && r.ValorAlcance == id) ||
+                            (r.TipoAlcance == "CATEGORIA" && r.ValorAlcance == item.Categoria) ||
+                            (r.TipoAlcance == "PROVEEDOR" && r.ValorAlcance == item.ProveedorPricipal) ||
+                            (r.TipoAlcance == "SUBGRUPO" && r.ValorAlcance == item.Variedad)
+                        );
+
+                        if (regla != null)
                         {
-                            item.FillProductSalesInfo(item.Id);
-                        }
-                        catch (Exception ex)
-                        {
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "ProcesarCuponApp", "CargaDatos", "Error: " + ex.Message);
+                            // CASCADA PURA:
+                            decimal baseTeorica = (regla.TipoAlcance == "PRODUCTO") ? item.Pvp : item.Pvp * item.Cantidad;
+
+                            // Saldo = Precio - Lo que llevamos acumulado en este cálculo ideal
+                            decimal saldo = baseTeorica - descuentoAcumuladoIdeal;
+
+                            if (saldo > 0)
+                            {
+                                decimal montoDesc = 0;
+                                string tipo = (cupon.TipoDescuento ?? "").Trim().ToUpper();
+
+                                if (tipo == "PORCENTAJE")
+                                    montoDesc = saldo * (cupon.ValorDescuento / 100);
+                                else
+                                    montoDesc = cupon.ValorDescuento;
+
+                                if (montoDesc > saldo) montoDesc = saldo;
+
+                                descuentoAcumuladoIdeal += montoDesc;
+
+                                // NUEVO: Guardamos el dinero que este cupón acaba de generar
+                                if (!dolaresPorCupon.ContainsKey(cupon.IdCupon)) dolaresPorCupon.Add(cupon.IdCupon, 0);
+                                dolaresPorCupon[cupon.IdCupon] += montoDesc;
+                            }
                         }
                     }
+                    // Guardamos cuánto debería tener este producto
+                    if (!objetivoDescuentoPorItem.ContainsKey(id)) objetivoDescuentoPorItem.Add(id, 0);
+                    objetivoDescuentoPorItem[id] = Math.Round(descuentoAcumuladoIdeal, 2);
+                }
 
-                    // --- BUSCAR QUÉ REGLA APLICA ---
-                    var reglaAplicada = resultado.Alcance.FirstOrDefault(r =>
-                        (r.TipoAlcance == "GLOBAL") ||
-                        (r.TipoAlcance == "PRODUCTO" && r.ValorAlcance == idProducto) ||
-                        (r.TipoAlcance == "CATEGORIA" && r.ValorAlcance == item.Categoria) ||
-                        (r.TipoAlcance == "PROVEEDOR" && r.ValorAlcance == item.ProveedorPricipal) ||
-                        (r.TipoAlcance == "SUBGRUPO" && r.ValorAlcance == item.Variedad) // Asumo Variedad = Subgrupo
-                    );
 
-                    if (reglaAplicada != null)
+                // ---------------------------------------------------------------------
+                // 3. APLICACIÓN QUIRÚRGICA (EL FIX)
+                // ---------------------------------------------------------------------
+                bool seAplicoAlgo = false;
+
+                foreach (var item in _factura.Productos)
+                {
+                    string id = item.Id;
+
+                    // Cuánto DEBERÍA tener según nuestro cálculo nuevo
+                    decimal objetivo = objetivoDescuentoPorItem.ContainsKey(id) ? objetivoDescuentoPorItem[id] : 0;
+
+                    // Cuánto YA LE DIMOS en vueltas anteriores (sacado de nuestra libreta)
+                    decimal yaAplicado = _dineroYaAplicadoPorItem.ContainsKey(id) ? _dineroYaAplicadoPorItem[id] : 0;
+
+                    // EL DELTA: ¿Cuánto me falta agregarle (o quitarle)?
+                    // Ejemplo: Objetivo 0.80 - YaAplicado 0.62 = Enviar 0.18
+                    decimal diferenciaAEnviar = objetivo - yaAplicado;
+
+                    if (diferenciaAEnviar != 0)
                     {
-                        decimal valorDescuento = 0;
-                        decimal baseCalculo = 0;
-
-                        // LÓGICA DE CÁLCULO (Unitario vs Global)
-                        if (reglaAplicada.TipoAlcance == "PRODUCTO")
-                        {
-                            // Si es cupón de producto específico, solo descontamos 1 unidad
-                            baseCalculo = item.Pvp;
-                        }
-                        else
-                        {
-                            // Si es Categoría, Proveedor o Global, descontamos sobre TODO lo que lleve
-                            baseCalculo = item.Pvp * item.Cantidad;
-                        }
-
-                        // CALCULO MATEMÁTICO
-                        if (resultado.TipoDescuento == "PORCENTAJE")
-                        {
-                            decimal porcentaje = resultado.ValorDescuento / 100;
-                            valorDescuento = baseCalculo * porcentaje;
-                        }
-                        else // VALOR FIJO
-                        {
-                            valorDescuento = resultado.ValorDescuento;
-                        }
-
-                        // Seguridad: No descontar más que el total de la línea
-                        decimal totalLinea = item.Pvp * item.Cantidad;
-                        if (valorDescuento > totalLinea) valorDescuento = totalLinea;
-
-                        // Aplicar al objeto en su propiedad dedicada
-                        item.DescuentoCuponPromocional += valorDescuento;
+                        // Solo enviamos la diferencia. El sistema sumará (0.62 + 0.18 = 0.80)
+                        item.DescuentoCuponPromocional = diferenciaAEnviar;
                         item.update();
 
-                        seAplicoAlguno = true;
+                        // Actualizamos nuestra libreta
+                        if (!_dineroYaAplicadoPorItem.ContainsKey(id)) _dineroYaAplicadoPorItem.Add(id, 0);
+                        _dineroYaAplicadoPorItem[id] += diferenciaAEnviar;
+
+                        seAplicoAlgo = true;
                     }
                 }
 
-                if (seAplicoAlguno)
+                // ---------------------------------------------------------------------
+                // 4. ACTUALIZACIÓN FINAL
+                // ---------------------------------------------------------------------
+                if (seAplicoAlgo)
                 {
-                    // Agregamos a listas de control
-                    this._cuponesAplicados.Add(resultado.IdCupon);
-                    this._idCuponAplicado = resultado.IdCupon;
+                    // Configurar objeto global SIN VALOR para evitar doble cobro
+                    if (_factura.ObjCuponAppModerno == null) _factura.ObjCuponAppModerno = new POS.Control.WalletPoints.ClsCuponApp();
 
-                    // =========================================================
-                    // NUEVO: ACTUALIZAR BANDERA DE EXCLUSIVIDAD
-                    // Si el cupón que acabamos de meter era exclusivo, cerramos la puerta
-                    if (!resultado.PermiteCombinar)
-                    {
-                        this._existeCuponExclusivoAplicado = true;
-                    }
-                    // =========================================================
-
-                    // Preparar objeto para Impresión y Factura
-                    if (_factura.ObjCuponAppModerno == null)
-                    {
-                        _factura.ObjCuponAppModerno = new POS.Control.WalletPoints.ClsCuponApp();
-                    }
-
-                    // Guardamos el estado completo del cupón para futuros recálculos.
                     _factura.ObjCuponAppModerno.SeUsoCuponApp = true;
-                    _factura.ObjCuponAppModerno.IdCupon = resultado.IdCupon;
-                    _factura.ObjCuponAppModerno.Descripcion = resultado.Descripcion;
-                    _factura.ObjCuponAppModerno.ReglasAlcance = resultado.Alcance; // <-- La regla más importante
-                    _factura.ObjCuponAppModerno.Valor = resultado.ValorDescuento; // El valor/porcentaje del descuento
-                    _factura.ObjCuponAppModerno.Codigo = resultado.TipoDescuento; // Re-usamos el campo Código para el Tipo (PORCENTAJE/VALOR FIJO)
+                    _factura.ObjCuponAppModerno.IdCupon = cuponesOrdenados.First().IdCupon;
 
-                    // Recalcular Total Factura
-                    calcularFactura();
 
-                    // Mensaje de Éxito
-                    List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
-                    parametros.Add(new ParametrosMensajes()
+                    string textoCupones = "";
+                    foreach (var cup in _historialCuponesSesion)
                     {
-                        codigo = "[ValorDescuento]",
-                        valor = resultado.ValorDescuento.ToString("0") // Muestra entero si puedes, o "N2"
-                    });
+                        string nombreLimpio = (cup.Descripcion ?? "Cupón").Trim();
 
+                        // Buscamos cuántos dólares generó este cupón en el diccionario nuevo
+                        decimal valorGenerado = dolaresPorCupon.ContainsKey(cup.IdCupon) ? dolaresPorCupon[cup.IdCupon] : 0;
+
+                        textoCupones += nombreLimpio + ";" + valorGenerado.ToString("N2") + "|";
+                    }
+                    // ------------------------------------------------------------------
+                    // 2. EMPAQUETAR PRODUCTOS (ID y Valor de App)
+                    // Formato: "IdProducto;Valor|IdProducto;Valor" -> Va a Codigo
+                    // ------------------------------------------------------------------
+                    string textoItems = "";
+                    foreach (var kvp in _dineroYaAplicadoPorItem)
+                    {
+                        textoItems += kvp.Key + ";" + kvp.Value.ToString("N2") + "|";
+                    }
+                    _factura.ObjCuponAppModerno.Descripcion = textoCupones.TrimEnd('|');
+                    _factura.ObjCuponAppModerno.Codigo = textoItems.TrimEnd('|'); // Reemplazamos "INFO" por esta data
+
+                    // TRUCO ANTI-DUPLICIDAD
+                    _factura.ObjCuponAppModerno.Valor = 0; // ¡CERO! Porque ya está aplicado en los ítems
+
+
+                    // Sincronizar listas legacy
+                    this._cuponesAplicados.Clear();
+                    this._existeCuponExclusivoAplicado = false;
+                    foreach (var c in cuponesOrdenados)
+                    {
+                        _cuponesAplicados.Add(c.IdCupon);
+                        if (!c.PermiteCombinar) _existeCuponExclusivoAplicado = true;
+                    }
+
+                    calcularFactura();
+                    RefrescarGridItems();
+
+                    // Mensaje
+                    List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
+                    parametros.Add(new ParametrosMensajes() { codigo = "[ValorDescuento]", valor = resultado.ValorDescuento.ToString("0") });
                     Control.Common.General.GetMensajeToList(10007, parametros);
-
-                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "ProcesarCuponApp", $"Cupón App {codigo} aplicado. Exclusivo: {!resultado.PermiteCombinar}");
-                }
-                else
-                {
-                    Control.Common.General.GetMensajeToList(10009); // No aplicó a ningún producto
                 }
             }
             catch (Exception ex)
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "ProcesarCuponApp", ex.Message);
-                MessageBox.Show("Error al procesar cupón: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -24236,7 +24439,7 @@ namespace POS
 
         private void txtCedula_TextChanged(object sender, EventArgs e)
         {
-           
+            ActualizarSaldoCliente();
 
         }
 
@@ -24281,7 +24484,7 @@ namespace POS
                         mensajeRespuesta = pinForm.Mensaje;
                         claveAccesoSRI = pinForm.ClaveAccesoSRI;
 
-           
+
                         DevolucionIvaModel devolucionIva = new DevolucionIvaModel();
                         devolucionIva.tipoDocumento = _factura.Documento;
                         devolucionIva.establecimiento = _factura.Establecimiento;
@@ -24340,7 +24543,7 @@ namespace POS
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "EjecutaDevolucionIVA", "Inicia proceso de devolución de IVA");
 
-                 
+
                 var mainForm = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f is frmMainTouchClte) as frmMainTouchClte;
 
 
@@ -24385,8 +24588,8 @@ namespace POS
                     //codigoMensaje = 999;
                     //mensajeRespuesta = "Ventana principal no encontrada.";
                 }
-                
-                
+
+
             }
             catch (Exception ex)
             {
@@ -24749,11 +24952,11 @@ namespace POS
         {
             try
             {
-                
+
                 UCLoading2.Visible = false;
                 this.Controls.Remove(UCLoading2);
 
-                if(!Entrocatch)
+                if (!Entrocatch)
                 {
                     if (Control.Common.GlobalParameters.UserObj == null)
                     {
@@ -24775,7 +24978,7 @@ namespace POS
 
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -24784,7 +24987,7 @@ namespace POS
             }
         }
 
-        public  bool ValidaExisteTmp()
+        public bool ValidaExisteTmp()
         {
             bool existe = false;
             string tipoCab = string.Empty, tipoDet = string.Empty, tipoPag = string.Empty;

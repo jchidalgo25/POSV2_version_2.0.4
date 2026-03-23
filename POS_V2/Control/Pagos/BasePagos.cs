@@ -35,7 +35,7 @@ namespace POS.Control.Pagos
             TarjetaInterna,
             Retencion,
             NotaCredito,
-            DineroElectronico, 
+            DineroElectronico,
             Efectivo,
             CompraGratis  // jchid agregado para la nueva modalidad de compra gratis 
         }
@@ -72,7 +72,7 @@ namespace POS.Control.Pagos
         private string _textoOriginal = string.Empty;
         private string ValorOriginalTarjeta = string.Empty;
 
-        
+
         private Timer _enforceFocusTimer;
 
         public decimal DescuentoPromoTarjBines = 0;
@@ -86,7 +86,8 @@ namespace POS.Control.Pagos
         }
 
         private bool _debeActualizarClienteFactura = false;
-        public bool DebeActualizarClienteFactura {
+        public bool DebeActualizarClienteFactura
+        {
             get { return _debeActualizarClienteFactura; }
         }
 
@@ -148,7 +149,7 @@ namespace POS.Control.Pagos
                     break;
 
                 default:
-                    
+
                     txtCuenta.TabStop = false;
                     break;
             }
@@ -183,7 +184,7 @@ namespace POS.Control.Pagos
             this.Focus();
         }
 
-        
+
         public BasePagos()
         {
             InicializarBuffer();
@@ -192,7 +193,7 @@ namespace POS.Control.Pagos
 
         private void InicializarBuffer()
         {
-            
+
             _resetTimer = new Timer { Interval = 100 };
             _resetTimer.Tick += (s, e) =>
             {
@@ -251,7 +252,7 @@ namespace POS.Control.Pagos
             BasePagosIniciar(p, val);
         }
 
-     
+
 
         public BasePagos(PagoTipo p, ref Models.Giftcard.ClsGiftcardSale f, decimal val = 0M)
         {
@@ -311,7 +312,7 @@ namespace POS.Control.Pagos
         }
 
 
-       
+
         public void BasePagosIniciar(PagoTipo p, decimal val = 0M)
         {
 
@@ -319,7 +320,7 @@ namespace POS.Control.Pagos
             _tarjetaInterna = _factura.TarjetaCreditoInterno;
             _tarjetaInternaAdicional = _factura.TarjetaCreditoInternoAdicional;
             this.txtValor.Text = val.ToString();
-            saldoFacturaPago = decimal.Parse( val.ToString());
+            saldoFacturaPago = decimal.Parse(val.ToString());
 
 
             EsManual = 0;
@@ -327,7 +328,7 @@ namespace POS.Control.Pagos
 
         }
 
-      
+
 
         private void btnEvent(object sender, EventArgs e)
         {
@@ -359,15 +360,15 @@ namespace POS.Control.Pagos
             string numAutori = string.Empty, numTransaccion = string.Empty;
             var obj = cmbBancoTarjeta.SelectedValue as core_tarjetacredito_bin;
             //valida si no pasa la tarjeta, entonces obtiene el dato del combo de bancos y tipo.
-            if(obj ==null)
+            if (obj == null)
             {
-              var  obj1 = cmbBancoTarjeta.SelectedValue as core_tarjetacredito;
+                var obj1 = cmbBancoTarjeta.SelectedValue as core_tarjetacredito;
                 return obj1 != null;
             }
 
-            
 
-            return obj != null ;
+
+            return obj != null;
         }
         /// <summary>
         /// Valida que esté lleno la información del Número de Transacción y Numero de Autorización.
@@ -384,10 +385,10 @@ namespace POS.Control.Pagos
             {
                 if (Control.Common.GlobalParameters.ActivarFormaPagoTC)
                 {
-                    if(!_esPedidoDomicilio)
+                    if (!_esPedidoDomicilio)
                     {
-                        
-                        if(numAutori.Length==0 || numTransaccion.Length == 0 )
+
+                        if (numAutori.Length == 0 || numTransaccion.Length == 0)
                         {
                             return false;
                         }
@@ -398,7 +399,7 @@ namespace POS.Control.Pagos
                         txtNumAutorizacionVoucher.Text = "000000";
                     }
 
-                    
+
                 }
             }
             catch (Exception)
@@ -406,7 +407,7 @@ namespace POS.Control.Pagos
 
                 return false;
             }
-            
+
 
             return true;
         }
@@ -463,7 +464,7 @@ namespace POS.Control.Pagos
                 if (!_notaCredito.tarjetaValida())
                 {
                     Control.Common.General.GetMensajeToList(181);
-                  
+
                 }
                 if (_notaCredito.getSaldo() < valor)
                 {
@@ -498,7 +499,7 @@ namespace POS.Control.Pagos
                 }
 
 
-                if (_tarjetaInternaAdicional != null  )
+                if (_tarjetaInternaAdicional != null)
                 {
                     if (string.IsNullOrEmpty(_tarjetaInternaAdicional.codigo) || string.IsNullOrEmpty(txtCuenta.Text))
                     {
@@ -517,7 +518,7 @@ namespace POS.Control.Pagos
                     {
                         //MessageBox.Show(this, "Tarjeta adicional Inactiva");
                         //Control.Common.General.GetMensajeToList(185);
-                        Control.Common.General.GetMensajeToList( 185);
+                        Control.Common.General.GetMensajeToList(185);
                         return false;
                     }
                     if (_tarjetaInterna.saldo < valor)
@@ -528,7 +529,7 @@ namespace POS.Control.Pagos
                         parametros.Add(new ParametrosMensajes() { codigo = "[saldo_empleado]", valor = _tarjetaInterna.saldo.ToString("N2") });
                         Control.Common.General.GetMensajeToList(186, parametros);
                         //Control.Common.General.GetMensajeToListv2(this, 186, parametros);
-                        
+
 
                         //MessageBox.Show(this, "La tarjeta de empleado principal no cuenta con suficiente saldo para cubrir el pago solicitado. Empleado: '" + _tarjetaInterna.nombre_tarjeta + "' Saldo actual empleado: '" + _tarjetaInterna.saldo.ToString("N2") + "'!");
                         return false;
@@ -636,7 +637,7 @@ namespace POS.Control.Pagos
         }
 
 
-        private void prepararVoucherTarjeta(string tipo_voucher, Tramas.RespuestaProcesoPago trama, Tramas.ProcesaPago pp, ref string response, bool esCopia=false)
+        private void prepararVoucherTarjeta(string tipo_voucher, Tramas.RespuestaProcesoPago trama, Tramas.ProcesaPago pp, ref string response, bool esCopia = false)
         {
             try
             {
@@ -647,7 +648,7 @@ namespace POS.Control.Pagos
                 recipe.MID = pp.MID;  //pp.MID;
                 recipe.MID2 = trama.merchantId;
                 recipe.TID = pp.TID;
-                
+
                 recipe.NumTarjeta = trama.numTarTuncate;
                 recipe.NumLote = trama.numerolote;
                 recipe.Adquiriente = trama.nomBancoAdq;
@@ -794,7 +795,7 @@ namespace POS.Control.Pagos
                 recipe.MID = pp.MID;  //pp.MID;
                 recipe.MID2 = Pago.MerchantID;
                 recipe.TID = pp.TID;
-                
+
                 recipe.NumTarjeta = Pago.NumTrajetaPayClub_DBPWallet.Trim();
                 recipe.NumLote = Pago.NumLote;
                 recipe.Adquiriente = Pago.NombBcoAdq; // trama.nomBancoAdq;
@@ -814,8 +815,8 @@ namespace POS.Control.Pagos
                 recipe.FechaTrans = string.Concat(Anio, "/", Mes, "/", Dia);
                 recipe.HoraTrans = string.Concat(HH, ":", mm, ":", ss);
                 recipe.VenTarjeta = "XX/XXXX";
-                recipe.Factura = _factura.GetNumeroFacturaEnmascarado(); 
-                
+                recipe.Factura = _factura.GetNumeroFacturaEnmascarado();
+
                 var valoranulacion = "";
                 var valorVoucher = "";
                 var valorinteres = "";
@@ -831,9 +832,9 @@ namespace POS.Control.Pagos
                                    where deta.AUTORIZACION == Pago.NumAutorizacion.ToString()
                                    && deta.NUMEROVOUCHER == secuencialTransaccion
                                    && deta.FACTURA == recipe.Factura
-                                      select deta).ToList();
+                                   select deta).ToList();
 
-                if (voucherList.Count > 0) { voucher = voucherList.FirstOrDefault();  }
+                if (voucherList.Count > 0) { voucher = voucherList.FirstOrDefault(); }
 
                 VALORCONSUMO = voucher.VALORCONSUMO;
                 valoranulacion = voucher.VALORCONSUMO;
@@ -849,7 +850,7 @@ namespace POS.Control.Pagos
                 else
                 {
                     decimal valorConsumo = Decimal.Parse(VALORCONSUMO.Substring(0, 11) + "." + VALORCONSUMO.Substring(11, 2));
-                    decimal valInt  = Decimal.Parse(valorinteres.Substring(0, 11) + "." + valorinteres.Substring(11, 2));
+                    decimal valInt = Decimal.Parse(valorinteres.Substring(0, 11) + "." + valorinteres.Substring(11, 2));
                     valorTotal = valorConsumo + valInt;
                     valorVoucher = (valorTotal).ToString("###,##0.00");
                 }
@@ -911,7 +912,7 @@ namespace POS.Control.Pagos
                 //recipe.CodigoRed = trama.codigoRed == "02" ? "MEDIANET" : "DATAFAST";
                 if (Pago.CodRed == "01")
                     recipe.CodigoRed = "DATAFAST";
-                else if (Pago.CodRed  == "02")
+                else if (Pago.CodRed == "02")
                     recipe.CodigoRed = "MEDIANET";
                 else if (Pago.CodRed == "03")
                     recipe.CodigoRed = "AUSTRO";
@@ -1011,10 +1012,10 @@ namespace POS.Control.Pagos
                         porc_Desc2 = 0;
                     }
                     else
-                    if (_facturaApp.Descuentos2.Count > 0)
-                    {
-                        porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                    }
+                        if (_facturaApp.Descuentos2.Count > 0)
+                        {
+                            porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
+                        }
                     var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
                     base0 = base0 - (base0 * (porc_Desc2 / 100));
                     var base12 = _factura.GetBase12Desc();
@@ -1320,7 +1321,7 @@ namespace POS.Control.Pagos
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePago", "ProcesaPinpadDev", "error: " + ex.Message);
             }
-           
+
         }
 
         #region Background ProcesaPinpad
@@ -1359,7 +1360,7 @@ namespace POS.Control.Pagos
 
         void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
-           
+
             if (Control.Common.GlobalParameters.PINPAD_MULTIRED)
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "bgw_DoWork", "BackGround, Se procesa por PINPAD_MULTIRED");
@@ -1387,13 +1388,13 @@ namespace POS.Control.Pagos
                     parametros.Add(new ParametrosMensajes() { codigo = "[ResponseBackground]", valor = ResponseBackground });
                     Control.Common.General.GetMensajeToList(402, parametros, ResponseBackgroundAdicional);
                 }
-                
+
 
                 //Agregar pago desde repositorio background si existe
                 if (PagoPinpadBackground != null)
                 {
-                    Common.Logger.LogMessage(Common.Enum.LogTypes.Info, "BasePagos", "bgw_RunWorkerCompleted", "Cobro tarjeta background agregado a los pagos de la factura '" 
-                                + _factura.GetNumeroFactura() 
+                    Common.Logger.LogMessage(Common.Enum.LogTypes.Info, "BasePagos", "bgw_RunWorkerCompleted", "Cobro tarjeta background agregado a los pagos de la factura '"
+                                + _factura.GetNumeroFactura()
                                 + "'. Datos cobro [ Valor: " + PagoPinpadBackground.Valor.ToString("N2") + "; Banco: "
                                 + PagoPinpadBackground.Banco + "; Nombre: " + PagoPinpadBackground.Nombre + "; Marca: " + PagoPinpadBackground.Marca + "; TipoPOS: " + PagoPinpadBackground.TipoPos + "; BinDescripcion: "
                                 + "; NumBin: " + PagoPinpadBackground.NumBin
@@ -1550,6 +1551,7 @@ namespace POS.Control.Pagos
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " Lectura Pinpad ");
                     resultadolectura = envioGen.LecturaTarjeta(IPPinPad, PuertoPinPad, 65000, "LT", "", 1);
+
 
 
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", $" Trama Repuesta (LT): {resultadolectura.TramaRespuesta}");
@@ -1812,10 +1814,10 @@ namespace POS.Control.Pagos
                     porc_Desc2 = 0;
                 }
                 else
-               if (_facturaApp.Descuentos2.Count > 0)
-                {
-                    porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                }
+                    if (_facturaApp.Descuentos2.Count > 0)
+                    {
+                        porc_Desc2 = _facturaApp.Descuentos2.Sum(x => x.Porcentaje);
+                    }
 
                 var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
                 base0 = base0 - (base0 * (porc_Desc2 / 100));
@@ -2265,7 +2267,7 @@ namespace POS.Control.Pagos
 
 
         }
-        public void ProcesaPinpadBackgroundMultiRedAnt ()
+        public void ProcesaPinpadBackgroundMultiRedAnt()
         {
             ResponseBackground = string.Empty;
             DebeCerrarFormBackground = false;
@@ -2317,13 +2319,13 @@ namespace POS.Control.Pagos
                         PuertoPinPad = Control.Common.GlobalParameters.ConectContingente.PuertoPinPadMEDIANET;
 
                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " IP PinPad: " + IPPinPad + "; PuertoPinPad: " + PuertoPinPad);
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " GlobalParameters.IPPinPad: " + Control.Common.GlobalParameters.IPPinPad 
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " GlobalParameters.IPPinPad: " + Control.Common.GlobalParameters.IPPinPad
                                                      + "; GlobalParameters.PuertoPinPad: " + Control.Common.GlobalParameters.PuertoPinPad);
 
                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", " Lectura Pinpad ");
                         resultadolectura = envioGen.LecturaTarjeta(IPPinPad, PuertoPinPad, 65000, "LT", "", 1);
 
-         
+
                         //Si la lectura de la tarjeta es exitosa, se realiza el proceso de pago (PP)
                         if (resultadolectura.CodigoRespuesta == "00")
                         {
@@ -2356,7 +2358,7 @@ namespace POS.Control.Pagos
                                 if (Control.Common.GlobalParameters.ConectContingente.PinPadContingente)
                                 {
                                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "ConectContingente.PinPadContingente: " + Control.Common.GlobalParameters.ConectContingente.PinPadContingente);
-                                    
+
                                     if (Control.Common.GlobalParameters.ConectContingente.Autorizador.ToString() != autorizador)
                                     {
                                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "ConectContingente.Autorizador: " + Control.Common.GlobalParameters.ConectContingente.Autorizador + "; autorizador: " + autorizador);
@@ -2374,8 +2376,8 @@ namespace POS.Control.Pagos
                                     Control.Common.GlobalParameters.AutorizadorDefault = Int32.Parse(autorizador);
                                     Control.Common.GlobalParameters.ConectContingente.Autorizador = Int32.Parse(autorizador);
                                 }
-      
-                         
+
+
                                 if (autorizador == "2")
                                 {
                                     IPPinPad = Control.Common.GlobalParameters.ConectContingente.IpPinPadMEDIANET;
@@ -2413,10 +2415,10 @@ namespace POS.Control.Pagos
                         else
                         {
                             ResponseBackground = "Error en PINPAD: " + resultadolectura.CodigoRespuesta + " - " + resultadolectura.MensajeRespuesta + "\n\n";
-                            ResponseBackground = ResponseBackground + " IP PinPad: " + IPPinPad + "; PuertoPinPad: " + PuertoPinPad ;
+                            ResponseBackground = ResponseBackground + " IP PinPad: " + IPPinPad + "; PuertoPinPad: " + PuertoPinPad;
                             ResponseBackground = ResponseBackground + " GlobalParameters.IPPinPad: " + Control.Common.GlobalParameters.IPPinPad + "\n\n";
                             ResponseBackground = ResponseBackground + " GlobalParameters.PuertoPinPad: " + Control.Common.GlobalParameters.PuertoPinPad + "\n\n";
-                            
+
                             return;
                         }
 
@@ -2456,10 +2458,10 @@ namespace POS.Control.Pagos
                         porc_Desc2 = 0;
                     }
                     else
-                   if (_facturaApp.Descuentos2.Count > 0)
-                    {
-                        porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                    }
+                        if (_facturaApp.Descuentos2.Count > 0)
+                        {
+                            porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
+                        }
 
                     var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
                     base0 = base0 - (base0 * (porc_Desc2 / 100));
@@ -2529,20 +2531,20 @@ namespace POS.Control.Pagos
                     PinPadRespuesta PagoResp = new PinPadRespuesta();
                     string strTrama = string.Empty;
 
-         
+
                     trama.TipoMensaje = "PP";
                     strTrama = trama.DevuelveTrama.ToString();
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "Enviando requerimiento PINPAD, trama: " + strTrama);
-                    
+
 
                     /*Se ejecuta el cobro por tarjeta. Se envia parametro*/
                     PagoResp = new PinPadRespuesta();
                     PagoResp = envioGenResponse.ObtenerTramaPinPad(IPPinPad, PuertoPinPad, timeOutCP, trama.codRed, strTrama, "", 1, "PP");
-                    
+
                     //Si la respuesta es difernete de CERO, ingresa a las excepciones 
                     if (PagoResp.CodigoRespuesta != "00" || PagoResp.CodigoRespuestaEntidad != "00")
                     {
-                       
+
                         Common.Logger.LogMessage(Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "PagoResp.CodigoRespuesta : " + PagoResp.CodigoRespuesta);
                         Common.Logger.LogMessage(Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "PagoResp.CodigoRespuestaEntidad : " + PagoResp.CodigoRespuestaEntidad);
 
@@ -2553,7 +2555,7 @@ namespace POS.Control.Pagos
                         {
                             Common.Logger.LogMessage(Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "PagoResp.CodigoRespuestaEntidad: -1; objeto no encontrado o sin respuesta, se genera reverso ");
                             PagoResp = new PinPadRespuesta();
-                            
+
                             trama.TipoTransaccion = "04"; //Reversos de Transacciones de Compras Corrientes y Diferidos
                             string tramaReverso = trama.DevuelveTrama.ToString();
                             Common.Logger.LogMessage(Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "Genera trama de reverso previo a generar el proceso de cobro por otro establecimiento");
@@ -2583,9 +2585,9 @@ namespace POS.Control.Pagos
                         }
 
 
-                        if (PagoResp.CodigoRespuestaEntidad == "TO" || PagoResp.CodigoRespuestaEntidad == "20" 
-                            || PagoResp.CodigoRespuestaEntidad == "91" || PagoResp.CodigoRespuestaEntidad == "96" 
-                            || PagoResp.CodigoRespuestaEntidad == "09" )
+                        if (PagoResp.CodigoRespuestaEntidad == "TO" || PagoResp.CodigoRespuestaEntidad == "20"
+                            || PagoResp.CodigoRespuestaEntidad == "91" || PagoResp.CodigoRespuestaEntidad == "96"
+                            || PagoResp.CodigoRespuestaEntidad == "09")
                         {
                             PagoResp.MensajeRespuesta = "Fuera de Linea / TimeOut ";
                             Common.Logger.LogMessage(Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "PagoResp.MensajeRespuesta : " + PagoResp.MensajeRespuesta);
@@ -2645,7 +2647,7 @@ namespace POS.Control.Pagos
                                 }
 
                             }
-                            
+
                         }
                         else
                         {
@@ -2656,14 +2658,14 @@ namespace POS.Control.Pagos
                                 case "03": Respuesta = "Establecimiento Invalido."; break;
                                 case "05": Respuesta = "Trans. Rechazada"; break;
                             }
-                            
+
                             ResponseBackground = "Error : " + PagoResp.MensajeRespuesta;
                             On_Off_Controles(true);
                             return;
 
                         }
                     }
-                    
+
                     string RetornaRespuesta = PagoResp.MensajeRespuesta.Trim();
                     RepuestaPago Pago = PagoResp.GetDatosPago(PagoResp.TramaRespuesta, autorizador);
 
@@ -2676,22 +2678,22 @@ namespace POS.Control.Pagos
                         return;
                     }
 
-                    
+
                     //Pago.Valor = valor;
                     resptrama.ObtieneDato = PagoResp.TramaRespuesta;
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "asigno el valor / total de la factura al objeto Pago.valor;  " + valor);
-                   
+
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "Transacción Realizada Correctamente: " + PagoResp.TramaRespuesta);
                     //Si la respuesta del PinPad es CERO, entonces la transacción fue realizada con exito, por lo que se regsitra el voucher
                     var objGeneraVoucher = GeneraVoucher(Pago, trama, resptrama, bin_descripcion);
 
-                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "Respuesta objGeneraVoucher: " 
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed", "Respuesta objGeneraVoucher: "
                                                                                 + "CodError:" + objGeneraVoucher.CodigoRespuesta + " Mensaje: "
                                                                                 + objGeneraVoucher.MensajeRespuesta
                                                                                 );
 
                     string numeroFactura = _factura.GetNumeroFactura();
-                
+
                     //Objeto de respuesta al registrar el Voucer. Si no se registra 
                     if (objGeneraVoucher.CodigoRespuesta != "0")
                     {
@@ -2831,7 +2833,7 @@ namespace POS.Control.Pagos
                         Nombre = Pago.GrupoTarjeta,
                         Marca = Pago.NombBcoAdq.Trim(),
                         TipoPos = nombreRed,
-                        BinDescripcion = bin_descripcion, 
+                        BinDescripcion = bin_descripcion,
                         NumBin = resultadolectura.NumBin
                     };
 
@@ -2880,9 +2882,9 @@ namespace POS.Control.Pagos
                 ResponseBackground = "Su solicitud no pudo ser realizada debido a un inconveniente temporal, esto puede deberse a una breve interrupcion en el servicio, por favor antes de volverlo a intentar verifique que transaccion no haya sido cargada al cliente en el banco";
 
                 Common.Logger.LogMessage(Common.Enum.LogTypes.Error, "BasePagos", "ProcesaPinpadBackgroundMultiRed"
-                        , "La solicitud no pudo ser realizada debido a una breve interrupcion en el servicio, esto puede deberse a un breve mantenimiento, por favor antes de volverlo a intentar verifique " 
-                        + "  que transaccion no haya sido cargada al cliente en el banco. A continuacion las excepciones encontradas - " 
-                        + Common.ExceptionHandler.GetExceptionMessages(ex), "Stacktrace " 
+                        , "La solicitud no pudo ser realizada debido a una breve interrupcion en el servicio, esto puede deberse a un breve mantenimiento, por favor antes de volverlo a intentar verifique "
+                        + "  que transaccion no haya sido cargada al cliente en el banco. A continuacion las excepciones encontradas - "
+                        + Common.ExceptionHandler.GetExceptionMessages(ex), "Stacktrace "
                         + ex.StackTrace);
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePago", "ProcesaPinpadBackgroundMultiRed", "error: " + ex.Message);
@@ -2894,8 +2896,8 @@ namespace POS.Control.Pagos
 
 
         }
-       
-        public RespuestaVoucher GeneraVoucher(RepuestaPago repuestaPago, Tramas.ProcesaPago trama, Tramas.RespuestaProcesoPago resptrama , string bin_descripcion)
+
+        public RespuestaVoucher GeneraVoucher(RepuestaPago repuestaPago, Tramas.ProcesaPago trama, Tramas.RespuestaProcesoPago resptrama, string bin_descripcion)
         {
             RespuestaVoucher objRespuesta = new RespuestaVoucher();
 
@@ -2903,13 +2905,13 @@ namespace POS.Control.Pagos
             string FacturaComprobante = string.Empty;
             string NumFactura = string.Empty;
             string tipoConsumo = string.Empty;
-            string tipovoucher = "";           
+            string tipovoucher = "";
             string TramaCobro = string.Empty;
             string codigoproceso = "000200";
 
             string printWarnings = string.Empty;
             string scriptInsertarVoucher = string.Empty;
-           
+
             string autori = string.Empty;
 
             DetVoucher detVoucher = new DetVoucher();
@@ -2942,13 +2944,13 @@ namespace POS.Control.Pagos
                 string fvencTarj = Convert.ToString(VencTarjeta).Substring(5, 2) + '/' + Convert.ToString(VencTarjeta).Substring(0, 4);
                 fvencTarj = fvencTarj.Length > 5 ? VencTarjeta.ToString("MM/yy") : fvencTarj;
 
-                
+
                 if (repuestaPago.CodRed == "02")
                     tipoConsumo = ((pos_tarjeta_tipopago)cmbBancoTarjeta.SelectedValue).tipoConsumo;
 
 
                 tipovoucher = Control.Common.GlobalParameters.ComprobanteVoucherTarjetaCreditoSinFirma;
-                if(valor > Control.Common.GlobalParameters.MontoVoucherTarjetaCreditoSinFirma)
+                if (valor > Control.Common.GlobalParameters.MontoVoucherTarjetaCreditoSinFirma)
                 {
                     tipovoucher = Control.Common.GlobalParameters.ComprobanteVoucherTarjetaCredito;
                 }
@@ -2966,11 +2968,11 @@ namespace POS.Control.Pagos
                 //if (Control.Common.GlobalParameters.MontoVoucherTarjetaCreditoSinFirma > 0 && repuestaPago.Valor <= Control.Common.GlobalParameters.MontoVoucherTarjetaCreditoSinFirma)
                 //    tipovoucher = Control.Common.GlobalParameters.ComprobanteVoucherTarjetaCreditoSinFirma;
 
-               
+
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", "Previo a obtener trama pinpad (BinDescripcion).'" + NumFactura + "' : '" + bin_descripcion + "'");
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", "Cambio realizado por evelasco para identificar version.'");
 
-  
+
                 try
                 {
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", "Obtiene Fecha Transaccion pinpad.'" + NumFactura + "' : " + repuestaPago.FechaTrans);
@@ -2981,7 +2983,7 @@ namespace POS.Control.Pagos
                     TramaCobro = "|" + resptrama.secuencialtransaccion + ";" + autori + ";" + resptrama.fechaTrans + ";" + valorTC.ToString();
                     //evelasco se envia trama para utilizar el proceso AX para cruzar con los cobros por TC - MEDIANET, DATAFAST.
 
-                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", "Obtiene Trama del pinpad (Num Voucher+Autorización+fecha Transaccion+ Valor Transacción) pinpad '" + NumFactura  + "' :" + TramaCobro);
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", "Obtiene Trama del pinpad (Num Voucher+Autorización+fecha Transaccion+ Valor Transacción) pinpad '" + NumFactura + "' :" + TramaCobro);
                     bin_descripcion = bin_descripcion + " " + TramaCobro;
                 }
                 catch (Exception exTramaCobro)
@@ -3050,7 +3052,7 @@ namespace POS.Control.Pagos
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", " Recupero string de Insert ");//Jorge Medina 19/01/2025
                 scriptInsertarVoucher = detVoucher.GetInsertString();
 
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", scriptInsertarVoucher );//Jorge Medina 19/01/2025
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "GeneraVoucher", scriptInsertarVoucher);//Jorge Medina 19/01/2025
 
                 /*Ejecuta guardar con Innyección SQL - UDT */
                 //var objGrabaVoucher = detVoucher.EjecutaGrabarUDT();
@@ -3076,7 +3078,7 @@ namespace POS.Control.Pagos
                 objRespuesta.tipovoucher = tipovoucher;
                 objRespuesta.tipoConsumo = tipoConsumo;
                 objRespuesta.pos_voucher = detVoucher.pos_voucher;
-                
+
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "ProcesaPinpad", "GeneraVoucher - Termina proceso - Registro voucher ");
 
                 return objRespuesta;
@@ -3093,7 +3095,7 @@ namespace POS.Control.Pagos
 
 
         }
-      
+
 
         private void ProcesaPinpadv2()
         {
@@ -3214,10 +3216,10 @@ namespace POS.Control.Pagos
                         porc_Desc2 = 0;
                     }
                     else
-                    if (_facturaApp.Descuentos2.Count > 0)
-                    {
-                        porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                    }
+                        if (_facturaApp.Descuentos2.Count > 0)
+                        {
+                            porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
+                        }
                     var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
                     base0 = base0 - (base0 * (porc_Desc2 / 100));
                     var base12 = _factura.GetBase12DescPromoIVA(false);
@@ -3828,10 +3830,10 @@ namespace POS.Control.Pagos
                         porc_Desc2 = 0;
                     }
                     else
-                    if (_facturaApp.Descuentos2.Count > 0)
-                    {
-                        porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                    }
+                        if (_facturaApp.Descuentos2.Count > 0)
+                        {
+                            porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
+                        }
                     var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
                     base0 = base0 - (base0 * (porc_Desc2 / 100));
                     var base12 = _factura.GetBase12DescPromoIVA(false);
@@ -4057,7 +4059,7 @@ namespace POS.Control.Pagos
                                 Nombre = resptrama.nomGruTar,
                                 Marca = resptrama.codBancoAdq,
                                 TipoPos = nombreRed,
-                                NumBin = numBinTC, 
+                                NumBin = numBinTC,
                                 BinDescripcion = bin_descripcion
                             };
                             /*PagoPinpadBackground = new Models.PagoPinpad
@@ -4315,7 +4317,7 @@ namespace POS.Control.Pagos
             }
             finally
             {
-          
+
 
                 On_Off_Controles(true);
             }
@@ -4329,19 +4331,19 @@ namespace POS.Control.Pagos
                 DateTime dateTime = new DateTime();
                 dateTime = DateTime.Now;
                 string strDate = Convert.ToDateTime(dateTime).ToString("yyyyMMddHHmmss");
-                string rutaCompleta = Control.Common.GlobalParameters.VoucherInsertPath+ _factura.GetNumeroFactura() + "_" + strDate + ".txt"; 
-                if(!string.IsNullOrEmpty(Control.Common.GlobalParameters.VoucherInsertPath))
+                string rutaCompleta = Control.Common.GlobalParameters.VoucherInsertPath + _factura.GetNumeroFactura() + "_" + strDate + ".txt";
+                if (!string.IsNullOrEmpty(Control.Common.GlobalParameters.VoucherInsertPath))
                 {
                     CreateEmptyDirectory(Control.Common.GlobalParameters.VoucherInsertPath);
                     using (StreamWriter mylogs = File.AppendText(rutaCompleta))         //se crea el archivo
                     {
                         mylogs.WriteLine(voucher);
 
-                        mylogs.Close();                        
+                        mylogs.Close();
                     }
 
-                }               
-                
+                }
+
             }
             catch (Exception ex)
             {
@@ -4359,7 +4361,7 @@ namespace POS.Control.Pagos
                            String.Format("  \n\nDatos caja-----------------" +
                                            "\n\nEstablecimiento: {0} \nPto Emision: {1} \nIpMaquina: {2} \nCajeroNombre: {3} \nCajeroIdentificacion: {4} \nExcepcion: {5} \n{6}" +
                                            "  \n\n-----------------" +
-                                           //datosVoucher,
+                                         //datosVoucher,
                                          string.Empty,
                                        Control.Common.GlobalParameters.Establecimiento,
                                        Control.Common.GlobalParameters.PuntoEmision,
@@ -4392,7 +4394,7 @@ namespace POS.Control.Pagos
         private void btnEnter_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 EjecutarPago();
             }
             catch (Exception ex)
@@ -4408,13 +4410,13 @@ namespace POS.Control.Pagos
             string msjError = string.Empty;
             var valor = 0M;
             string autorizador;
-           
+
 
 
 
             try
             {
-              
+
                 if (decimal.TryParse(txtValor.Text.Trim(), out valor) && valor > 0)
                 {
                     txtValor.Text = decimal.Parse(txtValor.Text.Trim()).ToString("#######.00");
@@ -4424,7 +4426,7 @@ namespace POS.Control.Pagos
                     }
 
 
-                    
+
 
 
                     switch (_pagoTipo)
@@ -4703,7 +4705,7 @@ namespace POS.Control.Pagos
                                         Pago pago = ((Factura)_factura).AgregarPago("GIFT CARDV", valor);
 
                                         // --- PASO 4: APLICAR LA CASCADA (PERO SOLO A LOS SUB-PAGOS) ---
-                                        decimal montoPendiente = valor; 
+                                        decimal montoPendiente = valor;
 
                                         foreach (var tarjetaData in tarjetasEncontradas)
                                         {
@@ -4915,7 +4917,7 @@ namespace POS.Control.Pagos
                             try
                             {
 
-         
+
                                 if (validarTarjetaInterna(valor))
                                 {
                                     _factura.AgregarPagoTarjetaInterna(valor, _tarjetaInterna.codigo, _tarjetaInterna.identificacion);
@@ -4930,7 +4932,7 @@ namespace POS.Control.Pagos
                                     this.Close();
 
 
-                                    
+
                                 }
                                 break;
                             }
@@ -4939,9 +4941,9 @@ namespace POS.Control.Pagos
 
                                 throw;
                             }
-                          
 
-                         
+
+
 
 
                         case PagoTipo.Retencion:
@@ -5034,16 +5036,16 @@ namespace POS.Control.Pagos
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePago", "ProcesaPinpad", "error: " + ex.Message);
             }
-           
+
         }
-		
+
         private bool validaHistoricoConsumoPtos(string clienteAx)
         {
             bool validaHistorico = false;
 
             try
             {
-                
+
                 if (Control.Common.GlobalParameters.ValidaCashBack == "")
                 {
 
@@ -5131,11 +5133,11 @@ namespace POS.Control.Pagos
             decimal saldoPuntosdet = 0;
             if (Control.Common.GlobalParameters.ValidaCashBack == "")
             {
-                
+
                 validaSaldo = true;
             }
             else
-            { 
+            {
                 using (POSEntities db = new POSEntities())
                 {
                     if (db.TblPuntosCab.Any(x => x.AccountNum == clienteAx && x.Estado == 1))
@@ -5233,7 +5235,7 @@ namespace POS.Control.Pagos
 
                     }
                 }
-        }
+            }
             return validaSaldo;
         }
         private bool ValidaPagoTotalPromoBines(decimal pago)
@@ -5249,7 +5251,8 @@ namespace POS.Control.Pagos
                         valida = false;
                         var result = Control.Common.General.GetMensajeToList(206);
 
-                        if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes) {
+                        if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
+                        {
                             //((MainWindow)this.ParentForm).QuitarDescuentoPromocionTarjetaBines();
                             ((MainWindow)this.Owner).QuitarDescuentoPromocionTarjetaBines();
                             valida = true;
@@ -5275,20 +5278,20 @@ namespace POS.Control.Pagos
         }
 
         private void guardarPagoManualPosVoucher(string bin_red)
-        { 
+        {
             string codigoBin = this._numTarjeta.Substring(0, 6);
             try
-            { 
+            {
                 var pos = new POSEntities();
 
                 if (pos.core_parametro.Where(x => x.identificador == "PINPAD" && x.parametro2 == this._factura.Establecimiento).First().valor == "TRUE")
                 {
                     //string bin_descripcion = "";
-                     
+
                     Tramas.ProcesaPago trama = new Tramas.ProcesaPago();
                     Tramas.RespuestaProcesoPago resptrama = new Tramas.RespuestaProcesoPago();
                     string valpag = Decimal.Round(Decimal.Parse(txtValor.Text) * 1.00M, 2).ToString().Replace(".", "").PadLeft(12, '0'); //"000000000000";
-                     
+
                     trama.codRed = bin_red;
                     switch (bin_red)
                     {
@@ -5310,7 +5313,7 @@ namespace POS.Control.Pagos
                             ResponseBackground = Common.GlobalParameters.PinpadMsjAutorizadorNoValido;
                             break;
                     }
-                      
+
                     //bin_descripcion = ctb.bin_descripcion; 
 
                     //  MessageBox.Show(this,"Verificar el calculo para  armar los totales");
@@ -5325,14 +5328,14 @@ namespace POS.Control.Pagos
                         porc_Desc2 = 0;
                     }
                     else
-                    if (_facturaApp.Descuentos2.Count > 0)
-                    {
-                        porc_Desc2= _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                    }
+                        if (_facturaApp.Descuentos2.Count > 0)
+                        {
+                            porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
+                        }
                     var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
-                    base0 = base0 - (base0 * (porc_Desc2/100));
+                    base0 = base0 - (base0 * (porc_Desc2 / 100));
                     var base12 = _factura.GetBase12DescPromoIVA(false);
-                    base12 = base12 - (base12 * (porc_Desc2/100));
+                    base12 = base12 - (base12 * (porc_Desc2 / 100));
                     var base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
                     if (_factura.GetPromoIva() > 0)
                     {
@@ -5355,11 +5358,11 @@ namespace POS.Control.Pagos
                         iva = decimal.Round(base12 * porc_iva, 2);
                         base0 = decimal.Parse(txtValor.Text) - base12 - iva;
 
-                        if(base0 < decimal.Parse("0"))
+                        if (base0 < decimal.Parse("0"))
                         {
-                            porc_pago = TruncateDecimal(decimal.Parse(txtValor.Text) / _factura.GetTotal(),2);
+                            porc_pago = TruncateDecimal(decimal.Parse(txtValor.Text) / _factura.GetTotal(), 2);
                             base12 = _factura.GetBase12DescPromoIVA(false);
-                             base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
+                            base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
                             if (_factura.GetPromoIva() > 0)
                             {
                                 base12 = base12 - ((base12 * PorcPromo) / 100);
@@ -5454,7 +5457,7 @@ namespace POS.Control.Pagos
                         "'" + _factura.GetNumeroFactura() + "'," +
                         "'            '," +//"'" + resptrama.ARQC + "'," +
                         "'            '," +//"'" + resptrama.AIDEMV + "'," +
-                        "'" + cmbBancoTarjeta.Text.Trim().PadRight(20, ' ').Substring(0, 20)+ "'," + //cmbTipoTransaccion.Text.Trim().PadRight(20, ' ').Substring(0, 20) + "'," +//"'" + resptrama.idEMV + "'," +
+                        "'" + cmbBancoTarjeta.Text.Trim().PadRight(20, ' ').Substring(0, 20) + "'," + //cmbTipoTransaccion.Text.Trim().PadRight(20, ' ').Substring(0, 20) + "'," +//"'" + resptrama.idEMV + "'," +
                         "'            '," +//"'" + resptrama.tipoCritoyValorEMV + "'," +
                         "'            '," +//"'" + resptrama.mensajePremioPublicidad + "'," +
                         "'" + trama.TipoTransaccion + "'," +  //"'01'," +
@@ -5514,7 +5517,7 @@ namespace POS.Control.Pagos
                         pos_voucher.GRUPOTAR = cmbBancoTarjeta.Text.Trim().PadRight(50, ' ').Substring(0, 50);// resptrama.nomGruTar;
                         pos_voucher.AUTORIZADOR = int.Parse(bin_red);// int.Parse(resptrama.codigoRed);
                         pos_voucher.ANULADO = false;
-                        pos_voucher.LOTE = (!string.IsNullOrEmpty(txtLote.Text) ? txtLote.Text : "000000").PadLeft(6,'0'); //"000000"; //resptrama.numerolote;
+                        pos_voucher.LOTE = (!string.IsNullOrEmpty(txtLote.Text) ? txtLote.Text : "000000").PadLeft(6, '0'); //"000000"; //resptrama.numerolote;
                         pos_voucher.PROCESADOTURNO = true;
                         pos_voucher.FACTURA = _factura.GetNumeroFactura();
                         //ML [16/01/2018]: Nuevos campos
@@ -5554,7 +5557,7 @@ namespace POS.Control.Pagos
 
                                                 "\nVALORCONSUMO: " + trama.montoTotalTransaccion.PadLeft(13, '0') +
                                                 "\nFORMAAUTORIZA: 1" +
-                                                "\nTIPOCONSUMO: "+ tipoConsumo + //PE" +                                                 
+                                                "\nTIPOCONSUMO: " + tipoConsumo + //PE" +                                                 
                                                 "\nPLAZO: " + trama.plazoDiferido.PadLeft(2, '0') +
                                                 "\nTIPOLECTURA: 000" + //resptrama.modoLectura.PadLeft(3, '0') +
                                                 "\nTIPOMONEDA: 840" +
@@ -5761,48 +5764,69 @@ namespace POS.Control.Pagos
 
                     txtCuenta.Text = "";
                     txtCuenta.NullText = "";
-                    txtCuenta.Focus();
-                    txtCuenta.PasswordChar = '*';
+                    txtCuenta.Enabled = false;
+                    txtCuenta.BackColor = System.Drawing.Color.White;
+
+                    // ── CAMPO OCULTO que recibe el pistolero ────────────────
+                    TextBox txtCaptura = new TextBox();
+                    txtCaptura.Name = "txtCapturaPistolero";
+                    txtCaptura.Size = new Size(0, 0);
+                    txtCaptura.Location = new Point(0, 0);
+                    txtCaptura.TabStop = false;
+                    splitContainer1.Panel1.Controls.Add(txtCaptura);
+
+                    txtCaptura.KeyPress += (s, ev) =>
+                    {
+                        // 1. VALIDAR: GiftCard solo acepta dígitos
+                        if (!char.IsControl(ev.KeyChar) && !char.IsDigit(ev.KeyChar))
+                        {
+                            ev.Handled = true; // Bloquear letras, guiones, cualquier otro caracter
+                            return;
+                        }
+
+                        // 2. ENTER = fin de lectura
+                        if (ev.KeyChar == (char)Keys.Enter)
+                        {
+                            // Mostrar asteriscos en pantalla (el cajero no ve el código real)
+                            txtCuenta.Text = new string('*', txtCaptura.Text.Length);
+
+                            // Guardar el código real en las variables
+                            _textoOriginal = txtCaptura.Text;
+                            ValorOriginalTarjeta = txtCaptura.Text;
+
+                            txtCaptura.Text = string.Empty; // Limpiar para próximo uso
+                            btnVerificar.PerformClick();
+                            ev.Handled = true;
+                        }
+                    };
+
+                    // ── Garantizar foco en campo oculto ─────────────────────
+                    this.BeginInvoke((MethodInvoker)delegate
+                    {
+                        txtCaptura.Focus();
+                    });
 
                     lblGiftCard.Visible = true;
                     lblGiftCardSaldo.Visible = true;
-
                     lblGiftCard.Text = "Saldo Gift Card:";
+
                     Label nuevoLabelGiftCard = new Label();
                     nuevoLabelGiftCard.Text = "Por favor, pistolee el código de la GiftCard";
-                    nuevoLabelGiftCard.Location = new Point(170, 170); // Posición en el formulario
+                    nuevoLabelGiftCard.Location = new Point(170, 170);
                     nuevoLabelGiftCard.Visible = true;
-                    nuevoLabelGiftCard.Font = new Font("Arial", 12, FontStyle.Bold); // Tamaño 14, negrita
+                    nuevoLabelGiftCard.Font = new Font("Arial", 12, FontStyle.Bold);
                     nuevoLabelGiftCard.ForeColor = Color.Red;
                     nuevoLabelGiftCard.Size = new Size(255, 60);
                     nuevoLabelGiftCard.Name = "lblError";
-
-                    // Añadir el Label al formulario
                     splitContainer1.Panel1.Controls.Add(nuevoLabelGiftCard);
 
                     if (_factura.Pagos.Any(x => x.Descripcion == "GIFT CARD" || x.Descripcion == "GIFT CARDV"))
                     {
-                        gridPagos.DataSource = _factura.Pagos.First(x => x.Descripcion == "GIFT CARD" || x.Descripcion == "GIFT CARDV").Pagos;
+                        gridPagos.DataSource = _factura.Pagos
+                            .First(x => x.Descripcion == "GIFT CARD" || x.Descripcion == "GIFT CARDV").Pagos;
                     }
 
                     var t = new TarjetaRegalo();
-
-                    ////JCanarte 19Mar2021 Sumar todas las giftcard matriculadas y presentar total acumulado, si es app movil
-                    //if (_facturaApp.EsUsoAppMovil == true) // si es APP MOVIL
-                    //{
-
-                    //    t.getTarjetaGen("", this._factura.ClienteIdentificacion, _facturaApp.EsUsoAppMovil);
-                    //    _tarjetaRegalo = t;
-
-                    //    var SaldoTotalCliente = t.getSaldoTotalTarjetaGiftCardGen("", this._factura.ClienteIdentificacion, _facturaApp.EsUsoAppMovil);
-                    //    if (SaldoTotalCliente != string.Empty)
-                    //    {
-                    //        dValorGiftCard = decimal.Parse(SaldoTotalCliente);
-                    //    }
-                    
-                    //    lblGiftCardSaldo.Text = string.Format("{0:C}", dValorGiftCard);
-                    //}
-
                 }
                 if (_pagoTipo == PagoTipo.NotaCredito)
                 {
@@ -5815,7 +5839,7 @@ namespace POS.Control.Pagos
                     //txtCuenta.PasswordChar = '*';
 
                     txtCuenta.TabStop = true;
-                    
+
 
                     MethodInvoker actionNC = delegate { txtCuenta.Focus(); };
                     this.BeginInvoke(actionNC);
@@ -5885,7 +5909,7 @@ namespace POS.Control.Pagos
                     nuevoLabel.Name = "lblError";
                     splitContainer1.Panel1.Controls.Add(nuevoLabel);
 
-                    
+
                     //txtCuenta.PasswordChar = '*';
                     txtCuenta.Text = "";
                     txtCuenta.NullText = "";
@@ -5908,7 +5932,50 @@ namespace POS.Control.Pagos
                     btnVerificar.Visible = true;
                     txtCuenta.Text = "";
                     txtCuenta.NullText = "";
-                    
+
+                    // jchid no permita escribir en el campo de texto, solo pistolear el código, para evitar errores de digitación
+                    // ── BLOQUEAR txtCuenta visible ──────────────────────────
+                    txtCuenta.Enabled = false;
+                    txtCuenta.BackColor = System.Drawing.Color.White;
+
+                    // ── CAMPO OCULTO que recibe el pistolero ────────────────
+                    TextBox txtCaptura = new TextBox();
+                    txtCaptura.Name = "txtCapturaPistolero";
+                    txtCaptura.Size = new Size(0, 0);
+                    txtCaptura.Location = new Point(0, 0);
+                    txtCaptura.TabStop = false;
+                    splitContainer1.Panel1.Controls.Add(txtCaptura);
+
+                    // ── Cuando el pistolero termina (Enter) → pasar a txtCuenta
+                    txtCaptura.KeyPress += (s, ev) =>
+                    {
+                        // 1. VALIDAR caracteres permitidos (solo dígitos y guion)
+                        if (!char.IsControl(ev.KeyChar) &&
+                            !char.IsDigit(ev.KeyChar) &&
+                            ev.KeyChar != '-')
+                        {
+                            ev.Handled = true; // Bloquear carácter inválido
+                            return;
+                        }
+
+                        // 2. ENTER = fin de lectura del pistoleador
+                        if (ev.KeyChar == (char)Keys.Enter)
+                        {
+                            txtCuenta.Text = new string('*', txtCaptura.Text.Length);
+                            _textoOriginal = txtCaptura.Text;
+                            ValorOriginalTarjeta = txtCaptura.Text;
+                            txtCaptura.Text = string.Empty;
+                            btnVerificar.PerformClick();
+                            ev.Handled = true;
+                        }
+                    };
+
+                    // ── Garantizar foco en campo oculto ─────────────────────
+                    this.BeginInvoke((MethodInvoker)delegate
+                    {
+                        txtCaptura.Focus();
+                    });
+
 
                     //// Garantizamos el foco después de que todo esté listo
                     //this.BeginInvoke((MethodInvoker)delegate {
@@ -5995,10 +6062,16 @@ namespace POS.Control.Pagos
                 // ✔️ Garantizar foco al final, cuando todo esté listo
                 this.BeginInvoke((MethodInvoker)delegate
                 {
+                    if (_pagoTipo == PagoTipo.DineroElectronico ||
+                         _pagoTipo == PagoTipo.TarjetaRegalo)
+                    {
+                        return;
+                    }
+
                     if (txtCuenta.Visible)
                     {
                         txtCuenta.Focus();
-                        txtCuenta.SelectAll(); // Mejor UX
+                        txtCuenta.SelectAll();
                     }
                     else if (_pagoTipo == PagoTipo.TarjetaCredito)
                     {
@@ -6018,25 +6091,25 @@ namespace POS.Control.Pagos
 
             }
 
-            
+
         }
 
 
-        
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             try
-            { 
-            if (gridPagos.SelectedRows.Count > 0)
             {
-                
-                //((MainWindow)this.Owner).QuitarDescuentoPromocionTarjetaBines();
-                var pago = gridPagos.SelectedRows[0].DataBoundItem as Models.PagoBase;
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "btnEliminar_Click", "Acción eliminar PagoBase solicitada por usuario sobre pago con código: " + pago.Codigo + ", valor: " + pago.Valor.ToString("N2") + ". Factura: " + _factura.GetNumeroFactura());
-                gridPagos.SelectedRows[0].Delete();
-                _factura.CalcularPagos();
-                _factura.AgregaOrdenApp(string.Empty);
-            }
+                if (gridPagos.SelectedRows.Count > 0)
+                {
+
+                    //((MainWindow)this.Owner).QuitarDescuentoPromocionTarjetaBines();
+                    var pago = gridPagos.SelectedRows[0].DataBoundItem as Models.PagoBase;
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "btnEliminar_Click", "Acción eliminar PagoBase solicitada por usuario sobre pago con código: " + pago.Codigo + ", valor: " + pago.Valor.ToString("N2") + ". Factura: " + _factura.GetNumeroFactura());
+                    gridPagos.SelectedRows[0].Delete();
+                    _factura.CalcularPagos();
+                    _factura.AgregaOrdenApp(string.Empty);
+                }
             }
             catch (Exception ex)
             {
@@ -6053,7 +6126,6 @@ namespace POS.Control.Pagos
         private bool verificaTarjetaInterna(decimal valor = 0)
         {
             bool result = false;
-            //string NumeroTarjeta = txtCuenta.Text;
             string NumeroTarjeta = _textoOriginal;
             Screen targetScreen = Control.Common.General.GetScreenCajero();
 
@@ -6073,33 +6145,32 @@ namespace POS.Control.Pagos
                 }
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Inicia verificaTarjetaInterna");
+
                 if (NumeroTarjeta.StartsWith("%"))
                 {
-                    var tarjeta = System.Text.RegularExpressions.Regex.Match(NumeroTarjeta, @"\%(\w+)\^").Groups[1].Value;
+                    var tarjeta = System.Text.RegularExpressions.Regex.Match(NumeroTarjeta, @"\%B(\d+)\^").Groups[1].Value;
 
                     if (string.IsNullOrEmpty(tarjeta))
-                    {
-                        tarjeta = System.Text.RegularExpressions.Regex.Match(tarjeta, @"\%(\w+)\&").Groups[1].Value;
-                        if (string.IsNullOrEmpty(tarjeta))
-                        {
-                            tarjeta = System.Text.RegularExpressions.Regex.Match(tarjeta, @"\%(\w+)\*").Groups[1].Value;
-                        }
-                    }
+                        tarjeta = System.Text.RegularExpressions.Regex.Match(NumeroTarjeta, @"\%B(\d+)\&").Groups[1].Value;
 
-                    NumeroTarjeta = tarjeta.ToUpper().Replace("B", "");
+                    if (string.IsNullOrEmpty(tarjeta))
+                        tarjeta = System.Text.RegularExpressions.Regex.Match(NumeroTarjeta, @"\%B(\d+)\*").Groups[1].Value;
 
+                    // Captura solo dígitos - cubre cualquier carácter especial al final
+                    if (string.IsNullOrEmpty(tarjeta))
+                        tarjeta = System.Text.RegularExpressions.Regex.Match(NumeroTarjeta, @"\%B(\d+)").Groups[1].Value;
+
+                    NumeroTarjeta = tarjeta.ToUpper();
                 }
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Ejecuta ConsultarTarjetaInternaGen");
                 tarjetaInterna = Control.Cliente.ConsultarTarjetaInternaGen(NumeroTarjeta);
 
-                if(tarjetaInterna != null)
+                if (tarjetaInterna != null)
                 {
-                    if(string.IsNullOrEmpty(tarjetaInterna.identificacionPrincipal))
+                    if (string.IsNullOrEmpty(tarjetaInterna.identificacionPrincipal))
                     {
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "identificacionPrincipal es NULL"+
-                            ", la tarjeta es principal. ");
-
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "identificacionPrincipal es NULL, la tarjeta es principal.");
 
                         if (_factura.ClienteIdentificacion.Trim().ToString() != tarjetaInterna.identificacion.Trim().ToString())
                         {
@@ -6107,11 +6178,9 @@ namespace POS.Control.Pagos
                             return result;
                         }
 
-
                         if (!tarjetaInterna.activo)
                         {
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Tarjeta Principal no activa");
-
                             this.BeginInvoke((MethodInvoker)delegate
                             {
                                 Control.Common.General.GetMensajeToList(189, targetScreen);
@@ -6119,11 +6188,9 @@ namespace POS.Control.Pagos
                             return result;
                         }
 
-
                         if (tarjetaInterna.saldo == 0)
                         {
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Tarjeta Principal no tiene Saldo");
-
                             this.BeginInvoke((MethodInvoker)delegate
                             {
                                 Control.Common.General.GetMensajeToList(621, targetScreen);
@@ -6133,7 +6200,6 @@ namespace POS.Control.Pagos
 
                         if (tarjetaInterna.fecha_expiracion.HasValue)
                         {
-                            //if (fechaValida == false)
                             if (tarjetaInterna.fecha_expiracion < DateTime.Now)
                             {
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "La tarjeta ha expirado");
@@ -6142,105 +6208,80 @@ namespace POS.Control.Pagos
                                     Control.Common.General.GetMensajeToList(562, targetScreen);
                                 });
                                 return result;
-
-                                //MessageBox.Show("La tarjeta ha expirado. Por favor comuniquese con el administrador del local.", "Tarjeta Expirada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                //return false;
-                            }
-                        }
-
-                        if(tarjetaInterna.fecha_expiracion == null)
-                        {
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "La tarjeta no tiene fecha de expiración");
-
-                            this.BeginInvoke((MethodInvoker)delegate
-                            {
-                                Control.Common.General.GetMensajeToList(563, targetScreen);
-                            });
-                            return result;
-
-                            //MessageBox.Show("La tarjeta no tiene fecha de expiración. Por favor comuniquese con el administrador del local.", "Tarjeta Expirada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            //return false;
-                        }
-
-                        
-                    }
-                    else
-                    {
-                        tarjetaInternaAdi = tarjetaInterna;
-
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "identificacionPrincipal es diferente de NULL" +
-                            ", es dependiente o tarjeta adicional ");
-
-                        tarjetaFinal = null;
-                        string identificacionPrincipal = tarjetaInterna.identificacionPrincipal;
-
-                        tarjetaInterna = Control.Cliente.ConsultarTarjetaInternaAdicionalGen(identificacionPrincipal);
-                        
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "identificacionPrincipal es NULL" +
-                            ", la tarjeta es principal. ");
-
-                        if (!tarjetaInterna.activo)
-                        {
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Tarjeta Principal no activa");
-
-                            this.BeginInvoke((MethodInvoker)delegate
-                            {
-                                Control.Common.General.GetMensajeToList(189, targetScreen);
-                            });
-                            return result;
-                        }
-
-
-                        if (tarjetaInterna.saldo == 0)
-                        {
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Tarjeta Principal no tiene Saldo");
-
-                            this.BeginInvoke((MethodInvoker)delegate
-                            {
-                                Control.Common.General.GetMensajeToList(621, targetScreen);
-                            });
-                            return result;
-                        }
-
-                        if (tarjetaInterna.fecha_expiracion.HasValue)
-                        {
-                            //if (fechaValida == false)
-                            if (tarjetaInterna.fecha_expiracion < DateTime.Now)
-                            {
-                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "La tarjeta ha expirado");
-                                this.BeginInvoke((MethodInvoker)delegate
-                                {
-                                    Control.Common.General.GetMensajeToList(562, targetScreen);
-                                });
-                                return result;
-
-                                //MessageBox.Show("La tarjeta ha expirado. Por favor comuniquese con el administrador del local.", "Tarjeta Expirada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                //return false;
                             }
                         }
 
                         if (tarjetaInterna.fecha_expiracion == null)
                         {
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "La tarjeta no tiene fecha de expiración");
-
                             this.BeginInvoke((MethodInvoker)delegate
                             {
                                 Control.Common.General.GetMensajeToList(563, targetScreen);
                             });
                             return result;
+                        }
+                    }
+                    else
+                    {
+                        tarjetaInternaAdi = tarjetaInterna;
 
-                            //MessageBox.Show("La tarjeta no tiene fecha de expiración. Por favor comuniquese con el administrador del local.", "Tarjeta Expirada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            //return false;
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "identificacionPrincipal es diferente de NULL, es dependiente o tarjeta adicional.");
+
+                        tarjetaFinal = null;
+                        string identificacionPrincipal = tarjetaInterna.identificacionPrincipal;
+
+                        tarjetaInterna = Control.Cliente.ConsultarTarjetaInternaAdicionalGen(identificacionPrincipal);
+
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "identificacionPrincipal es NULL, la tarjeta es principal.");
+
+                        if (!tarjetaInterna.activo)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Tarjeta Principal no activa");
+                            this.BeginInvoke((MethodInvoker)delegate
+                            {
+                                Control.Common.General.GetMensajeToList(189, targetScreen);
+                            });
+                            return result;
                         }
 
+                        if (tarjetaInterna.saldo == 0)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "Tarjeta Principal no tiene Saldo");
+                            this.BeginInvoke((MethodInvoker)delegate
+                            {
+                                Control.Common.General.GetMensajeToList(621, targetScreen);
+                            });
+                            return result;
+                        }
+
+                        if (tarjetaInterna.fecha_expiracion.HasValue)
+                        {
+                            if (tarjetaInterna.fecha_expiracion < DateTime.Now)
+                            {
+                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "La tarjeta ha expirado");
+                                this.BeginInvoke((MethodInvoker)delegate
+                                {
+                                    Control.Common.General.GetMensajeToList(562, targetScreen);
+                                });
+                                return result;
+                            }
+                        }
+
+                        if (tarjetaInterna.fecha_expiracion == null)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", "La tarjeta no tiene fecha de expiración");
+                            this.BeginInvoke((MethodInvoker)delegate
+                            {
+                                Control.Common.General.GetMensajeToList(563, targetScreen);
+                            });
+                            return result;
+                        }
                     }
 
                     if (tarjetaInterna != null || tarjetaInternaAdi != null)
                     {
                         tarjetaFinal = tarjetaInterna;
-                        //tarjetaFinal = tarjetaInternaAdi;
-                        //tarjetaFinal = tarjetaInternaAdi == null ? tarjetaInterna : tarjetaInternaAdi;
-                        
+
                         Cedula = tarjetaFinal.identificacion != null ? tarjetaFinal.identificacion.ToString() : null;
 
                         valorPago = tarjetaFinal.saldo;
@@ -6248,7 +6289,6 @@ namespace POS.Control.Pagos
                         {
                             valorPago = decimal.Parse(txtValor.Text);
                         }
-
 
                         lblGiftCard.Text = "Saldo Tarjeta";
                         lblGiftCardSaldo.Text = tarjetaFinal.saldo.ToString("N2");
@@ -6258,30 +6298,22 @@ namespace POS.Control.Pagos
                         _tarjetaInternaAdicional = tarjetaInternaAdi;
                     }
 
-
                     if (_factura.Pagos.Any(x => x.Descripcion == "TAR PORTAL"))
                     {
                         gridPagos.DataSource = _factura.Pagos.First(x => x.Descripcion == "TAR PORTAL").Pagos;
                     }
-                
 
                     result = true;
                 }
-
-                
             }
             catch (Exception ex)
             {
                 result = false;
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", $"Error: " +
-                            $" {ex.Message}");
-
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "verificaTarjetaInterna", $"Error: {ex.Message}");
                 return result;
             }
 
             return result;
-
-
         }
 
         private void verificaTarjetaInternaBackGround()
@@ -6353,7 +6385,7 @@ namespace POS.Control.Pagos
                 }
 
                 saldoTarjeta = decimal.Parse(string.Format("{0:C}", (_tarjetaInterna == null) ? _tarjetaInterna.saldo : _tarjetaInternaAdicional.saldo));
-                
+
 
                 decimal valorConsumo = decimal.Parse(string.Format("{0:C}", txtValor.Text));
 
@@ -6361,7 +6393,8 @@ namespace POS.Control.Pagos
                 {
                     saldoConsumo = valorConsumo;
                 }
-                else {
+                else
+                {
                     saldoConsumo = saldoTarjeta - valorConsumo;
                 }
 
@@ -6596,7 +6629,7 @@ namespace POS.Control.Pagos
                 //lblGiftCardSaldo.Text = string.Format("{0:C}", _notaCredito.getSaldo());
                 lblGiftCardSaldo.Text = _notaCredito.getSaldo().ToString();
                 txtValor.Text = _notaCredito.getSaldo().ToString();
-               
+
             }
             else
             {
@@ -6637,7 +6670,7 @@ namespace POS.Control.Pagos
             string numeroTarjeta = ValorOriginalTarjeta?.Trim();
 
             // 2. Caso especial: App Móvil por prefijo en _textoOriginal
-            if (!string.IsNullOrEmpty(_textoOriginal) &&    
+            if (!string.IsNullOrEmpty(_textoOriginal) &&
                 _textoOriginal.Trim().StartsWith(Control.Common.GlobalParameters.AppMovil_PrefijoUsaApp))
             {
                 if (_factura.ClienteIdentificacion.Trim().ToString() != clteEmpleado.Identificacion.Trim().ToString())
@@ -6667,7 +6700,7 @@ namespace POS.Control.Pagos
             decimal SaldoGifCard = 0M;
 
             //jchid Giftcard que empiezan con 99 
-           
+
             bool omitirConsultaLocal = numeroTarjeta?.StartsWith("99") == true;
             bool omitirTarjetaConsultaLocal = numeroTarjeta?.StartsWith("13") == true;  // código de la version 219 - opozo
 
@@ -6912,7 +6945,7 @@ namespace POS.Control.Pagos
         {
 
 
-            decimal valorRestante = string.IsNullOrEmpty(txtValor.Text) ? 0M: decimal.Parse(  txtValor.Text);
+            decimal valorRestante = string.IsNullOrEmpty(txtValor.Text) ? 0M : decimal.Parse(txtValor.Text);
             Screen targetScreen = Control.Common.General.GetScreenCajero();
             string codigo = _textoOriginal;
             string tarjetaleida = string.Empty;
@@ -6920,7 +6953,7 @@ namespace POS.Control.Pagos
             decimal GiftCardSaldo = 0;
             decimal SaldoMonedero = 0;
             decimal saldo = 0;
-   
+
 
             try
             {
@@ -6949,26 +6982,26 @@ namespace POS.Control.Pagos
                         txtCuenta.Text = string.Empty;
                         txtValor.Text = "0.00";
                         lblGiftCardSaldo.Text = "0.00";
-                        
+
                         Control.Common.General.GetMensajeToList(687);
                         return;
                     }
 
-                 
+
 
                     bool resultado = ProcesarValidacionTarjetaRegalo(clteEmpleado, valorRestante);
-                    
+
                 }
 
                 if (_pagoTipo == PagoTipo.NotaCredito)
                 {
                     valorRestante = decimal.Parse(string.IsNullOrEmpty(txtValor.Text) ? "0.0" : txtValor.Text);
                     notaCredito = new NotaCredito();
-                    
+
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "btnVerificar_Click"
                                 , " Ejecuta Consulta en el local ");
 
-                    var validaNC = notaCredito.validaNotaCredito(tarjetaleida, valorRestante,true);
+                    var validaNC = notaCredito.validaNotaCredito(tarjetaleida, valorRestante, true);
 
                     if (validaNC.CodError == 0)
                     {
@@ -6981,7 +7014,7 @@ namespace POS.Control.Pagos
                         {
                             Control.Common.General.GetMensajeToList(686);
 
-                            
+
                             lblGiftCardSaldo.Text = "0.00";
                             txtValor.Text = "0.00";
                             txtCuenta.Text = "";
@@ -6997,7 +7030,7 @@ namespace POS.Control.Pagos
                         {
                             txtValor.Text = validaNC.saldo.ToString("N2");
                         }
-                        
+
                         lblGiftCardSaldo.Text = validaNC.saldo.ToString("N2");
                         return;
 
@@ -7141,8 +7174,8 @@ namespace POS.Control.Pagos
                 if (_pagoTipo == PagoTipo.TarjetaInterna)
                 {
                     lblGiftCard.Text = "Saldo Tarjeta";
-                    var validTarejta =  verificaTarjetaInterna();
-                    
+                    var validTarejta = verificaTarjetaInterna();
+
 
                     if (!validTarejta)
                     {
@@ -7160,6 +7193,7 @@ namespace POS.Control.Pagos
 
                 if (_pagoTipo == PagoTipo.DineroElectronico)
                 {
+                    string textoValidar = tarjetaleida.Trim();
 
                     if (tarjetaleida.Trim().StartsWith("000"))
                     {
@@ -7171,13 +7205,23 @@ namespace POS.Control.Pagos
                     }
 
 
-                    clteEmpleado = Common.General.ValidaClienteEmpleado(_textoOriginal, Common.GlobalParameters.Establecimiento,Common.GlobalParameters.PINPAD_MULTIRED);
+                    if (!textoValidar.StartsWith("666") || !textoValidar.Contains("-"))
+                    {
+                        Common.General.GetMensajeToList(9008); // o un mensaje nuevo específico
+                        txtCuenta.Text = string.Empty;
+                        txtValor.Text = "0.00";
+                        lblGiftCardSaldo.Text = "0.00";
+                        return;
+                    }
+
+
+                    clteEmpleado = Common.General.ValidaClienteEmpleado(_textoOriginal, Common.GlobalParameters.Establecimiento, Common.GlobalParameters.PINPAD_MULTIRED);
 
                     using (var db = new POSEntities())
                     {
                         flagTarjetaValida = false;
 
-                        
+
                         if (Control.Common.GlobalParameters.MonederoPorcentajeConsumo <= 0)
                         {
                             this.TopLevel = false;
@@ -7186,7 +7230,7 @@ namespace POS.Control.Pagos
 
                             return;
                         }
-                        
+
                         maxconsumo = decimal.Round(valorRestante * (Control.Common.GlobalParameters.MonederoPorcentajeConsumo / 100), 2);
                         if (_factura.CodigoClienteApp != clteEmpleado.CodigoClienteApp)
                         {
@@ -7198,7 +7242,7 @@ namespace POS.Control.Pagos
 
                             return;
                         }
-                        
+
                         var validaMonedero = MetodosBilletera.RecuperaSaldosPorIdentificacion(clteEmpleado.Identificacion);
 
                         if (validaMonedero.codError != 0)
@@ -7206,7 +7250,7 @@ namespace POS.Control.Pagos
                             lblGiftCardSaldo.Text = "0.00";
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "btnVerificar BIlletera Electronica"
                                 , " validaMonedero msjError: " + validaMonedero.msjError);
-            
+
                             return;
                         }
 
@@ -7227,11 +7271,11 @@ namespace POS.Control.Pagos
                         else
                         {
                             txtValor.Text = validaMonedero.SaldoMonedero.ToString("N2");
-                            
+
                             lblGiftCard.Visible = true;
                             lblGiftCardSaldo.Visible = true;
                             lblGiftCardSaldo.Text = validaMonedero.SaldoMonedero.ToString("N2");
-                           
+
                             flagTarjetaValida = true;
                         }
                     }
@@ -7306,93 +7350,100 @@ namespace POS.Control.Pagos
                         }
 
                         // =========================================================================
-                        // VALIDACIÓN CON BASE DE DATOS
+                        // VALIDACIÓN CON SERVIDOR CENTRAL (CAMBIO SOLICITADO)
                         // =========================================================================
 
-                        using (var db = new POSEntities())
+                        decimal saldoEnTarjeta = 0;
+                        bool terminosAceptados = false;
+                        bool registroExiste = false;
+                        string connectionStringCentral = Control.Common.GlobalParameters.ConServerPuntos;
+
+                        try
                         {
-                            // Consultamos la tarjeta en BD
-                            var tarjeta = db.core_TarjetaDescuento.AsNoTracking()
-                                            .FirstOrDefault(x => x.codigo == codigoIngresado && x.activo == true);
-
-                            if (tarjeta == null)
+                            using (System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(connectionStringCentral))
                             {
-                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "btnVerificar", "Código no encontrado en BD: " + codigoIngresado);
-                                Control.Common.General.GetMensajeToList(10006); // Mensaje Tarjeta Ajena
+                                cn.Open();
+                                // Consultamos la tarjeta directamente en el central
+                                string sqlCentral = "SELECT TOP 1 saldo, acepto_terminos FROM core_TarjetaDescuento WHERE codigo = @cod AND activo = 1";
 
-                                txtCuenta.Text = "";
-                                _textoOriginal = "";
-                                return;
+                                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sqlCentral, cn))
+                                {
+                                    cmd.Parameters.AddWithValue("@cod", codigoIngresado);
+                                    using (var reader = cmd.ExecuteReader())
+                                    {
+                                        if (reader.Read())
+                                        {
+                                            registroExiste = true;
+                                            saldoEnTarjeta = Convert.ToDecimal(reader["saldo"]);
+                                            terminosAceptados = reader["acepto_terminos"] != DBNull.Value && Convert.ToBoolean(reader["acepto_terminos"]);
+                                        }
+                                    }
+                                }
                             }
-
-                            // ----------------------------------------------------------------------------------
-                            // CORRECCIÓN SQL DIRECTO: Validar Términos y Condiciones sin modificar Entity Framework
-                            // ----------------------------------------------------------------------------------
-                            bool terminosAceptados = false;
-                            try
-                            {
-                                // Consulta directa a la tabla para evitar error de propiedad no mapeada en EF
-                                // Asegúrate que el nombre de tabla y columna sean correctos en tu BD
-                                string querySQL = "SELECT TOP 1 acepto_terminos FROM core_TarjetaDescuento WHERE codigo = @p0";
-                                bool? resultadoBD = db.Database.SqlQuery<bool?>(querySQL, codigoIngresado).FirstOrDefault();
-                                terminosAceptados = resultadoBD.GetValueOrDefault();
-                            }
-                            catch (Exception ex)
-                            {
-                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "ValidarTerminosSQL", "Error obteniendo acepto_terminos: " + ex.Message);
-                                // Si falla la consulta directa, asumimos false por seguridad
-                                terminosAceptados = false;
-                            }
-                            // ----------------------------------------------------------------------------------
-
-                            if (!terminosAceptados)
-                            {
-                                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "BasePagos", "btnVerificar", "Bloqueo por TyC.");
-                                Control.Common.General.GetMensajeToList(10001);
-
-                                lblGiftCardSaldo.ForeColor = System.Drawing.Color.Red;
-                                lblGiftCardSaldo.Text = "BLOQUEADO";
-                                txtCuenta.Focus();
-                                return;
-                            }
-
-                            // Obtener Saldo
-                            decimal saldoEnTarjeta = tarjeta.saldo;
-                            lblGiftCardSaldo.Visible = true;
-                            lblGiftCardSaldo.ForeColor = System.Drawing.Color.Black;
-                            lblGiftCardSaldo.Text = saldoEnTarjeta.ToString("N2");
-
-                            if (saldoEnTarjeta <= 0)
-                            {
-                                Control.Common.General.GetMensajeToList(10004); // Mensaje "Sin saldo tarjeta"
-                                return;
-                            }
-
-                            // Calcular Monto a Pagar (Regla del 10%)
-                            decimal totalFactura = 0;
-                            decimal.TryParse(txtValor.Text.Replace("$", "").Trim(), out totalFactura);
-                            if (totalFactura <= 0) totalFactura = this.valorRestante;
-
-                            decimal montoMaximo = Math.Round(totalFactura * 0.10m, 2);
-                            decimal valorAPagar = (saldoEnTarjeta >= montoMaximo) ? montoMaximo : saldoEnTarjeta;
-
-                            // Mostrar Resultado
-                            txtValor.Text = valorAPagar.ToString("N2");
-
-                            // Mensajes de éxito
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "btnVerificar", "Aplicado: $" + valorAPagar);
-
-                            List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
-                            parametros.Add(new ParametrosMensajes() { codigo = "[valorAplicado]", valor = "$" + valorAPagar.ToString("N2") });
-                            Control.Common.General.GetMensajeToList(10000, parametros);
-
-                            // Bloqueo Final
-                            _compraGratisCalculada = true;
-                            txtCuenta.Enabled = false;
-                            btnVerificar.Enabled = false;
-                            txtValor.Focus();
-                            txtValor.SelectAll();
                         }
+                        catch (Exception ex)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "btnVerificar", "Fallo conexión Central: " + ex.Message);
+                            MessageBox.Show("Error al conectar con el servidor central: " + ex.Message);
+                            return;
+                        }
+
+                        if (!registroExiste)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "btnVerificar", "Código no encontrado en Central: " + codigoIngresado);
+                            Control.Common.General.GetMensajeToList(10006);
+
+                            txtCuenta.Text = "";
+                            _textoOriginal = "";
+                            return;
+                        }
+
+                        if (!terminosAceptados)
+                        {
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Warning, "BasePagos", "btnVerificar", "Bloqueo por TyC.");
+                            Control.Common.General.GetMensajeToList(10001);
+
+                            lblGiftCardSaldo.ForeColor = System.Drawing.Color.Red;
+                            lblGiftCardSaldo.Text = "BLOQUEADO";
+                            txtCuenta.Focus();
+                            return;
+                        }
+
+                        // Obtener Saldo
+                        lblGiftCardSaldo.Visible = true;
+                        lblGiftCardSaldo.ForeColor = System.Drawing.Color.Black;
+                        lblGiftCardSaldo.Text = saldoEnTarjeta.ToString("N2");
+
+                        if (saldoEnTarjeta <= 0)
+                        {
+                            Control.Common.General.GetMensajeToList(10004); // Mensaje "Sin saldo tarjeta"
+                            return;
+                        }
+
+                        // Calcular Monto a Pagar (Regla del 10%)
+                        decimal totalFactura = 0;
+                        decimal.TryParse(txtValor.Text.Replace("$", "").Trim(), out totalFactura);
+                        if (totalFactura <= 0) totalFactura = this.valorRestante;
+
+                        decimal montoMaximo = Math.Round(totalFactura * 0.10m, 2);
+                        decimal valorAPagar = (saldoEnTarjeta >= montoMaximo) ? montoMaximo : saldoEnTarjeta;
+
+                        // Mostrar Resultado
+                        txtValor.Text = valorAPagar.ToString("N2");
+
+                        // Mensajes de éxito
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos", "btnVerificar", "Aplicado (Central): $" + valorAPagar);
+
+                        List<ParametrosMensajes> parametros = new List<ParametrosMensajes>();
+                        parametros.Add(new ParametrosMensajes() { codigo = "[valorAplicado]", valor = "$" + valorAPagar.ToString("N2") });
+                        Control.Common.General.GetMensajeToList(10000, parametros);
+
+                        // Bloqueo Final
+                        _compraGratisCalculada = true;
+                        txtCuenta.Enabled = false;
+                        btnVerificar.Enabled = false;
+                        txtValor.Focus();
+                        txtValor.SelectAll();
                     }
                     catch (Exception ex)
                     {
@@ -7418,20 +7469,22 @@ namespace POS.Control.Pagos
         {
             try
             {
-                // Validación de caracteres según tipo de pago
-                if (_pagoTipo == PagoTipo.DineroElectronico || _pagoTipo == PagoTipo.TarjetaRegalo)
+                // Para DineroElectronico y TarjetaRegalo este evento
+                // nunca llega porque txtCuenta está deshabilitado.
+                // El flujo lo maneja txtCaptura en el Load.
+                // Solo dejamos la lógica para los otros tipos de pago.
+                if (_pagoTipo == PagoTipo.DineroElectronico ||
+                    _pagoTipo == PagoTipo.TarjetaRegalo)
                 {
-                    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != '\'')
-                    {
-                        e.Handled = true;
-                        return;
-                    }
+                    e.Handled = true; // por seguridad, ignorar todo
+                    return;
                 }
 
-                // Manejar Enter
+                // Para NotaCredito, TarjetaInterna, CompraGratis
+                // el cajero puede escribir o pistoleas directo en txtCuenta
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    e.Handled = true; // 🔥 Clave: marcar como manejado
+                    e.Handled = true;
                     btnVerificar_Click(sender, e);
                 }
             }
@@ -7444,8 +7497,6 @@ namespace POS.Control.Pagos
                     "Error: " + ex.Message,
                     ex.StackTrace);
             }
-
-
         }
 
         private void cmbBancoTarjeta_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -7460,7 +7511,7 @@ namespace POS.Control.Pagos
                         if (EsManual == 1 && !tarjetaDetectadaPagoManual)
                         {
                             Control.Common.General.GetMensajeToList(210);
-                            
+
                             // msgBoxCtrl.ShowMessage(MsgBoxCtrl.MessageType.Error, "Recuerde que debe seleccionar el Banco/Tarjet Adecuada ya que está utilizando la opción Pago Manual.", "POS - Pago Manual ");
                             // MessageBox.Show(this, "Recuerde que debe seleccionar el Banco/Tarjet Adecuada ya que está utilizando la opción Pago Manual.", "Notificación del Sistema para Pago Manual", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             // MsgBox m = new MsgBox("info", "Recuerde que debe seleccionar el Banco/Tarjet Adecuada ya que está utilizando la opción Pago Manual.", "Notificación del Sistema para Pago Manual");
@@ -7507,56 +7558,55 @@ namespace POS.Control.Pagos
 
         private void txtCuenta_TextChanged(object sender, EventArgs e)
         {
-            // Evitar recursividad
-            if (_isUpdatingText || txtCuenta.Text == _textoOriginal)
-                return;
+            // ── PROTECCIÓN 1: evitar recursividad (ya la tenías) ──
+            if (_isUpdatingText) return;
 
+            // ── PROTECCIÓN 2: NUEVA ──────────────────────────────
+            // Si txtCuenta está deshabilitado significa que el pistoleador
+            // usa txtCaptura. _textoOriginal ya fue asignado correctamente
+            // en el KeyPress de txtCaptura. No hacer NADA aquí.
+            if (!txtCuenta.Enabled) return;
+
+            // ── TODO LO DE ABAJO solo aplica cuando el cajero
+            //    escribe manualmente (otros tipos de pago) ─────────
             try
             {
                 _isUpdatingText = true;
 
-                // Obtener el valor actual del campo
                 string textoActual = txtCuenta.Text;
 
-                // Si el texto es igual al original, es probable que sea por actualización interna
                 if (textoActual == _textoOriginal)
                     return;
 
-                // 1. Identificar el nuevo carácter ingresado
                 if (textoActual.Length > _textoOriginal.Length)
                 {
-                    // Se agregó un carácter
                     string nuevoCaracter = textoActual.Substring(_textoOriginal.Length);
                     _textoOriginal += nuevoCaracter;
                 }
                 else if (textoActual.Length < _textoOriginal.Length)
                 {
-                    // Opcional: manejar caso de borrado (por ejemplo, retroceso)
-                    _textoOriginal = textoActual; // o recortar
+                    _textoOriginal = textoActual;
                 }
 
-                // 2. Asignar a variable global
                 ValorOriginalTarjeta = _textoOriginal;
 
-                // 3. Enmascarar antes de mostrar
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Info,
+                    "BasePagos",
+                    "txtCuenta_TextChanged",
+                    $"ValorOriginalTarjeta: {ValorOriginalTarjeta}");
+
                 string textoEnmascarado = Control.Common.General.EnmascararTexto(_textoOriginal, 0, '*');
-
-                // 4. Actualizar interfaz
                 txtCuenta.Text = textoEnmascarado;
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "txtCuenta_textchanged", $"ValorOriginalTarjeta : {ValorOriginalTarjeta}");
-                // 5. Cursor al final
-                //60928832476-22585 
                 txtCuenta.SelectionStart = txtCuenta.Text.Length;
-
-
-
-
-
             }
             catch (Exception ex)
             {
-                // Manejar errores según corresponda
-                MessageBox.Show("Ocurrió un error al procesar el texto.");
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Error,
+                    "BasePagos",
+                    "txtCuenta_TextChanged",
+                    "Error: " + ex.Message, ex.StackTrace);
             }
             finally
             {
@@ -7669,7 +7719,7 @@ namespace POS.Control.Pagos
         //    txtValor.Text = decimal.Parse(txtValor.Text).ToString();
         //}
 
-       private void RecargaCombosPagoManual()
+        private void RecargaCombosPagoManual()
         {
             try
             {
@@ -7677,7 +7727,7 @@ namespace POS.Control.Pagos
                 cmbTipoTransaccion.DisplayMember = null;
                 cmbTipoTransaccion.DataSource = null;
                 cmbTipoTransaccion.Items.Clear();
-                
+
                 using (var db = new POSEntities())
                 {
                     cmbBancoTarjeta.DataSource = null;
@@ -7734,11 +7784,11 @@ namespace POS.Control.Pagos
                 lblTipoPagoTarjeta.Top = 172;
                 cmbTipoTransaccion.Left = 172;
                 cmbTipoTransaccion.Top = 168;
-                
+
                 // chkPedidoDomicilio.Visible = true;
                 btnServDomicilio.Enabled = true;
                 btnServDomicilio.Visible = true;
-                
+
                 //habilita siempre y cuando este activo parametro ACTIVAR_TRAMA_TC = true.
                 // if (Control.Common.GlobalParameters.ActivarFormaPagoTC)
                 // {
@@ -7764,10 +7814,10 @@ namespace POS.Control.Pagos
                 txtNumAutorizacionVoucher.Top = 255;
                 txtNumAutorizacionVoucher.Width = 255;
                 txtNumAutorizacionVoucher.Visible = true;
-                 
+
                 // Visible controles de corriente y diferido.   JM  13-10-2020
                 lblTID.Left = 10;
-                lblTID.Top = 15; 
+                lblTID.Top = 15;
                 lblTID.Visible = true;
 
                 cmbTID.Left = 80;
@@ -7782,7 +7832,7 @@ namespace POS.Control.Pagos
                 }
 
                 lblLote.Left = 10;
-                lblLote.Top = 53; 
+                lblLote.Top = 53;
                 lblLote.Visible = true;
 
                 txtLote.Left = 80;
@@ -7791,14 +7841,14 @@ namespace POS.Control.Pagos
                 txtLote.Visible = true;
 
                 this.Height = 742;
-                this.Width = 950;                
-                this.splitContainer1.SplitterDistance = 445; 
+                this.Width = 950;
+                this.splitContainer1.SplitterDistance = 445;
                 this.CenterToParent();
 
                 btnServDomicilio.Top = 525;
                 btnPagoManual.Top = 525;
                 btnEliminar.Top = 525;
-                gridPagos.Top = 567; 
+                gridPagos.Top = 567;
 
                 lblTipo.Visible = true;
                 lblTipo.Left = 12;
@@ -7818,7 +7868,7 @@ namespace POS.Control.Pagos
                 this.splitContainer1.Panel1.Controls.Add(this.cmbTipo);
                 this.splitContainer1.Panel1.Controls.Add(this.lblTipoPago);
                 this.splitContainer1.Panel1.Controls.Add(this.cmbTipoPago);
-  
+
                 //  JM  13-10-2020
 
                 //  }
@@ -7842,10 +7892,10 @@ namespace POS.Control.Pagos
                 {
                     // JM  13-10-2020 
 
-                    List<pos_tarjeta_transaccion> listTarTrans = new List<pos_tarjeta_transaccion>(); 
-                    listTarTrans.Add(new pos_tarjeta_transaccion { idTipo = "00", NombreTarjetaTransaccion = "-- Seleccione --",estado=true });
+                    List<pos_tarjeta_transaccion> listTarTrans = new List<pos_tarjeta_transaccion>();
+                    listTarTrans.Add(new pos_tarjeta_transaccion { idTipo = "00", NombreTarjetaTransaccion = "-- Seleccione --", estado = true });
                     listTarTrans.AddRange(db.pos_tarjeta_transaccion.Where(x => x.estado == true).ToList());
-                     
+
                     cmbTipo.DataSource = listTarTrans; //db.pos_tarjeta_transaccion.Where(x => x.estado == true).ToList();
                     cmbTipo.DataMember = "idTipo";
                     cmbTipo.DisplayMember = "NombreTarjetaTransaccion";
@@ -7982,10 +8032,10 @@ namespace POS.Control.Pagos
         {
 
             if (EstadoControles == false) e.Cancel = true;
-           
+
             if (gridPagos.RowCount == 0)
             {
-                if (this.Owner != null )// !_factura.AplicaDescuentoPromoBines)
+                if (this.Owner != null)// !_factura.AplicaDescuentoPromoBines)
                 {
                     if (!EsPagoOkPromoTarjeta)
                     {
@@ -7994,11 +8044,11 @@ namespace POS.Control.Pagos
                     //((MainWindow)this.Owner).EjecutaBotonPago("RETURN");
                 }
             }
-            
+
         }
 
 
-        
+
         private void BasePagos_Shown(object sender, EventArgs e)
         {
 
@@ -8012,7 +8062,7 @@ namespace POS.Control.Pagos
                 || _pagoTipo == PagoTipo.TarjetaInterna || _pagoTipo == PagoTipo.DineroElectronico)
             {
 
-              
+
                 // Limpiar campo
                 txtCuenta.Clear();
                 txtCuenta.Focus();
@@ -8046,7 +8096,7 @@ namespace POS.Control.Pagos
             bool separadorValidoNumeroTarjeta = true;
             try
             {
-                
+
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "caracter: " + e.KeyChar);
                 if (e.KeyChar == (char)Keys.Enter)
                 {
@@ -8056,11 +8106,11 @@ namespace POS.Control.Pagos
                     this._numTarjeta = string.Empty;
 
                     var numeroTarjeta = txtNoTarjeta.Text.Trim().Replace("%B", "");
-                    numeroTarjeta = numeroTarjeta.Replace("\t",string.Empty);
+                    numeroTarjeta = numeroTarjeta.Replace("\t", string.Empty);
                     if (numeroTarjeta.Length >= 8)
                     {
                         //' '
-                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "numero de tarjeta leida: "+ numeroTarjeta);
+                        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "numero de tarjeta leida: " + numeroTarjeta);
                         indice = numeroTarjeta.IndexOf('^');
                         if (indice < 0)
                         {
@@ -8068,11 +8118,11 @@ namespace POS.Control.Pagos
                             if (indice < 0) //Validación para Tarjetas ALIA - CUOTAFACIL
                             {
                                 indice = numeroTarjeta.IndexOf('=');//Tarjetas ALIA - CUOTAFACIL.
-                            }                                    
+                            }
                         }
 
                         //Si no encuentra caracter separador, no seguir con la rutina y enviar mensaje.
-                        if(indice <0)
+                        if (indice < 0)
                         {
                             separadorValidoNumeroTarjeta = false;
                         }
@@ -8110,7 +8160,7 @@ namespace POS.Control.Pagos
 
 
                             ConsultaTarjetaBines(_numTarjeta, numtarjetaTodo);
-                            
+
                             /*codigoBin = this._numTarjeta.Substring(0, 6);
                             using (var db = new POSEntities())
                             {
@@ -8168,7 +8218,7 @@ namespace POS.Control.Pagos
                         }
                         else
                         {
-                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "No pudo encontrar el caracter separador para obtener numero de Tarjeta '" + numeroTarjeta +"'");
+                            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "No pudo encontrar el caracter separador para obtener numero de Tarjeta '" + numeroTarjeta + "'");
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "obtener el caracter que utiliza la tarjeta de credito y agregar a la validación para obtener el indice. (Ejemplo: indice = numeroTarjeta.IndexOf('&');) ");
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "Numero Tarjeta: " + numtarjetaTodo);
 
@@ -8186,22 +8236,25 @@ namespace POS.Control.Pagos
                             //cmbBancoTarjeta.Show();
                             //cmbBancoTarjeta.ShowDropDown(); abre el combo para que el usuario seleccione la tarjeta.
                             //return;
-                             
+
                         }
 
                         //txtNoTarjeta.SelectAll();
                     }
                 }
-            }catch(Exception exkp )
+            }
+            catch (Exception exkp)
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "Se presentaron novedades durante la ejecución del método, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(exkp), "StackTrace: " + exkp.StackTrace);
                 txtNoTarjeta.Clear();
-                try { 
+                try
+                {
                     tarjetaDetectadaPagoManual = true;
                     //btnPagoManual_Click(null, null);
                     RecargaCombosPagoManual();
                     tarjetaDetectadaPagoManual = false;
-                }catch(Exception ex1)
+                }
+                catch (Exception ex1)
                 {
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_KeyPress", "Se presentaron novedades durante la ejecución del método (en la sección catch), a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex1), "StackTrace: " + ex1.StackTrace);
                 }
@@ -8211,7 +8264,7 @@ namespace POS.Control.Pagos
                 //MessageBox.Show("Tarjeta no pudo ser leida correctamente, favor a continuación ingrese los 6 primeros dígitos de la tarjeta.", "Notificación Pago Manual", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
-                SearchTarjetaCreditoBines frmtarcredbin = new SearchTarjetaCreditoBines();      
+                SearchTarjetaCreditoBines frmtarcredbin = new SearchTarjetaCreditoBines();
                 frmtarcredbin.ShowDialog();
                 if (!string.IsNullOrEmpty(frmtarcredbin.NumeroTarjeta))
                 {
@@ -8229,7 +8282,7 @@ namespace POS.Control.Pagos
             string CodigoRed;
             string codigoBin;
             int indice = 0;
-           // string numtarjetaTodo = string.Empty;
+            // string numtarjetaTodo = string.Empty;
             bool separadorValidoNumeroTarjeta = true;
             try
             {
@@ -8254,7 +8307,7 @@ namespace POS.Control.Pagos
                         cmbBancoTarjeta.DisplayMember = null;
                         cmbBancoTarjeta.DataMember = null;
                         cmbBancoTarjeta.Rebind();
-                        
+
                         cmbBancoTarjeta.DataSource = db.core_tarjetacredito_bin.Where(x => x.bin == codigoBin).ToList(); //core_tarjetacredito_bin;
                         cmbBancoTarjeta.DisplayMember = "bin_descripcion";//cmbBancoTarjeta.DisplayMember = "nombre_completo";
                         cmbBancoTarjeta.DataMember = "bin";
@@ -8288,7 +8341,7 @@ namespace POS.Control.Pagos
                         //MessageBox.Show("Tarjeta no pudo ser leida correctamente, favor a continuación ingrese los 6 primeros dígitos de la tarjeta.", "Notificación Pago Manual", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                         // Si no se encuentra el bin llama al formulario para digitarlo.
-                        SearchTarjetaCreditoBines frmtarcredbin = new SearchTarjetaCreditoBines();                     
+                        SearchTarjetaCreditoBines frmtarcredbin = new SearchTarjetaCreditoBines();
                         frmtarcredbin.ShowDialog();
                         if (!string.IsNullOrEmpty(frmtarcredbin.NumeroTarjeta))
                         {
@@ -8300,7 +8353,7 @@ namespace POS.Control.Pagos
                     }
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 throw;
@@ -8316,7 +8369,8 @@ namespace POS.Control.Pagos
                     if (_factura.BinNumeroTarjetaPromo != codigoBin)
                     {
                         var result = Control.Common.General.GetMensajeToList(214);
-                        if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes) {
+                        if (result == MsgBoxCtrl.MessageBoxResult.Ok || result == MsgBoxCtrl.MessageBoxResult.Yes)
+                        {
                             ((MainWindow)this.Owner).QuitarDescuentoPromocionTarjetaBines();
                         }
                         else
@@ -8341,21 +8395,21 @@ namespace POS.Control.Pagos
         {
             string numeroTarjeta = "";
             try
-            { 
-
-
-            for (int i = 0; i < numTarjeta.Length; i++)
             {
-                if (i >= 6 && i < numTarjeta.Length - 3)
+
+
+                for (int i = 0; i < numTarjeta.Length; i++)
                 {
-                    numeroTarjeta += 'X';
+                    if (i >= 6 && i < numTarjeta.Length - 3)
+                    {
+                        numeroTarjeta += 'X';
+                    }
+                    else
+                    {
+                        numeroTarjeta += numTarjeta[i];
+                    }
+
                 }
-                else
-                {
-                    numeroTarjeta += numTarjeta[i];
-                }
-                
-            }
             }
             catch (Exception exkp)
             {
@@ -8402,24 +8456,24 @@ namespace POS.Control.Pagos
              {
                  Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_Enter", "Se presentaron novedades durante la ejecución del método, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(exkp), "StackTrace: " + exkp.StackTrace);
              }*/
-           /* try { 
+            /* try { 
 
-            if (InputLanguage.CurrentInputLanguage.Culture.EnglishName.ToUpper() != "ENGLISH (UNITED STATES)")
-            {
-                foreach (InputLanguage lang in InputLanguage.InstalledInputLanguages)
-                {
-                    if (lang.Culture.EnglishName.ToUpper() == "ENGLISH (UNITED STATES)")
-                    {
-                        InputLanguage.CurrentInputLanguage = lang;
-                    }
-                }
-            }
-
-        }
-             catch (Exception exkp)
+             if (InputLanguage.CurrentInputLanguage.Culture.EnglishName.ToUpper() != "ENGLISH (UNITED STATES)")
              {
-                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_Enter", "Se presentaron novedades durante la ejecución del método, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(exkp), "StackTrace: " + exkp.StackTrace);
-             }*/
+                 foreach (InputLanguage lang in InputLanguage.InstalledInputLanguages)
+                 {
+                     if (lang.Culture.EnglishName.ToUpper() == "ENGLISH (UNITED STATES)")
+                     {
+                         InputLanguage.CurrentInputLanguage = lang;
+                     }
+                 }
+             }
+
+         }
+              catch (Exception exkp)
+              {
+                  Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_Enter", "Se presentaron novedades durante la ejecución del método, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(exkp), "StackTrace: " + exkp.StackTrace);
+              }*/
 
 
         }
@@ -8429,13 +8483,13 @@ namespace POS.Control.Pagos
             try
             {
                 InputLanguage.CurrentInputLanguage = original;
-                
+
             }
             catch (Exception exl)
             {
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.BasePagos", "txtNoTarjeta_Enter", "Se presentaron novedades durante la ejecución del método, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(exl), "StackTrace: " + exl.StackTrace);
             }
-            
+
         }
 
         private void txtNumAutorizacionVoucher_KeyPress(object sender, KeyPressEventArgs e)
@@ -8456,12 +8510,12 @@ namespace POS.Control.Pagos
 
                         //txtNumAutorizacionVoucher.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
                         //txtNumAutorizacionVoucher.TextMaskFormat = MaskFormat.e;
-                      //  txtNumAutorizacionVoucher.MaskType = Telerik.WinControls.UI.MaskType.None;
-                       // txtNumAutorizacionVoucher.Clear();
-                       // txtNumAutorizacionVoucher.Text = NumAutorizacionVoucher.PadLeft(6, '0');
+                        //  txtNumAutorizacionVoucher.MaskType = Telerik.WinControls.UI.MaskType.None;
+                        // txtNumAutorizacionVoucher.Clear();
+                        // txtNumAutorizacionVoucher.Text = NumAutorizacionVoucher.PadLeft(6, '0');
                         //txtEstab.MaskType = Telerik.WinControls.UI.MaskType.Standard;
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -8480,26 +8534,26 @@ namespace POS.Control.Pagos
                     e.Handled = true;
                 }
                 if (e.KeyChar == (char)Keys.Enter)
+                {
+
+                    var NumTransaccionVoucher = txtNumTransaccionVoucher.Text.Trim().Replace("_", "");
+                    txtNumTransaccionVoucher.Text = txtNumTransaccionVoucher.Text.Replace("__", "");
+
+                    if (NumTransaccionVoucher.Length < 7)
                     {
-
-                        var NumTransaccionVoucher = txtNumTransaccionVoucher.Text.Trim().Replace("_", "");
-                        txtNumTransaccionVoucher.Text = txtNumTransaccionVoucher.Text.Replace("__", "");
-
-                        if (NumTransaccionVoucher.Length < 7)
-                        {
-                            //txtNumTransaccionVoucher.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-                            // txtNumTransaccionVoucher.MaskType = Telerik.WinControls.UI.MaskType.None;
-                            // txtNumTransaccionVoucher.Clear();
-                            // txtNumTransaccionVoucher.Text = NumTransaccionVoucher.PadLeft(6, '0');
-                            //txtEstab.MaskType = Telerik.WinControls.UI.ME:\evelasco\TFS\POS\DEV\POS\Resources\askType.Standard;
-                        }
-
-                        if (txtNumTransaccionVoucher.Text.Length >= 6)
-                        {
-                            txtNumAutorizacionVoucher.Focus();
-                        }
+                        //txtNumTransaccionVoucher.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+                        // txtNumTransaccionVoucher.MaskType = Telerik.WinControls.UI.MaskType.None;
+                        // txtNumTransaccionVoucher.Clear();
+                        // txtNumTransaccionVoucher.Text = NumTransaccionVoucher.PadLeft(6, '0');
+                        //txtEstab.MaskType = Telerik.WinControls.UI.ME:\evelasco\TFS\POS\DEV\POS\Resources\askType.Standard;
                     }
-                
+
+                    if (txtNumTransaccionVoucher.Text.Length >= 6)
+                    {
+                        txtNumAutorizacionVoucher.Focus();
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -8509,41 +8563,41 @@ namespace POS.Control.Pagos
 
         private void chkPedidoDomicilio_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
-            
+
         }
 
         private void btnServDomicilio_Click(object sender, EventArgs e)
         {
             //bool _esPedidoDomicilio = false;
             try
-            {                
-                    SearchPedidoDomicilio BusqPedidoDomicilio = new SearchPedidoDomicilio(_factura.ClienteIdentificacion);
-                    BusqPedidoDomicilio.ShowDialog();
-                    _esPedidoDomicilio = BusqPedidoDomicilio.EsPedidoDomicilio();
-                    if (!_esPedidoDomicilio)
-                    {
-                        //chkPedidoDomicilio.Checked = false;
-                        cmbBancoTarjeta.Enabled = false;
-                        cmbTipoTransaccion.Enabled = false;
-                        txtNumAutorizacionVoucher.Enabled = true;
-                        txtNumTransaccionVoucher.Enabled = true;
-                    }
-                    else
-                    {
-                        cmbBancoTarjeta.Enabled = true;
-                        cmbTipoTransaccion.Enabled = true;
-                        _ordenApp =BusqPedidoDomicilio.NumeroPedidoDomicilio;
-                        txtNumAutorizacionVoucher.Enabled = false;
-                        txtNumTransaccionVoucher.Enabled = false;
-                    }
-                
+            {
+                SearchPedidoDomicilio BusqPedidoDomicilio = new SearchPedidoDomicilio(_factura.ClienteIdentificacion);
+                BusqPedidoDomicilio.ShowDialog();
+                _esPedidoDomicilio = BusqPedidoDomicilio.EsPedidoDomicilio();
+                if (!_esPedidoDomicilio)
+                {
+                    //chkPedidoDomicilio.Checked = false;
+                    cmbBancoTarjeta.Enabled = false;
+                    cmbTipoTransaccion.Enabled = false;
+                    txtNumAutorizacionVoucher.Enabled = true;
+                    txtNumTransaccionVoucher.Enabled = true;
+                }
+                else
+                {
+                    cmbBancoTarjeta.Enabled = true;
+                    cmbTipoTransaccion.Enabled = true;
+                    _ordenApp = BusqPedidoDomicilio.NumeroPedidoDomicilio;
+                    txtNumAutorizacionVoucher.Enabled = false;
+                    txtNumTransaccionVoucher.Enabled = false;
+                }
+
             }
             catch (Exception ex)
             {
-            
+
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "BasePagos", "btnServDomicilio_Click", "Ha ocurrido una excepción al presionar Enter, a continuacion las excepciones encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex));
             }
-        }        
+        }
 
         private void cmbTipo_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
@@ -8594,7 +8648,7 @@ namespace POS.Control.Pagos
                                     boxDiferido.Visible = false;
                                     break;
                             }
-                        } 
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -8616,14 +8670,14 @@ namespace POS.Control.Pagos
         }
 
         private char? ConvertKeyToChar(Keys key)
-       
+
         {
             if (key >= Keys.D0 && key <= Keys.D9) return (char)('0' + (key - Keys.D0));
             if (key >= Keys.NumPad0 && key <= Keys.NumPad9) return (char)('0' + (key - Keys.NumPad0));
             if (key >= Keys.A && key <= Keys.Z) return (char)('A' + (key - Keys.A));
             return null;
         }
-        
+
 
 
         protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)

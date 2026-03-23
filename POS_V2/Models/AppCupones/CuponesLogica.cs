@@ -12,7 +12,17 @@ namespace POS.Models.AppCupones
         {
             CuponRespuesta respuesta = new CuponRespuesta();
 
-            string connectionMark = POS.Properties.Settings.Default.CONECTA_MKT;
+            string connectionMark = "";
+            if (Control.Common.GlobalParameters.ConServerMarketing != "")
+            {
+                connectionMark = Control.Common.GlobalParameters.ConServerMarketing;
+            }
+            else
+            {
+                respuesta.EsValido = false;
+                respuesta.Mensaje = "No se encontró conexión al servidor de Marketing.";
+                return respuesta;
+            }
             string sQuery = string.Empty;
             DataSet dtsConsulta = new DataSet();
 
@@ -109,7 +119,16 @@ namespace POS.Models.AppCupones
         {
             try
             {
-                string connectionMark = POS.Properties.Settings.Default.CONECTA_MKT;
+                string connectionMark = "";
+                if (Control.Common.GlobalParameters.ConServerMarketing != "")
+                {
+                    connectionMark = Control.Common.GlobalParameters.ConServerMarketing;
+                }
+                else
+                {
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "CuponesLogica", "RegistrarUsoCupon", "No se encontró conexión al servidor central.");
+                    return;
+                }
 
                 using (System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(connectionMark))
                 {

@@ -100,6 +100,34 @@ namespace DSS.Controles.Impresion
                                 ProcesarBarcode(e, parsedTag, x, ticketWidth, ref y);
                                 break;
                             case "b": e.Graphics.DrawString(parsedTag.Content, _font_bold, Brushes.Black, x, y); y += (int)_font_bold.GetHeight(e.Graphics); break;
+                            case "bcol":
+                                {
+                                    string[] cols = parsedTag.Content.Split('|');
+                                    string colNombre = cols.Length > 0 ? cols[0] : "";
+                                    string colValor = cols.Length > 1 ? cols[1] : "";
+
+                                    // ✅ Fuente más pequeña — ajusta el 8 al tamaño que quieras
+                                    Font fontBcol = new Font(_font_bold.Name, 8, FontStyle.Bold);
+
+                                    int xColon = 180;
+                                    int xValor = 280;
+
+                                    while (colNombre.Length > 0 &&
+                                           e.Graphics.MeasureString(colNombre, fontBcol).Width > xColon - x)
+                                    {
+                                        colNombre = colNombre.Substring(0, colNombre.Length - 1);
+                                    }
+
+                                    e.Graphics.DrawString(colNombre, fontBcol, Brushes.Black, x, y);
+                                    e.Graphics.DrawString(":", fontBcol, Brushes.Black, xColon, y);
+
+                                    SizeF valorSize = e.Graphics.MeasureString(colValor, fontBcol);
+                                    int xValorDerecha = xValor - (int)valorSize.Width;
+                                    e.Graphics.DrawString(colValor, fontBcol, Brushes.Black, xValorDerecha, y);
+
+                                    y += (int)fontBcol.GetHeight(e.Graphics);
+                                    break;
+                                }
                             default: e.Graphics.DrawString(linea_a_imprimir, _font, Brushes.Black, x, y); y += (int)_font.GetHeight(e.Graphics); break;
                         }
                     }

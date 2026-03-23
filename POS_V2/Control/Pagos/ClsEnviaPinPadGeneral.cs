@@ -261,7 +261,7 @@ namespace POS.Control.Pagos
                     }
 
 
-                    connResponse = connResponse.Substring(0, connResponse.IndexOf(TipoTrans, 0)).ToString();
+                    //connResponse = connResponse.Substring(0, connResponse.IndexOf(TipoTrans, 0)).ToString();
                     Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "ClsEnviaPinPadGeneral", "ObtenerTramaPinPad", " CabTrama: " + CabTrama);
 
                     int IndexCabTrama = 0;
@@ -411,17 +411,15 @@ namespace POS.Control.Pagos
                 conexionRespuesta = new PinPadRespuesta();
                 conexionRespuesta.CodigoRespuestaEntidad = "-1";
                 conexionRespuesta.MensajeRespuestaEntidad = "Error: " + exx.Message;
-
                 conexionRespuesta.CodigoRespuesta = "20";
 
                 string InnerExceptionMessage = string.Empty;
-
-                if (exx.InnerException.Message != null) { InnerExceptionMessage = exx.InnerException.Message; }
+                if (exx.InnerException != null) { InnerExceptionMessage = exx.InnerException.Message; }
                 conexionRespuesta.MensajeRespuesta = "Error al generar el trama, revise por favor. " + InnerExceptionMessage;
 
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "ClsEnviaPinPadGeneral", "ObtenerTramaPinPad", "conexionRespuesta.CodigoRespuestaEntidad: " + conexionRespuesta.CodigoRespuestaEntidad);
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "ClsEnviaPinPadGeneral", "ObtenerTramaPinPad", "conexionRespuesta.CodigoRespuesta: " + conexionRespuesta.CodigoRespuesta);
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "ClsEnviaPinPadGeneral", "ObtenerTramaPinPad", "Error al generar el trama, revise por favor." + exx.InnerException.Message);
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "ClsEnviaPinPadGeneral", "ObtenerTramaPinPad", "Error al generar el trama, revise por favor." + InnerExceptionMessage);
                 return conexionRespuesta;
             }
         }
@@ -812,6 +810,58 @@ namespace POS.Control.Pagos
                 return conexionRespuesta;
             }
         }
+
+
+        public PinPadRespuesta LecturaTarjetaManual()
+        {
+            PinPadRespuesta respuestaSimulada = new PinPadRespuesta();
+
+            // Instanciamos el formulario que acabamos de crear
+            using (var frm = new FrmIngresoTarjeta())
+            {
+                var result = frm.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    string tarjetaLimpia = frm.NumeroTarjetaDigitado;
+
+                    // --- SIMULACIÓN DE RESPUESTA DE PINPAD ---
+
+                    // 1. Código de éxito
+                    respuestaSimulada.CodigoRespuesta = "00";
+                    respuestaSimulada.MensajeRespuesta = "INGRESO MANUAL OK";
+
+                    // 2. Extraer el BIN (Primeros 6 dígitos)
+                    // Esto es CRÍTICO: El método principal usa esto para saber si es Medianet o Datafast
+                    if (tarjetaLimpia.Length >= 6)
+                    {
+                        respuestaSimulada.NumBin = tarjetaLimpia.Substring(0, 6);
+                    }
+                    else
+                    {
+                        // Fallback por si acaso
+                        respuestaSimulada.NumBin = "000000";
+                    }
+
+                    // 3. Número de tarjeta
+                    respuestaSimulada.NumeroTarjeta = tarjetaLimpia;
+
+                    // 4. Trama cruda (por si se loguea en base de datos)
+                    respuestaSimulada.TramaRespuesta = "MANUAL:" + tarjetaLimpia;
+                }
+                else
+                {
+                    // El usuario canceló o cerró la ventana
+                    respuestaSimulada.CodigoRespuesta = "99";
+                    respuestaSimulada.MensajeRespuesta = "CANCELADO POR USUARIO";
+                    respuestaSimulada.NumBin = "";
+                }
+            }
+
+            return respuestaSimulada;
+        }
+
+
 
 
     }

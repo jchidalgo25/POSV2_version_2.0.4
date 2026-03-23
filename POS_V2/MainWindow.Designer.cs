@@ -32,6 +32,7 @@ namespace POS
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
+
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn25 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn26 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn27 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -44,6 +45,20 @@ namespace POS
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn34 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn35 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn36 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn16 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn17 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn18 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn19 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn20 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn21 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn22 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn23 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn24 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+
             this.tempo2minutos = new System.Windows.Forms.Timer(this.components);
             this.tempo666 = new System.Windows.Forms.Timer(this.components);
             this.tempo5min = new System.Windows.Forms.Timer(this.components);
@@ -67,19 +82,22 @@ namespace POS
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.clienteGroup = new Telerik.WinControls.UI.RadGroupBox();
+
+
+            this.txtCedula = new Telerik.WinControls.UI.RadTextBox();
+            this.btnCliente = new Telerik.WinControls.UI.RadButton();
             this.btnCFinal = new Telerik.WinControls.UI.RadButton();
+            this.lblSaldoTarjeta = new Telerik.WinControls.UI.RadLabel();
+
             this.picClienteApp = new System.Windows.Forms.PictureBox();
             this.lblEtiquetaSaldo = new Telerik.WinControls.UI.RadLabel();
-            this.lblSaldoTarjeta = new Telerik.WinControls.UI.RadLabel();
             this.lblDireccion = new Telerik.WinControls.UI.RadLabel();
             this.lblIdClienteApp = new Telerik.WinControls.UI.RadLabel();
-            this.btnCliente = new Telerik.WinControls.UI.RadButton();
             this.lblTelefono = new Telerik.WinControls.UI.RadLabel();
             this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
             this.lblNombre = new Telerik.WinControls.UI.RadLabel();
             this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
-            this.txtCedula = new Telerik.WinControls.UI.RadTextBox();
             this.panelPagoSecundario = new System.Windows.Forms.Panel();
             this.lblRestante = new Telerik.WinControls.UI.RadLabel();
             this.lblTotal2 = new Telerik.WinControls.UI.RadLabel();
@@ -102,12 +120,10 @@ namespace POS
             this.splitDetalle = new System.Windows.Forms.SplitContainer();
             this.gridItems = new Telerik.WinControls.UI.RadGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnDescuentoCupon = new Telerik.WinControls.UI.RadButton();
             this.btnSearchPro = new Telerik.WinControls.UI.RadButton();
             this.panel12 = new System.Windows.Forms.Panel();
             this.btnPrecio = new Telerik.WinControls.UI.RadButton();
             this.btnBorrarProducto = new Telerik.WinControls.UI.RadButton();
-            this.radButton2 = new Telerik.WinControls.UI.RadButton();
             this.btnQtyProduct = new Telerik.WinControls.UI.RadButton();
             this.txtCodigo = new Telerik.WinControls.UI.RadTextBox();
             this.panelgrid = new System.Windows.Forms.Panel();
@@ -149,6 +165,7 @@ namespace POS
             this.btnEliminarPago = new Telerik.WinControls.UI.RadButton();
             this.radButton13 = new Telerik.WinControls.UI.RadButton();
             this.telerikMetroTouchTheme2 = new Telerik.WinControls.Themes.TelerikMetroTouchTheme();
+            this.btnDescuentoCupon = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.btnGiftback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoPOS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUser)).BeginInit();
@@ -170,19 +187,23 @@ namespace POS
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clienteGroup)).BeginInit();
             this.clienteGroup.SuspendLayout();
+
+
+
+            ((System.ComponentModel.ISupportInitialize)(this.txtCedula)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCFinal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).BeginInit();
+
             ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblIdClienteApp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTelefono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNombre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCedula)).BeginInit();
             this.panelPagoSecundario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lblRestante)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTotal2)).BeginInit();
@@ -203,13 +224,10 @@ namespace POS
             ((System.ComponentModel.ISupportInitialize)(this.gridItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridItems.MasterTemplate)).BeginInit();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDescuentoCupon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearchPro)).BeginInit();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBorrarProducto)).BeginInit();
-            this.btnBorrarProducto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radButton2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnQtyProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodigo)).BeginInit();
             this.panelgrid.SuspendLayout();
@@ -251,6 +269,7 @@ namespace POS
             ((System.ComponentModel.ISupportInitialize)(this.lblCambio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminarPago)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDescuentoCupon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -312,12 +331,12 @@ namespace POS
             this.btnUser.Image = ((System.Drawing.Image)(resources.GetObject("btnUser.Image")));
             this.btnUser.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.btnLocal});
-            this.btnUser.Location = new System.Drawing.Point(1023, 3);
+            this.btnUser.Location = new System.Drawing.Point(858, 3);
             this.btnUser.Name = "btnUser";
             // 
             // 
             // 
-            this.btnUser.RootElement.ControlBounds = new System.Drawing.Rectangle(1023, 3, 110, 24);
+            this.btnUser.RootElement.ControlBounds = new System.Drawing.Rectangle(858, 3, 110, 24);
             this.btnUser.Size = new System.Drawing.Size(162, 70);
             this.btnUser.TabIndex = 6;
             this.btnUser.Text = "User";
@@ -441,12 +460,12 @@ namespace POS
             this.btnGrabar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGrabar.Image = ((System.Drawing.Image)(resources.GetObject("btnGrabar.Image")));
             this.btnGrabar.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnGrabar.Location = new System.Drawing.Point(930, 3);
+            this.btnGrabar.Location = new System.Drawing.Point(765, 3);
             this.btnGrabar.Name = "btnGrabar";
             // 
             // 
             // 
-            this.btnGrabar.RootElement.ControlBounds = new System.Drawing.Rectangle(930, 3, 110, 24);
+            this.btnGrabar.RootElement.ControlBounds = new System.Drawing.Rectangle(765, 3, 110, 24);
             this.btnGrabar.Size = new System.Drawing.Size(81, 70);
             this.btnGrabar.TabIndex = 7;
             this.btnGrabar.ThemeName = "TelerikMetroTouch";
@@ -469,7 +488,7 @@ namespace POS
             this.panelToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelToolbar.Location = new System.Drawing.Point(0, 0);
             this.panelToolbar.Name = "panelToolbar";
-            this.panelToolbar.Size = new System.Drawing.Size(1191, 77);
+            this.panelToolbar.Size = new System.Drawing.Size(1026, 77);
             this.panelToolbar.TabIndex = 0;
             // 
             // btnPagar
@@ -479,12 +498,12 @@ namespace POS
             this.btnPagar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPagar.Image = global::POS.Properties.Resources.coin;
             this.btnPagar.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnPagar.Location = new System.Drawing.Point(930, 3);
+            this.btnPagar.Location = new System.Drawing.Point(765, 3);
             this.btnPagar.Name = "btnPagar";
             // 
             // 
             // 
-            this.btnPagar.RootElement.ControlBounds = new System.Drawing.Rectangle(930, 3, 110, 24);
+            this.btnPagar.RootElement.ControlBounds = new System.Drawing.Rectangle(765, 3, 110, 24);
             this.btnPagar.Size = new System.Drawing.Size(81, 70);
             this.btnPagar.TabIndex = 8;
             this.btnPagar.ThemeName = "TelerikMetroTouch";
@@ -534,7 +553,7 @@ namespace POS
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel2.Size = new System.Drawing.Size(1191, 104);
+            this.panel2.Size = new System.Drawing.Size(1026, 104);
             this.panel2.TabIndex = 0;
             // 
             // splitContainer2
@@ -559,27 +578,31 @@ namespace POS
             this.splitContainer2.Panel2.Controls.Add(this.panelPagoSecundario);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer2.Panel2MinSize = 50;
-            this.splitContainer2.Size = new System.Drawing.Size(1191, 104);
-            this.splitContainer2.SplitterDistance = 708;
+            this.splitContainer2.Size = new System.Drawing.Size(1026, 104);
+            this.splitContainer2.SplitterDistance = 610;
             this.splitContainer2.TabIndex = 3;
             // 
             // clienteGroup
             // 
             this.clienteGroup.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
             this.clienteGroup.BackColor = System.Drawing.SystemColors.ControlLightLight;
+
             this.clienteGroup.Controls.Add(this.btnCFinal);
+
+            this.clienteGroup.Controls.Add(this.txtCedula);
+            this.clienteGroup.Controls.Add(this.btnCliente);
+            this.clienteGroup.Controls.Add(this.btnCFinal);
+            this.clienteGroup.Controls.Add(this.lblSaldoTarjeta);
+
             this.clienteGroup.Controls.Add(this.picClienteApp);
             this.clienteGroup.Controls.Add(this.lblEtiquetaSaldo);
-            this.clienteGroup.Controls.Add(this.lblSaldoTarjeta);
             this.clienteGroup.Controls.Add(this.lblDireccion);
             this.clienteGroup.Controls.Add(this.lblIdClienteApp);
-            this.clienteGroup.Controls.Add(this.btnCliente);
             this.clienteGroup.Controls.Add(this.lblTelefono);
             this.clienteGroup.Controls.Add(this.radLabel4);
             this.clienteGroup.Controls.Add(this.lblNombre);
             this.clienteGroup.Controls.Add(this.radLabel3);
             this.clienteGroup.Controls.Add(this.radLabel2);
-            this.clienteGroup.Controls.Add(this.txtCedula);
             this.clienteGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clienteGroup.HeaderText = "F-001-001-0000000000 ";
             this.clienteGroup.Location = new System.Drawing.Point(0, 0);
@@ -591,12 +614,13 @@ namespace POS
             // 
             this.clienteGroup.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.clienteGroup.RootElement.Padding = new System.Windows.Forms.Padding(1, 17, 1, 1);
-            this.clienteGroup.Size = new System.Drawing.Size(708, 104);
+            this.clienteGroup.Size = new System.Drawing.Size(610, 104);
             this.clienteGroup.TabIndex = 0;
             this.clienteGroup.Text = "F-001-001-0000000000 ";
             this.clienteGroup.ThemeName = "TelerikMetroTouch";
             this.clienteGroup.Click += new System.EventHandler(this.clienteGroup_Click);
             // 
+
             // btnCFinal
             // 
             this.btnCFinal.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -617,27 +641,20 @@ namespace POS
             this.btnCFinal.Click += new System.EventHandler(this.btnCFinal_Click);
             // 
             // picClienteApp
+
+            // txtCedula
+
             // 
-            this.picClienteApp.Image = global::POS.Properties.Resources.cliente_app_icon;
-            this.picClienteApp.Location = new System.Drawing.Point(261, 72);
-            this.picClienteApp.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.picClienteApp.Name = "picClienteApp";
-            this.picClienteApp.Size = new System.Drawing.Size(39, 27);
-            this.picClienteApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picClienteApp.TabIndex = 25;
-            this.picClienteApp.TabStop = false;
-            this.picClienteApp.Visible = false;
-            // 
-            // lblEtiquetaSaldo
-            // 
-            this.lblEtiquetaSaldo.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblEtiquetaSaldo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEtiquetaSaldo.Location = new System.Drawing.Point(21, 75);
-            this.lblEtiquetaSaldo.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.lblEtiquetaSaldo.Name = "lblEtiquetaSaldo";
+            this.txtCedula.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtCedula.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtCedula.Location = new System.Drawing.Point(13, 28);
+            this.txtCedula.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.txtCedula.Name = "txtCedula";
+            this.txtCedula.NullText = "Cédula o R.U.C";
             // 
             // 
             // 
+
             this.lblEtiquetaSaldo.RootElement.ControlBounds = new System.Drawing.Rectangle(21, 75, 100, 18);
             this.lblEtiquetaSaldo.Size = new System.Drawing.Size(55, 25);
             this.lblEtiquetaSaldo.TabIndex = 8;
@@ -660,7 +677,7 @@ namespace POS
             // 
             // lblDireccion
             // 
-            this.lblDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDireccion.AutoSize = false;
             this.lblDireccion.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -691,6 +708,18 @@ namespace POS
             this.lblIdClienteApp.TabIndex = 23;
             this.lblIdClienteApp.Text = "#####";
             this.lblIdClienteApp.Visible = false;
+
+            this.txtCedula.RootElement.ControlBounds = new System.Drawing.Rectangle(30, 66, 100, 20);
+            this.txtCedula.ShortcutsEnabled = false;
+            this.txtCedula.Size = new System.Drawing.Size(209, 30);
+            this.txtCedula.TabIndex = 0;
+            this.txtCedula.TabStop = false;
+            this.txtCedula.ThemeName = "TelerikMetroTouch";
+            this.txtCedula.TextChanged += new System.EventHandler(this.txtCedula_TextChanged);
+            this.txtCedula.Enter += new System.EventHandler(this.txtCedula_Enter);
+            this.txtCedula.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCedula_KeyDown);
+            this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
+
             // 
             // btnCliente
             // 
@@ -711,9 +740,119 @@ namespace POS
             this.btnCliente.ThemeName = "TelerikMetroTouch";
             this.btnCliente.Click += new System.EventHandler(this.btnCliente_Click);
             // 
+
             // lblTelefono
             // 
-            this.lblTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTelefono.AutoSize = false;
+            this.lblTelefono.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblTelefono.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTelefono.Location = new System.Drawing.Point(409, 72);
+            this.lblTelefono.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.lblTelefono.Name = "lblTelefono";
+            // btnCFinal
+            // 
+            this.btnCFinal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCFinal.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCFinal.Location = new System.Drawing.Point(261, 20);
+            this.btnCFinal.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnCFinal.MaximumSize = new System.Drawing.Size(39, 49);
+            this.btnCFinal.Name = "btnCFinal";
+            // 
+            // 
+            // 
+            this.btnCFinal.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
+            this.btnCFinal.RootElement.ControlBounds = new System.Drawing.Rectangle(588, 48, 87, 24);
+            this.btnCFinal.RootElement.MaxSize = new System.Drawing.Size(39, 49);
+            this.btnCFinal.Size = new System.Drawing.Size(39, 49);
+            this.btnCFinal.TabIndex = 13;
+            this.btnCFinal.Text = "CF";
+            this.btnCFinal.ThemeName = "TelerikMetroTouch";
+            this.btnCFinal.Click += new System.EventHandler(this.btnCFinal_Click);
+            // 
+            // lblSaldoTarjeta
+            // 
+            this.lblSaldoTarjeta.BackColor = System.Drawing.Color.White;
+            this.lblSaldoTarjeta.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.lblSaldoTarjeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(88)))), ((int)(((byte)(42)))));
+            this.lblSaldoTarjeta.Location = new System.Drawing.Point(170, 63);
+            this.lblSaldoTarjeta.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.lblSaldoTarjeta.Name = "lblSaldoTarjeta";
+            // 
+            // 
+            // 
+            this.lblSaldoTarjeta.RootElement.ControlBounds = new System.Drawing.Rectangle(382, 149, 100, 18);
+            this.lblSaldoTarjeta.Size = new System.Drawing.Size(75, 33);
+            this.lblSaldoTarjeta.TabIndex = 9;
+            this.lblSaldoTarjeta.Text = "#####";
+            // 
+            // picClienteApp
+            // 
+            this.picClienteApp.Image = global::POS.Properties.Resources.cliente_app_icon;
+            this.picClienteApp.Location = new System.Drawing.Point(268, 72);
+            this.picClienteApp.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.picClienteApp.Name = "picClienteApp";
+            this.picClienteApp.Size = new System.Drawing.Size(39, 27);
+            this.picClienteApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picClienteApp.TabIndex = 25;
+            this.picClienteApp.TabStop = false;
+            this.picClienteApp.Visible = false;
+            // 
+            // lblEtiquetaSaldo
+            // 
+            this.lblEtiquetaSaldo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblEtiquetaSaldo.Font = new System.Drawing.Font("Segoe UI", 11.75F, System.Drawing.FontStyle.Bold);
+            this.lblEtiquetaSaldo.Location = new System.Drawing.Point(7, 67);
+            this.lblEtiquetaSaldo.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.lblEtiquetaSaldo.Name = "lblEtiquetaSaldo";
+            // 
+            // 
+            // 
+            this.lblEtiquetaSaldo.RootElement.ControlBounds = new System.Drawing.Rectangle(15, 158, 100, 18);
+            this.lblEtiquetaSaldo.Size = new System.Drawing.Size(168, 25);
+            this.lblEtiquetaSaldo.TabIndex = 8;
+            this.lblEtiquetaSaldo.Text = "Saldo Compra Gratis:";
+            // 
+            // lblDireccion
+            // 
+            this.lblDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDireccion.AutoSize = false;
+            this.lblDireccion.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblDireccion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDireccion.Location = new System.Drawing.Point(409, 41);
+            this.lblDireccion.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.lblDireccion.Name = "lblDireccion";
+            // 
+            // 
+            // 
+            this.lblDireccion.RootElement.ControlBounds = new System.Drawing.Rectangle(921, 97, 100, 18);
+            this.lblDireccion.Size = new System.Drawing.Size(340, 20);
+            this.lblDireccion.TabIndex = 24;
+            this.lblDireccion.Text = "#####";
+            // 
+            // lblIdClienteApp
+            // 
+            this.lblIdClienteApp.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblIdClienteApp.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdClienteApp.Location = new System.Drawing.Point(13, 63);
+            this.lblIdClienteApp.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.lblIdClienteApp.Name = "lblIdClienteApp";
+            // 
+            // 
+            // 
+            this.lblIdClienteApp.RootElement.ControlBounds = new System.Drawing.Rectangle(30, 149, 100, 18);
+            this.lblIdClienteApp.Size = new System.Drawing.Size(46, 21);
+            this.lblIdClienteApp.TabIndex = 23;
+            this.lblIdClienteApp.Text = "#####";
+            this.lblIdClienteApp.Visible = false;
+            // 
+            // lblTelefono
+            // 
+            this.lblTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTelefono.AutoSize = false;
             this.lblTelefono.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -724,8 +863,13 @@ namespace POS
             // 
             // 
             // 
+
             this.lblTelefono.RootElement.ControlBounds = new System.Drawing.Rectangle(409, 72, 100, 18);
             this.lblTelefono.Size = new System.Drawing.Size(438, 20);
+
+            this.lblTelefono.RootElement.ControlBounds = new System.Drawing.Rectangle(921, 171, 100, 18);
+            this.lblTelefono.Size = new System.Drawing.Size(340, 20);
+
             this.lblTelefono.TabIndex = 7;
             this.lblTelefono.Text = "#####";
             // 
@@ -746,7 +890,7 @@ namespace POS
             // 
             // lblNombre
             // 
-            this.lblNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNombre.AutoSize = false;
             this.lblNombre.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -757,8 +901,11 @@ namespace POS
             // 
             // 
             // 
+
             this.lblNombre.RootElement.ControlBounds = new System.Drawing.Rectangle(409, 10, 100, 18);
             this.lblNombre.Size = new System.Drawing.Size(438, 20);
+            this.lblNombre.RootElement.ControlBounds = new System.Drawing.Rectangle(921, 23, 100, 18);
+            this.lblNombre.Size = new System.Drawing.Size(340, 20);
             this.lblNombre.TabIndex = 5;
             this.lblNombre.Text = "#####";
             // 
@@ -792,6 +939,7 @@ namespace POS
             this.radLabel2.TabIndex = 2;
             this.radLabel2.Text = "Nombre:";
             // 
+
             // txtCedula
             // 
             this.txtCedula.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -825,7 +973,7 @@ namespace POS
             this.panelPagoSecundario.Location = new System.Drawing.Point(0, 0);
             this.panelPagoSecundario.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panelPagoSecundario.Name = "panelPagoSecundario";
-            this.panelPagoSecundario.Size = new System.Drawing.Size(479, 104);
+            this.panelPagoSecundario.Size = new System.Drawing.Size(412, 104);
             this.panelPagoSecundario.TabIndex = 2;
             // 
             // lblRestante
@@ -835,13 +983,15 @@ namespace POS
             this.lblRestante.BackColor = System.Drawing.Color.Transparent;
             this.lblRestante.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRestante.ForeColor = System.Drawing.Color.White;
-            this.lblRestante.Location = new System.Drawing.Point(245, 32);
+            this.lblRestante.Location = new System.Drawing.Point(178, 32);
             this.lblRestante.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblRestante.Name = "lblRestante";
             // 
             // 
             // 
+
             this.lblRestante.RootElement.ControlBounds = new System.Drawing.Rectangle(245, 32, 100, 18);
+            this.lblRestante.RootElement.ControlBounds = new System.Drawing.Rectangle(-115, 75, 100, 18);
             this.lblRestante.Size = new System.Drawing.Size(199, 50);
             this.lblRestante.TabIndex = 6;
             this.lblRestante.Text = "00.00";
@@ -854,13 +1004,14 @@ namespace POS
             this.lblTotal2.BackColor = System.Drawing.Color.Transparent;
             this.lblTotal2.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal2.ForeColor = System.Drawing.Color.White;
-            this.lblTotal2.Location = new System.Drawing.Point(49, 32);
+            this.lblTotal2.Location = new System.Drawing.Point(-17, 32);
             this.lblTotal2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblTotal2.Name = "lblTotal2";
             // 
             // 
             // 
             this.lblTotal2.RootElement.ControlBounds = new System.Drawing.Rectangle(49, 32, 100, 18);
+            this.lblTotal2.RootElement.ControlBounds = new System.Drawing.Rectangle(-554, 75, 100, 18);
             this.lblTotal2.Size = new System.Drawing.Size(199, 50);
             this.lblTotal2.TabIndex = 8;
             this.lblTotal2.Text = "00.00";
@@ -871,13 +1022,14 @@ namespace POS
             this.radLabel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radLabel8.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel8.ForeColor = System.Drawing.Color.White;
-            this.radLabel8.Location = new System.Drawing.Point(321, 3);
+            this.radLabel8.Location = new System.Drawing.Point(255, 3);
             this.radLabel8.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel8.Name = "radLabel8";
             // 
             // 
             // 
             this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(321, 3, 100, 18);
+            this.radLabel8.RootElement.ControlBounds = new System.Drawing.Rectangle(58, 8, 100, 18);
             this.radLabel8.Size = new System.Drawing.Size(118, 37);
             this.radLabel8.TabIndex = 7;
             this.radLabel8.Text = "Restante:";
@@ -889,13 +1041,14 @@ namespace POS
             this.radLabel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radLabel9.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel9.ForeColor = System.Drawing.Color.White;
-            this.radLabel9.Location = new System.Drawing.Point(77, 0);
+            this.radLabel9.Location = new System.Drawing.Point(11, 0);
             this.radLabel9.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radLabel9.Name = "radLabel9";
             // 
             // 
             // 
             this.radLabel9.RootElement.ControlBounds = new System.Drawing.Rectangle(77, 0, 100, 18);
+            this.radLabel9.RootElement.ControlBounds = new System.Drawing.Rectangle(-491, 0, 100, 18);
             this.radLabel9.Size = new System.Drawing.Size(171, 37);
             this.radLabel9.TabIndex = 9;
             this.radLabel9.Text = "Total a pagar:";
@@ -916,9 +1069,9 @@ namespace POS
             this.panel3.Controls.Add(this.btnBusqProd);
             this.panel3.Controls.Add(this.btnKbd);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 670);
+            this.panel3.Location = new System.Drawing.Point(0, 534);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1191, 70);
+            this.panel3.Size = new System.Drawing.Size(1026, 70);
             this.panel3.TabIndex = 1;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -926,7 +1079,7 @@ namespace POS
             // 
             this.btnFlechaDer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFlechaDer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.btnFlechaDer.Location = new System.Drawing.Point(1148, 15);
+            this.btnFlechaDer.Location = new System.Drawing.Point(985, 15);
             this.btnFlechaDer.Name = "btnFlechaDer";
             this.btnFlechaDer.Size = new System.Drawing.Size(33, 40);
             this.btnFlechaDer.TabIndex = 1;
@@ -945,7 +1098,7 @@ namespace POS
             // 
             // flowPanelBotones
             // 
-            this.flowPanelBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flowPanelBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowPanelBotones.AutoScroll = true;
             this.flowPanelBotones.BackColor = System.Drawing.Color.White;
@@ -963,12 +1116,12 @@ namespace POS
             this.lblTotal.BackColor = System.Drawing.Color.Transparent;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(1093, 12);
+            this.lblTotal.Location = new System.Drawing.Point(928, 12);
             this.lblTotal.Name = "lblTotal";
             // 
             // 
             // 
-            this.lblTotal.RootElement.ControlBounds = new System.Drawing.Rectangle(1093, 12, 100, 18);
+            this.lblTotal.RootElement.ControlBounds = new System.Drawing.Rectangle(928, 12, 100, 18);
             this.lblTotal.Size = new System.Drawing.Size(91, 46);
             this.lblTotal.TabIndex = 7;
             this.lblTotal.Text = "00.00";
@@ -1067,7 +1220,7 @@ namespace POS
             // 
             // btnBusqProd
             // 
-            this.btnBusqProd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnBusqProd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBusqProd.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnBusqProd.Location = new System.Drawing.Point(133, 6);
@@ -1087,7 +1240,7 @@ namespace POS
             // 
             // btnKbd
             // 
-            this.btnKbd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnKbd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnKbd.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnKbd.Location = new System.Drawing.Point(8, 6);
@@ -1114,7 +1267,7 @@ namespace POS
             this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel1.Size = new System.Drawing.Size(1191, 740);
+            this.panel1.Size = new System.Drawing.Size(1026, 604);
             this.panel1.TabIndex = 1;
             // 
             // panel4
@@ -1123,7 +1276,7 @@ namespace POS
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 104);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1191, 566);
+            this.panel4.Size = new System.Drawing.Size(1026, 430);
             this.panel4.TabIndex = 2;
             // 
             // splitDetalle
@@ -1145,8 +1298,8 @@ namespace POS
             this.splitDetalle.Panel2.BackColor = System.Drawing.Color.White;
             this.splitDetalle.Panel2.Controls.Add(this.panelgrid);
             this.splitDetalle.Panel2.Controls.Add(this.panel10);
-            this.splitDetalle.Size = new System.Drawing.Size(1191, 566);
-            this.splitDetalle.SplitterDistance = 709;
+            this.splitDetalle.Size = new System.Drawing.Size(1026, 430);
+            this.splitDetalle.SplitterDistance = 611;
             this.splitDetalle.TabIndex = 0;
             // 
             // gridItems
@@ -1161,82 +1314,82 @@ namespace POS
             // 
             this.gridItems.MasterTemplate.AllowAddNewRow = false;
             this.gridItems.MasterTemplate.AllowColumnReorder = false;
-            gridViewTextBoxColumn25.FieldName = "Nombre";
-            gridViewTextBoxColumn25.HeaderText = "Descripción";
-            gridViewTextBoxColumn25.Name = "column1";
-            gridViewTextBoxColumn25.Width = 275;
-            gridViewTextBoxColumn26.FieldName = "CantidadINEC";
-            gridViewTextBoxColumn26.FormatString = "{0:00.000}";
-            gridViewTextBoxColumn26.HeaderText = "Cantidad";
-            gridViewTextBoxColumn26.Name = "column2";
-            gridViewTextBoxColumn26.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn26.Width = 80;
-            gridViewTextBoxColumn27.FieldName = "Unidades";
-            gridViewTextBoxColumn27.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn27.HeaderText = "Unidades";
-            gridViewTextBoxColumn27.Name = "column3";
-            gridViewTextBoxColumn27.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn27.Width = 80;
-            gridViewTextBoxColumn28.FieldName = "Pvp";
-            gridViewTextBoxColumn28.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn28.HeaderText = "P.V.P";
-            gridViewTextBoxColumn28.Name = "column4";
-            gridViewTextBoxColumn28.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn28.Width = 60;
-            gridViewTextBoxColumn29.FieldName = "SubtotalSinDescuento";
-            gridViewTextBoxColumn29.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn29.HeaderText = "Subtotal";
-            gridViewTextBoxColumn29.Name = "column6";
-            gridViewTextBoxColumn29.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn29.Width = 80;
-            gridViewTextBoxColumn30.FieldName = "Descuento";
-            gridViewTextBoxColumn30.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn30.HeaderText = "Descuento";
-            gridViewTextBoxColumn30.Name = "column5";
-            gridViewTextBoxColumn30.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn30.Width = 80;
-            gridViewTextBoxColumn31.FieldName = "DescuentoIVA";
-            gridViewTextBoxColumn31.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn31.HeaderText = "Dscto. IVA";
-            gridViewTextBoxColumn31.Name = "columnDsctoIVA";
-            gridViewTextBoxColumn31.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn31.Width = 80;
-            gridViewTextBoxColumn32.FieldName = "Iva";
-            gridViewTextBoxColumn32.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn32.HeaderText = "I.V.A";
-            gridViewTextBoxColumn32.Name = "column8";
-            gridViewTextBoxColumn32.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn32.Width = 70;
-            gridViewTextBoxColumn33.FieldName = "TotalPromoIVA";
-            gridViewTextBoxColumn33.FormatString = "{0:00.00}";
-            gridViewTextBoxColumn33.HeaderText = "Total";
-            gridViewTextBoxColumn33.Name = "column7";
-            gridViewTextBoxColumn33.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn33.Width = 90;
-            gridViewTextBoxColumn34.FieldName = "IdTemporal";
-            gridViewTextBoxColumn34.HeaderText = "IdTemporal";
-            gridViewTextBoxColumn34.IsVisible = false;
-            gridViewTextBoxColumn34.Name = "IdTemporal";
+            gridViewTextBoxColumn13.FieldName = "Nombre";
+            gridViewTextBoxColumn13.HeaderText = "Descripción";
+            gridViewTextBoxColumn13.Name = "column1";
+            gridViewTextBoxColumn13.Width = 275;
+            gridViewTextBoxColumn14.FieldName = "CantidadINEC";
+            gridViewTextBoxColumn14.FormatString = "{0:00.000}";
+            gridViewTextBoxColumn14.HeaderText = "Cantidad";
+            gridViewTextBoxColumn14.Name = "column2";
+            gridViewTextBoxColumn14.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn14.Width = 80;
+            gridViewTextBoxColumn15.FieldName = "Unidades";
+            gridViewTextBoxColumn15.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn15.HeaderText = "Unidades";
+            gridViewTextBoxColumn15.Name = "column3";
+            gridViewTextBoxColumn15.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn15.Width = 80;
+            gridViewTextBoxColumn16.FieldName = "Pvp";
+            gridViewTextBoxColumn16.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn16.HeaderText = "P.V.P";
+            gridViewTextBoxColumn16.Name = "column4";
+            gridViewTextBoxColumn16.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn16.Width = 60;
+            gridViewTextBoxColumn17.FieldName = "SubtotalSinDescuento";
+            gridViewTextBoxColumn17.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn17.HeaderText = "Subtotal";
+            gridViewTextBoxColumn17.Name = "column6";
+            gridViewTextBoxColumn17.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn17.Width = 80;
+            gridViewTextBoxColumn18.FieldName = "Descuento";
+            gridViewTextBoxColumn18.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn18.HeaderText = "Descuento";
+            gridViewTextBoxColumn18.Name = "column5";
+            gridViewTextBoxColumn18.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn18.Width = 80;
+            gridViewTextBoxColumn19.FieldName = "DescuentoIVA";
+            gridViewTextBoxColumn19.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn19.HeaderText = "Dscto. IVA";
+            gridViewTextBoxColumn19.Name = "columnDsctoIVA";
+            gridViewTextBoxColumn19.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn19.Width = 80;
+            gridViewTextBoxColumn20.FieldName = "Iva";
+            gridViewTextBoxColumn20.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn20.HeaderText = "I.V.A";
+            gridViewTextBoxColumn20.Name = "column8";
+            gridViewTextBoxColumn20.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn20.Width = 70;
+            gridViewTextBoxColumn21.FieldName = "TotalPromoIVA";
+            gridViewTextBoxColumn21.FormatString = "{0:00.00}";
+            gridViewTextBoxColumn21.HeaderText = "Total";
+            gridViewTextBoxColumn21.Name = "column7";
+            gridViewTextBoxColumn21.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn21.Width = 90;
+            gridViewTextBoxColumn22.FieldName = "IdTemporal";
+            gridViewTextBoxColumn22.HeaderText = "IdTemporal";
+            gridViewTextBoxColumn22.IsVisible = false;
+            gridViewTextBoxColumn22.Name = "IdTemporal";
             this.gridItems.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn25,
-            gridViewTextBoxColumn26,
-            gridViewTextBoxColumn27,
-            gridViewTextBoxColumn28,
-            gridViewTextBoxColumn29,
-            gridViewTextBoxColumn30,
-            gridViewTextBoxColumn31,
-            gridViewTextBoxColumn32,
-            gridViewTextBoxColumn33,
-            gridViewTextBoxColumn34});
+            gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14,
+            gridViewTextBoxColumn15,
+            gridViewTextBoxColumn16,
+            gridViewTextBoxColumn17,
+            gridViewTextBoxColumn18,
+            gridViewTextBoxColumn19,
+            gridViewTextBoxColumn20,
+            gridViewTextBoxColumn21,
+            gridViewTextBoxColumn22});
             this.gridItems.MasterTemplate.EnableGrouping = false;
             this.gridItems.Name = "gridItems";
             this.gridItems.ReadOnly = true;
             // 
             // 
             // 
-            this.gridItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 63, 240, 150);
+            this.gridItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 149, 240, 150);
             this.gridItems.RootElement.Shape = null;
-            this.gridItems.Size = new System.Drawing.Size(709, 503);
+            this.gridItems.Size = new System.Drawing.Size(611, 367);
             this.gridItems.TabIndex = 2;
             this.gridItems.Text = "radGridView1";
             this.gridItems.ThemeName = "TelerikMetroTouch";
@@ -1254,7 +1407,7 @@ namespace POS
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(709, 63);
+            this.panel5.Size = new System.Drawing.Size(611, 63);
             this.panel5.TabIndex = 1;
             // 
             // btnDescuentoCupon
@@ -1302,7 +1455,7 @@ namespace POS
             // 
             this.panel12.Controls.Add(this.btnPrecio);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(570, 0);
+            this.panel12.Location = new System.Drawing.Point(472, 0);
             this.panel12.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(139, 63);
@@ -1310,7 +1463,7 @@ namespace POS
             // 
             // btnPrecio
             // 
-            this.btnPrecio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnPrecio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrecio.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPrecio.Font = new System.Drawing.Font("Segoe UI", 8F);
@@ -1332,10 +1485,9 @@ namespace POS
             // 
             // btnBorrarProducto
             // 
-            this.btnBorrarProducto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnBorrarProducto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBorrarProducto.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnBorrarProducto.Controls.Add(this.radButton2);
             this.btnBorrarProducto.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnBorrarProducto.Location = new System.Drawing.Point(300, 4);
             this.btnBorrarProducto.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
@@ -1351,27 +1503,6 @@ namespace POS
             this.btnBorrarProducto.Text = "Borrar Prod.";
             this.btnBorrarProducto.ThemeName = "TelerikMetroTouch";
             this.btnBorrarProducto.Click += new System.EventHandler(this.btnBorrarProducto_Click);
-            // 
-            // radButton2
-            // 
-            this.radButton2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.radButton2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.radButton2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.radButton2.Location = new System.Drawing.Point(0, 0);
-            this.radButton2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.radButton2.MaximumSize = new System.Drawing.Size(119, 49);
-            this.radButton2.Name = "radButton2";
-            // 
-            // 
-            // 
-            this.radButton2.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 110, 24);
-            this.radButton2.RootElement.MaxSize = new System.Drawing.Size(119, 49);
-            this.radButton2.Size = new System.Drawing.Size(93, 46);
-            this.radButton2.TabIndex = 14;
-            this.radButton2.Text = "Borrar Prod.";
-            this.radButton2.ThemeName = "TelerikMetroTouch";
-            this.radButton2.Click += new System.EventHandler(this.btnBorrarProducto_Click);
             // 
             // btnQtyProduct
             // 
@@ -1424,7 +1555,7 @@ namespace POS
             this.panelgrid.Location = new System.Drawing.Point(0, 58);
             this.panelgrid.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panelgrid.Name = "panelgrid";
-            this.panelgrid.Size = new System.Drawing.Size(478, 508);
+            this.panelgrid.Size = new System.Drawing.Size(411, 372);
             this.panelgrid.TabIndex = 3;
             // 
             // panel6
@@ -1435,7 +1566,7 @@ namespace POS
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(478, 508);
+            this.panel6.Size = new System.Drawing.Size(411, 372);
             this.panel6.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -1455,7 +1586,7 @@ namespace POS
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.12583F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.74419F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(478, 508);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 372);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tablePagar2
@@ -1492,7 +1623,7 @@ namespace POS
             this.tablePagar2.Controls.Add(this.btnRetencion, 1, 4);
             this.tablePagar2.Controls.Add(this.btn7, 1, 2);
             this.tablePagar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePagar2.Location = new System.Drawing.Point(1, 226);
+            this.tablePagar2.Location = new System.Drawing.Point(1, 167);
             this.tablePagar2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.tablePagar2.Name = "tablePagar2";
             this.tablePagar2.RowCount = 5;
@@ -1501,7 +1632,7 @@ namespace POS
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tablePagar2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tablePagar2.Size = new System.Drawing.Size(476, 279);
+            this.tablePagar2.Size = new System.Drawing.Size(409, 202);
             this.tablePagar2.TabIndex = 36;
             // 
             // btnCompraGratis
@@ -1509,7 +1640,7 @@ namespace POS
             this.btnCompraGratis.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCompraGratis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCompraGratis.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCompraGratis.Location = new System.Drawing.Point(1, 223);
+            this.btnCompraGratis.Location = new System.Drawing.Point(1, 163);
             this.btnCompraGratis.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnCompraGratis.Name = "btnCompraGratis";
             // 
@@ -1517,6 +1648,8 @@ namespace POS
             // 
             this.btnCompraGratis.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 223, 110, 24);
             this.btnCompraGratis.Size = new System.Drawing.Size(120, 53);
+            this.btnCompraGratis.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 124, 110, 24);
+            this.btnCompraGratis.Size = new System.Drawing.Size(103, 36);
             this.btnCompraGratis.TabIndex = 56;
             this.btnCompraGratis.Text = "Compra\r\nGratis";
             this.btnCompraGratis.TextWrap = true;
@@ -1532,7 +1665,7 @@ namespace POS
             this.btnDevolucionIVA.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDevolucionIVA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDevolucionIVA.Font = new System.Drawing.Font("Segoe UI", 10.27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDevolucionIVA.Location = new System.Drawing.Point(123, 223);
+            this.btnDevolucionIVA.Location = new System.Drawing.Point(106, 163);
             this.btnDevolucionIVA.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnDevolucionIVA.Name = "btnDevolucionIVA";
             // 
@@ -1540,6 +1673,8 @@ namespace POS
             // 
             this.btnDevolucionIVA.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 223, 110, 24);
             this.btnDevolucionIVA.Size = new System.Drawing.Size(72, 53);
+            this.btnDevolucionIVA.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 124, 110, 24);
+            this.btnDevolucionIVA.Size = new System.Drawing.Size(61, 36);
             this.btnDevolucionIVA.TabIndex = 55;
             this.btnDevolucionIVA.Text = "Dev. IVA";
             this.btnDevolucionIVA.ThemeName = "TelerikMetroTouch";
@@ -1552,13 +1687,14 @@ namespace POS
             // 
             this.radButton12.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radButton12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.radButton12.Location = new System.Drawing.Point(274, 168);
+            this.radButton12.Location = new System.Drawing.Point(235, 123);
             this.radButton12.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.radButton12.Name = "radButton12";
             // 
             // 
             // 
             this.radButton12.RootElement.ControlBounds = new System.Drawing.Rectangle(274, 168, 110, 24);
+            this.radButton12.RootElement.ControlBounds = new System.Drawing.Rectangle(236, 95, 110, 24);
             this.radButton12.RootElement.Padding = new System.Windows.Forms.Padding(0);
             this.radButton12.Size = new System.Drawing.Size(21, 32);
             this.radButton12.TabIndex = 41;
@@ -1577,15 +1713,16 @@ namespace POS
             this.btn0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn0.ImageAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btn0.ImageScalingSize = new System.Drawing.Size(15, 15);
-            this.btn0.Location = new System.Drawing.Point(197, 168);
+            this.btn0.Location = new System.Drawing.Point(169, 123);
             this.btn0.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btn0.Name = "btn0";
             // 
             // 
             // 
             this.btn0.RootElement.ControlBounds = new System.Drawing.Rectangle(197, 168, 110, 24);
+            this.btn0.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 95, 110, 24);
             this.btn0.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn0.Size = new System.Drawing.Size(75, 49);
+            this.btn0.Size = new System.Drawing.Size(64, 34);
             this.btn0.TabIndex = 36;
             this.btn0.Text = "0";
             this.btn0.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -1603,15 +1740,16 @@ namespace POS
             // 
             this.btn9.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn9.Location = new System.Drawing.Point(273, 110);
+            this.btn9.Location = new System.Drawing.Point(234, 80);
             this.btn9.Margin = new System.Windows.Forms.Padding(0);
             this.btn9.Name = "btn9";
             // 
             // 
             // 
             this.btn9.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 110, 110, 24);
+            this.btn9.RootElement.ControlBounds = new System.Drawing.Rectangle(233, 58, 110, 24);
             this.btn9.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn9.Size = new System.Drawing.Size(77, 55);
+            this.btn9.Size = new System.Drawing.Size(66, 40);
             this.btn9.TabIndex = 36;
             this.btn9.Text = "9";
             this.btn9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -1628,15 +1766,16 @@ namespace POS
             // 
             this.btn8.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn8.Location = new System.Drawing.Point(196, 110);
+            this.btn8.Location = new System.Drawing.Point(168, 80);
             this.btn8.Margin = new System.Windows.Forms.Padding(0);
             this.btn8.Name = "btn8";
             // 
             // 
             // 
             this.btn8.RootElement.ControlBounds = new System.Drawing.Rectangle(196, 110, 110, 24);
+            this.btn8.RootElement.ControlBounds = new System.Drawing.Rectangle(167, 58, 110, 24);
             this.btn8.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn8.Size = new System.Drawing.Size(77, 55);
+            this.btn8.Size = new System.Drawing.Size(66, 40);
             this.btn8.TabIndex = 36;
             this.btn8.Text = "8";
             this.btn8.ThemeName = "TelerikMetroTouch";
@@ -1652,15 +1791,16 @@ namespace POS
             this.btn6.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn6.DisplayStyle = Telerik.WinControls.DisplayStyle.Text;
             this.btn6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn6.Location = new System.Drawing.Point(273, 55);
+            this.btn6.Location = new System.Drawing.Point(234, 40);
             this.btn6.Margin = new System.Windows.Forms.Padding(0);
             this.btn6.Name = "btn6";
             // 
             // 
             // 
             this.btn6.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 55, 110, 24);
+            this.btn6.RootElement.ControlBounds = new System.Drawing.Rectangle(233, 29, 110, 24);
             this.btn6.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn6.Size = new System.Drawing.Size(77, 55);
+            this.btn6.Size = new System.Drawing.Size(66, 40);
             this.btn6.TabIndex = 36;
             this.btn6.Text = "6";
             this.btn6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -1678,15 +1818,16 @@ namespace POS
             // 
             this.btn5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn5.Location = new System.Drawing.Point(196, 55);
+            this.btn5.Location = new System.Drawing.Point(168, 40);
             this.btn5.Margin = new System.Windows.Forms.Padding(0);
             this.btn5.Name = "btn5";
             // 
             // 
             // 
             this.btn5.RootElement.ControlBounds = new System.Drawing.Rectangle(196, 55, 110, 24);
+            this.btn5.RootElement.ControlBounds = new System.Drawing.Rectangle(167, 29, 110, 24);
             this.btn5.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn5.Size = new System.Drawing.Size(77, 55);
+            this.btn5.Size = new System.Drawing.Size(66, 40);
             this.btn5.TabIndex = 35;
             this.btn5.Text = "5";
             this.btn5.ThemeName = "TelerikMetroTouch";
@@ -1701,7 +1842,7 @@ namespace POS
             // 
             this.btn4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn4.Location = new System.Drawing.Point(123, 55);
+            this.btn4.Location = new System.Drawing.Point(106, 40);
             this.btn4.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.btn4.MinimumSize = new System.Drawing.Size(51, 29);
             this.btn4.Name = "btn4";
@@ -1709,9 +1850,10 @@ namespace POS
             // 
             // 
             this.btn4.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 55, 110, 29);
+            this.btn4.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 29, 114, 69);
             this.btn4.RootElement.MinSize = new System.Drawing.Size(51, 29);
             this.btn4.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn4.Size = new System.Drawing.Size(73, 55);
+            this.btn4.Size = new System.Drawing.Size(62, 40);
             this.btn4.TabIndex = 34;
             this.btn4.Text = "4";
             this.btn4.ThemeName = "TelerikMetroTouch";
@@ -1726,15 +1868,15 @@ namespace POS
             // 
             this.btn3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn3.Location = new System.Drawing.Point(273, 0);
+            this.btn3.Location = new System.Drawing.Point(234, 0);
             this.btn3.Margin = new System.Windows.Forms.Padding(0);
             this.btn3.Name = "btn3";
             // 
             // 
-            // 
             this.btn3.RootElement.ControlBounds = new System.Drawing.Rectangle(273, 0, 110, 24);
+            this.btn3.RootElement.ControlBounds = new System.Drawing.Rectangle(233, 0, 110, 24);
             this.btn3.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn3.Size = new System.Drawing.Size(77, 55);
+            this.btn3.Size = new System.Drawing.Size(66, 40);
             this.btn3.TabIndex = 33;
             this.btn3.Text = "3";
             this.btn3.ThemeName = "TelerikMetroTouch";
@@ -1749,15 +1891,16 @@ namespace POS
             // 
             this.btn2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn2.Location = new System.Drawing.Point(196, 0);
+            this.btn2.Location = new System.Drawing.Point(168, 0);
             this.btn2.Margin = new System.Windows.Forms.Padding(0);
             this.btn2.Name = "btn2";
             // 
             // 
             // 
             this.btn2.RootElement.ControlBounds = new System.Drawing.Rectangle(196, 0, 110, 24);
+            this.btn2.RootElement.ControlBounds = new System.Drawing.Rectangle(167, 0, 110, 24);
             this.btn2.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn2.Size = new System.Drawing.Size(77, 55);
+            this.btn2.Size = new System.Drawing.Size(66, 40);
             this.btn2.TabIndex = 32;
             this.btn2.Text = "2";
             this.btn2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -1775,7 +1918,7 @@ namespace POS
             this.btn1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btn1.Location = new System.Drawing.Point(123, 0);
+            this.btn1.Location = new System.Drawing.Point(106, 0);
             this.btn1.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.btn1.MinimumSize = new System.Drawing.Size(51, 29);
             this.btn1.Name = "btn1";
@@ -1784,9 +1927,10 @@ namespace POS
             // 
             this.btn1.RootElement.AutoSize = false;
             this.btn1.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 0, 110, 29);
+            this.btn1.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 0, 114, 69);
             this.btn1.RootElement.MinSize = new System.Drawing.Size(51, 29);
             this.btn1.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn1.Size = new System.Drawing.Size(73, 55);
+            this.btn1.Size = new System.Drawing.Size(62, 40);
             this.btn1.TabIndex = 31;
             this.btn1.Text = "1";
             this.btn1.ThemeName = "TelerikMetroTouch";
@@ -1818,6 +1962,8 @@ namespace POS
             // 
             this.btnTCredito.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 3, 110, 24);
             this.btnTCredito.Size = new System.Drawing.Size(120, 49);
+            this.btnTCredito.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 8, 110, 24);
+            this.btnTCredito.Size = new System.Drawing.Size(103, 34);
             this.btnTCredito.TabIndex = 43;
             this.btnTCredito.Text = "T.Crédito";
             this.btnTCredito.ThemeName = "TelerikMetroTouch";
@@ -1831,7 +1977,7 @@ namespace POS
             this.btnCreditoInterno.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCreditoInterno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCreditoInterno.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnCreditoInterno.Location = new System.Drawing.Point(1, 58);
+            this.btnCreditoInterno.Location = new System.Drawing.Point(1, 43);
             this.btnCreditoInterno.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnCreditoInterno.Name = "btnCreditoInterno";
             // 
@@ -1839,6 +1985,8 @@ namespace POS
             // 
             this.btnCreditoInterno.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 58, 110, 24);
             this.btnCreditoInterno.Size = new System.Drawing.Size(120, 49);
+            this.btnCreditoInterno.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 37, 110, 24);
+            this.btnCreditoInterno.Size = new System.Drawing.Size(103, 34);
             this.btnCreditoInterno.TabIndex = 45;
             this.btnCreditoInterno.Text = "T.Delportal";
             this.btnCreditoInterno.ThemeName = "TelerikMetroTouch";
@@ -1851,7 +1999,7 @@ namespace POS
             // 
             this.btnDsctoEsp.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDsctoEsp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDsctoEsp.Location = new System.Drawing.Point(351, 58);
+            this.btnDsctoEsp.Location = new System.Drawing.Point(301, 43);
             this.btnDsctoEsp.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnDsctoEsp.Name = "btnDsctoEsp";
             // 
@@ -1859,6 +2007,8 @@ namespace POS
             // 
             this.btnDsctoEsp.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 58, 110, 24);
             this.btnDsctoEsp.Size = new System.Drawing.Size(124, 49);
+            this.btnDsctoEsp.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 37, 110, 24);
+            this.btnDsctoEsp.Size = new System.Drawing.Size(107, 34);
             this.btnDsctoEsp.TabIndex = 46;
             this.btnDsctoEsp.Text = "Dscto. Promo";
             this.btnDsctoEsp.ThemeName = "TelerikMetroTouch";
@@ -1872,10 +2022,10 @@ namespace POS
             this.btnOrdenDelivery.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOrdenDelivery.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOrdenDelivery.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnOrdenDelivery.Location = new System.Drawing.Point(351, 168);
+            this.btnOrdenDelivery.Location = new System.Drawing.Point(301, 123);
             this.btnOrdenDelivery.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnOrdenDelivery.Name = "btnOrdenDelivery";
-            this.btnOrdenDelivery.Size = new System.Drawing.Size(124, 49);
+            this.btnOrdenDelivery.Size = new System.Drawing.Size(107, 34);
             this.btnOrdenDelivery.TabIndex = 50;
             this.btnOrdenDelivery.Text = "Servicio Domicilio";
             this.btnOrdenDelivery.TextWrap = true;
@@ -1892,7 +2042,7 @@ namespace POS
             this.btnCheque.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCheque.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCheque.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnCheque.Location = new System.Drawing.Point(1, 168);
+            this.btnCheque.Location = new System.Drawing.Point(1, 123);
             this.btnCheque.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnCheque.Name = "btnCheque";
             // 
@@ -1900,6 +2050,9 @@ namespace POS
             // 
             this.btnCheque.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 168, 110, 24);
             this.btnCheque.Size = new System.Drawing.Size(120, 49);
+
+            this.btnCheque.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 95, 110, 24);
+            this.btnCheque.Size = new System.Drawing.Size(103, 34);
             this.btnCheque.TabIndex = 47;
             this.btnCheque.Text = "Cheque";
             this.btnCheque.ThemeName = "TelerikMetroTouch";
@@ -1912,7 +2065,7 @@ namespace POS
             // 
             this.btnDsctoPaviPlan.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDsctoPaviPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDsctoPaviPlan.Location = new System.Drawing.Point(197, 223);
+            this.btnDsctoPaviPlan.Location = new System.Drawing.Point(169, 163);
             this.btnDsctoPaviPlan.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnDsctoPaviPlan.Name = "btnDsctoPaviPlan";
             // 
@@ -1920,6 +2073,8 @@ namespace POS
             // 
             this.btnDsctoPaviPlan.RootElement.ControlBounds = new System.Drawing.Rectangle(197, 223, 110, 24);
             this.btnDsctoPaviPlan.Size = new System.Drawing.Size(75, 53);
+            this.btnDsctoPaviPlan.RootElement.ControlBounds = new System.Drawing.Rectangle(170, 124, 110, 24);
+            this.btnDsctoPaviPlan.Size = new System.Drawing.Size(64, 36);
             this.btnDsctoPaviPlan.TabIndex = 51;
             this.btnDsctoPaviPlan.Text = "Dscto. PaviPlan";
             this.btnDsctoPaviPlan.ThemeName = "TelerikMetroTouch";
@@ -1933,7 +2088,7 @@ namespace POS
             this.btnPagoAtras.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPagoAtras.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPagoAtras.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnPagoAtras.Location = new System.Drawing.Point(351, 223);
+            this.btnPagoAtras.Location = new System.Drawing.Point(301, 163);
             this.btnPagoAtras.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnPagoAtras.Name = "btnPagoAtras";
             // 
@@ -1941,6 +2096,8 @@ namespace POS
             // 
             this.btnPagoAtras.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 223, 110, 24);
             this.btnPagoAtras.Size = new System.Drawing.Size(124, 53);
+            this.btnPagoAtras.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 124, 110, 24);
+            this.btnPagoAtras.Size = new System.Drawing.Size(107, 36);
             this.btnPagoAtras.TabIndex = 52;
             this.btnPagoAtras.Text = "Cancelar";
             this.btnPagoAtras.ThemeName = "TelerikMetroTouch";
@@ -1954,7 +2111,7 @@ namespace POS
             this.btnPagoGiftCard.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPagoGiftCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPagoGiftCard.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnPagoGiftCard.Location = new System.Drawing.Point(351, 3);
+            this.btnPagoGiftCard.Location = new System.Drawing.Point(301, 3);
             this.btnPagoGiftCard.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnPagoGiftCard.Name = "btnPagoGiftCard";
             // 
@@ -1962,6 +2119,8 @@ namespace POS
             // 
             this.btnPagoGiftCard.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 3, 110, 24);
             this.btnPagoGiftCard.Size = new System.Drawing.Size(124, 49);
+            this.btnPagoGiftCard.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 8, 110, 24);
+            this.btnPagoGiftCard.Size = new System.Drawing.Size(107, 34);
             this.btnPagoGiftCard.TabIndex = 53;
             this.btnPagoGiftCard.Text = "Gift Card";
             this.btnPagoGiftCard.ThemeName = "TelerikMetroTouch";
@@ -1975,7 +2134,7 @@ namespace POS
             this.btnMonedero.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnMonedero.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnMonedero.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnMonedero.Location = new System.Drawing.Point(351, 113);
+            this.btnMonedero.Location = new System.Drawing.Point(301, 83);
             this.btnMonedero.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnMonedero.Name = "btnMonedero";
             // 
@@ -1983,6 +2142,8 @@ namespace POS
             // 
             this.btnMonedero.RootElement.ControlBounds = new System.Drawing.Rectangle(351, 113, 110, 24);
             this.btnMonedero.Size = new System.Drawing.Size(124, 49);
+            this.btnMonedero.RootElement.ControlBounds = new System.Drawing.Rectangle(302, 66, 110, 24);
+            this.btnMonedero.Size = new System.Drawing.Size(107, 34);
             this.btnMonedero.TabIndex = 49;
             this.btnMonedero.Text = "Dinero Electrónico";
             this.btnMonedero.TextWrap = true;
@@ -1999,7 +2160,7 @@ namespace POS
             this.btnNC.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnNC.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnNC.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnNC.Location = new System.Drawing.Point(1, 113);
+            this.btnNC.Location = new System.Drawing.Point(1, 83);
             this.btnNC.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnNC.Name = "btnNC";
             // 
@@ -2007,6 +2168,8 @@ namespace POS
             // 
             this.btnNC.RootElement.ControlBounds = new System.Drawing.Rectangle(1, 113, 110, 24);
             this.btnNC.Size = new System.Drawing.Size(120, 49);
+            this.btnNC.RootElement.ControlBounds = new System.Drawing.Rectangle(3, 66, 110, 24);
+            this.btnNC.Size = new System.Drawing.Size(103, 34);
             this.btnNC.TabIndex = 44;
             this.btnNC.Text = "N. CREDITO";
             this.btnNC.ThemeName = "TelerikMetroTouch";
@@ -2020,7 +2183,7 @@ namespace POS
             this.btnRetencion.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnRetencion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRetencion.Font = new System.Drawing.Font("Segoe UI", 10.27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRetencion.Location = new System.Drawing.Point(274, 223);
+            this.btnRetencion.Location = new System.Drawing.Point(235, 163);
             this.btnRetencion.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnRetencion.Name = "btnRetencion";
             // 
@@ -2028,6 +2191,8 @@ namespace POS
             // 
             this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(274, 223, 110, 24);
             this.btnRetencion.Size = new System.Drawing.Size(75, 53);
+            this.btnRetencion.RootElement.ControlBounds = new System.Drawing.Rectangle(236, 124, 110, 24);
+            this.btnRetencion.Size = new System.Drawing.Size(64, 36);
             this.btnRetencion.TabIndex = 48;
             this.btnRetencion.Text = "Retención";
             this.btnRetencion.ThemeName = "TelerikMetroTouch";
@@ -2041,7 +2206,7 @@ namespace POS
             // 
             this.btn7.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn7.Location = new System.Drawing.Point(123, 110);
+            this.btn7.Location = new System.Drawing.Point(106, 80);
             this.btn7.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.btn7.MinimumSize = new System.Drawing.Size(51, 29);
             this.btn7.Name = "btn7";
@@ -2049,9 +2214,10 @@ namespace POS
             // 
             // 
             this.btn7.RootElement.ControlBounds = new System.Drawing.Rectangle(123, 110, 110, 29);
+            this.btn7.RootElement.ControlBounds = new System.Drawing.Rectangle(107, 58, 114, 69);
             this.btn7.RootElement.MinSize = new System.Drawing.Size(51, 29);
             this.btn7.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.btn7.Size = new System.Drawing.Size(73, 55);
+            this.btn7.Size = new System.Drawing.Size(62, 40);
             this.btn7.TabIndex = 56;
             this.btn7.Text = "7";
             this.btn7.ThemeName = "TelerikMetroTouch";
@@ -2074,12 +2240,12 @@ namespace POS
             this.tableLayoutPanel2.Controls.Add(this.btnPagoBorrar, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtPagoValor, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 150);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 111);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(476, 70);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(409, 50);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // btnEfectivo
@@ -2095,6 +2261,8 @@ namespace POS
             // 
             this.btnEfectivo.RootElement.ControlBounds = new System.Drawing.Rectangle(2, 4, 110, 24);
             this.btnEfectivo.Size = new System.Drawing.Size(115, 62);
+            this.btnEfectivo.RootElement.ControlBounds = new System.Drawing.Rectangle(4, 9, 110, 24);
+            this.btnEfectivo.Size = new System.Drawing.Size(99, 42);
             this.btnEfectivo.TabIndex = 42;
             this.btnEfectivo.Text = "Efectivo";
             this.btnEfectivo.ThemeName = "TelerikMetroTouch";
@@ -2109,7 +2277,7 @@ namespace POS
             this.btnPagoBorrar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPagoBorrar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPagoBorrar.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPagoBorrar.Location = new System.Drawing.Point(356, 4);
+            this.btnPagoBorrar.Location = new System.Drawing.Point(307, 4);
             this.btnPagoBorrar.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.btnPagoBorrar.Name = "btnPagoBorrar";
             // 
@@ -2117,6 +2285,8 @@ namespace POS
             // 
             this.btnPagoBorrar.RootElement.ControlBounds = new System.Drawing.Rectangle(356, 4, 110, 24);
             this.btnPagoBorrar.Size = new System.Drawing.Size(118, 62);
+            this.btnPagoBorrar.RootElement.ControlBounds = new System.Drawing.Rectangle(306, 9, 110, 24);
+            this.btnPagoBorrar.Size = new System.Drawing.Size(100, 42);
             this.btnPagoBorrar.TabIndex = 38;
             this.btnPagoBorrar.Text = "Borrar";
             this.btnPagoBorrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -2134,7 +2304,7 @@ namespace POS
             this.txtPagoValor.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtPagoValor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPagoValor.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPagoValor.Location = new System.Drawing.Point(120, 4);
+            this.txtPagoValor.Location = new System.Drawing.Point(104, 4);
             this.txtPagoValor.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.txtPagoValor.Name = "txtPagoValor";
             // 
@@ -2142,6 +2312,8 @@ namespace POS
             // 
             this.txtPagoValor.RootElement.ControlBounds = new System.Drawing.Rectangle(120, 4, 100, 20);
             this.txtPagoValor.Size = new System.Drawing.Size(233, 62);
+            this.txtPagoValor.RootElement.ControlBounds = new System.Drawing.Rectangle(105, 9, 100, 20);
+            this.txtPagoValor.Size = new System.Drawing.Size(200, 42);
             this.txtPagoValor.TabIndex = 37;
             this.txtPagoValor.TabStop = false;
             this.txtPagoValor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2149,8 +2321,8 @@ namespace POS
             // 
             // gridPagos
             // 
-            this.gridPagos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.gridPagos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridPagos.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gridPagos.Location = new System.Drawing.Point(4, 4);
@@ -2162,17 +2334,28 @@ namespace POS
             this.gridPagos.MasterTemplate.AllowColumnReorder = false;
             this.gridPagos.MasterTemplate.AutoGenerateColumns = false;
             this.gridPagos.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn35.FieldName = "Descripcion";
-            gridViewTextBoxColumn35.HeaderText = "Forma Pago";
-            gridViewTextBoxColumn35.Name = "column1";
-            gridViewTextBoxColumn35.Width = 215;
-            gridViewTextBoxColumn36.FieldName = "Valor";
-            gridViewTextBoxColumn36.HeaderText = "Valor";
-            gridViewTextBoxColumn36.Name = "column2";
-            gridViewTextBoxColumn36.Width = 234;
+            //gridViewTextBoxColumn35.FieldName = "Descripcion";
+            //gridViewTextBoxColumn35.HeaderText = "Forma Pago";
+            //gridViewTextBoxColumn35.Name = "column1";
+            //gridViewTextBoxColumn35.Width = 215;
+            //gridViewTextBoxColumn36.FieldName = "Valor";
+            //gridViewTextBoxColumn36.HeaderText = "Valor";
+            //gridViewTextBoxColumn36.Name = "column2";
+            //gridViewTextBoxColumn36.Width = 234;
+            //this.gridPagos.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
+            //gridViewTextBoxColumn35,
+            //gridViewTextBoxColumn36});
+            gridViewTextBoxColumn23.FieldName = "Descripcion";
+            gridViewTextBoxColumn23.HeaderText = "Forma Pago";
+            gridViewTextBoxColumn23.Name = "column1";
+            gridViewTextBoxColumn23.Width = 185;
+            gridViewTextBoxColumn24.FieldName = "Valor";
+            gridViewTextBoxColumn24.HeaderText = "Valor";
+            gridViewTextBoxColumn24.Name = "column2";
+            gridViewTextBoxColumn24.Width = 197;
             this.gridPagos.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn35,
-            gridViewTextBoxColumn36});
+            gridViewTextBoxColumn23,
+            gridViewTextBoxColumn24});
             this.gridPagos.MasterTemplate.EnableGrouping = false;
             this.gridPagos.Name = "gridPagos";
             this.gridPagos.ReadOnly = true;
@@ -2181,6 +2364,8 @@ namespace POS
             // 
             this.gridPagos.RootElement.ControlBounds = new System.Drawing.Rectangle(4, 4, 240, 150);
             this.gridPagos.Size = new System.Drawing.Size(470, 139);
+            this.gridPagos.RootElement.ControlBounds = new System.Drawing.Rectangle(9, 9, 240, 150);
+            this.gridPagos.Size = new System.Drawing.Size(403, 100);
             this.gridPagos.TabIndex = 10;
             this.gridPagos.Text = "radGridView1";
             this.gridPagos.ThemeName = "TelerikMetroTouch";
@@ -2195,7 +2380,7 @@ namespace POS
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(478, 58);
+            this.panel10.Size = new System.Drawing.Size(411, 58);
             this.panel10.TabIndex = 2;
             // 
             // radLabel7
@@ -2222,12 +2407,14 @@ namespace POS
             this.lblCambio.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCambio.ForeColor = System.Drawing.Color.White;
             this.lblCambio.Location = new System.Drawing.Point(184, 1);
+            this.lblCambio.Location = new System.Drawing.Point(120, 1);
             this.lblCambio.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.lblCambio.Name = "lblCambio";
             // 
             // 
             // 
             this.lblCambio.RootElement.ControlBounds = new System.Drawing.Rectangle(184, 1, 100, 18);
+            this.lblCambio.RootElement.ControlBounds = new System.Drawing.Rectangle(-243, 3, 100, 18);
             this.lblCambio.Size = new System.Drawing.Size(252, 50);
             this.lblCambio.TabIndex = 9;
             this.lblCambio.Text = "00.00";
@@ -2276,11 +2463,31 @@ namespace POS
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.radButton13.GetChildAt(0).GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             ((Telerik.WinControls.Primitives.BorderPrimitive)(this.radButton13.GetChildAt(0).GetChildAt(2))).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
             // 
+            // btnDescuentoCupon
+            // 
+            this.btnDescuentoCupon.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDescuentoCupon.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnDescuentoCupon.Location = new System.Drawing.Point(397, 4);
+            this.btnDescuentoCupon.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.btnDescuentoCupon.MaximumSize = new System.Drawing.Size(73, 49);
+            this.btnDescuentoCupon.Name = "btnDescuentoCupon";
+            // 
+            // 
+            // 
+            this.btnDescuentoCupon.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
+            this.btnDescuentoCupon.RootElement.ControlBounds = new System.Drawing.Rectangle(215, 5, 73, 24);
+            this.btnDescuentoCupon.RootElement.MaxSize = new System.Drawing.Size(73, 49);
+            this.btnDescuentoCupon.Size = new System.Drawing.Size(73, 45);
+            this.btnDescuentoCupon.TabIndex = 13;
+            this.btnDescuentoCupon.Text = "Cupón";
+            this.btnDescuentoCupon.ThemeName = "TelerikMetroTouch";
+            this.btnDescuentoCupon.Click += new System.EventHandler(this.btnDescuentoCupon_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1191, 817);
+            this.ClientSize = new System.Drawing.Size(1026, 681);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelToolbar);
@@ -2326,18 +2533,19 @@ namespace POS
             this.clienteGroup.ResumeLayout(false);
             this.clienteGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnCFinal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCedula)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCFinal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClienteApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblEtiquetaSaldo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblSaldoTarjeta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDireccion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblIdClienteApp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCliente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTelefono)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNombre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCedula)).EndInit();
             this.panelPagoSecundario.ResumeLayout(false);
             this.panelPagoSecundario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lblRestante)).EndInit();
@@ -2360,13 +2568,10 @@ namespace POS
             ((System.ComponentModel.ISupportInitialize)(this.gridItems)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDescuentoCupon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearchPro)).EndInit();
             this.panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnPrecio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBorrarProducto)).EndInit();
-            this.btnBorrarProducto.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.radButton2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnQtyProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodigo)).EndInit();
             this.panelgrid.ResumeLayout(false);
@@ -2409,6 +2614,7 @@ namespace POS
             ((System.ComponentModel.ISupportInitialize)(this.lblCambio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminarPago)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDescuentoCupon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 

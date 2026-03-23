@@ -55,7 +55,7 @@ namespace POS.Control.Common
             try
             {
                 string puertoImpresora = DetectarPuertoImpresora();
-                
+
 
                 // ESC/POS command to open the drawer
                 byte[] openDrawerCommand = new byte[] { 0x1B, 0x70, 0x00, 0x19, 0xFA };
@@ -77,7 +77,7 @@ namespace POS.Control.Common
             }
         }
 
-       
+
 
         public static void OpenCashDrawer_COM(string printerPort)
         {
@@ -318,7 +318,8 @@ namespace POS.Control.Common
                     texto = texto.Replace("<<TSI>>", "TSI                     : " + recipe.TSI);
                     texto = texto.Replace("<<CIUDAD>>", Control.Common.GlobalParameters.CiudadLocal);
 
-                    if (esCopia) {
+                    if (esCopia)
+                    {
                         texto = string.Concat(texto, "\n <<--------- COPIA CLIENTE --------- >>");
                     }
                     Control.Common.Printer.Imprimir(texto, 3, 9);
@@ -356,6 +357,7 @@ namespace POS.Control.Common
                 //    string first = receipt.CodigoTarjeta.Substring(0, 3);
                 //    string last = receipt.CodigoTarjeta.Substring(receipt.CodigoTarjeta.Length - 3, 3);
                 //    receipt.CodigoTarjeta = first + string.Empty.PadRight(receipt.CodigoTarjeta.Length - 6, 'X') + last;
+                //    receipt.CodigoTarjeta = first + string.Empty.PadRight(receipt.CodigoTarjeta.Length - 6, 'X') + last;  // jchid comentado para que no salga el codigo
                 //}
 
                 //Muchas GC
@@ -500,7 +502,7 @@ namespace POS.Control.Common
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Printer", "ImprimirRetencionFisica", "error: " + ex.Message);
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Printer", "ImprimirRetencionFisica", "InnerException.Message: " + ex.InnerException.Message);
             }
-            
+
         }
 
         public static void ImprimirFlete(string texto, Models.PrinterRecipes.ReceiptFleteMotorizado receipt)
@@ -530,7 +532,7 @@ namespace POS.Control.Common
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Printer", "ImprimirFlete", "error: " + ex.Message);
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Printer", "ImprimirFlete", "InnerException.Message: " + ex.InnerException.Message);
             }
-            
+
         }
 
 

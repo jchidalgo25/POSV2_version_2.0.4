@@ -59,6 +59,7 @@ namespace POS.Control.Common
         public static string ConsumoCuponAppInsertPath { get; set; }
         public static string xulrunnerPath { get; set; }
         public static string ConServerPuntos { get; set; }
+        public static string ConServerMarketing { get; set; }
         public static string ConServerMkt { get; set; }
         public static string Linkbtn3Proveedor { get; set; }
         public static string Labelbtn3Proveedor { get; set; }

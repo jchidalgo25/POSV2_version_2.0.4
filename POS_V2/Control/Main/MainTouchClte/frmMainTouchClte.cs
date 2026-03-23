@@ -29,7 +29,7 @@ namespace POS.Control.Main.MainTouch
         }
 
 
-        
+
         private void frmMainTouchClte_FormClosing(object sender, FormClosingEventArgs e)
         {
 
@@ -72,7 +72,7 @@ namespace POS.Control.Main.MainTouch
             }
         }
 
-        private  void AgregarProductoAlTicket(Producto producto)
+        private void AgregarProductoAlTicket(Producto producto)
         {
             // Formato: Nombre                          Cantidad x Precio
             string linea = $"{producto.Nombre.PadRight(25)} 1 x ${producto.Pvp:F2}\r\n";
@@ -146,7 +146,7 @@ namespace POS.Control.Main.MainTouch
             var ultimoProducto = productos.Last();
 
             // Formatear la línea del producto
-            string line = $"{ultimoProducto.Nombre.Substring(0,20) ,-20}" +
+            string line = $"{ultimoProducto.Nombre.Substring(0, 20),-20}" +
                           $"{ultimoProducto.Cantidad,6:F2}" +
                           $"{ultimoProducto.Pvp,10:C}" +
                           $"{ultimoProducto.Subtotal,10:C}\n" + Environment.NewLine
@@ -157,7 +157,7 @@ namespace POS.Control.Main.MainTouch
             //txtTicket.AppendText(line);
         }
 
-     
+
         private void frmMainTouchClte_Load(object sender, EventArgs e)
         {
             // Puedes dejar esto vacío o usarlo para inicializaciones adicionales
@@ -352,7 +352,7 @@ namespace POS.Control.Main.MainTouch
             e.RowElement.BackColor4 = Control.Common.GlobalParameters.Color_GridViewBackground;
         }
 
-    
+
         public void ActualizarDatosCliente(ClienteEmpleado cliente)
         {
             string NombreCliente = string.Empty;

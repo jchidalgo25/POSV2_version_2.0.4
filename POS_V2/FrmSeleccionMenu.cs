@@ -113,9 +113,11 @@ namespace POS
                            INNER JOIN POS.dbo.VW_SEARCHPRODUCT_MENU V ON D.codigo_barras = V.BARRAS 
                            WHERE D.id_menu = @p0 AND V.ESTABLECIMIENTO = @p1 AND D.estado = 1";
 
+                    string estab = Control.Common.GlobalParameters.Establecimiento;
+
                     _todosLosProductos = await Task.Run(() => db.Database.SqlQuery<ProductoTemporal>(sql,
                         new System.Data.SqlClient.SqlParameter("@p0", _idCategoria.Trim()),
-                        new System.Data.SqlClient.SqlParameter("@p1", "055")).ToList(), ct);
+                        new System.Data.SqlClient.SqlParameter("@p1", estab)).ToList(), ct);
 
                     await RenderizarProductos(_todosLosProductos, ct);
                 }
@@ -139,7 +141,7 @@ namespace POS
                 if (ct.IsCancellationRequested) return;
 
                 // Usamos la cache que cargamos al inicio (Instantáneo)
-                decimal precioFinal = CalcularPrecioLocalEnRAM(item, _listaDescuentosCache, "055");
+                decimal precioFinal = CalcularPrecioLocalEnRAM(item, _listaDescuentosCache,Control.Common.GlobalParameters.Establecimiento);
 
                 UcProductoTarjeta tarjeta = new UcProductoTarjeta();
                 tarjeta.ConfigurarTarjeta(item.ARTICULO, precioFinal, item.BARRAS, global::POS.Properties.Resources._default);
