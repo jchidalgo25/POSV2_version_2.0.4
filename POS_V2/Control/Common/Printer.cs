@@ -356,6 +356,7 @@ namespace POS.Control.Common
                 //    string first = receipt.CodigoTarjeta.Substring(0, 3);
                 //    string last = receipt.CodigoTarjeta.Substring(receipt.CodigoTarjeta.Length - 3, 3);
                 //    receipt.CodigoTarjeta = first + string.Empty.PadRight(receipt.CodigoTarjeta.Length - 6, 'X') + last;
+                //    receipt.CodigoTarjeta = first + string.Empty.PadRight(receipt.CodigoTarjeta.Length - 6, 'X') + last;  // jchid comentado para que no salga el codigo
                 //}
 
                 //Muchas GC

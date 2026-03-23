@@ -814,5 +814,57 @@ namespace POS.Control.Pagos
         }
 
 
+        public PinPadRespuesta LecturaTarjetaManual()
+        {
+            PinPadRespuesta respuestaSimulada = new PinPadRespuesta();
+
+            // Instanciamos el formulario que acabamos de crear
+            using (var frm = new FrmIngresoTarjeta())
+            {
+                var result = frm.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    string tarjetaLimpia = frm.NumeroTarjetaDigitado;
+
+                    // --- SIMULACIÓN DE RESPUESTA DE PINPAD ---
+
+                    // 1. Código de éxito
+                    respuestaSimulada.CodigoRespuesta = "00";
+                    respuestaSimulada.MensajeRespuesta = "INGRESO MANUAL OK";
+
+                    // 2. Extraer el BIN (Primeros 6 dígitos)
+                    // Esto es CRÍTICO: El método principal usa esto para saber si es Medianet o Datafast
+                    if (tarjetaLimpia.Length >= 6)
+                    {
+                        respuestaSimulada.NumBin = tarjetaLimpia.Substring(0, 6);
+                    }
+                    else
+                    {
+                        // Fallback por si acaso
+                        respuestaSimulada.NumBin = "000000";
+                    }
+
+                    // 3. Número de tarjeta
+                    respuestaSimulada.NumeroTarjeta = tarjetaLimpia;
+
+                    // 4. Trama cruda (por si se loguea en base de datos)
+                    respuestaSimulada.TramaRespuesta = "MANUAL:" + tarjetaLimpia;
+                }
+                else
+                {
+                    // El usuario canceló o cerró la ventana
+                    respuestaSimulada.CodigoRespuesta = "99";
+                    respuestaSimulada.MensajeRespuesta = "CANCELADO POR USUARIO";
+                    respuestaSimulada.NumBin = "";
+                }
+            }
+
+            return respuestaSimulada;
+        }
+
+
+
+
     }
 }

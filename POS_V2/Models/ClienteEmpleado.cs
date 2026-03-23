@@ -231,6 +231,7 @@ namespace POS.Models
             set { _montoCreditoEmpresarial = value; }
         }
 
+        public decimal SaldoApp { get; set; }
 
     }
 

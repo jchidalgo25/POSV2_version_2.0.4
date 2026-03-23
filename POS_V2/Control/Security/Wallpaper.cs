@@ -35,6 +35,24 @@ namespace POS.Control.Security
 
             InitializeImages();
 
+            try
+            {
+                if (Control.Common.GlobalParameters.PANTALLA_CLIENTE
+                    && Control.Common.GlobalParameters.frmTouchClte != null
+                    && !Control.Common.GlobalParameters.frmTouchClte.IsDisposed)
+                {
+                    Control.Common.GlobalParameters.frmTouchClte.MostrarPublicidad();
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logger.LogMessage(
+                    Common.Enum.LogTypes.Error,
+                    "Wallpaper",
+                    "MostrarPublicidad",
+                    $"Error al mostrar publicidad en pantalla secundaria: {ex.Message}",
+                    ex.StackTrace);
+            }
         }
 
         private void InitializeImages()
@@ -485,6 +503,24 @@ namespace POS.Control.Security
                 }
 
                 pbWallpaper.Image?.Dispose(); // Solo limpiamos lo local, la caché persiste
+                try
+                {
+                    if (Control.Common.GlobalParameters.PANTALLA_CLIENTE
+                        && Control.Common.GlobalParameters.frmTouchClte != null
+                        && !Control.Common.GlobalParameters.frmTouchClte.IsDisposed)
+                    {
+                        Control.Common.GlobalParameters.frmTouchClte.OcultarPublicidad();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Common.Logger.LogMessage(
+                        Common.Enum.LogTypes.Error,
+                        "Wallpaper",
+                        "MostrarPublicidad",
+                        $"Error al mostrar publicidad en pantalla secundaria: {ex.Message}",
+                        ex.StackTrace);
+                }
             }
             catch (Exception ex)
             {

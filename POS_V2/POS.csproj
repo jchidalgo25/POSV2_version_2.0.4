@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\CefSharp.Common.94.4.50\build\CefSharp.Common.props" Condition="Exists('packages\CefSharp.Common.94.4.50\build\CefSharp.Common.props')" />
+  <Import Project="packages\cef.redist.x86.94.4.5\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.94.4.5\build\cef.redist.x86.props')" />
+  <Import Project="packages\cef.redist.x64.94.4.5\build\cef.redist.x64.props" Condition="Exists('packages\cef.redist.x64.94.4.5\build\cef.redist.x64.props')" />
   <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,7 +41,7 @@
     <PublisherName>Liris</PublisherName>
     <WebPage>publish.htm</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>48</ApplicationRevision>
+    <ApplicationRevision>49</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -280,6 +283,15 @@
       <HintPath>packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Web.WebView2.1.0.3800.47\lib\Microsoft.Web.WebView2.Core.winmd</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms">
+      <HintPath>packages\Microsoft.Web.WebView2.1.0.3800.47\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf">
+      <HintPath>packages\Microsoft.Web.WebView2.1.0.3800.47\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Newtonsoft.Json.dll</HintPath>
@@ -301,6 +313,7 @@
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations">
       <Private>False</Private>
@@ -461,6 +474,12 @@
     </Compile>
     <Compile Include="Control\Pagos\DescuentoAPP.Designer.cs">
       <DependentUpon>DescuentoAPP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIngresoTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIngresoTarjeta.Designer.cs">
+      <DependentUpon>FrmIngresoTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\PINPAD\bines.cs" />
     <Compile Include="Control\Security\WallpaperClte.cs">
@@ -2656,6 +2675,11 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.Web.WebView2.1.0.3800.47\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Web.WebView2.1.0.3800.47\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('packages\cef.redist.x64.94.4.5\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x64.94.4.5\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('packages\cef.redist.x86.94.4.5\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.94.4.5\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.94.4.50\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.94.4.50\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.94.4.50\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.94.4.50\build\CefSharp.Common.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -2664,4 +2688,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="packages\Microsoft.Web.WebView2.1.0.3800.47\build\Microsoft.Web.WebView2.targets" Condition="Exists('packages\Microsoft.Web.WebView2.1.0.3800.47\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="packages\CefSharp.Common.94.4.50\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.94.4.50\build\CefSharp.Common.targets')" />
 </Project>

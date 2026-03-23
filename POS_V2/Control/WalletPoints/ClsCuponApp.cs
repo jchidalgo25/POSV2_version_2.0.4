@@ -1,9 +1,10 @@
-﻿using System;
+﻿using POS.Models;
+using POS.Models.AppCupones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using POS.Models.AppCupones;
 
 namespace POS.Control.WalletPoints
 {
@@ -22,6 +23,8 @@ namespace POS.Control.WalletPoints
 
         // Nueva propiedad para guardar las reglas y el alcance del cupón de App.
         public List<AlcanceCupon> ReglasAlcance { get; set; } = new List<AlcanceCupon>();
+
+        
 
         public Control.WalletPoints.ClsCuponApp Clone()
         {
