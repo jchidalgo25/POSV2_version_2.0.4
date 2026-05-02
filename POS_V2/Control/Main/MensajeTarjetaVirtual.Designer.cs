@@ -13,13 +13,23 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                if (pictureBox1?.Image != null)
+                {
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
+                }
+                if (pictureBox2?.Image != null)
+                {
+                    pictureBox2.Image.Dispose();
+                    pictureBox2.Image = null;
+                }
+                if (components != null)
+                    components.Dispose();
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
 
         /// <summary>

@@ -206,19 +206,27 @@ namespace POS.Control.ToolBox
 
         private void btnVtaNormal_Click(object sender, EventArgs e)
         {
-            if (Control.Common.GlobalParameters.CompraGratis || Control.Common.GlobalParameters.MonederoActivo)
+            if (Control.Common.GlobalParameters.CompraGratis ||
+                Control.Common.GlobalParameters.MonederoActivo)
             {
-                Control.Main.MensajeTarjetaVirtual frm = new Control.Main.MensajeTarjetaVirtual();
-
-                MainWindow mainWindow = Application.OpenForms.OfType<MainWindow>().FirstOrDefault();
-
-                if (mainWindow != null && mainWindow.ValidaExisteTmp())
+                try
                 {
-                    mainWindow.EjecutarCargaArchivosTmpAsync();
+                    using (var frm = new Control.Main.MensajeTarjetaVirtual())
+                    {
+                        MainWindow mainWindow = Application.OpenForms
+                            .OfType<MainWindow>().FirstOrDefault();
+
+                        if (mainWindow != null && mainWindow.ValidaExisteTmp())
+                            mainWindow.EjecutarCargaArchivosTmpAsync();
+
+                        frm.ShowDialog();
+                    } // ← Dispose automático aquí
                 }
-
-
-                frm.ShowDialog();
+                catch (Exception ex)
+                {
+                    // Loguear pero no interrumpir la venta
+                    // Logger.Fatal("MenuInicial", "btnVtaNormal_Click", ex.Message);
+                }
             }
 
             CapturarCanalVenta(CANALVENTA.VENTANORMALPOS);

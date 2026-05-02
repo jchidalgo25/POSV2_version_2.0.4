@@ -497,5 +497,8 @@ namespace POS.Control.Common
 
         public static bool EsModoImpresionBankard = false; // jchid descuento bankard
 
+        // jchid 2026-04-14 En Common.GlobalParameters de autorizacion de huella
+        public static bool VerificationInProgress { get; set; } = false;
+
     }
 }

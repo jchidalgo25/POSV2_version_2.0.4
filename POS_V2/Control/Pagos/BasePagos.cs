@@ -118,6 +118,9 @@ namespace POS.Control.Pagos
         private Timer _resetTimer;
         public decimal saldoFacturaPago = 0;
 
+        // Al inicio de la clase BasePagos, junto a las otras variables
+        public static string _tarjetaCompraGratisEnUso = string.Empty;
+        public static string _facturaCompraGratisEnUso = string.Empty;
 
 
 
@@ -1807,38 +1810,71 @@ namespace POS.Control.Pagos
                 var porc_iva = Control.Common.GlobalParameters.IVAGEN / 100;
                 var PorcPromo = Control.Common.GlobalParameters.DESC_PROMO_IVA;/// Decimal.Parse((pos.core_parametro.First(x => x.identificador == "DESC_PROMO_IVA").parametro2));
                 var porc_pago = (decimal.Parse(txtValor.Text) / _factura.GetTotal());
+                //decimal porc_Desc2 = 0;
+
+                //if (_facturaApp == null)
+                //{
+                //    porc_Desc2 = 0;
+                //}
+                //else
+                //    if (_facturaApp.Descuentos2.Count > 0)
+                //    {
+                //        porc_Desc2 = _facturaApp.Descuentos2.Sum(x => x.Porcentaje);
+                //    }
+
+                //var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
+                //base0 = base0 - (base0 * (porc_Desc2 / 100));
+                //var base12 = _factura.GetBase12DescPromoIVA(false);
+                //base12 = base12 - (base12 * (porc_Desc2 / 100));
+
+                //var base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
+                //if (_factura.GetPromoIva() > 0)
+                //{
+                //    base12 = base12 - ((base12 * PorcPromo) / 100);
+                //}
+
+                //base12 += base12PromoIVAExcluye;
+                //var iva = decimal.Round(base12 * porc_iva, 2);
+                //trama.montoTotalTransaccion = valpag;//12N 10N2D
+
+                //if (decimal.Parse(txtValor.Text) == _factura.GetTotal())
+                //{
+                //    trama.montoBaseGravaIVa = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0'); //12N 10N2D
+                //    trama.montoBaseNoGravaIVa = decimal.Round(((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0) * porc_pago), 2, MidpointRounding.ToEven).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D
+                //    trama.impuestoIvaTransaccion = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D              
+                //}
+                //else
                 decimal porc_Desc2 = 0;
 
-                if (_facturaApp == null)
+                if (_facturaApp != null && _facturaApp.Descuentos2.Count > 0)
                 {
-                    porc_Desc2 = 0;
+                    porc_Desc2 = _facturaApp.getDescuentos2();
                 }
-                else
-                    if (_facturaApp.Descuentos2.Count > 0)
-                    {
-                        porc_Desc2 = _facturaApp.Descuentos2.Sum(x => x.Porcentaje);
-                    }
 
                 var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
-                base0 = base0 - (base0 * (porc_Desc2 / 100));
                 var base12 = _factura.GetBase12DescPromoIVA(false);
-                base12 = base12 - (base12 * (porc_Desc2 / 100));
 
                 var base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
                 if (_factura.GetPromoIva() > 0)
                 {
                     base12 = base12 - ((base12 * PorcPromo) / 100);
                 }
-
                 base12 += base12PromoIVAExcluye;
                 var iva = decimal.Round(base12 * porc_iva, 2);
-                trama.montoTotalTransaccion = valpag;//12N 10N2D
+
+                if (porc_Desc2 > 0)
+                {
+                    base0 = base0 - decimal.Round((base0 / (base0 + base12)) * porc_Desc2, 2, MidpointRounding.AwayFromZero);
+                    base12 = base12 - decimal.Round((base12 / (base0 + base12)) * porc_Desc2, 2, MidpointRounding.AwayFromZero);
+                    iva = decimal.Round(base12 * porc_iva, 2);
+                }
+                trama.montoTotalTransaccion = valpag;
 
                 if (decimal.Parse(txtValor.Text) == _factura.GetTotal())
                 {
-                    trama.montoBaseGravaIVa = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0'); //12N 10N2D
-                    trama.montoBaseNoGravaIVa = decimal.Round(((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0) * porc_pago), 2, MidpointRounding.ToEven).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D
-                    trama.impuestoIvaTransaccion = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D              
+                    trama.montoBaseGravaIVa = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                    trama.montoBaseNoGravaIVa = decimal.Round(((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0) * porc_pago), 2, MidpointRounding.ToEven).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                    trama.impuestoIvaTransaccion = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
                 }
                 else
                 {
@@ -5778,7 +5814,7 @@ namespace POS.Control.Pagos
                     txtCaptura.KeyPress += (s, ev) =>
                     {
                         // 1. VALIDAR: GiftCard solo acepta dígitos
-                        if (!char.IsControl(ev.KeyChar) && !char.IsDigit(ev.KeyChar))
+                        if (!char.IsControl(ev.KeyChar) && !char.IsDigit(ev.KeyChar) && ev.KeyChar != '-')
                         {
                             ev.Handled = true; // Bloquear letras, guiones, cualquier otro caracter
                             return;
@@ -7349,6 +7385,18 @@ namespace POS.Control.Pagos
                             return;
                         }
 
+                        string numeroFacturaActual = this._factura?.GetNumeroFactura() ?? "";
+
+                        if (!string.IsNullOrEmpty(_tarjetaCompraGratisEnUso)
+                            && _facturaCompraGratisEnUso == numeroFacturaActual)
+                        {
+                            Control.Common.General.GetMensajeToList(10026); // "Ya se aplicó CompraGratis en esta transacción"
+                            txtCuenta.Text = "";
+                            _textoOriginal = "";
+                            txtCuenta.Focus();
+                            return;
+                        }
+
                         // =========================================================================
                         // VALIDACIÓN CON SERVIDOR CENTRAL (CAMBIO SOLICITADO)
                         // =========================================================================
@@ -7439,6 +7487,9 @@ namespace POS.Control.Pagos
                         Control.Common.General.GetMensajeToList(10000, parametros);
 
                         // Bloqueo Final
+                        // Registrar en variable global para bloquear si cierran y reabren el form
+                        _tarjetaCompraGratisEnUso = codigoIngresado;
+                        _facturaCompraGratisEnUso = numeroFacturaActual;
                         _compraGratisCalculada = true;
                         txtCuenta.Enabled = false;
                         btnVerificar.Enabled = false;
@@ -7469,6 +7520,7 @@ namespace POS.Control.Pagos
         {
             try
             {
+
                 // Para DineroElectronico y TarjetaRegalo este evento
                 // nunca llega porque txtCuenta está deshabilitado.
                 // El flujo lo maneja txtCaptura en el Load.

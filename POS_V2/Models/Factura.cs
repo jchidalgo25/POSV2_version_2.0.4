@@ -18,6 +18,7 @@ using POS.Control.Pagos;
 using POS.Control;
 using POS.Control.CajaPinpad.Modelo;
 using POS.Models.SRI;
+using System.Web.Instrumentation;
 
 namespace POS.Models
 {
@@ -5494,7 +5495,7 @@ namespace POS.Models
         }
 
 
-        public void prepararImpresionCupones4(Factura factura, long promoId)
+        public void prepararImpresionCupones4(Factura factura, long promoId, string bin = "")
         {
             string sQuery = string.Empty;
             DataSet dtsConsulta = new DataSet();
@@ -5510,6 +5511,7 @@ namespace POS.Models
                 sQuery = string.Concat(sQuery, $"   @establecimiento = '{factura.Establecimiento}' ", Environment.NewLine);
                 sQuery = string.Concat(sQuery, $"   , @punto_emision = '{factura.PtoEmision}' ", Environment.NewLine);
                 sQuery = string.Concat(sQuery, $"   , @numero_factura = {factura.Secuencia} ", Environment.NewLine);
+                sQuery = string.Concat(sQuery, $"   , @bin = '{bin}' ", Environment.NewLine); // ✅ NUEVO
                 dtsConsulta = Control.Common.General.GetDataSet(sQuery, connectionMark);
 
                 if (dtsConsulta.Tables.Count > 0)
@@ -5606,6 +5608,7 @@ namespace POS.Models
 
 
         }
+
         public void prepararImpresionCuponesUDT(Factura factura, long promoId)
         {
             string sQuery = string.Empty;

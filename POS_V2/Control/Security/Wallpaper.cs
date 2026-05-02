@@ -34,7 +34,6 @@ namespace POS.Control.Security
             CanClose = false;
 
             InitializeImages();
-
         }
 
         private void InitializeImages()
@@ -289,10 +288,10 @@ namespace POS.Control.Security
             }
         }
 
-      
 
-  
-        
+
+
+
 
         private void VerifyCanClose()
         {
@@ -308,6 +307,10 @@ namespace POS.Control.Security
                     return;
                 }
 
+                // jchid 2026-04-14 colocar esto para que no cuente el timer cuando este activo el verifycanclose
+                imageTimer.Stop();
+                // end jchid 2026-04-14 colocar esto para que no cuente el timer cuando este activo el verifycanclose
+
                 Thread t = new Thread(() =>
                 {
                     DialogResult resultado = DialogResult.Cancel;
@@ -320,7 +323,7 @@ namespace POS.Control.Security
                             resultado = verifier.ShowDialog(); // Ahora en STA, debería funcionar
                         }
 
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -330,6 +333,10 @@ namespace POS.Control.Security
                     // ✅ Usa Invoke para actualizar CanClose desde el hilo principal
                     this.Invoke(new Action(() =>
                     {
+                        // jchid 2026-04-14 colocar esto para que no cuente el timer cuando este activo el verifycanclose
+                        imageTimer.Start();
+                        // end jchid 2026-04-14 colocar esto para que no cuente el timer cuando este activo el verifycanclose
+
                         if (resultado == DialogResult.OK)
                         {
                             CanClose = true;
@@ -351,11 +358,15 @@ namespace POS.Control.Security
                 t.SetApartmentState(ApartmentState.STA);
                 t.Start();
 
-           
+
 
             }
             catch (Exception ex)
             {
+                // jchid 2026-04-14 colocar esto para que no cuente el timer cuando este activo el verifycanclose
+                imageTimer.Start();
+                // end jchid 2026-04-14 colocar esto para que no cuente el timer cuando este activo el verifycanclose
+
                 Common.Logger.LogMessage(Common.Enum.LogTypes.Error, "Wallpaper", "VerifyCanClose", ex.ToString(), ex.StackTrace);
             }
         }

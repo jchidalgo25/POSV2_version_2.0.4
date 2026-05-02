@@ -26,34 +26,41 @@ namespace POS
         private List<ProductoTemporal> _todosLosProductos = new List<ProductoTemporal>();
 
 
-        public FrmSeleccionMenu(string tituloMenu, string idCategoria, string rutaImagen) // se recibe estas variables para ver que llega y que se va mostrar 
+        public FrmSeleccionMenu(string tituloMenu, string idCategoria, string rutaImagen)
         {
             InitializeComponent();
 
+            // Abre como modal centrado, igual que en los otros POS
+            Rectangle pantalla = Screen.PrimaryScreen.WorkingArea;
+            this.Size = new Size(
+                (int)(pantalla.Width * 0.75),   // 75% del ancho
+                (int)(pantalla.Height * 0.65)   // 65% del alto
+            );
+            this.MinimumSize = new Size(
+                (int)(pantalla.Width * 0.70),
+                (int)(pantalla.Height * 0.60)
+            );
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            this.Shown += (s, e) => AjustarControlesPanelDerecho();
 
 
             typeof(FlowLayoutPanel).InvokeMember("DoubleBuffered",
-            System.Reflection.BindingFlags.SetProperty |
-            System.Reflection.BindingFlags.Instance |
-            System.Reflection.BindingFlags.NonPublic,
-            null, flpnlitems, new object[] { true });
-
-
-       
+                System.Reflection.BindingFlags.SetProperty |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.NonPublic,
+                null, flpnlitems, new object[] { true });
 
             lbHeader.Text = tituloMenu;
             this._idCategoria = idCategoria;
 
             if (!string.IsNullOrEmpty(rutaImagen) && File.Exists(rutaImagen))
             {
-                // pbIcono es el PictureBox que tienes a lado del título
                 pbIcono.Image = Image.FromFile(rutaImagen);
                 pbIcono.SizeMode = PictureBoxSizeMode.Zoom;
             }
 
             ConfigurarBotonesEspeciales();
-
-
         }
 
         private async void FrmSeleccionMenu_Load(object sender, EventArgs e)
@@ -74,6 +81,22 @@ namespace POS
         {
             DetenerCargas();
             this.Close();
+        }
+
+        // Reposicionar controles del panel derecho proporcionalmente
+        private void AjustarControlesPanelDerecho()
+        {
+            int altoPanel = pnlIzquierda.Height;
+
+            // El flowLayoutPanel1 ocupa la mayor parte del espacio
+            flowLayoutPanel1.Height = altoPanel - 200; // deja 200px para botones abajo
+
+            // Los botones se ubican desde abajo hacia arriba
+            bntCancelar.Top = altoPanel - 40;
+            bntAgregarP.Top = altoPanel - 85;
+            btnGuardarRamo.Top = altoPanel - 130;
+            label2.Top = altoPanel - 155; // TOTAL ITEMS
+            label1.Top = altoPanel - 175; // SUBTOTAL
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

@@ -1610,10 +1610,81 @@ namespace POS.Models
         /// <param name="factura">Para datos de factura</param>
         /// <param name="cliente">Para datos de cliente</param>
         /// <returns>Verdadero si encuentra el ITEM, False si no encuentra</returns>
+        //public bool getProducto(string codigo, Factura factura, pos_customer cliente)
+        //{
+        //    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" codigo : {codigo}");
+
+
+        //    codigo = codigo.Trim();
+        //    pos_item item = null;
+        //    var result = false;
+
+        //    using (var db = new POSEntities())
+        //    {
+        //        var productID = db.pos_item.Any(x => x.ITEMID == codigo); //&& x.ITEMTYPE!=2);
+        //        var barcode = db.pos_itembarra.Any(x => x.ITEMBARCODE == codigo || "F" + x.ITEMBARCODE == codigo);
+
+        //        result = productID || barcode;
+
+        //        if (productID)
+        //        {
+        //            item = db.pos_item.Single(x => x.ITEMID == codigo);
+        //            setProductoData(item, factura, cliente);
+
+        //            this.CodigosBarra = db.pos_itembarra.Where(x => x.ITEMID == this.Id).Select(x => new CodigoBarra {ID = x.ITEMID, codigo = x.ITEMBARCODE }).ToList();
+        //        }
+        //        else if (barcode)
+        //        {
+
+        //            var item_id = db.pos_itembarra.FirstOrDefault(x => x.ITEMBARCODE == codigo || "F" + x.ITEMBARCODE == codigo);
+        //            if (db.pos_item.Any(x => x.ITEMID == item_id.ITEMID))// && x.ITEMTYPE != 2))
+        //            {
+        //                item = db.pos_item.Single(x => x.ITEMID == item_id.ITEMID);
+        //                setProductoData(item, factura, cliente, codigo);
+        //                this.CodigosBarra = db.pos_itembarra.Where(x => x.ITEMID == this.Id).Select(x => new CodigoBarra { ID = x.ITEMID, codigo = x.ITEMBARCODE }).ToList();
+        //            }
+        //            else
+        //            {
+        //                result = false;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            result = false;
+        //        }
+
+        //        if (!result)
+        //        {
+        //            item = getProductoPeso(codigo);
+
+        //            if (item != null)
+        //            {
+        //                setProductoData(item, factura, cliente);
+        //                this.CodigosBarra = db.pos_itembarra.Where(x => x.ITEMID == this.Id).Select(x => new CodigoBarra { ID = x.ITEMID, codigo = x.ITEMBARCODE }).ToList();
+        //                result = true;
+        //            }
+        //        }
+        //        if (item != null)
+        //        {
+        //            //if (item.PRICE <= 0 || item.COST > item.PRICE) Ing Antonio aprobo venta costo>precio
+        //            if (item.PRICE <= 0)
+        //            {
+        //                item = null;
+        //                result = false;
+        //            }
+        //        }
+
+        //    }
+        //    return result;
+        //}
+
+        // METODO GETPRODUCTO() JCHID
         public bool getProducto(string codigo, Factura factura, pos_customer cliente)
         {
-            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindows", $"getProducto", $" codigo : {codigo}");
-
+            Control.Common.Logger.LogMessage(
+                Control.Common.Enum.LogTypes.Info,
+                "MainWindows", "getProducto",
+                $"Iniciando. Codigo: '{codigo}'");
 
             codigo = codigo.Trim();
             pos_item item = null;
@@ -1621,8 +1692,13 @@ namespace POS.Models
 
             using (var db = new POSEntities())
             {
-                var productID = db.pos_item.Any(x => x.ITEMID == codigo); //&& x.ITEMTYPE!=2);
+                var productID = db.pos_item.Any(x => x.ITEMID == codigo);
                 var barcode = db.pos_itembarra.Any(x => x.ITEMBARCODE == codigo || "F" + x.ITEMBARCODE == codigo);
+
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Info,
+                    "MainWindows", "getProducto",
+                    $"Busqueda DB. Codigo: '{codigo}', ExisteItemID: {productID}, ExisteBarcode: {barcode}");
 
                 result = productID || barcode;
 
@@ -1630,53 +1706,109 @@ namespace POS.Models
                 {
                     item = db.pos_item.Single(x => x.ITEMID == codigo);
                     setProductoData(item, factura, cliente);
+                    this.CodigosBarra = db.pos_itembarra
+                        .Where(x => x.ITEMID == this.Id)
+                        .Select(x => new CodigoBarra { ID = x.ITEMID, codigo = x.ITEMBARCODE })
+                        .ToList();
 
-                    this.CodigosBarra = db.pos_itembarra.Where(x => x.ITEMID == this.Id).Select(x => new CodigoBarra {ID = x.ITEMID, codigo = x.ITEMBARCODE }).ToList();
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Info,
+                        "MainWindows", "getProducto",
+                        $"Encontrado por ITEMID. Codigo: '{codigo}', ItemID: '{item.ITEMID}', Precio: {item.PRICE}, Costo: {item.COST}");
                 }
                 else if (barcode)
                 {
+                    var item_id = db.pos_itembarra.FirstOrDefault(
+                        x => x.ITEMBARCODE == codigo || "F" + x.ITEMBARCODE == codigo);
 
-                    var item_id = db.pos_itembarra.FirstOrDefault(x => x.ITEMBARCODE == codigo || "F" + x.ITEMBARCODE == codigo);
-                    if (db.pos_item.Any(x => x.ITEMID == item_id.ITEMID))// && x.ITEMTYPE != 2))
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Info,
+                        "MainWindows", "getProducto",
+                        $"Barcode encontrado. Codigo: '{codigo}', ItemID resuelto: '{item_id?.ITEMID}'");
+
+                    if (db.pos_item.Any(x => x.ITEMID == item_id.ITEMID))
                     {
                         item = db.pos_item.Single(x => x.ITEMID == item_id.ITEMID);
                         setProductoData(item, factura, cliente, codigo);
-                        this.CodigosBarra = db.pos_itembarra.Where(x => x.ITEMID == this.Id).Select(x => new CodigoBarra { ID = x.ITEMID, codigo = x.ITEMBARCODE }).ToList();
+                        this.CodigosBarra = db.pos_itembarra
+                            .Where(x => x.ITEMID == this.Id)
+                            .Select(x => new CodigoBarra { ID = x.ITEMID, codigo = x.ITEMBARCODE })
+                            .ToList();
+
+                        Control.Common.Logger.LogMessage(
+                            Control.Common.Enum.LogTypes.Info,
+                            "MainWindows", "getProducto",
+                            $"Encontrado por barcode. Codigo: '{codigo}', ItemID: '{item.ITEMID}', Precio: {item.PRICE}, Costo: {item.COST}");
                     }
                     else
                     {
                         result = false;
+                        Control.Common.Logger.LogMessage(
+                            Control.Common.Enum.LogTypes.Warning,
+                            "MainWindows", "getProducto",
+                            $"Barcode existe en pos_itembarra pero ItemID '{item_id?.ITEMID}' NO existe en pos_item. Codigo: '{codigo}'");
                     }
                 }
                 else
                 {
                     result = false;
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Warning,
+                        "MainWindows", "getProducto",
+                        $"Codigo NO encontrado ni por ITEMID ni por barcode. Codigo: '{codigo}'");
                 }
 
                 if (!result)
                 {
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Info,
+                        "MainWindows", "getProducto",
+                        $"Intentando busqueda por peso. Codigo: '{codigo}'");
+
                     item = getProductoPeso(codigo);
 
                     if (item != null)
                     {
                         setProductoData(item, factura, cliente);
-                        this.CodigosBarra = db.pos_itembarra.Where(x => x.ITEMID == this.Id).Select(x => new CodigoBarra { ID = x.ITEMID, codigo = x.ITEMBARCODE }).ToList();
+                        this.CodigosBarra = db.pos_itembarra
+                            .Where(x => x.ITEMID == this.Id)
+                            .Select(x => new CodigoBarra { ID = x.ITEMID, codigo = x.ITEMBARCODE })
+                            .ToList();
                         result = true;
+
+                        Control.Common.Logger.LogMessage(
+                            Control.Common.Enum.LogTypes.Info,
+                            "MainWindows", "getProducto",
+                            $"Encontrado por peso. Codigo: '{codigo}', ItemID: '{item.ITEMID}', Precio: {item.PRICE}");
                     }
-                }
-                if (item != null)
-                {
-                    //if (item.PRICE <= 0 || item.COST > item.PRICE) Ing Antonio aprobo venta costo>precio
-                    if (item.PRICE <= 0)
+                    else
                     {
-                        item = null;
-                        result = false;
+                        Control.Common.Logger.LogMessage(
+                            Control.Common.Enum.LogTypes.Warning,
+                            "MainWindows", "getProducto",
+                            $"NO encontrado por peso tampoco. Codigo: '{codigo}'");
                     }
                 }
-                
+
+                if (item != null && item.PRICE <= 0)
+                {
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Warning,
+                        "MainWindows", "getProducto",
+                        $"Producto descartado por PRECIO INVALIDO. Codigo: '{codigo}', ItemID: '{item.ITEMID}', Precio: {item.PRICE}, Costo: {item.COST}");
+                    item = null;
+                    result = false;
+                }
             }
+
+            Control.Common.Logger.LogMessage(
+                Control.Common.Enum.LogTypes.Info,
+                "MainWindows", "getProducto",
+                $"Retornando: {result}. Codigo: '{codigo}'");
+
             return result;
         }
+        //METODO GETPRODUCTO() JCHID END
 
 
         public pos_item getProductoPeso(string codigo)

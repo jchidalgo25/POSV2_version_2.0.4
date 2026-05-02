@@ -49,76 +49,80 @@ namespace POS
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.pnlIzquierda.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlSuperior
-            // 
-            this.pnlSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(88)))), ((int)(((byte)(42)))));
+
+            // ── pnlSuperior ──────────────────────────────────────────
+            this.pnlSuperior.BackColor = System.Drawing.Color.FromArgb(0, 88, 42);
             this.pnlSuperior.Controls.Add(this.label4);
             this.pnlSuperior.Controls.Add(this.txtBusqueda);
             this.pnlSuperior.Controls.Add(this.pbIcono);
             this.pnlSuperior.Controls.Add(this.label3);
             this.pnlSuperior.Controls.Add(this.lbHeader);
-            this.pnlSuperior.Location = new System.Drawing.Point(0, -2);
+            this.pnlSuperior.Dock = System.Windows.Forms.DockStyle.Top;   // <-- CAMBIO: ocupa todo el ancho siempre
+            this.pnlSuperior.Location = new System.Drawing.Point(0, 0);
             this.pnlSuperior.Name = "pnlSuperior";
-            this.pnlSuperior.Size = new System.Drawing.Size(1304, 117);
+            this.pnlSuperior.Size = new System.Drawing.Size(1024, 100);    // <-- alto reducido a 100
             this.pnlSuperior.TabIndex = 0;
-            // 
-            // txtBusqueda
-            // 
+
+            // ── txtBusqueda ───────────────────────────────────────────
+            this.txtBusqueda.Anchor = System.Windows.Forms.AnchorStyles.Top
+                                    | System.Windows.Forms.AnchorStyles.Right; // <-- CAMBIO
             this.txtBusqueda.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtBusqueda.DefaultText = "";
-            this.txtBusqueda.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBusqueda.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBusqueda.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBusqueda.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBusqueda.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBusqueda.DisabledState.BorderColor = System.Drawing.Color.FromArgb(208, 208, 208);
+            this.txtBusqueda.DisabledState.FillColor = System.Drawing.Color.FromArgb(226, 226, 226);
+            this.txtBusqueda.DisabledState.ForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+            this.txtBusqueda.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+            this.txtBusqueda.FocusedState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
             this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBusqueda.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBusqueda.Location = new System.Drawing.Point(752, 62);
-            this.txtBusqueda.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.txtBusqueda.HoverState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
+            this.txtBusqueda.Location = new System.Drawing.Point(580, 50);  // <-- ajustado
             this.txtBusqueda.Name = "txtBusqueda";
             this.txtBusqueda.PlaceholderText = "";
             this.txtBusqueda.SelectedText = "";
-            this.txtBusqueda.Size = new System.Drawing.Size(370, 29);
+            this.txtBusqueda.Size = new System.Drawing.Size(280, 29);       // <-- ancho reducido
             this.txtBusqueda.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.txtBusqueda.TabIndex = 4;
             this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
-            // 
-            // pbIcono
-            // 
-            this.pbIcono.Location = new System.Drawing.Point(20, 34);
-            this.pbIcono.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
+            // ── pbIcono ───────────────────────────────────────────────
+            this.pbIcono.Location = new System.Drawing.Point(20, 25);
             this.pbIcono.Name = "pbIcono";
-            this.pbIcono.Size = new System.Drawing.Size(51, 49);
+            this.pbIcono.Size = new System.Drawing.Size(45, 45);
             this.pbIcono.TabIndex = 2;
             this.pbIcono.TabStop = false;
-            // 
-            // label3
-            // 
+
+            // ── label3 ────────────────────────────────────────────────
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(76, 68);
+            this.label3.Location = new System.Drawing.Point(72, 58);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(409, 23);
             this.label3.TabIndex = 1;
             this.label3.Text = "ELIJA LOS PRODUCTOS PARA AGREGAR A LA VENTA";
-            // 
-            // lbHeader
-            // 
+
+            // ── lbHeader ──────────────────────────────────────────────
             this.lbHeader.AutoSize = true;
-            this.lbHeader.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHeader.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.lbHeader.ForeColor = System.Drawing.Color.White;
-            this.lbHeader.Location = new System.Drawing.Point(70, 26);
+            this.lbHeader.Location = new System.Drawing.Point(70, 20);
             this.lbHeader.Name = "lbHeader";
-            this.lbHeader.Size = new System.Drawing.Size(0, 40);
             this.lbHeader.TabIndex = 0;
-            // 
-            // pnlIzquierda
-            // 
-            this.pnlIzquierda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlIzquierda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+
+            // ── label4 (BUSCAR) ───────────────────────────────────────
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top
+                               | System.Windows.Forms.AnchorStyles.Right; // <-- CAMBIO
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(490, 53);      // <-- ajustado
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 23);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "BUSCAR";
+
+            // ── pnlIzquierda ─────────────────────────────────────────
+            this.pnlIzquierda.Anchor = System.Windows.Forms.AnchorStyles.Top    // <-- CAMBIO: agregado Top
+                                     | System.Windows.Forms.AnchorStyles.Bottom
+                                     | System.Windows.Forms.AnchorStyles.Right;  // quitamos Left
+            this.pnlIzquierda.BackColor = System.Drawing.Color.FromArgb(248, 250, 252);
             this.pnlIzquierda.Controls.Add(this.btnGuardarRamo);
             this.pnlIzquierda.Controls.Add(this.flowLayoutPanel1);
             this.pnlIzquierda.Controls.Add(this.label2);
@@ -126,129 +130,124 @@ namespace POS
             this.pnlIzquierda.Controls.Add(this.bntCancelar);
             this.pnlIzquierda.Controls.Add(this.bntAgregarP);
             this.pnlIzquierda.Controls.Add(this.lbResumen);
-            this.pnlIzquierda.Location = new System.Drawing.Point(972, -43);
+            this.pnlIzquierda.Location = new System.Drawing.Point(694, 100); // <-- ajustado
             this.pnlIzquierda.Name = "pnlIzquierda";
-            this.pnlIzquierda.Size = new System.Drawing.Size(332, 793);
+            this.pnlIzquierda.Size = new System.Drawing.Size(330, 668);      // <-- ajustado
             this.pnlIzquierda.TabIndex = 1;
-            // 
-            // btnGuardarRamo
-            // 
+
+            // ── lbResumen ─────────────────────────────────────────────
+            this.lbResumen.AutoSize = true;
+            this.lbResumen.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.lbResumen.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lbResumen.Location = new System.Drawing.Point(7, 10);
+            this.lbResumen.Name = "lbResumen";
+            this.lbResumen.TabIndex = 0;
+            this.lbResumen.Text = "RESUMEN SELECCION";
+
+            // ── flowLayoutPanel1 (lista del carrito) ──────────────────
+            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top    // <-- CAMBIO
+                                         | System.Windows.Forms.AnchorStyles.Bottom
+                                         | System.Windows.Forms.AnchorStyles.Left
+                                         | System.Windows.Forms.AnchorStyles.Right;
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 35);       // <-- ajustado
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(322, 490);         // <-- más alto
+            this.flowLayoutPanel1.TabIndex = 5;
+            this.flowLayoutPanel1.WrapContents = false;
+
+            // ── label1 (SUBTOTAL) ─────────────────────────────────────
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom           // <-- CAMBIO
+                               | System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.label1.Location = new System.Drawing.Point(7, 535);
+            this.label1.Name = "label1";
+            this.label1.TabIndex = 3;
+            this.label1.Text = "SUBTOTAL:";
+
+            // ── label2 (TOTAL ITEMS) ──────────────────────────────────
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom           // <-- CAMBIO
+                               | System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(0, 88, 42);
+            this.label2.Location = new System.Drawing.Point(7, 558);
+            this.label2.Name = "label2";
+            this.label2.TabIndex = 4;
+            this.label2.Text = "TOTAL ITEMS:";
+
+            // ── btnGuardarRamo ────────────────────────────────────────
+            this.btnGuardarRamo.Anchor = System.Windows.Forms.AnchorStyles.Bottom   // <-- CAMBIO
+                                       | System.Windows.Forms.AnchorStyles.Left
+                                       | System.Windows.Forms.AnchorStyles.Right;
             this.btnGuardarRamo.AutoSize = true;
-            this.btnGuardarRamo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(88)))), ((int)(((byte)(42)))));
-            this.btnGuardarRamo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarRamo.BackColor = System.Drawing.Color.FromArgb(0, 88, 42);
+            this.btnGuardarRamo.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.btnGuardarRamo.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarRamo.Location = new System.Drawing.Point(22, 648);
+            this.btnGuardarRamo.Location = new System.Drawing.Point(5, 580);
             this.btnGuardarRamo.Name = "btnGuardarRamo";
-            this.btnGuardarRamo.Size = new System.Drawing.Size(290, 45);
+            this.btnGuardarRamo.Size = new System.Drawing.Size(318, 35);
             this.btnGuardarRamo.TabIndex = 6;
             this.btnGuardarRamo.Text = "GENERAR ARREGLO FLORAL";
             this.btnGuardarRamo.UseVisualStyleBackColor = false;
             this.btnGuardarRamo.Click += new System.EventHandler(this.btnGuardarRamo_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 201);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(327, 379);
-            this.flowLayoutPanel1.TabIndex = 5;
-            this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(88)))), ((int)(((byte)(42)))));
-            this.label2.Location = new System.Drawing.Point(27, 612);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 23);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "TOTAL ITEMS:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(27, 584);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 23);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "SUBTOTAL:";
-            // 
-            // bntCancelar
-            // 
-            this.bntCancelar.AutoSize = true;
-            this.bntCancelar.BackColor = System.Drawing.Color.White;
-            this.bntCancelar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntCancelar.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.bntCancelar.Location = new System.Drawing.Point(22, 744);
-            this.bntCancelar.Name = "bntCancelar";
-            this.bntCancelar.Size = new System.Drawing.Size(290, 37);
-            this.bntCancelar.TabIndex = 2;
-            this.bntCancelar.Text = "CANCELAR";
-            this.bntCancelar.UseVisualStyleBackColor = false;
-            this.bntCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // bntAgregarP
-            // 
+
+            // ── bntAgregarP ───────────────────────────────────────────
+            this.bntAgregarP.Anchor = System.Windows.Forms.AnchorStyles.Bottom      // <-- CAMBIO
+                                    | System.Windows.Forms.AnchorStyles.Left
+                                    | System.Windows.Forms.AnchorStyles.Right;
             this.bntAgregarP.AutoSize = true;
-            this.bntAgregarP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(88)))), ((int)(((byte)(42)))));
-            this.bntAgregarP.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntAgregarP.BackColor = System.Drawing.Color.FromArgb(0, 88, 42);
+            this.bntAgregarP.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.bntAgregarP.ForeColor = System.Drawing.Color.White;
-            this.bntAgregarP.Location = new System.Drawing.Point(21, 693);
+            this.bntAgregarP.Location = new System.Drawing.Point(5, 620);
             this.bntAgregarP.Name = "bntAgregarP";
-            this.bntAgregarP.Size = new System.Drawing.Size(290, 43);
+            this.bntAgregarP.Size = new System.Drawing.Size(318, 35);
             this.bntAgregarP.TabIndex = 1;
             this.bntAgregarP.Text = "AGREGAR A LA VENTA";
             this.bntAgregarP.UseVisualStyleBackColor = false;
             this.bntAgregarP.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // lbResumen
-            // 
-            this.lbResumen.AutoSize = true;
-            this.lbResumen.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbResumen.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lbResumen.Location = new System.Drawing.Point(7, 173);
-            this.lbResumen.Name = "lbResumen";
-            this.lbResumen.Size = new System.Drawing.Size(180, 23);
-            this.lbResumen.TabIndex = 0;
-            this.lbResumen.Text = "RESUMEN SELECCION";
-            // 
-            // flpnlitems
-            // 
-            this.flpnlitems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+
+            // ── bntCancelar ───────────────────────────────────────────
+            this.bntCancelar.Anchor = System.Windows.Forms.AnchorStyles.Bottom      // <-- CAMBIO
+                                    | System.Windows.Forms.AnchorStyles.Left
+                                    | System.Windows.Forms.AnchorStyles.Right;
+            this.bntCancelar.AutoSize = true;
+            this.bntCancelar.BackColor = System.Drawing.Color.White;
+            this.bntCancelar.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.bntCancelar.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.bntCancelar.Location = new System.Drawing.Point(5, 660);
+            this.bntCancelar.Name = "bntCancelar";
+            this.bntCancelar.Size = new System.Drawing.Size(318, 30);
+            this.bntCancelar.TabIndex = 2;
+            this.bntCancelar.Text = "CANCELAR";
+            this.bntCancelar.UseVisualStyleBackColor = false;
+            this.bntCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+
+            // ── flpnlitems (panel productos izquierda) ────────────────
+            this.flpnlitems.Anchor = System.Windows.Forms.AnchorStyles.Top
+                                   | System.Windows.Forms.AnchorStyles.Bottom
+                                   | System.Windows.Forms.AnchorStyles.Left
+                                   | System.Windows.Forms.AnchorStyles.Right;       // ya estaba bien
             this.flpnlitems.AutoScroll = true;
-            this.flpnlitems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            this.flpnlitems.Location = new System.Drawing.Point(0, 115);
-            this.flpnlitems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.flpnlitems.BackColor = System.Drawing.Color.FromArgb(248, 250, 252);
+            this.flpnlitems.Location = new System.Drawing.Point(0, 100);
             this.flpnlitems.Name = "flpnlitems";
-            this.flpnlitems.Size = new System.Drawing.Size(972, 635);
+            this.flpnlitems.Size = new System.Drawing.Size(694, 668);              // <-- ajustado
             this.flpnlitems.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(643, 65);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 23);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "BUSCAR";
-            // 
-            // FrmSeleccionMenu
-            // 
+
+            // ── FrmSeleccionMenu ──────────────────────────────────────
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1306, 750);
+            this.ClientSize = new System.Drawing.Size(1024, 768);                   // <-- CAMBIO base 1024x768
+            this.MinimumSize = new System.Drawing.Size(900, 650);                   // <-- NUEVO mínimo
             this.Controls.Add(this.pnlSuperior);
             this.Controls.Add(this.flpnlitems);
             this.Controls.Add(this.pnlIzquierda);
-            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmSeleccionMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -261,7 +260,6 @@ namespace POS
             this.pnlIzquierda.ResumeLayout(false);
             this.pnlIzquierda.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion

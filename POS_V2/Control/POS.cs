@@ -203,14 +203,39 @@ namespace POS.Control
                 factura.EstTcpIpPinpad = pto.EsTcipPinpad;
                 factura.PuertoPinPad = pto.puerto_pinpad;
 
+                //if (factura.Documento == "F")
+                //{
+                //    //* CAMBIO TEMPORAL PARA FACTURACION ELECTRONICA DE GRAN MANZANA *//
+                //    /*if (factura.Establecimiento != "012")
+                //    {
+                //        var recibo = db.core_recibo.Single(x => x.identificador == "FACTURA");
+                //        factura.Recibo = recibo.cuerpo;
+                //    }*/
+                //    st1 = stopwatch.ElapsedMilliseconds;
+                //    var recibo = db.core_recibo.Where(x => x.identificador == (Control.Common.GlobalParameters.ComprobanteFactura + "_" + Control.Common.GlobalParameters.EstablecimientoAxCode)).FirstOrDefault();
+                //    st2 = stopwatch.ElapsedMilliseconds;
+                //    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar init", "core_recibo1", st1.ToString() + " " + st2.ToString() + ":" + (st2 - st1).ToString());
+                //    if (recibo == null)
+                //    {
+                //        st1 = stopwatch.ElapsedMilliseconds;
+                //        recibo = db.core_recibo.Where(x => x.identificador == Control.Common.GlobalParameters.ComprobanteFactura).FirstOrDefault();
+                //        st2 = stopwatch.ElapsedMilliseconds;
+                //        Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar init", "core_recibo2", st1.ToString() + " " + st2.ToString() + ":" + (st2 - st1).ToString());
+                //    }
+
+
+                //    factura.Recibo = recibo.cuerpo;
+
+                //}
+                //else if (factura.Documento == "R")
+                //{
+                //    var recibo = db.core_recibo.Single(x => x.identificador == "RECIBO_GIFTCARD");
+                //    factura.Recibo = recibo.cuerpo;
+                //}
+
+                //debug jchid para impresion 17/04/2026
                 if (factura.Documento == "F")
                 {
-                    //* CAMBIO TEMPORAL PARA FACTURACION ELECTRONICA DE GRAN MANZANA *//
-                    /*if (factura.Establecimiento != "012")
-                    {
-                        var recibo = db.core_recibo.Single(x => x.identificador == "FACTURA");
-                        factura.Recibo = recibo.cuerpo;
-                    }*/
                     st1 = stopwatch.ElapsedMilliseconds;
                     var recibo = db.core_recibo.Where(x => x.identificador == (Control.Common.GlobalParameters.ComprobanteFactura + "_" + Control.Common.GlobalParameters.EstablecimientoAxCode)).FirstOrDefault();
                     st2 = stopwatch.ElapsedMilliseconds;
@@ -222,16 +247,24 @@ namespace POS.Control
                         st2 = stopwatch.ElapsedMilliseconds;
                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar init", "core_recibo2", st1.ToString() + " " + st2.ToString() + ":" + (st2 - st1).ToString());
                     }
-                        
 
                     factura.Recibo = recibo.cuerpo;
 
+                    // ============ DIAG LOG INIT ============
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info,
+                        "MainWindow", "DiagImpresion",
+                        $"[DIAG-INIT] Recibo cargado en init | " +
+                        $"Buscó: [{Control.Common.GlobalParameters.ComprobanteFactura + "_" + Control.Common.GlobalParameters.EstablecimientoAxCode}] | " +
+                        $"Encontró: [{recibo?.identificador ?? "NULL"}] | " +
+                        $"Largo: {recibo?.cuerpo?.Length ?? 0}");
+                    // ============ FIN DIAG LOG INIT ============
                 }
                 else if (factura.Documento == "R")
                 {
                     var recibo = db.core_recibo.Single(x => x.identificador == "RECIBO_GIFTCARD");
                     factura.Recibo = recibo.cuerpo;
                 }
+                //debug jchid para impresion 17/04/2026
                 st1 = stopwatch.ElapsedMilliseconds;
                 var aperturaCaja = db.BG_Apertura
                              .FirstOrDefault(x => x.CEDULA == cedula && x.FECHA == hoy.Date && x.CERRADO == 0 && x.PRE_CIERRE == 0);

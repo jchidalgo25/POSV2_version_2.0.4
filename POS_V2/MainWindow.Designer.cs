@@ -488,7 +488,7 @@ namespace POS
             this.panelToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelToolbar.Location = new System.Drawing.Point(0, 0);
             this.panelToolbar.Name = "panelToolbar";
-            this.panelToolbar.Size = new System.Drawing.Size(1026, 77);
+            this.panelToolbar.Size = new System.Drawing.Size(1024, 77);
             this.panelToolbar.TabIndex = 0;
             // 
             // btnPagar
@@ -1071,7 +1071,7 @@ namespace POS
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 534);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1026, 70);
+            this.panel3.Size = new System.Drawing.Size(1024, 87);
             this.panel3.TabIndex = 1;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
