@@ -60,21 +60,24 @@ namespace POS.Control.Security
 
                     Task.Run(() =>
                     {
-                        using (var frmWallpaper = new Control.Security.Wallpaper())
+                        if (!Control.Common.GlobalParameters.VerificationInProgress)
                         {
-                            ////Control.Security.Wallpaper frmWallpaper = new Control.Security.Wallpaper();
-                            //frmWallpaper.Location = new Point(
-                            //                screenCajero.WorkingArea.Left + (screenCajero.WorkingArea.Width - frmWallpaper.Width) / 2,
-                            //                screenCajero.WorkingArea.Top + (screenCajero.WorkingArea.Height - frmWallpaper.Height) / 2);
+                            using (var frmWallpaper = new Control.Security.Wallpaper())
+                            {
+                                ////Control.Security.Wallpaper frmWallpaper = new Control.Security.Wallpaper();
+                                //frmWallpaper.Location = new Point(
+                                //                screenCajero.WorkingArea.Left + (screenCajero.WorkingArea.Width - frmWallpaper.Width) / 2,
+                                //                screenCajero.WorkingArea.Top + (screenCajero.WorkingArea.Height - frmWallpaper.Height) / 2);
 
-                            //frmWallpaper.FormBorderStyle = FormBorderStyle.None;
-                            //frmWallpaper.StartPosition = FormStartPosition.Manual;
-                            //frmWallpaper.Bounds = screenCajero.Bounds;
-                            //frmWallpaper.TopMost = true;
-                            frmWallpaper.StartPosition = FormStartPosition.CenterScreen;
-                            frmWallpaper.WindowState = FormWindowState.Maximized;
-                            frmWallpaper.ShowInTaskbar = false;
-                            frmWallpaper.ShowDialog();
+                                //frmWallpaper.FormBorderStyle = FormBorderStyle.None;
+                                //frmWallpaper.StartPosition = FormStartPosition.Manual;
+                                //frmWallpaper.Bounds = screenCajero.Bounds;
+                                //frmWallpaper.TopMost = true;
+                                frmWallpaper.StartPosition = FormStartPosition.CenterScreen;
+                                frmWallpaper.WindowState = FormWindowState.Maximized;
+                                frmWallpaper.ShowInTaskbar = false;
+                                frmWallpaper.ShowDialog();
+                            }
                         }
 
                     });

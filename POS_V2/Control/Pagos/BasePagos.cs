@@ -1808,47 +1808,174 @@ namespace POS.Control.Pagos
                 var porc_iva = Control.Common.GlobalParameters.IVAGEN / 100;
                 var PorcPromo = Control.Common.GlobalParameters.DESC_PROMO_IVA;/// Decimal.Parse((pos.core_parametro.First(x => x.identificador == "DESC_PROMO_IVA").parametro2));
                 var porc_pago = (decimal.Parse(txtValor.Text) / _factura.GetTotal());
+                //decimal porc_Desc2 = 0;
+
+                //if (_facturaApp == null)
+                //{
+                //    porc_Desc2 = 0;
+                //}
+                //else
+                //    if (_facturaApp.Descuentos2.Count > 0)
+                //    {
+                //        porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
+                //    }
+
+                //var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
+                //base0 = base0 - (base0 * (porc_Desc2 / 100));
+                //var base12 = _factura.GetBase12DescPromoIVA(false);
+                //base12 = base12 - (base12 * (porc_Desc2 / 100));
+
+                //prueba cuando existe descuento 2 JCHID
+                //decimal porc_Desc2 = 0;
+
+                //if (_facturaApp != null && _facturaApp.Descuentos2.Count > 0)
+                //{
+                //    porc_Desc2 = _facturaApp.getDescuentos2();
+                //}
+
+                //var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
+                //var base12 = _factura.GetBase12DescPromoIVA(false);
+
+                //if (porc_Desc2 > 0)
+                //{
+                //    decimal proporcion = porc_Desc2 / (base0 + base12 + decimal.Round(base12 * porc_iva, 2) + porc_Desc2);
+                //    base0 = base0 - decimal.Round(base0 * proporcion, 2, MidpointRounding.AwayFromZero);
+                //    base12 = base12 - decimal.Round(base12 * proporcion, 2, MidpointRounding.AwayFromZero);
+                //}
+
+                //// end jchid
+
+                //var base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
+                //if (_factura.GetPromoIva() > 0)
+                //{
+                //    base12 = base12 - ((base12 * PorcPromo) / 100);
+                //}
+
+                //base12 += base12PromoIVAExcluye;
+                //var iva = decimal.Round(base12 * porc_iva, 2);
+                //trama.montoTotalTransaccion = valpag;//12N 10N2D
+
+                //if (decimal.Parse(txtValor.Text) == _factura.GetTotal())
+                //{
+                //    trama.montoBaseGravaIVa = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0'); //12N 10N2D
+                //    trama.montoBaseNoGravaIVa = decimal.Round(((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0) * porc_pago), 2, MidpointRounding.ToEven).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D
+                //    trama.impuestoIvaTransaccion = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D              
+                //}
+                //else
+                //{
                 decimal porc_Desc2 = 0;
 
-                if (_facturaApp == null)
+                if (_facturaApp != null && _facturaApp.Descuentos2.Count > 0)
                 {
-                    porc_Desc2 = 0;
+                    porc_Desc2 = _facturaApp.getDescuentos2();
                 }
-                else
-                    if (_facturaApp.Descuentos2.Count > 0)
-                    {
-                        porc_Desc2 = _facturaApp.Descuentos2.Max(x => x.Porcentaje);
-                    }
 
                 var base0 = _factura.GetBase0() - (_factura.GetDescuentos() - (_factura.GetBase12() - _factura.GetBase12Desc()));
-                base0 = base0 - (base0 * (porc_Desc2 / 100));
                 var base12 = _factura.GetBase12DescPromoIVA(false);
-                base12 = base12 - (base12 * (porc_Desc2 / 100));
 
                 var base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
                 if (_factura.GetPromoIva() > 0)
                 {
                     base12 = base12 - ((base12 * PorcPromo) / 100);
                 }
-
                 base12 += base12PromoIVAExcluye;
                 var iva = decimal.Round(base12 * porc_iva, 2);
-                trama.montoTotalTransaccion = valpag;//12N 10N2D
+
+                if (porc_Desc2 > 0)
+                {
+                    var totalBase = base0 + base12;
+                    var desc0 = decimal.Round((base0 / totalBase) * porc_Desc2, 2, MidpointRounding.AwayFromZero);
+                    var desc12 = porc_Desc2 - desc0;
+
+                    base0 = base0 - desc0;
+                    base12 = base12 - desc12;
+                    iva = decimal.Round(base12 * porc_iva, 2);
+                }
+
+                //trama.montoTotalTransaccion = valpag;
+
+
+
+
+                //if (decimal.Parse(txtValor.Text) == _factura.GetTotal())
+                //{
+                //    // jchid diferencia de 0.001 en el calculo del proporcional, se redondea a 2 decimales para evitar que el valor a enviar al pinpad sea diferente al de la pantalla
+                //    decimal b12Calc = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero);
+                //    decimal ivaCalc = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero);
+
+
+
+                //    trama.montoBaseGravaIVa = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                //    trama.montoBaseNoGravaIVa = decimal.Round(((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0) * porc_pago), 2, MidpointRounding.ToEven).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                //    trama.impuestoIvaTransaccion = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                //}
+                //else
+                //{
+
+                //    base12 = Decimal.Round(base12 * porc_pago, 2);
+                //    iva = decimal.Round(base12 * porc_iva, 2);
+                //    base0 = decimal.Parse(txtValor.Text) - base12 - iva;
+
+                //    if (base0 < decimal.Parse("0"))
+                //    {
+                //        porc_pago = TruncateDecimal(decimal.Parse(txtValor.Text) / _factura.GetTotal(), 2);
+                //        base12 = _factura.GetBase12DescPromoIVA(false);
+                //        base12PromoIVAExcluye = _factura.GetBase12DescPromoIVA(true);
+                //        if (_factura.GetPromoIva() > 0)
+                //        {
+                //            base12 = base12 - ((base12 * PorcPromo) / 100);
+                //        }
+                //        base12 += base12PromoIVAExcluye;
+                //        iva = decimal.Round(base12 * porc_iva, 2);
+
+                //        base12 = base12 * porc_pago;
+                //        iva = base12 * porc_iva;
+                //        base0 = decimal.Parse(txtValor.Text) - base12 - iva;
+                //    }
+
+                //    trama.montoBaseGravaIVa = (base12).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0'); //12N 10N2D
+                //    trama.montoBaseNoGravaIVa = ((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0)).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D
+                //    trama.impuestoIvaTransaccion = (iva).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D              
+                //}
+
+                // ============ INICIO PARCHE - CUADRE DE COMPONENTES ============
+                // Problema: base0 puede tener más de 2 decimales (por DescuentoAX con 6 decimales)
+                // y al redondearse independientemente, la suma base0+base12+iva puede diferir del total en $0.01.
+                // Solución: calcular base12 e iva normalmente, y derivar base0 como residuo del total.
+
+                trama.montoTotalTransaccion = valpag;
+
+                decimal totalParaTrama = decimal.Parse(txtValor.Text);
 
                 if (decimal.Parse(txtValor.Text) == _factura.GetTotal())
                 {
-                    trama.montoBaseGravaIVa = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0'); //12N 10N2D
-                    trama.montoBaseNoGravaIVa = decimal.Round(((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0) * porc_pago), 2, MidpointRounding.ToEven).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D
-                    trama.impuestoIvaTransaccion = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D              
+                    // Pago total
+                    decimal b12Calc = decimal.Round((base12 * porc_pago), 2, MidpointRounding.AwayFromZero);
+                    decimal ivaCalc = decimal.Round((iva * porc_pago), 2, MidpointRounding.AwayFromZero);
+
+                    // base0 como RESIDUO: garantiza que b12 + b0 + iva == total siempre
+                    decimal b0Calc = totalParaTrama - b12Calc - ivaCalc;
+                    if (b0Calc < 0m) b0Calc = 0m;
+
+                    // Log de validación
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos",
+                        "ProcesaPinpadBackgroundMultiRed",
+                        $"CUADRE_TRAMA (pagoTotal): Total={totalParaTrama}, Base12={b12Calc}, Base0={b0Calc}, IVA={ivaCalc}, Suma={b12Calc + b0Calc + ivaCalc}, Cuadra={totalParaTrama == (b12Calc + b0Calc + ivaCalc)}");
+
+                    trama.montoBaseGravaIVa = b12Calc.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                    trama.montoBaseNoGravaIVa = b0Calc.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                    trama.impuestoIvaTransaccion = ivaCalc.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
                 }
                 else
                 {
-
+                    // Pago parcial
                     base12 = Decimal.Round(base12 * porc_pago, 2);
                     iva = decimal.Round(base12 * porc_iva, 2);
+
+                    // base0 como residuo
                     base0 = decimal.Parse(txtValor.Text) - base12 - iva;
 
-                    if (base0 < decimal.Parse("0"))
+                    if (base0 < 0m)
                     {
                         porc_pago = TruncateDecimal(decimal.Parse(txtValor.Text) / _factura.GetTotal(), 2);
                         base12 = _factura.GetBase12DescPromoIVA(false);
@@ -1858,17 +1985,25 @@ namespace POS.Control.Pagos
                             base12 = base12 - ((base12 * PorcPromo) / 100);
                         }
                         base12 += base12PromoIVAExcluye;
+
+                        base12 = decimal.Round(base12 * porc_pago, 2);
                         iva = decimal.Round(base12 * porc_iva, 2);
 
-                        base12 = base12 * porc_pago;
-                        iva = base12 * porc_iva;
+                        // Residuo otra vez
                         base0 = decimal.Parse(txtValor.Text) - base12 - iva;
+                        if (base0 < 0m) base0 = 0m;
                     }
 
-                    trama.montoBaseGravaIVa = (base12).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0'); //12N 10N2D
-                    trama.montoBaseNoGravaIVa = ((base0 < decimal.Parse("0") ? decimal.Parse("0") : base0)).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D
-                    trama.impuestoIvaTransaccion = (iva).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');//12N 10N2D              
+                    // Log de validación
+                    Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "BasePagos",
+                        "ProcesaPinpadBackgroundMultiRed",
+                        $"CUADRE_TRAMA (pagoParcial): Total={txtValor.Text}, Base12={base12}, Base0={base0}, IVA={iva}, Suma={base12 + base0 + iva}, Cuadra={decimal.Parse(txtValor.Text) == (base12 + base0 + iva)}");
+
+                    trama.montoBaseGravaIVa = base12.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                    trama.montoBaseNoGravaIVa = (base0 < 0m ? 0m : base0).ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
+                    trama.impuestoIvaTransaccion = iva.ToString("N2").Replace(".", "").Replace(",", "").PadLeft(12, '0');
                 }
+                // ============ FIN PARCHE - CUADRE DE COMPONENTES ============
 
                 trama.impuestoServicioTransaccion = "";//12N 10N2D
                 trama.popinaTransaccion = "";//12N 10N2D

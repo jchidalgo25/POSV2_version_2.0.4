@@ -45,7 +45,21 @@ namespace POS.Control.ToolBox
             CenterToScreen();
         }
 
+        public frmTecladoCompleto(TextBox referenciaTextBox, Screen pantalla)
+        {
+            textBoxActivo = referenciaTextBox;
+            InitializeComponent1();
+            CrearBotones();
 
+            this.StartPosition = FormStartPosition.Manual;
+            this.Load += (s, e) =>
+            {
+                // Posicionar después de que el form tenga tamaño real
+                int x = pantalla.WorkingArea.Left + (pantalla.WorkingArea.Width - this.Width) / 2;
+                int y = pantalla.WorkingArea.Bottom - this.Height - 10;
+                this.Location = new Point(x, y);
+            };
+        }
 
         void InitializeComponent1()
         {

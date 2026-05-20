@@ -109,7 +109,6 @@ namespace POS.Control.CajaPinpad
                             string IPPinPad = string.Empty;
                             int PuertoPinPad = 0;
                             bool EstTcpIpPinpad = false;
-                            bool isPinPadMultiRed = false;
 
 
                             switch (detConsulta.Autorizador)
@@ -130,11 +129,8 @@ namespace POS.Control.CajaPinpad
                             Control.Common.GlobalParameters.PuertoPinPad = PuertoPinPad;
                             Control.Common.GlobalParameters.EstTcpIpPinpad = EstTcpIpPinpad;
 
-                            if (data["isPinPadMultiRed"].ToString() == "True")
-                            {
-                                isPinPadMultiRed = true;
-                                Control.Common.GlobalParameters.PINPAD_MULTIRED = true;
-                            }
+                            Control.Common.GlobalParameters.PINPAD_MULTIRED =
+                                data["isPinPadMultiRed"].ToString().Equals("True", StringComparison.OrdinalIgnoreCase);
                             
                         }
                     }
@@ -197,7 +193,7 @@ namespace POS.Control.CajaPinpad
                             detPinnPad.EsPinPadMultiRed = isPinPadMultiRed;
 
 
-                            //detPinnPad.LoteAustro = Int32.Parse(data["LoteAustro"].ToString());
+                            //detPinnPad.LoteAustro = Int32.Parse(data["LoteAustro"].ToString();
 
 
                         }

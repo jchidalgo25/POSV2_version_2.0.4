@@ -953,7 +953,7 @@ namespace POS.Models
         public decimal getDescuentos2()
         {
             if (this.Descuentos2.Count > 0)
-                return decimal.Round(this.Descuentos2.Max(x => x.Valor), 2, MidpointRounding.AwayFromZero);
+                return decimal.Round(this.Descuentos2.Sum(x => x.Valor), 2, MidpointRounding.AwayFromZero);
             else
                 return 0M;
         }
@@ -3882,7 +3882,8 @@ namespace POS.Models
                 texto = texto.Replace("<<factura_fecha>>", DateTime.Now.ToString());
                 var viewFac = db.ViewFacturasUsuarios.Where(x => x.usuario == this.User.username && x.establecimiento == this.Establecimiento && x.fecha.Value.Year == DateTime.Now.Year && x.fecha.Value.Month == DateTime.Now.Month && x.fecha.Value.Day == DateTime.Now.Day);
 
-                System.Text.RegularExpressions.Regex regexfact = new System.Text.RegularExpressions.Regex(@"<plantillaFact>(.*)\</plantillaFact>");
+                System.Text.RegularExpressions.Regex regexfact = new System.Text.RegularExpressions.Regex(@"<plantillaFact>(.*)</plantillaFact>",
+                System.Text.RegularExpressions.RegexOptions.Singleline);
                 StringBuilder fact = new StringBuilder();
                 decimal total = 0M;
                 foreach (var factura in viewFac)
@@ -3897,7 +3898,9 @@ namespace POS.Models
                 fact.AppendLine("Total Acumulado: $" + String.Format("{0,8:0.00}", total));
                 texto = regexfact.Replace(texto, fact.ToString());
 
-                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"<plantillaPago>(.*)\</plantillaPago>");
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"<plantillaPago>(.*)</plantillaPago>",
+                System.Text.RegularExpressions.RegexOptions.Singleline);
+
                 StringBuilder pagos = new StringBuilder();
 
                 var viewUs = db.ViewFacturaPagoUsuarios.Where(x => x.usuario == this.User.username && x.establecimiento == this.Establecimiento && x.fecha.Value.Year == DateTime.Now.Year && x.fecha.Value.Month == DateTime.Now.Month && x.fecha.Value.Day == DateTime.Now.Day);
@@ -3909,7 +3912,7 @@ namespace POS.Models
                     {
                         foreach (var registro in db.ViewPagoDetalleUsuarios.Where(x => x.tipo_id == detalle.valor && x.usuario == this.User.username && x.establecimiento == this.Establecimiento && x.fecha.Value.Year == DateTime.Now.Year && x.fecha.Value.Month == DateTime.Now.Month && x.fecha.Value.Day == DateTime.Now.Day))
                         {
-                            pagos.AppendLine(" - " + registro.datos.Substring(0, registro.datos.Length > 25 ? 25 : registro.datos.Length) + "     $" + registro.valor);
+                            pagos.AppendLine(" - " + registro.datos.Substring(0, registro.datos.Length > 25 ? 25 : registro.datos.Length) + "  $" + String.Format("{0,8:0.00}", registro.valor));
                         }
                     }
                 }
@@ -5494,7 +5497,7 @@ namespace POS.Models
         }
 
 
-        public void prepararImpresionCupones4(Factura factura, long promoId)
+        public void prepararImpresionCupones4(Factura factura, long promoId, string bin = "")
         {
             string sQuery = string.Empty;
             DataSet dtsConsulta = new DataSet();
@@ -5510,6 +5513,7 @@ namespace POS.Models
                 sQuery = string.Concat(sQuery, $"   @establecimiento = '{factura.Establecimiento}' ", Environment.NewLine);
                 sQuery = string.Concat(sQuery, $"   , @punto_emision = '{factura.PtoEmision}' ", Environment.NewLine);
                 sQuery = string.Concat(sQuery, $"   , @numero_factura = {factura.Secuencia} ", Environment.NewLine);
+                sQuery = string.Concat(sQuery, $"   , @bin = '{bin}' ", Environment.NewLine); // ✅ NUEVO
                 dtsConsulta = Control.Common.General.GetDataSet(sQuery, connectionMark);
 
                 if (dtsConsulta.Tables.Count > 0)

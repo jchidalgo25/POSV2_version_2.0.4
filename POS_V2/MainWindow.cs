@@ -116,6 +116,9 @@ namespace POS
         // En MainWindow.cs o clase donde lo estés creando
         private frmMainTouchClte frmTouchClte;
         private int _segundosEncuestaGlobal = 30;
+        private System.Windows.Forms.Timer _timerMenuEncuesta = null;
+        private frmEncuestaEnCurso _frmEncuestaEnCurso;
+        private bool _menuInicialLlamado = false;
         //private frmPromocionPantallaCliente frmPromocionPantallaCliente;
 
         //loading object
@@ -1011,6 +1014,16 @@ namespace POS
                 txtCedula.Text = "";
             }
 
+            if (!char.IsControl(e.KeyChar) && txtCedula.Text.Length == 0)
+            {
+                frmTouchClte = Control.Common.GlobalParameters.frmTouchClte;
+                if (Control.Common.GlobalParameters.PANTALLA_CLIENTE
+                    && frmTouchClte != null
+                    && !frmTouchClte.IsDisposed)
+                {
+                    frmTouchClte.OcultarPublicidad();
+                }
+            }
 
             if (txtCedula.Text.Length != txtCedula.SelectionStart)
             {
@@ -1274,6 +1287,8 @@ namespace POS
                         lblEtiquetaSaldo.Visible = true;
                         lblSaldoTarjeta.Visible = true;
                         lblSaldoTarjeta.Text = "$ " + tarjeta.saldo.ToString("N2");
+                        GlobalclteEmpleado.SaldoCompraGratis = tarjeta.saldo;
+
                     }
                     else
                     {
@@ -1504,7 +1519,7 @@ namespace POS
                     {
                         LimpiarClienteCompraGratis();
                         tempo666.Start();
-
+                        
                         Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "txtCedula_KeyPress", "validaClienteSp - El cajero ha pistoleado la Tarjeta Virtual : " + txtCedula.Text);
 
                         txtCedula.Text = clteEmpleado.Identificacion;
@@ -1559,6 +1574,43 @@ namespace POS
                         var validaSaldos = MetodosBilletera.RecuperaSaldosPorIdentificacion(clteEmpleado.Identificacion);
 
                         clteEmpleado.SaldoApp = validaSaldos.SaldoMonedero;
+                        try
+                        {
+                            if (POS.Control.Common.GlobalParameters.CompraGratis)
+                            {
+                                string idTarjeta = clteEmpleado.Identificacion;
+                                if (!string.IsNullOrEmpty(idTarjeta))
+                                {
+                                    using (var db = new POSEntities())
+                                    {
+                                        // Validar fechas
+                                        var paramInicio = db.core_parametro
+                                            .FirstOrDefault(x => x.identificador == "COMPRA_GRATIS_FECHA_INICIO_CONSUMO");
+                                        var paramFin = db.core_parametro
+                                            .FirstOrDefault(x => x.identificador == "COMPRA_GRATIS_FECHA_FIN_CONSUMO");
+
+                                        bool dentroDeRango = false;
+                                        if (paramInicio != null && paramFin != null)
+                                        {
+                                            DateTime fechaInicio = DateTime.Parse(paramInicio.valor);
+                                            DateTime fechaFin = DateTime.Parse(paramFin.valor);
+                                            DateTime hoy = DateTime.Now.Date;
+                                            dentroDeRango = (hoy >= fechaInicio && hoy <= fechaFin);
+                                        }
+
+                                        // Solo obtener saldo si está dentro del rango
+                                        if (dentroDeRango)
+                                        {
+                                            var tarjeta = db.core_TarjetaDescuento
+                                                .FirstOrDefault(t => t.codigo == "666" + idTarjeta && t.activo == true);
+                                            if (tarjeta != null)
+                                                clteEmpleado.SaldoCompraGratis = tarjeta.saldo;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch { }
 
                     }
 
@@ -2573,6 +2625,8 @@ namespace POS
             {
 
                 frmTouchClte.ActualizarDatosCliente(null);
+                frmTouchClte.MostrarPublicidad();
+
             }
         }
 
@@ -2763,6 +2817,8 @@ namespace POS
         private void llamaMenuInicial()
         {
             // msgBoxCtrl = new MsgBoxCtrl();
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "llamaMenuInicial",
+       $"LLAMADA | StackTrace: {new System.Diagnostics.StackTrace().ToString().Substring(0, Math.Min(500, new System.Diagnostics.StackTrace().ToString().Length))}");
 
             try
             {
@@ -3580,6 +3636,9 @@ namespace POS
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindows_Load", "Saldo Compra Gratis ");
                 ActualizarSaldoCliente();
 
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindows_Load", "Tiempo de para Encuesto Global");
+                CargarTiempoEncuestaGlobal();
+
                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "MainWindow_Shown", "PANTALLA_CLIENTE");
                 if (Control.Common.GlobalParameters.PANTALLA_CLIENTE)
                 {
@@ -3605,7 +3664,7 @@ namespace POS
                                     Control.Common.Enum.LogTypes.Info,
                                     "MainWindow", "MainWindows_Load",
                                     "Sincronizando factura temporal con pantalla secundaria");
-
+                                frmTouchClte.OcultarPublicidad();
                                 // Productos
                                 FacturaService.NotificarProductosActualizados(_factura.Productos);
 
@@ -14486,6 +14545,7 @@ namespace POS
                         }
                         catch (Exception ex)
                         {
+
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "btnGrabar_Click", "Ocurrió un problema en el bloque de código donde se actualiza el secuencial, a continuación el detalle de lo ocurrido - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex) + Environment.NewLine + "StackTrace:" + Environment.NewLine + ex.StackTrace);
 
                             List<ParametrosMensajes> parametrosError = new List<ParametrosMensajes>();
@@ -14883,6 +14943,8 @@ namespace POS
             var st1 = stopwatch.ElapsedMilliseconds;
             var facturaGrabada = false;
             string cedulaClienteParaCupon = this.txtCedula.Text;
+            //bool menuInicialLlamado = false;
+            _menuInicialLlamado = false;
 
             btnGrabar.Enabled = false;
             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", "Inactiva Botón de Grabar");
@@ -15313,7 +15375,8 @@ namespace POS
                                 //_factura.prepararImpresionCupones3(_factura.Establecimiento, _factura.PtoEmision, _factura.Secuencia, 0);
                                 st9 = stopwatch.ElapsedMilliseconds;
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "prepararImpresionCupones4", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
-                                _factura.prepararImpresionCupones4(_factura, 0); 
+                                string binTarjeta = _factura.Pagos.FirstOrDefault(p => p.Descripcion == "T. CREDITO" && !string.IsNullOrEmpty(p.NumBin))?.NumBin ?? string.Empty;
+                                _factura.prepararImpresionCupones4(_factura, 0, binTarjeta);
 
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "MainWindow", "btnGrabar_Click", "Recorro lista de Pagos ");
 
@@ -15672,39 +15735,25 @@ namespace POS
                             {
                                 st8 = stopwatch.ElapsedMilliseconds;
                                 frmTouchClte.ActualizarDatosCliente(null);
+                                frmTouchClte.EncuestaTerminada -= FrmTouchClte_EncuestaTerminada; // evitar doble suscripción
+                                frmTouchClte.EncuestaTerminada += FrmTouchClte_EncuestaTerminada;
+                                frmTouchClte.PreguntaAbiertaRecibida -= FrmTouchClte_PreguntaAbiertaRecibida;
+                                frmTouchClte.PreguntaAbiertaRecibida += FrmTouchClte_PreguntaAbiertaRecibida;
                                 st9 = stopwatch.ElapsedMilliseconds;
                                 Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "ActualizarDatosCliente", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
 
-                                // ── Mostrar encuesta de satisfacción ──────────────────────
-                                int segundosEncuesta = 30;
-                                try
-                                {
-                                    using (var dbEnc = new POSEntities())
-                                    {
-                                        var param = dbEnc.core_parametro
-                                            .FirstOrDefault(x => x.identificador == "ENCUESTA_SEGUNDOS");
-                                        if (param != null)
-                                            int.TryParse(param.valor, out segundosEncuesta);
-                                    }
-                                }
-                                catch { }
-
-                                // ── Guardar para el timer del menú ──
-                                _segundosEncuestaGlobal = segundosEncuesta;
-
-                                frmTouchClte.MostrarEncuestaSatisfaccion(
-                                     segundos: segundosEncuesta,
-                                     numeroFactura: facturaNumero,
-                                     identificacion: facturaCliente,
-                                     nombreCliente: facturaClienteNombre
-                                 );
-
+                                // ── Mostrar encuesta nueva directamente ──
+                                frmTouchClte.MostrarEncuestaNueva(
+                                    numeroFactura: facturaNumero,
+                                    identificacion: facturaCliente,
+                                    nombreCliente: facturaClienteNombre
+                                );
 
                                 Control.Common.Logger.LogMessage(
                                     Control.Common.Enum.LogTypes.Info,
                                     "MainWindow", "ejecutaGrabar",
-                                    $"Encuesta mostrada por {segundosEncuesta} segundos");
-                                // ─────────────────────────────────────────────────────────
+                                    $"Encuesta nueva mostrada | Factura:{facturaNumero}");
+                                // ────────────────────────────────────────
                             }
 
                         }
@@ -15945,30 +15994,245 @@ namespace POS
 
             if (_validafactura)
             {
-                // ── Si hay pantalla secundaria, esperar que termine la encuesta ──
-                if (Control.Common.GlobalParameters.PANTALLA_CLIENTE
-                    && Control.Common.GlobalParameters.frmTouchClte != null
-                    && !Control.Common.GlobalParameters.frmTouchClte.IsDisposed)
+                try
                 {
-                    // Delay igual al tiempo de la encuesta antes de mostrar menú
-                    var timerMenu = new System.Windows.Forms.Timer();
-                    timerMenu.Interval = _segundosEncuestaGlobal * 1000;
-                    timerMenu.Tick += (s, ev) =>
+                    if (Control.Common.GlobalParameters.PANTALLA_CLIENTE
+                        && Control.Common.GlobalParameters.frmTouchClte != null
+                        && !Control.Common.GlobalParameters.frmTouchClte.IsDisposed)
                     {
-                        timerMenu.Stop();
-                        timerMenu.Dispose();
-                        llamaMenuInicial();
-                    };
-                    timerMenu.Start();
+                        // Verificar si hay preguntas activas
+                        bool hayPreguntasActivas = false;
+                        try
+                        {
+                            using (var db = new POSEntities())
+                            {
+                                string estCheck = Control.Common.GlobalParameters.Establecimiento ?? "";
+                                hayPreguntasActivas = db.Database.SqlQuery<int>(@"
+                        SELECT COUNT(*) FROM dbo.pos_encuesta_pregunta
+                        WHERE activo = 1
+                        AND (
+                            establecimiento IS NULL 
+                            OR establecimiento = '' 
+                            OR ',' + establecimiento + ',' LIKE '%,' + @est + ',%'
+                        )", new System.Data.SqlClient.SqlParameter("@est", estCheck))
+                                    .FirstOrDefault() > 0;
+                            }
+                        }
+                        catch (Exception exCheck)
+                        {
+                            Control.Common.Logger.LogMessage(
+                                Control.Common.Enum.LogTypes.Error,
+                                "MainWindow", "ejecutaGrabar",
+                                $"Error verificando preguntas activas: {exCheck.Message}");
+                        }
+
+                        if (hayPreguntasActivas)
+                        {
+                            // ← CON preguntas: bloquear, mostrar popup y timer
+                            BloquearControlesCajero(true);
+
+                            _frmEncuestaEnCurso = new frmEncuestaEnCurso(_segundosEncuestaGlobal);
+                            _frmEncuestaEnCurso.Location = new Point(
+                                screenCajero.WorkingArea.Left + (screenCajero.WorkingArea.Width - _frmEncuestaEnCurso.Width) / 2,
+                                screenCajero.WorkingArea.Top + (screenCajero.WorkingArea.Height - _frmEncuestaEnCurso.Height) / 2
+                            );
+                            _frmEncuestaEnCurso.EncuestaOmitida += FrmEncuestaEnCurso_Omitida;
+                            //_frmEncuestaEnCurso.TiempoAgotado += FrmEncuestaEnCurso_TiempoAgotado;
+                            _frmEncuestaEnCurso.Show(this);
+                            _frmEncuestaEnCurso.IniciarContador();
+
+                            _timerMenuEncuesta?.Stop();
+                            _timerMenuEncuesta?.Dispose();
+
+                            _timerMenuEncuesta = new System.Windows.Forms.Timer();
+                            _timerMenuEncuesta.Interval = _segundosEncuestaGlobal * 1000;
+                            _timerMenuEncuesta.Tick += (s, ev) =>
+                            {
+                                _timerMenuEncuesta.Stop();
+                                _timerMenuEncuesta.Dispose();
+                                _timerMenuEncuesta = null;
+
+                                if (_frmEncuestaEnCurso != null)
+                                {
+                                    //_frmEncuestaEnCurso.TiempoAgotado -= FrmEncuestaEnCurso_TiempoAgotado;
+                                    _frmEncuestaEnCurso.EncuestaOmitida -= FrmEncuestaEnCurso_Omitida;
+                                    _frmEncuestaEnCurso.DetenerContador();
+                                    _frmEncuestaEnCurso.Close();
+                                    _frmEncuestaEnCurso = null;
+                                }
+
+                                try
+                                {
+                                    var frmClte = Control.Common.GlobalParameters.frmTouchClte;
+                                    if (frmClte != null && !frmClte.IsDisposed)
+                                    {
+                                        frmClte.EncuestaTerminada -= FrmTouchClte_EncuestaTerminada;
+                                        frmClte.EncuestaNuevaCargada = false;
+                                        frmClte.LimpiarEncuestaPendiente();
+                                        frmClte.MostrarPublicidad();
+                                    }
+                                }
+                                catch (Exception exTimer)
+                                {
+                                    Control.Common.Logger.LogMessage(
+                                        Control.Common.Enum.LogTypes.Error,
+                                        "MainWindow", "TimerMenuEncuesta",
+                                        $"Error: {exTimer.Message}");
+                                }
+
+                                BloquearControlesCajero(false);
+                                llamaMenuInicial();
+                            };
+                            _timerMenuEncuesta.Start();
+
+                            // ← Con encuesta activa NO llamar llamaMenuInicial() aquí
+                            // el timer o los eventos se encargan
+                            return;
+                        }
+                        // ← SIN preguntas: flujo normal igual que antes
+                    }
+
+                    // Flujo normal sin encuesta
+                    llamaMenuInicial();
                 }
-                else
+                catch (Exception ex)
                 {
+                    BloquearControlesCajero(false);
+                    _timerMenuEncuesta?.Stop();
+                    _timerMenuEncuesta?.Dispose();
+                    _timerMenuEncuesta = null;
+
+                    if (_frmEncuestaEnCurso != null)
+                    {
+                        //_frmEncuestaEnCurso.TiempoAgotado -= FrmEncuestaEnCurso_TiempoAgotado;
+                        _frmEncuestaEnCurso.EncuestaOmitida -= FrmEncuestaEnCurso_Omitida;
+                        _frmEncuestaEnCurso.DetenerContador();
+                        _frmEncuestaEnCurso.Close();
+                        _frmEncuestaEnCurso = null;
+                    }
+
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Error,
+                        "MainWindow", "ejecutaGrabar",
+                        $"Error al gestionar encuesta/timer: {ex.Message} | StackTrace: {ex.StackTrace}");
+
                     llamaMenuInicial();
                 }
             }
             var st4 = stopwatch.ElapsedMilliseconds;
             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar2", "Ejecutar grabar2", st3.ToString() + " " + st4.ToString() + ":" + (st4 - st3).ToString());
         }
+
+        private void BloquearControlesCajero(bool bloquear)
+        {
+            this.InvokeIfRequired(() =>
+            {
+                txtCedula.Enabled = !bloquear;
+                txtCodigo.Enabled = !bloquear;
+                btnCFinal.Enabled = !bloquear;
+                btnGrabar.Enabled = !bloquear;
+                btnBorrarProducto.Enabled = !bloquear;
+                btnSearchPro.Enabled = !bloquear;
+                btnQtyProduct.Enabled = !bloquear;
+                // Agrega aquí cualquier otro control que quieras bloquear
+
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Info,
+                    "MainWindow", "BloquearControlesCajero",
+                    $"Controles cajero {(bloquear ? "BLOQUEADOS" : "HABILITADOS")}");
+            });
+        }
+
+
+        private void FrmTouchClte_EncuestaTerminada(object sender, EventArgs e)
+        {
+            this.InvokeIfRequired(() =>
+            {
+                var frmClte = sender as POS.Control.Main.MainTouch.frmMainTouchClte;
+                if (frmClte != null)
+                {
+                    frmClte.EncuestaTerminada -= FrmTouchClte_EncuestaTerminada;
+                    frmClte.PreguntaAbiertaRecibida -= FrmTouchClte_PreguntaAbiertaRecibida;
+                }
+
+                if (_timerMenuEncuesta == null)
+                {
+                    Control.Common.Logger.LogMessage(
+                        Control.Common.Enum.LogTypes.Info,
+                        "MainWindow", "FrmTouchClte_EncuestaTerminada",
+                        "Timer no activo — ejecutaGrabar manejará el flujo, ignorando");
+                    return;
+                }
+
+                _timerMenuEncuesta.Stop();
+                _timerMenuEncuesta.Dispose();
+                _timerMenuEncuesta = null;
+
+                if (_frmEncuestaEnCurso != null)
+                {
+                    _frmEncuestaEnCurso.EncuestaOmitida -= FrmEncuestaEnCurso_Omitida;
+                    _frmEncuestaEnCurso.CerrarDefinitivamente(); // ← aquí
+                    _frmEncuestaEnCurso = null;
+                }
+
+                BloquearControlesCajero(false);
+                llamaMenuInicial();
+            });
+        }
+
+        private void FrmEncuestaEnCurso_Omitida(object sender, EventArgs e)
+        {
+            try
+            {
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Info,
+                    "MainWindow", "FrmEncuestaEnCurso_Omitida",
+                    "Cajero omitió la encuesta");
+
+                if (_frmEncuestaEnCurso != null)
+                {
+                    //_frmEncuestaEnCurso.TiempoAgotado -= FrmEncuestaEnCurso_TiempoAgotado;
+                    _frmEncuestaEnCurso.EncuestaOmitida -= FrmEncuestaEnCurso_Omitida;
+                    _frmEncuestaEnCurso.DetenerContador();
+                    _frmEncuestaEnCurso.Close();
+                    _frmEncuestaEnCurso = null;
+                }
+
+                // Cancelar timer
+                _timerMenuEncuesta?.Stop();
+                _timerMenuEncuesta?.Dispose();
+                _timerMenuEncuesta = null;
+
+                // Cerrar popup
+                _frmEncuestaEnCurso?.DetenerContador();
+                _frmEncuestaEnCurso = null;
+
+                // Limpiar encuesta en pantalla cliente
+                var frmClte = Control.Common.GlobalParameters.frmTouchClte;
+                if (frmClte != null && !frmClte.IsDisposed)
+                {
+                    frmClte.EncuestaTerminada -= FrmTouchClte_EncuestaTerminada;
+                    frmClte.PreguntaAbiertaRecibida -= FrmTouchClte_PreguntaAbiertaRecibida;
+                    frmClte.EncuestaNuevaCargada = false;
+                    frmClte.LimpiarEncuestaPendiente();
+                    frmClte.MostrarPublicidad();
+                }
+
+                BloquearControlesCajero(false);
+                llamaMenuInicial();
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Error,
+                    "MainWindow", "FrmEncuestaEnCurso_Omitida",
+                    $"Error: {ex.Message}");
+                BloquearControlesCajero(false);
+                llamaMenuInicial();
+            }
+        }
+        
+
         private void btnGrabar_Click(object sender, EventArgs e)
         {
             //btnGrabar.Enabled = false; // Protección contra múltiples presionados, mejora tras prueba de estrés
@@ -18369,6 +18633,14 @@ namespace POS
             LimpiarClienteCompraGratis();
             btnBorrarProducto.Enabled = true; // para cuando es devolución de IVA JCHID
             ActualizarSaldoCliente();
+
+            frmTouchClte = Control.Common.GlobalParameters.frmTouchClte;
+            if (Control.Common.GlobalParameters.PANTALLA_CLIENTE
+                && frmTouchClte != null
+                && !frmTouchClte.IsDisposed)
+            {
+                frmTouchClte.OcultarPublicidad();
+            }
         }
 
         private void btnSearchPro_Click(object sender, EventArgs e)
@@ -25039,6 +25311,7 @@ namespace POS
                         && !Control.Common.GlobalParameters.frmTouchClte.IsDisposed)
                     {
                         FacturaService.NotificarProductosActualizados(_factura.Productos);
+                        Control.Common.GlobalParameters.frmTouchClte.OcultarPublicidad();
                         Control.Common.GlobalParameters.frmTouchClte.ActualizarTotales(
                             valor: _factura.getSubTotal(),
                             descuento: _factura.getDescuentos0() + _factura.getDescuentos2() ,
@@ -25207,6 +25480,53 @@ namespace POS
             }
         }
 
+        private void FrmTouchClte_PreguntaAbiertaRecibida(object sender, PreguntaEncuesta pregunta)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() =>
+                    FrmTouchClte_PreguntaAbiertaRecibida(sender, pregunta)));
+                return;
+            }
+
+            try
+            {
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Info,
+                    "MainWindow", "FrmTouchClte_PreguntaAbiertaRecibida",
+                    $"Pregunta abierta recibida: {pregunta.pregunta}");
+
+                // ← Ocultar popup encuesta en curso mientras cajero escribe
+                _frmEncuestaEnCurso?.OcultarParaPreguntaAbierta();
+
+                Screen screenCajero = Control.Common.General.GetScreenCajero();
+                var popup = new frmPreguntaAbierta(pregunta.pregunta);
+                popup.StartPosition = FormStartPosition.Manual;
+                popup.Location = new Point(
+                    screenCajero.WorkingArea.Left + (screenCajero.WorkingArea.Width - popup.Width) / 2,
+                    screenCajero.WorkingArea.Top + (screenCajero.WorkingArea.Height - popup.Height) / 2
+                );
+
+                var resultado = popup.ShowDialog(this);
+
+                var frmClte = Control.Common.GlobalParameters.frmTouchClte;
+                if (frmClte != null && !frmClte.IsDisposed)
+                {
+                    if (resultado == DialogResult.OK)
+                        frmClte.ResponderPreguntaAbiertaDesdeCajero(1, popup.Respuesta);
+                    else
+                        frmClte.ResponderPreguntaAbiertaDesdeCajero(0, "Omitido");
+                }
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Error,
+                    "MainWindow", "FrmTouchClte_PreguntaAbiertaRecibida",
+                    $"Error: {ex.Message}");
+            }
+        }
+
         public  bool ValidaExisteTmp()
         {
             bool existe = false;
@@ -25242,6 +25562,34 @@ namespace POS
             return existe;
         }
 
+        private void CargarTiempoEncuestaGlobal()
+        {
+            try
+            {
+                using (var db = new POSEntities())
+                {
+                    var parametro = db.core_parametro
+                        .FirstOrDefault(x => x.identificador == "TIEMPO_ENCUESTA");
+
+                    if (parametro != null && int.TryParse(parametro.valor, out int segundos))
+                    {
+                        _segundosEncuestaGlobal = segundos;
+                        Control.Common.Logger.LogMessage(
+                            Control.Common.Enum.LogTypes.Info,
+                            "MainWindow", nameof(CargarTiempoEncuestaGlobal),
+                            $"Tiempo encuesta cargado desde DB: {_segundosEncuestaGlobal}s");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(
+                    Control.Common.Enum.LogTypes.Error,
+                    "MainWindow", nameof(CargarTiempoEncuestaGlobal),
+                    $"Error cargando tiempo encuesta, usando default {_segundosEncuestaGlobal}s: {ex.Message}");
+            }
+        }
+
     }
 
     public class FlorDelRamoTemp
@@ -25250,3 +25598,192 @@ namespace POS
         public decimal Cantidad { get; set; }
     }
 }
+public class frmPreguntaAbierta : Form
+{
+    public string Respuesta { get; private set; } = "";
+    public bool Omitida { get; private set; } = false;
+
+    public frmPreguntaAbierta(string pregunta)
+    {
+        this.Text = "Encuesta del cliente";
+        this.Size = new Size(600, 350);
+        this.StartPosition = FormStartPosition.CenterScreen;
+        this.FormBorderStyle = FormBorderStyle.FixedDialog;
+        this.MaximizeBox = false;
+        this.MinimizeBox = false;
+        this.TopMost = true;
+
+        var lblPregunta = new Label();
+        lblPregunta.Text = pregunta;
+        lblPregunta.Font = new Font("Segoe UI", 13, FontStyle.Bold);
+        lblPregunta.ForeColor = Color.FromArgb(0, 102, 51);
+        lblPregunta.Location = new Point(20, 20);
+        lblPregunta.Size = new Size(550, 60);
+        lblPregunta.TextAlign = ContentAlignment.MiddleLeft;
+        this.Controls.Add(lblPregunta);
+
+        var txtRespuesta = new TextBox();
+        txtRespuesta.Multiline = true;
+        txtRespuesta.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+        txtRespuesta.Location = new Point(20, 90);
+        txtRespuesta.Size = new Size(550, 120);
+        txtRespuesta.ScrollBars = ScrollBars.Vertical;
+        this.Controls.Add(txtRespuesta);
+
+        var btnOmitir = new Button();
+        btnOmitir.Text = "Omitir";
+        btnOmitir.Font = new Font("Segoe UI", 11, FontStyle.Regular);
+        btnOmitir.ForeColor = Color.Gray;
+        btnOmitir.BackColor = Color.White;
+        btnOmitir.FlatStyle = FlatStyle.Flat;
+        btnOmitir.Size = new Size(150, 50);
+        btnOmitir.Location = new Point(20, 240);
+        btnOmitir.Click += (s, e) =>
+        {
+            Omitida = true;
+            Respuesta = "Omitido";
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        };
+        this.Controls.Add(btnOmitir);
+
+        var btnEnviar = new Button();
+        btnEnviar.Text = "✓  Enviar";
+        btnEnviar.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+        btnEnviar.ForeColor = Color.White;
+        btnEnviar.BackColor = Color.FromArgb(0, 102, 51);
+        btnEnviar.FlatStyle = FlatStyle.Flat;
+        btnEnviar.FlatAppearance.BorderSize = 0;
+        btnEnviar.Size = new Size(200, 50);
+        btnEnviar.Location = new Point(370, 240);
+        btnEnviar.Click += (s, e) =>
+        {
+            Respuesta = string.IsNullOrWhiteSpace(txtRespuesta.Text)
+                ? "Sin respuesta"
+                : txtRespuesta.Text.Trim();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        };
+        this.Controls.Add(btnEnviar);
+    }
+
+}
+
+public class frmEncuestaEnCurso : Form
+{
+    private Label _lblContador;
+    private System.Windows.Forms.Timer _timerContador;
+    private int _segundosRestantes;
+    public event EventHandler EncuestaOmitida;
+    private bool _cerrarPermitido = false;
+    //public event EventHandler TiempoAgotado;
+
+    public frmEncuestaEnCurso(int segundos)
+    {
+        _segundosRestantes = segundos;
+
+        this.Text = "Encuesta en curso";
+        this.Size = new Size(380, 260);
+        this.StartPosition = FormStartPosition.Manual;
+        this.FormBorderStyle = FormBorderStyle.FixedDialog;
+        this.MaximizeBox = false;
+        this.MinimizeBox = false;
+        this.TopMost = true;
+        this.ControlBox = false; // ← sin X para que no lo cierren accidentalmente
+        this.BackColor = Color.White;
+
+        // Ícono superior
+        var lblIcono = new Label();
+        lblIcono.Text = "Encuesta en curso";
+        lblIcono.Font = new Font("Segoe UI", 13, FontStyle.Bold);
+        lblIcono.ForeColor = Color.FromArgb(0, 102, 51);
+        lblIcono.TextAlign = ContentAlignment.MiddleCenter;
+        lblIcono.Size = new Size(340, 35);
+        lblIcono.Location = new Point(20, 15);
+        this.Controls.Add(lblIcono);
+
+        // Descripción
+        var lblDesc = new Label();
+        lblDesc.Text = "El cliente está respondiendo\nla encuesta de satisfacción";
+        lblDesc.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+        lblDesc.ForeColor = Color.Gray;
+        lblDesc.TextAlign = ContentAlignment.MiddleCenter;
+        lblDesc.Size = new Size(340, 50);
+        lblDesc.Location = new Point(20, 55);
+        this.Controls.Add(lblDesc);
+
+        // Contador
+        _lblContador = new Label();
+        _lblContador.Text = $"Se cerrará en: {_segundosRestantes} segundos";
+        _lblContador.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+        _lblContador.ForeColor = Color.FromArgb(0, 102, 51);
+        _lblContador.TextAlign = ContentAlignment.MiddleCenter;
+        _lblContador.Size = new Size(340, 30);
+        _lblContador.Location = new Point(20, 115);
+        this.Controls.Add(_lblContador);
+
+        // Botón omitir
+        var btnOmitir = new Button();
+        btnOmitir.Text = "Omitir encuesta";
+        btnOmitir.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+        btnOmitir.ForeColor = Color.White;
+        btnOmitir.BackColor = Color.FromArgb(0, 102, 51);
+        btnOmitir.FlatStyle = FlatStyle.Flat;
+        btnOmitir.FlatAppearance.BorderSize = 0;
+        btnOmitir.Size = new Size(220, 45);
+        btnOmitir.Location = new Point(80, 165);
+        btnOmitir.Cursor = Cursors.Hand;
+        btnOmitir.Click += (s, e) =>
+        {
+            DetenerContador();
+            EncuestaOmitida?.Invoke(this, EventArgs.Empty);
+            this.Hide();
+        };
+        this.Controls.Add(btnOmitir);
+
+        // Timer contador
+        _timerContador = new System.Windows.Forms.Timer();
+        _timerContador.Interval = 1000;
+        _timerContador.Tick += (s, e) =>
+        {
+            _segundosRestantes--;
+            _lblContador.Text = $"Se cerrará en: {_segundosRestantes} segundos";
+            if (_segundosRestantes <= 1)
+            {
+                DetenerContador();
+                this.Hide();
+                //?.Invoke(this, EventArgs.Empty); // ← notificar
+            }
+        };
+    }
+
+    public void IniciarContador() => _timerContador.Start();
+    public void DetenerContador() => _timerContador.Stop();
+
+    public void OcultarParaPreguntaAbierta()
+    {
+        DetenerContador();
+        this.Hide();
+    }
+
+    public void CerrarDefinitivamente()
+    {
+        _cerrarPermitido = true;
+        DetenerContador();
+        if (!this.IsDisposed)
+            this.Close();
+    }
+
+    protected override void OnFormClosing(FormClosingEventArgs e)
+    {
+        // Evitar que se cierre con Alt+F4
+        if (e.CloseReason == CloseReason.UserClosing && !_cerrarPermitido)
+        {
+            e.Cancel = true;
+            return;
+        }
+        DetenerContador();
+        base.OnFormClosing(e);
+    }
+}
+

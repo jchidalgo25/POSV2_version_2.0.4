@@ -2628,7 +2628,18 @@ namespace POS.Models
                       this.Subtotal = this.Subtotal + this.Ajuste;
                   }*/
 
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Producto", "update",
+                    $"DIAG_UPDATE [{this.Id}] ANTES: Descuento={this.Descuento}, DescuentoAX={this.DescuentoAX}, DescuentoCuponPromocional={this.DescuentoCuponPromocional}, _descuentoActual={_descuentoActual}, SubtotalSinDescuento={this.SubtotalSinDescuento}");
+
+
+
                 this.Descuento = this.Descuento + this.DescuentoAX + this.DescuentoCuponPromocional;
+                //this.Descuento = Math.Round(this.Descuento + this.DescuentoAX + this.DescuentoCuponPromocional, 2, MidpointRounding.AwayFromZero);
+
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Producto", "update",
+                    $"DIAG_UPDATE [{this.Id}] DESPUES: Descuento={this.Descuento}, Subtotal={this.Subtotal}, decimalesDescuento={BitConverter.GetBytes(decimal.GetBits(this.Descuento)[3])[2]}");
+
+
                 //Los descuentos de un producto no pueden ser mayor al subtotal
                 if (this.Descuento > this.SubtotalSinDescuento)
                 {

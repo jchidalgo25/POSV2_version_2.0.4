@@ -2328,7 +2328,7 @@ namespace POS.Control.Common
                 foreach (var deta in mensajes)
                 {
                     msgBoxCtrl.TipoMensaje = deta.TipoMensaje;
-                    msgBoxCtrl.MostrarContador = true;
+                    msgBoxCtrl.MostrarContador = false;
                     msgBoxCtrl.TiempoEspera = deta.tiempo_espera;
 
                     msgBoxCtrl.drawingFont = new Liris_MenssageDLL.Model.DrawingFontCtrl
@@ -2496,7 +2496,7 @@ namespace POS.Control.Common
         
         public static MensajesLibrary.MsgBoxCtrl.MessageBoxResult GetMensajeToList(int id, Screen targetScreen = null, List<ParametrosMensajes> listParametros = null)
         {
-
+           
             List<Mensajes> mensajes = new List<Mensajes>();
             MensajesLibrary.MsgBoxCtrl.MessageBoxResult respuestaMsj;
             MensajesLibrary.MsgBoxCtrl msgBoxCtrl;
@@ -2550,7 +2550,7 @@ namespace POS.Control.Common
 
 
                     msgBoxCtrl.TipoMensaje = deta.TipoMensaje;
-                    msgBoxCtrl.MostrarContador = true;
+                    msgBoxCtrl.MostrarContador = false;
                     msgBoxCtrl.TiempoEspera = deta.tiempo_espera;
 
                     msgBoxCtrl.drawingFont = new Liris_MenssageDLL.Model.DrawingFontCtrl
@@ -2569,14 +2569,13 @@ namespace POS.Control.Common
                 }
 
                 // Mostrar en una ventana modal en la pantalla deseada
+                // Mostrar en una ventana modal en la pantalla deseada
                 using (var form = new Form())
                 {
                     form.StartPosition = FormStartPosition.Manual;
 
-                    // Si no se pasa pantalla, usar la principal
                     var screen = targetScreen ?? Screen.PrimaryScreen;
 
-                    // Centrar en la pantalla objetivo
                     form.Location = new Point(
                         screen.WorkingArea.Left + (screen.WorkingArea.Width - form.Width) / 2,
                         screen.WorkingArea.Top + (screen.WorkingArea.Height - form.Height) / 2);
@@ -2584,14 +2583,24 @@ namespace POS.Control.Common
                     form.FormBorderStyle = FormBorderStyle.None;
                     form.ShowInTaskbar = false;
                     form.TopMost = true;
-                    form.Load += (sender, e) =>
+                    form.Size = new System.Drawing.Size(1, 1);
+
+                    form.Shown += (sender, e) =>
                     {
-                        // Cerrar formulario después de mostrar el mensaje
-                        respuestaMsj = msgBoxCtrl.ShowMessage();
-                        form.Close();
+                        form.BeginInvoke(new Action(() =>
+                        {
+                            try
+                            {
+                                respuestaMsj = msgBoxCtrl.ShowMessage();
+                            }
+                            finally
+                            {
+                                form.Close();
+                            }
+                        }));
                     };
 
-                    Application.Run(form); // Ejecutar contexto de formulario temporal
+                    Application.Run(form);
                 }
 
                 //respuestaMsj = msgBoxCtrl.ShowMessage();

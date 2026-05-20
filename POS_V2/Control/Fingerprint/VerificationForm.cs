@@ -1,20 +1,21 @@
+using POS;
+using POS.Control;
+using POS.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
-using POS;
-using System.Threading;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.Primitives;
 using Telerik.WinControls.UI;
-using POS.Models;
-using POS.Control;
-using System.Data.SqlClient;
 
 namespace POS.Control.Fingerprint
 {
@@ -22,9 +23,20 @@ namespace POS.Control.Fingerprint
     {
         Factura _factura;
         private AppData Data;
+        private System.Windows.Forms.Timer _keepOnTopTimer;
         private byte[] byteArray;
         private DPFP.Template template;
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
+        private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOSIZE = 0x0001;
+
+        private void ForzarAlFrente()
+        {
+            SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+        }
         public VerificationForm(AppData data, Factura factura)
         {
             InitializeComponent();
@@ -168,6 +180,7 @@ namespace POS.Control.Fingerprint
         {
             string Tipo = this.Tag.ToString();
             string establecimientoCodePOS;
+            Control.Common.GlobalParameters.VerificationInProgress = true;
 
             try
             {
@@ -182,8 +195,10 @@ namespace POS.Control.Fingerprint
 
                 using (var db = new POSEntities())
                 {
-                    Establecimiento = db.core_establecimiento.FirstOrDefault(x => x.establecimiento == establecimientoCodePOS /* this._factura.Establecimiento */).almacen;
+                    Establecimiento = db.core_establecimiento
+                        .FirstOrDefault(x => x.establecimiento == establecimientoCodePOS).almacen;
                 }
+
                 switch (Tipo)
                 {
                     case "usr":
@@ -198,20 +213,36 @@ namespace POS.Control.Fingerprint
                         break;
                 }
 
+                ForzarAlFrente();
+                this.TopMost = true;
+                this.WindowState = FormWindowState.Normal;
                 this.BringToFront();
+                this.Activate();
+                this.Focus();
+
+                // ? Timer que cada 300ms fuerza el formulario al frente
+                _keepOnTopTimer = new System.Windows.Forms.Timer();
+                _keepOnTopTimer.Interval = 300;
+                _keepOnTopTimer.Tick += (s, args) =>
+                {
+                    if (Control.Common.GlobalParameters.VerificationInProgress)
+                    {
+                        ForzarAlFrente();
+                        this.Activate();
+                    }
+                };
+                _keepOnTopTimer.Start();
             }
             catch (Exception ex)
             {
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.VerificationForm", "VerificationForm_Load", "Se presentaron novedades " +
-                    "durante la ejecución del método, a continuacion las excepciones " +
-                    "encontradas - " + Control.Common.ExceptionHandler.GetExceptionMessages(ex), "StackTrace: " + ex.StackTrace);
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "POS.Control.Pagos.VerificationForm",
+                    "VerificationForm_Load", "Se presentaron novedades durante la ejecución del método - " +
+                    Control.Common.ExceptionHandler.GetExceptionMessages(ex), "StackTrace: " + ex.StackTrace);
             }
-
             finally
             {
                 Cursor.Current = Cursors.Default;
                 this.ResumeLayout();
-
             }
         }
 
@@ -231,6 +262,14 @@ namespace POS.Control.Fingerprint
 
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            _keepOnTopTimer?.Stop();
+            _keepOnTopTimer?.Dispose();
+            Control.Common.GlobalParameters.VerificationInProgress = false;
+            base.OnFormClosed(e);
         }
 
 
