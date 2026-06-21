@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="18f5e209-c891-4c26-9f20-6bde2b787517" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.127.11:9091/WSCliente/WSClientes.Service1.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service11.wsdl" MetadataType="Wsdl" ID="02d60d4e-7a2c-4f75-890c-57f086cd09d8" SourceId="1" SourceUrl="http://srv-ax.interno.liris.com:9091/WSCliente/WSClientes.Service1.svc?wsdl" />
+    <MetadataFile FileName="WSClientes1.disco" MetadataType="Disco" ID="ef63e650-32cf-4473-80b8-e32746a7818e" SourceId="1" SourceUrl="http://srv-ax.interno.liris.com:9091/WSCliente/WSClientes.Service1.svc?disco" />
+    <MetadataFile FileName="WSClientes3.xsd" MetadataType="Schema" ID="72b054ee-dcff-489c-bfba-5af9f26e7365" SourceId="1" SourceUrl="http://srv-ax.interno.liris.com:9091/WSCliente/WSClientes.Service1.svc?xsd=xsd2" />
+    <MetadataFile FileName="WSClientes4.xsd" MetadataType="Schema" ID="eb117576-9a5a-46e4-863f-fe907451c2db" SourceId="1" SourceUrl="http://srv-ax.interno.liris.com:9091/WSCliente/WSClientes.Service1.svc?xsd=xsd1" />
+    <MetadataFile FileName="WSClientes5.xsd" MetadataType="Schema" ID="570afde4-ca07-40ce-ab80-8feb280990fc" SourceId="1" SourceUrl="http://srv-ax.interno.liris.com:9091/WSCliente/WSClientes.Service1.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

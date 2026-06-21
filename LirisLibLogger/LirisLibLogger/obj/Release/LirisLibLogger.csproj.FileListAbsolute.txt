@@ -1,0 +1,6 @@
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\LirisLibLogger\LirisLibLogger\bin\Release\LirisLibLogger.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\LirisLibLogger\LirisLibLogger\bin\Release\LirisLibLogger.pdb
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\LirisLibLogger\LirisLibLogger\obj\Release\LirisLibLogger.csprojAssemblyReference.cache
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\LirisLibLogger\LirisLibLogger\obj\Release\LirisLibLogger.csproj.CoreCompileInputs.cache
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\LirisLibLogger\LirisLibLogger\obj\Release\LirisLibLogger.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\LirisLibLogger\LirisLibLogger\obj\Release\LirisLibLogger.pdb

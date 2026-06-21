@@ -1,0 +1,2628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="auth_group">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="80" Nullable="false" />
+  </EntityType>
+  <EntityType Name="auth_group_permissions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_id" Type="int" Nullable="false" />
+    <Property Name="permission_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="auth_permission">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="content_type_id" Type="int" Nullable="false" />
+    <Property Name="codename" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="auth_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="last_login" Type="datetime" Nullable="false" />
+    <Property Name="is_superuser" Type="bit" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="last_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="is_staff" Type="bit" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="date_joined" Type="datetime" Nullable="false" />
+    <Property Name="Huella" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="auth_user_groups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="group_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="auth_user_user_permissions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="permission_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_autorizacionsri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" />
+    <Property Name="fecha_modificacion" Type="datetime" />
+    <Property Name="autorizacion" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.core_autorizacionsri2' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="core_autorizacionsri2">
+    <Key>
+      <PropertyRef Name="autorizacion" />
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="fecha_modificacion" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="activo" />
+    </Key>
+    <Property Name="autorizacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_banco">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_descuento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="tipo_descuento" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="parametro" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="parametro2" Type="nvarchar" MaxLength="255" />
+    <Property Name="rango_fecha" Type="bit" Nullable="false" />
+    <Property Name="fecha_desde" Type="datetime" />
+    <Property Name="fecha_hasta" Type="datetime" />
+    <Property Name="usar_dia_semana" Type="bit" Nullable="false" />
+    <Property Name="dia_semana" Type="int" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_descuentotipo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="complejo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_documento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_documentosecuencia">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="documento_id" Type="int" Nullable="false" />
+    <Property Name="punto_emision_id" Type="int" Nullable="false" />
+    <Property Name="siguiente" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_empresacredito">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="razon_social" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="lista_blanca" Type="bit" Nullable="false" />
+    <Property Name="dia_corte" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_empresacreditocorte">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="codigo_id" Type="int" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_empresacreditopago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="codigo_id" Type="int" Nullable="false" />
+    <Property Name="tipo_pago" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="comentario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="nvarchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_establecimiento">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+    </Key>
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="administrador" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="administrador_email" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="MID" Type="nvarchar" MaxLength="15" />
+    <Property Name="almacen" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_factura">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="punto_emision" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="numero" Type="bigint" Nullable="false" />
+    <Property Name="documento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="cliente_ax" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="cliente" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="razon_social" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="base0" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="base12" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="descuento" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="descuento2" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="iva" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="total" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="autorizacion" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ip" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="orderID" Type="nvarchar" MaxLength="20" />
+    <Property Name="loadinvoice" Type="bit" Nullable="false" />
+    <Property Name="loadpaym" Type="bit" Nullable="false" />
+    <Property Name="msgError" Type="nvarchar" MaxLength="50" />
+    <Property Name="paymID" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="core_facturadetalle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="factura_id" Type="int" Nullable="false" />
+    <Property Name="linea" Type="int" Nullable="false" />
+    <Property Name="item_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="item_nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="cantidad" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="unidades" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="descuento" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="iva" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="total" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="unidad" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="costo" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="precio" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_facturadetalle_carnicero">
+    <Key>
+      <PropertyRef Name="factura_id" />
+      <PropertyRef Name="itemID" />
+      <PropertyRef Name="CarniceroCOD" />
+    </Key>
+    <Property Name="factura_id" Type="int" Nullable="false" />
+    <Property Name="itemID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CarniceroCOD" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_facturapago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="factura_id" Type="int" Nullable="false" />
+    <Property Name="tipo_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="cliente" Type="nvarchar" MaxLength="20" />
+    <Property Name="datos" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="JournalNum" Type="nvarchar" MaxLength="10" />
+    <Property Name="voucher" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="core_giftcard">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="fecha_activacion" Type="datetime" />
+    <Property Name="fecha_expiracion" Type="datetime" />
+    <Property Name="fecha_desactivacion" Type="datetime" />
+    <Property Name="saldo" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+    <Property Name="bono" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_giftcard_migracion">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="numero" Type="int" Nullable="false" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="core_giftcardtransaccion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="tarjeta" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="tipo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_notacredito">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="numdocumento" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="documentoaplica" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="motivo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cliente" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="salesID" Type="nvarchar" MaxLength="20" />
+    <Property Name="loadinvoice" Type="bit" Nullable="false" />
+    <Property Name="loadpaym" Type="bit" Nullable="false" />
+    <Property Name="msgError" Type="nvarchar" MaxLength="50" />
+    <Property Name="paymID" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="core_notacreditodetalle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="notacredito_id" Type="int" Nullable="false" />
+    <Property Name="linea" Type="int" Nullable="false" />
+    <Property Name="item_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="cantidad" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="pvp" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="descuento" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="unidad" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="total" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_parametro">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="identificador" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="valor" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="parametro2" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="core_poscustomergroup">
+    <Key>
+      <PropertyRef Name="custgroup" />
+    </Key>
+    <Property Name="custgroup" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_promocionticket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_desde" Type="datetime" Nullable="false" />
+    <Property Name="fecha_hasta" Type="datetime" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="descripcion_larga" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" />
+    <Property Name="impresion_unitario" Type="bit" Nullable="false" />
+    <Property Name="division" Type="varchar" MaxLength="10" />
+    <Property Name="ismoneda" Type="bit" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.core_promocionticket_items' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="core_promocionticket_items">
+    <Key>
+      <PropertyRef Name="promocionticket_id" />
+      <PropertyRef Name="itemid" />
+    </Key>
+    <Property Name="promocionticket_id" Type="int" Nullable="false" />
+    <Property Name="itemid" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.CORE_PROMOCIONTICKET2' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="CORE_PROMOCIONTICKET2">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="fecha_modificacion" />
+      <PropertyRef Name="fecha_desde" />
+      <PropertyRef Name="fecha_hasta" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="descripcion_larga" />
+      <PropertyRef Name="impresion_unitario" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_desde" Type="datetime" Nullable="false" />
+    <Property Name="fecha_hasta" Type="datetime" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="descripcion_larga" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" />
+    <Property Name="impresion_unitario" Type="bit" Nullable="false" />
+    <Property Name="division" Type="varchar" MaxLength="10" />
+    <Property Name="ismoneda" Type="bit" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.CORE_PROMOCIONTICKET2_items' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="CORE_PROMOCIONTICKET2_items">
+    <Key>
+      <PropertyRef Name="promocionticket_id" />
+      <PropertyRef Name="itemid" />
+    </Key>
+    <Property Name="promocionticket_id" Type="int" Nullable="false" />
+    <Property Name="itemid" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_puntoemision">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="establecimiento_id" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="punto_emision" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="ip_address" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+    <Property Name="secuencia_broadnet" Type="int" Nullable="false" />
+    <Property Name="TID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="usa_balanza" Type="bit" Nullable="false" />
+    <Property Name="scanner_integrado" Type="bit" Nullable="false" />
+    <Property Name="marca_balanza" Type="nvarchar" MaxLength="50" />
+    <Property Name="puerto_balanza" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="core_recibo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="cuerpo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="identificador" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_retencion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_autorizacion" Type="datetime" Nullable="false" />
+    <Property Name="factura_id" Type="int" Nullable="false" />
+    <Property Name="num_retencion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="num_autorizacion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="num_factura" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="valor_ret_fte" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="valor_base" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CodRetIVA" Type="nvarchar" MaxLength="5" />
+    <Property Name="CodPorcRetIVA" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ValorBaseIVA" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ValorRetIVA" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ConceptoRetIVA" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="core_tarjetacredito">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="banco_id" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="tipo" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="operador" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_tarjetacreditointerno">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="empresa_id" Type="int" Nullable="false" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="identificacion" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="nombre_tarjeta" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="fecha_activacion" Type="datetime" />
+    <Property Name="fecha_expiracion" Type="datetime" />
+    <Property Name="fecha_desactivacion" Type="datetime" />
+    <Property Name="cupo" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="saldo" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_tarjetacreditointernotransaccion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="tarjeta" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="tipo" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_tarjetacreditopromocionticket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="promocion_id" Type="int" Nullable="false" />
+    <Property Name="tarjeta_id" Type="int" Nullable="false" />
+    <Property Name="multiplicador" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="core_TarjetaDescuento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="fecha_activacion" Type="datetime" />
+    <Property Name="fecha_expiracion" Type="datetime" />
+    <Property Name="fecha_desactivacion" Type="datetime" />
+    <Property Name="saldo" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+    <Property Name="bono" Type="bit" Nullable="false" />
+    <Property Name="numeroFactura" Type="bigint" Nullable="false" />
+    <Property Name="codigoCliente" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="django_admin_log">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="action_time" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="content_type_id" Type="int" />
+    <Property Name="object_id" Type="nvarchar(max)" />
+    <Property Name="object_repr" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="action_flag" Type="smallint" Nullable="false" />
+    <Property Name="change_message" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="django_content_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="app_label" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="model" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="django_session">
+    <Key>
+      <PropertyRef Name="session_key" />
+    </Key>
+    <Property Name="session_key" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="session_data" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="expire_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="django_site">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="domain" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MSpeer_lsns">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="last_updated" Type="datetime" />
+    <Property Name="originator" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="originator_db" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="originator_publication" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="originator_publication_id" Type="int" />
+    <Property Name="originator_db_version" Type="int" />
+    <Property Name="originator_lsn" Type="varbinary" MaxLength="16" />
+    <Property Name="originator_version" Type="int" />
+    <Property Name="originator_id" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.MSpeer_originatorid_history' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="MSpeer_originatorid_history">
+    <Key>
+      <PropertyRef Name="originator_publication" />
+      <PropertyRef Name="originator_id" />
+      <PropertyRef Name="originator_node" />
+      <PropertyRef Name="originator_db" />
+      <PropertyRef Name="originator_db_version" />
+      <PropertyRef Name="originator_version" />
+      <PropertyRef Name="inserted_date" />
+    </Key>
+    <Property Name="originator_publication" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="originator_id" Type="int" Nullable="false" />
+    <Property Name="originator_node" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="originator_db" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="originator_db_version" Type="int" Nullable="false" />
+    <Property Name="originator_version" Type="int" Nullable="false" />
+    <Property Name="inserted_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.mt_FacturasRezagadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="mt_FacturasRezagadas">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="punto_emision" />
+      <PropertyRef Name="numero" />
+      <PropertyRef Name="cliente_ax" />
+      <PropertyRef Name="total" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="fecha_deteccion" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="punto_emision" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="numero" Type="bigint" Nullable="false" />
+    <Property Name="cliente_ax" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="total" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="estado" Type="smallint" Nullable="false" />
+    <Property Name="fecha_deteccion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_correccion" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.pos_autorizacionsri' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="pos_autorizacionsri">
+    <Key>
+      <PropertyRef Name="autorizacion" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="activo" />
+    </Key>
+    <Property Name="autorizacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pos_customer">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="DATAAREAID" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="TELEFAX" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CUSTGROUP" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CREDITMAX" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="MANDATORYCREDITLIMIT" Type="int" Nullable="false" />
+    <Property Name="DIMENSION" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DIMENSION2_" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DIMENSION3_" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="VATNUM" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="COUNTRYREGIONID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="CELLULARPHONE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="PHONELOCAL" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="STREET" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MODIFIEDDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="CREATEDDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pos_customer_group">
+    <Key>
+      <PropertyRef Name="CUSTGROUP" />
+    </Key>
+    <Property Name="CUSTGROUP" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="dataareaid" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.pos_customer2' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="pos_customer2">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="ADDRESS" />
+      <PropertyRef Name="PHONE" />
+      <PropertyRef Name="TELEFAX" />
+      <PropertyRef Name="CUSTGROUP" />
+      <PropertyRef Name="CREDITMAX" />
+      <PropertyRef Name="MANDATORYCREDITLIMIT" />
+      <PropertyRef Name="DIMENSION" />
+      <PropertyRef Name="DIMENSION2_" />
+      <PropertyRef Name="DIMENSION3_" />
+      <PropertyRef Name="VATNUM" />
+      <PropertyRef Name="COUNTRYREGIONID" />
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="CELLULARPHONE" />
+      <PropertyRef Name="PHONELOCAL" />
+      <PropertyRef Name="STREET" />
+      <PropertyRef Name="MODIFIEDDATETIME" />
+      <PropertyRef Name="CREATEDDATETIME" />
+      <PropertyRef Name="DATAAREAID" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="TELEFAX" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CUSTGROUP" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CREDITMAX" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="MANDATORYCREDITLIMIT" Type="int" Nullable="false" />
+    <Property Name="DIMENSION" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DIMENSION2_" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DIMENSION3_" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="VATNUM" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="COUNTRYREGIONID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="CELLULARPHONE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="PHONELOCAL" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="STREET" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MODIFIEDDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="CREATEDDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.pos_item' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="pos_item">
+    <Key>
+      <PropertyRef Name="ITEMID" />
+    </Key>
+    <Property Name="ITEMGROUPID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ITEMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ITEMNAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="PRIMARYVENDORID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NAMEALIAS" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="TAXVALUE" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="COST" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="PRICE" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="UNITID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ITEMTYPE" Type="int" Nullable="false" />
+    <Property Name="BLOQUEADOPOS" Type="int" Nullable="false" />
+    <Property Name="CATEGORIA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.pos_itembarra' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="pos_itembarra">
+    <Key>
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+    <Property Name="ITEMBARCODE" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="ITEMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="INVENTDIMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="BARCODESETUPID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MODIFIEDDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="DEL_MODIFIEDTIME" Type="int" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.pos_paymentmode' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="pos_paymentmode">
+    <Key>
+      <PropertyRef Name="PAYMMODE" />
+    </Key>
+    <Property Name="NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="PAYMMODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ProduccionAx' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ProduccionAx">
+    <Key>
+      <PropertyRef Name="productoax" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="peso" />
+      <PropertyRef Name="fecha" />
+      <PropertyRef Name="recepcionconsumo" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="nivel" />
+    </Key>
+    <Property Name="productoax" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="peso" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="hora" Type="time" Precision="7" />
+    <Property Name="articuloplanificacionax" Type="varchar" MaxLength="50" />
+    <Property Name="recepcionconsumo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nivel" Type="int" Nullable="false" />
+    <Property Name="diario" Type="varchar" MaxLength="50" />
+    <Property Name="ordencompra" Type="varchar" MaxLength="50" />
+    <Property Name="almacen" Type="varchar" MaxLength="50" />
+    <Property Name="almacen_tran" Type="varchar" MaxLength="50" />
+    <Property Name="numero_guia" Type="varchar" MaxLength="50" />
+    <Property Name="transportista" Type="varchar" MaxLength="50" />
+    <Property Name="placa" Type="varchar" MaxLength="10" />
+    <Property Name="num_op" Type="varchar" MaxLength="10" />
+    <Property Name="razonsocial_transporte" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="sitetree_tree">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="alias" Type="nvarchar" MaxLength="80" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sitetree_treeitem">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="hint" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="url" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="urlaspattern" Type="bit" Nullable="false" />
+    <Property Name="tree_id" Type="int" Nullable="false" />
+    <Property Name="hidden" Type="bit" Nullable="false" />
+    <Property Name="alias" Type="nvarchar" MaxLength="80" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="inmenu" Type="bit" Nullable="false" />
+    <Property Name="inbreadcrumbs" Type="bit" Nullable="false" />
+    <Property Name="insitetree" Type="bit" Nullable="false" />
+    <Property Name="access_loggedin" Type="bit" Nullable="false" />
+    <Property Name="access_guest" Type="bit" Nullable="false" />
+    <Property Name="access_restricted" Type="bit" Nullable="false" />
+    <Property Name="access_perm_type" Type="int" Nullable="false" />
+    <Property Name="parent_id" Type="int" />
+    <Property Name="sort_order" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sitetree_treeitem_access_permissions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="treeitem_id" Type="int" Nullable="false" />
+    <Property Name="permission_id" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.TblAuthorizeDeleteProduct' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="TblAuthorizeDeleteProduct">
+    <Key>
+      <PropertyRef Name="USERID" />
+      <PropertyRef Name="LOCATIONID" />
+      <PropertyRef Name="AUTHORIZE" />
+      <PropertyRef Name="Huella" />
+    </Key>
+    <Property Name="USERID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CODE" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="150" />
+    <Property Name="LOCATIONID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AUTHORIZE" Type="bit" Nullable="false" />
+    <Property Name="Huella" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TblDeletedProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="INVOICEDATE" Type="datetime" />
+    <Property Name="ESTABLISHMENT" Type="nchar" MaxLength="10" />
+    <Property Name="EMISIONSERIES" Type="nchar" MaxLength="10" />
+    <Property Name="NUMBER" Type="bigint" />
+    <Property Name="CASHIER" Type="nvarchar" MaxLength="20" />
+    <Property Name="ITEMID" Type="varchar" MaxLength="20" />
+    <Property Name="QTY" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="TOTAL" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="USERAUTHORIZE" Type="varchar" MaxLength="130" />
+  </EntityType>
+  <EntityType Name="TblDiscountCard">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emision_date" Type="datetime" />
+    <Property Name="card" Type="varchar" MaxLength="50" />
+    <Property Name="itemid" Type="varchar" MaxLength="20" />
+    <Property Name="value" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="expiration_date" Type="datetime" />
+    <Property Name="times" Type="int" />
+    <Property Name="status" Type="bit" />
+  </EntityType>
+  <EntityType Name="TblDiscountCardTrans">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="trans_date" Type="datetime" />
+    <Property Name="card" Type="varchar" MaxLength="50" />
+    <Property Name="invoiceid" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.TblFeriados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="TblFeriados">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="permiteVenta" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="permiteVenta" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TblInvoiceCounter">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="establishment" Type="varchar" MaxLength="50" />
+    <Property Name="counter" Type="int" />
+    <Property Name="status" Type="bit" />
+  </EntityType>
+  <EntityType Name="TblInvoiceRandom">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="establishment" Type="varchar" MaxLength="50" />
+    <Property Name="winner" Type="int" />
+    <Property Name="won" Type="bit" />
+  </EntityType>
+  <EntityType Name="TblInvoiceWinner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="invoicedate" Type="datetime" />
+    <Property Name="establishment" Type="varchar" MaxLength="50" />
+    <Property Name="emisionseries" Type="varchar" MaxLength="50" />
+    <Property Name="invoiceid" Type="varchar" MaxLength="50" />
+    <Property Name="customer" Type="varchar" MaxLength="50" />
+    <Property Name="resource" Type="varchar" MaxLength="50" />
+    <Property Name="value" Type="decimal" Precision="7" Scale="2" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.tblNavidadLMAT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="tblNavidadLMAT">
+    <Key>
+      <PropertyRef Name="factura_id" />
+      <PropertyRef Name="Almacen" />
+      <PropertyRef Name="Seleccionado" />
+      <PropertyRef Name="Procesado" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="factura_id" Type="int" Nullable="false" />
+    <Property Name="Almacen" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Seleccionado" Type="bit" Nullable="false" />
+    <Property Name="Procesado" Type="bit" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ax_viewConsumoCreditoCliente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ax_viewConsumoCreditoCliente">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="CORTE" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="MONTO" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="CORTE" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ax_viewCorteCredito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ax_viewCorteCredito">
+    <Key>
+      <PropertyRef Name="ACCOUNTNUM" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="monto" />
+      <PropertyRef Name="corte" />
+    </Key>
+    <Property Name="ACCOUNTNUM" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="corte" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.BG_Apertura' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="BG_Apertura">
+    <Key>
+      <PropertyRef Name="CEDULA" />
+      <PropertyRef Name="CAJERA" />
+      <PropertyRef Name="LOCAL" />
+      <PropertyRef Name="PUNTO_VENTA" />
+      <PropertyRef Name="TURNO" />
+      <PropertyRef Name="VALOR_BASE" />
+      <PropertyRef Name="ESTABLECIMIENTO" />
+      <PropertyRef Name="PUNTO_EMISION" />
+      <PropertyRef Name="IP" />
+      <PropertyRef Name="LEIDO" />
+      <PropertyRef Name="NUM_CAJA" />
+      <PropertyRef Name="CERRADO" />
+      <PropertyRef Name="PRE_CIERRE" />
+      <PropertyRef Name="INVENTLOCATION" />
+      <PropertyRef Name="FECHA" />
+    </Key>
+    <Property Name="CEDULA" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="CAJERA" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="LOCAL" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="PUNTO_VENTA" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TURNO" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="VALOR_BASE" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="ESTABLECIMIENTO" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="PUNTO_EMISION" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IP" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FECHA" Type="date" Nullable="false" />
+    <Property Name="LEIDO" Type="int" Nullable="false" />
+    <Property Name="NUM_CAJA" Type="int" Nullable="false" />
+    <Property Name="CERRADO" Type="int" Nullable="false" />
+    <Property Name="PRE_CIERRE" Type="int" Nullable="false" />
+    <Property Name="INVENTLOCATION" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.BG_Lst_POS_no_sub_AX' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="BG_Lst_POS_no_sub_AX">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="item_id" />
+      <PropertyRef Name="item_nombre" />
+    </Key>
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="fecha_creacion" Type="date" />
+    <Property Name="orderID" Type="nvarchar" MaxLength="20" />
+    <Property Name="item_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="item_nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="cantidad" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="unidades" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="total" Type="decimal" Precision="38" Scale="4" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.core_factura_view' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="core_factura_view">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="DateInvoice" />
+      <PropertyRef Name="InvoiceAccount" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="SalesResponsable" />
+      <PropertyRef Name="InventLocationId" />
+      <PropertyRef Name="documento" />
+      <PropertyRef Name="descuento" />
+      <PropertyRef Name="descuento2" />
+      <PropertyRef Name="loadinvoice" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="DateInvoice" Type="datetime" Nullable="false" />
+    <Property Name="InvoiceId" Type="nvarchar" MaxLength="15" />
+    <Property Name="InvoiceAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="SalesResponsable" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="InventLocationId" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="documento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="descuento" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="descuento2" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="orderID" Type="nvarchar" MaxLength="20" />
+    <Property Name="loadinvoice" Type="bit" Nullable="false" />
+    <Property Name="SalesSubtotal" Type="decimal" Precision="13" Scale="4" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.core_facturadetalle_view' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="core_facturadetalle_view">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="itemid" />
+      <PropertyRef Name="description" />
+      <PropertyRef Name="LineNum" />
+      <PropertyRef Name="SalesQTY" />
+      <PropertyRef Name="SalesPrice" />
+      <PropertyRef Name="SalesDesc" />
+      <PropertyRef Name="SalesUnit" />
+      <PropertyRef Name="TAX" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="InvoiceId" Type="nvarchar" MaxLength="15" />
+    <Property Name="itemid" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="LineNum" Type="int" Nullable="false" />
+    <Property Name="SalesQTY" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="SalesPrice" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="SalesDesc" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="SalesUnit" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="LineAmount" Type="decimal" Precision="38" Scale="16" />
+    <Property Name="TAX" Type="int" Nullable="false" />
+    <Property Name="SalesDescUnit" Type="decimal" Precision="38" Scale="14" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.core_facturapago_view' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="core_facturapago_view">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="Paymode" />
+      <PropertyRef Name="PayReference" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="PaymDate" />
+      <PropertyRef Name="PaymID" />
+      <PropertyRef Name="documento" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="InvoiceId" Type="nvarchar" MaxLength="15" />
+    <Property Name="Paymode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Voucher" Type="nvarchar" MaxLength="20" />
+    <Property Name="InvoiceAccount" Type="nvarchar" MaxLength="20" />
+    <Property Name="PayReference" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PaymDate" Type="datetime" Nullable="false" />
+    <Property Name="PaymID" Type="int" Nullable="false" />
+    <Property Name="documento" Type="nvarchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.View_AlmacenProductoPeso' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="View_AlmacenProductoPeso">
+    <Key>
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="INVENTLOCATIONID" />
+    </Key>
+    <Property Name="ITEMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="INVENTLOCATIONID" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.View_CarnicerosAX' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="View_CarnicerosAX">
+    <Key>
+      <PropertyRef Name="CODIGO" />
+      <PropertyRef Name="NOMBRE" />
+    </Key>
+    <Property Name="CODIGO" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewDetalleAcumulado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewDetalleAcumulado">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="item_id" />
+    </Key>
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="item_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="cantidad" Type="decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewEstablecimientoTotal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewEstablecimientoTotal">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+    </Key>
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="subtotal" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="descuento" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="descuento2" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="iva" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="total" Type="decimal" Precision="38" Scale="4" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewFacturaPagoUsuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewFacturaPagoUsuario">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="PAYMMODE" />
+    </Key>
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="38" Scale="2" />
+    <Property Name="PAYMMODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewFacturasPagoCredito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewFacturasPagoCredito">
+    <Key>
+      <PropertyRef Name="fecha_creacion" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="cliente_ax" />
+      <PropertyRef Name="razon_social" />
+      <PropertyRef Name="tarjeta" />
+      <PropertyRef Name="empresa" />
+    </Key>
+    <Property Name="Factura" Type="nvarchar" MaxLength="43" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="cliente_ax" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="razon_social" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="tarjeta" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="empresa" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewFacturasUsuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewFacturasUsuarios">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="punto_emision" />
+      <PropertyRef Name="usuario" />
+    </Key>
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="punto_emision" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="total" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="numerofactura" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewPagoDetalleUsuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewPagoDetalleUsuario">
+    <Key>
+      <PropertyRef Name="establecimiento" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="tipo_id" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="datos" />
+    </Key>
+    <Property Name="establecimiento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="tipo_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="datos" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewPagosCredito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewPagosCredito">
+    <Key>
+      <PropertyRef Name="fecha" />
+      <PropertyRef Name="tarjeta" />
+      <PropertyRef Name="cliente" />
+      <PropertyRef Name="ruc" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="razon_social" />
+    </Key>
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="tarjeta" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="cliente" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ruc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="razon_social" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.ViewTicketsCarniceros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ViewTicketsCarniceros">
+    <Key>
+      <PropertyRef Name="FECHA_CREACION" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="ITEM_NOMBRE" />
+      <PropertyRef Name="CODIGOCARNICERO" />
+      <PropertyRef Name="CANTIDAD" />
+      <PropertyRef Name="UNIDADES" />
+      <PropertyRef Name="TOTAL" />
+    </Key>
+    <Property Name="FECHA_CREACION" Type="datetime" Nullable="false" />
+    <Property Name="ITEMID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ITEM_NOMBRE" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="CODIGOCARNICERO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="NOMBRECARNICERO" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDALMACEN" Type="nvarchar" MaxLength="15" />
+    <Property Name="ALMACEN" Type="nvarchar" MaxLength="100" />
+    <Property Name="CANTIDAD" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="UNIDADES" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="TOTAL" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.VW_BLOCK_PRODUCTS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VW_BLOCK_PRODUCTS">
+    <Key>
+      <PropertyRef Name="PRODUCT" />
+      <PropertyRef Name="BARCODE" />
+      <PropertyRef Name="QTY" />
+      <PropertyRef Name="DESCRIPTION" />
+      <PropertyRef Name="SETPRODUCT" />
+      <PropertyRef Name="CATEGORY" />
+      <PropertyRef Name="VARIETY" />
+      <PropertyRef Name="GROUPS" />
+      <PropertyRef Name="SUBGROUP" />
+      <PropertyRef Name="VENDORID" />
+    </Key>
+    <Property Name="PRODUCT" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="BARCODE" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="QTY" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="SETPRODUCT" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CATEGORY" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="VARIETY" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="GROUPS" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="SUBGROUP" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="VENDORID" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.VW_CombosCaja' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VW_CombosCaja">
+    <Key>
+      <PropertyRef Name="ITEMRELATION" />
+      <PropertyRef Name="ITEMRELATIONCODE" />
+      <PropertyRef Name="ITEMNAME" />
+      <PropertyRef Name="SUPPITEMID" />
+      <PropertyRef Name="SUPPITEMNAME" />
+      <PropertyRef Name="UNITID" />
+      <PropertyRef Name="MULTIPLEQTY" />
+      <PropertyRef Name="SUPPITEMQTY" />
+      <PropertyRef Name="SUPPITEMFREE" />
+      <PropertyRef Name="SUPPITEMOPTIONAL" />
+      <PropertyRef Name="FROMDATE" />
+      <PropertyRef Name="TODATE" />
+    </Key>
+    <Property Name="ITEMRELATION" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ITEMRELATIONCODE" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="ITEMNAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="SUPPITEMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SUPPITEMCODE" Type="nvarchar" MaxLength="80" />
+    <Property Name="SUPPITEMNAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="UNITID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="FROMDATE" Type="datetime" Nullable="false" />
+    <Property Name="TODATE" Type="datetime" Nullable="false" />
+    <Property Name="MULTIPLEQTY" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="SUPPITEMQTY" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="SUPPITEMFREE" Type="int" Nullable="false" />
+    <Property Name="SUPPITEMOPTIONAL" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.vw_CreditoLocalesCabecera' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_CreditoLocalesCabecera">
+    <Key>
+      <PropertyRef Name="CLIENTE" />
+      <PropertyRef Name="CLIENTENOMBRE" />
+      <PropertyRef Name="FECHACONTRATO" />
+      <PropertyRef Name="FECHAENTREGA" />
+      <PropertyRef Name="FECHAVENCIMIENTO" />
+      <PropertyRef Name="LOCALENTREGA" />
+      <PropertyRef Name="NOMBRELOCAL" />
+      <PropertyRef Name="ESTADO" />
+      <PropertyRef Name="TOTAL" />
+      <PropertyRef Name="ABONADO" />
+      <PropertyRef Name="ENTREGADO" />
+      <PropertyRef Name="LOCALCONTRATO" />
+      <PropertyRef Name="ANULADO" />
+    </Key>
+    <Property Name="CLIENTE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CLIENTENOMBRE" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="FECHACONTRATO" Type="datetime" Nullable="false" />
+    <Property Name="FECHAENTREGA" Type="datetime" Nullable="false" />
+    <Property Name="FECHAVENCIMIENTO" Type="datetime" Nullable="false" />
+    <Property Name="LOCALENTREGA" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="NOMBRELOCAL" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="ESTADO" Type="int" Nullable="false" />
+    <Property Name="TOTAL" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="ABONADO" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="ENTREGADO" Type="int" Nullable="false" />
+    <Property Name="LOCALCONTRATO" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ANULADO" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.vw_CreditoLocalesMensajes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_CreditoLocalesMensajes">
+    <Key>
+      <PropertyRef Name="TIPOMENSAJE" />
+      <PropertyRef Name="MENSAJE" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="TIPOMENSAJE" Type="int" Nullable="false" />
+    <Property Name="MENSAJE" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECVERSION" Type="int" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.vw_CreditoLocalesPagos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_CreditoLocalesPagos">
+    <Key>
+      <PropertyRef Name="FECHA" />
+      <PropertyRef Name="CLIENTE" />
+      <PropertyRef Name="MONTO" />
+      <PropertyRef Name="SALDO" />
+      <PropertyRef Name="LOCAL" />
+      <PropertyRef Name="CAJERO" />
+      <PropertyRef Name="ESTABLECIMIENTO" />
+      <PropertyRef Name="NOMBRELOCAL" />
+      <PropertyRef Name="FORMAPAGO" />
+      <PropertyRef Name="DETALLE" />
+      <PropertyRef Name="CREATEDDATETIME" />
+      <PropertyRef Name="CREATEDBY" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="FECHA" Type="datetime" Nullable="false" />
+    <Property Name="CLIENTE" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MONTO" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="SALDO" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="LOCAL" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CAJERO" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ESTABLECIMIENTO" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="NOMBRELOCAL" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="FORMAPAGO" Type="int" Nullable="false" />
+    <Property Name="DETALLE" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="CREATEDDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECVERSION" Type="int" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.vw_DescuentosCabeceraAX' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_DescuentosCabeceraAX">
+    <Key>
+      <PropertyRef Name="TIPODESCUENTO" />
+      <PropertyRef Name="DESCRIPCION" />
+      <PropertyRef Name="FECHADESDETZID" />
+      <PropertyRef Name="FECHAHASTATZID" />
+      <PropertyRef Name="ESTADO" />
+      <PropertyRef Name="LUNES" />
+      <PropertyRef Name="MARTES" />
+      <PropertyRef Name="MIERCOLES" />
+      <PropertyRef Name="JUEVES" />
+      <PropertyRef Name="VIERNES" />
+      <PropertyRef Name="SABADO" />
+      <PropertyRef Name="DOMINGO" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="ALMACEN" />
+      <PropertyRef Name="FECHADESDE" />
+      <PropertyRef Name="FECHAHASTA" />
+    </Key>
+    <Property Name="ALMACEN" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="TIPODESCUENTO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="FECHADESDE" Type="datetime" Nullable="false" />
+    <Property Name="FECHAHASTA" Type="datetime" Nullable="false" />
+    <Property Name="FECHADESDETZID" Type="int" Nullable="false" />
+    <Property Name="FECHAHASTATZID" Type="int" Nullable="false" />
+    <Property Name="ESTADO" Type="int" Nullable="false" />
+    <Property Name="LUNES" Type="int" Nullable="false" />
+    <Property Name="MARTES" Type="int" Nullable="false" />
+    <Property Name="MIERCOLES" Type="int" Nullable="false" />
+    <Property Name="JUEVES" Type="int" Nullable="false" />
+    <Property Name="VIERNES" Type="int" Nullable="false" />
+    <Property Name="SABADO" Type="int" Nullable="false" />
+    <Property Name="DOMINGO" Type="int" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECVERSION" Type="int" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.vw_DescuentosDetalleAX' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_DescuentosDetalleAX">
+    <Key>
+      <PropertyRef Name="REFRECID" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="ITEMBARCODE" />
+      <PropertyRef Name="CANTIDAD" />
+      <PropertyRef Name="DESCUENTO" />
+      <PropertyRef Name="TIENEDESCUENTO" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+    </Key>
+    <Property Name="REFRECID" Type="bigint" Nullable="false" />
+    <Property Name="ITEMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ITEMBARCODE" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="CANTIDAD" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="DESCUENTO" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="TIENEDESCUENTO" Type="int" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECVERSION" Type="int" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.VW_ITEMBARCODEQTY' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VW_ITEMBARCODEQTY">
+    <Key>
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="ITEMBARCODE" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="INVENTDIMID" />
+      <PropertyRef Name="QTY" />
+      <PropertyRef Name="BARCODESETUPID" />
+      <PropertyRef Name="MODIFIEDDATETIME" />
+      <PropertyRef Name="DEL_MODIFIEDTIME" />
+      <PropertyRef Name="MODIFIEDBY" />
+      <PropertyRef Name="DATAAREAID" />
+    </Key>
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+    <Property Name="ITEMBARCODE" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="ITEMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="INVENTDIMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="QTY" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="BARCODESETUPID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MODIFIEDDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="DEL_MODIFIEDTIME" Type="int" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.VW_NC_Motivo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VW_NC_Motivo">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DESCRIPTION" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.vw_PreciosPOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_PreciosPOS">
+    <Key>
+      <PropertyRef Name="ALMACEN" />
+      <PropertyRef Name="ITEMID" />
+      <PropertyRef Name="ITEMNAME" />
+      <PropertyRef Name="DSCE" />
+      <PropertyRef Name="DSCP" />
+      <PropertyRef Name="DSCEP" />
+      <PropertyRef Name="ITEMBARCODE" />
+      <PropertyRef Name="UNITID" />
+    </Key>
+    <Property Name="ALMACEN" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="ITEMID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ITEMNAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="PLM" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="DSCE" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="DSCP" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="DSCEP" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="TAXVALUE" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PVP" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="UNITID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ITEMBARCODE" Type="nvarchar" MaxLength="80" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.VW_PromoChoose' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VW_PromoChoose">
+    <Key>
+      <PropertyRef Name="BARCODE" />
+      <PropertyRef Name="DESCRIPCION" />
+      <PropertyRef Name="IVA" />
+    </Key>
+    <Property Name="ITEMID" Type="varchar" MaxLength="20" />
+    <Property Name="BARCODE" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="QTY" Type="decimal" Precision="7" Scale="2" />
+    <Property Name="P1" Type="varchar" MaxLength="50" />
+    <Property Name="P2" Type="varchar" MaxLength="50" />
+    <Property Name="P3" Type="varchar" MaxLength="50" />
+    <Property Name="PRECIO_COMBO" Type="decimal" Precision="7" Scale="2" />
+    <Property Name="PVP" Type="numeric" Precision="30" Scale="13" />
+    <Property Name="IVA" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="ESTADO" Type="bit" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.vw_RETIVA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_RETIVA">
+    <Key>
+      <PropertyRef Name="CODE" />
+      <PropertyRef Name="CONCEPT" />
+      <PropertyRef Name="RETENTION" />
+      <PropertyRef Name="INITDATE" />
+      <PropertyRef Name="ENDDATE" />
+    </Key>
+    <Property Name="CODE" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="CONCEPT" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="RETENTION" Type="numeric" Precision="28" Scale="12" Nullable="false" />
+    <Property Name="INITDATE" Type="datetime" Nullable="false" />
+    <Property Name="ENDDATE" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'POS.dbo.VW_SEARCHPRODUCT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VW_SEARCHPRODUCT">
+    <Key>
+      <PropertyRef Name="ARTICULO" />
+      <PropertyRef Name="BARRAS" />
+    </Key>
+    <Property Name="ARTICULO" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="BARRAS" Type="nvarchar" MaxLength="80" Nullable="false" />
+  </EntityType>
+  <Association Name="content_type_id_refs_id_d043b34a">
+    <End Role="django_content_type" Type="Self.django_content_type" Multiplicity="1" />
+    <End Role="auth_permission" Type="Self.auth_permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="django_content_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_permission">
+        <PropertyRef Name="content_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__auth_grou__permi__0F624AF8">
+    <End Role="auth_permission" Type="Self.auth_permission" Multiplicity="1" />
+    <End Role="auth_group_permissions" Type="Self.auth_group_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_permission">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_group_permissions">
+        <PropertyRef Name="permission_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__auth_user__group__04E4BC85">
+    <End Role="auth_group" Type="Self.auth_group" Multiplicity="1" />
+    <End Role="auth_user_groups" Type="Self.auth_user_groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_groups">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__auth_user__permi__0D7A0286">
+    <End Role="auth_permission" Type="Self.auth_permission" Multiplicity="1" />
+    <End Role="auth_user_user_permissions" Type="Self.auth_user_user_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_permission">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_user_permissions">
+        <PropertyRef Name="permission_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_docu__docum__0B91BA14">
+    <End Role="core_documento" Type="Self.core_documento" Multiplicity="1" />
+    <End Role="core_documentosecuencia" Type="Self.core_documentosecuencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_documento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_documentosecuencia">
+        <PropertyRef Name="documento_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_docu__punto__0C85DE4D">
+    <End Role="core_puntoemision" Type="Self.core_puntoemision" Multiplicity="1" />
+    <End Role="core_documentosecuencia" Type="Self.core_documentosecuencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_puntoemision">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_documentosecuencia">
+        <PropertyRef Name="punto_emision_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_empr__codig__0A9D95DB">
+    <End Role="core_empresacreditocorte" Type="Self.core_empresacreditocorte" Multiplicity="1" />
+    <End Role="core_empresacreditopago" Type="Self.core_empresacreditopago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_empresacreditocorte">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_empresacreditopago">
+        <PropertyRef Name="codigo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_empr__codig__797309D9">
+    <End Role="core_empresacredito" Type="Self.core_empresacredito" Multiplicity="1" />
+    <End Role="core_empresacreditocorte" Type="Self.core_empresacreditocorte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_empresacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_empresacreditocorte">
+        <PropertyRef Name="codigo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_fact__factu__4D5F7D71">
+    <End Role="core_factura" Type="Self.core_factura" Multiplicity="1" />
+    <End Role="core_facturapago" Type="Self.core_facturapago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_factura">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_facturapago">
+        <PropertyRef Name="factura_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_fact__factu__7C4F7684">
+    <End Role="core_factura" Type="Self.core_factura" Multiplicity="1" />
+    <End Role="core_facturadetalle" Type="Self.core_facturadetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_factura">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_facturadetalle">
+        <PropertyRef Name="factura_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_nc__nc__7C4F7684">
+    <End Role="core_notacredito" Type="Self.core_notacredito" Multiplicity="1" />
+    <End Role="core_notacreditodetalle" Type="Self.core_notacreditodetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_notacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_notacreditodetalle">
+        <PropertyRef Name="notacredito_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_punt__estab__02084FDA">
+    <End Role="core_establecimiento" Type="Self.core_establecimiento" Multiplicity="1" />
+    <End Role="core_puntoemision" Type="Self.core_puntoemision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_establecimiento">
+        <PropertyRef Name="establecimiento" />
+      </Principal>
+      <Dependent Role="core_puntoemision">
+        <PropertyRef Name="establecimiento_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_retencion__factura">
+    <End Role="core_factura" Type="Self.core_factura" Multiplicity="1" />
+    <End Role="core_retencion" Type="Self.core_retencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_factura">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_retencion">
+        <PropertyRef Name="factura_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_tarj__banco__7B5B524B">
+    <End Role="core_banco" Type="Self.core_banco" Multiplicity="1" />
+    <End Role="core_tarjetacredito" Type="Self.core_tarjetacredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_banco">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_tarjetacredito">
+        <PropertyRef Name="banco_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__core_tarj__empre__7A672E12">
+    <End Role="core_empresacredito" Type="Self.core_empresacredito" Multiplicity="1" />
+    <End Role="core_tarjetacreditointerno" Type="Self.core_tarjetacreditointerno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_empresacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_tarjetacreditointerno">
+        <PropertyRef Name="empresa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__django_ad__conte__02FC7413">
+    <End Role="django_content_type" Type="Self.django_content_type" Multiplicity="0..1" />
+    <End Role="django_admin_log" Type="Self.django_admin_log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="django_content_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="django_admin_log">
+        <PropertyRef Name="content_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__django_ad__user___03F0984C">
+    <End Role="auth_user" Type="Self.auth_user" Multiplicity="1" />
+    <End Role="django_admin_log" Type="Self.django_admin_log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="django_admin_log">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sitetree___permi__06CD04F7">
+    <End Role="auth_permission" Type="Self.auth_permission" Multiplicity="1" />
+    <End Role="sitetree_treeitem_access_permissions" Type="Self.sitetree_treeitem_access_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_permission">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem_access_permissions">
+        <PropertyRef Name="permission_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sitetree___tree___00200768">
+    <End Role="sitetree_tree" Type="Self.sitetree_tree" Multiplicity="1" />
+    <End Role="sitetree_treeitem" Type="Self.sitetree_treeitem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sitetree_tree">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem">
+        <PropertyRef Name="tree_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="group_id_refs_id_f4b32aac">
+    <End Role="auth_group" Type="Self.auth_group" Multiplicity="1" />
+    <End Role="auth_group_permissions" Type="Self.auth_group_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_group_permissions">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="parent_id_refs_id_04063ce5">
+    <End Role="sitetree_treeitem" Type="Self.sitetree_treeitem" Multiplicity="0..1" />
+    <End Role="sitetree_treeitem1" Type="Self.sitetree_treeitem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sitetree_treeitem">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem1">
+        <PropertyRef Name="parent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tarjeta_id_refs_id_0b442392">
+    <End Role="core_tarjetacredito" Type="Self.core_tarjetacredito" Multiplicity="1" />
+    <End Role="core_tarjetacreditopromocionticket" Type="Self.core_tarjetacreditopromocionticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="core_tarjetacredito">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="core_tarjetacreditopromocionticket">
+        <PropertyRef Name="tarjeta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="treeitem_id_refs_id_dc62ad92">
+    <End Role="sitetree_treeitem" Type="Self.sitetree_treeitem" Multiplicity="1" />
+    <End Role="sitetree_treeitem_access_permissions" Type="Self.sitetree_treeitem_access_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sitetree_treeitem">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sitetree_treeitem_access_permissions">
+        <PropertyRef Name="treeitem_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="user_id_refs_id_40c41112">
+    <End Role="auth_user" Type="Self.auth_user" Multiplicity="1" />
+    <End Role="auth_user_groups" Type="Self.auth_user_groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_groups">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="user_id_refs_id_4dc23c39">
+    <End Role="auth_user" Type="Self.auth_user" Multiplicity="1" />
+    <End Role="auth_user_user_permissions" Type="Self.auth_user_user_permissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="auth_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="auth_user_user_permissions">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="dss_function_CREDITO_EmpresaFechaCorte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="datetime" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="fecha_inicio" Type="datetime" />
+          <Property Name="fecha_fin" Type="datetime" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="SP_GENERABARCODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VALOR" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="spTarjetaDescuentoEspanola" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+    <Parameter Name="bono" Type="bit" Mode="In" />
+    <Parameter Name="activo" Type="bit" Mode="In" />
+    <Parameter Name="diasActivo" Type="int" Mode="In" />
+    <Parameter Name="saldo" Type="decimal" Mode="In" />
+    <Parameter Name="numeroFactura" Type="bigint" Mode="In" />
+    <Parameter Name="codigoCliente" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="POSModelStoreContainer">
+    <EntitySet Name="auth_group" EntityType="Self.auth_group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="auth_group_permissions" EntityType="Self.auth_group_permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="auth_permission" EntityType="Self.auth_permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="auth_user" EntityType="Self.auth_user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="auth_user_groups" EntityType="Self.auth_user_groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="auth_user_user_permissions" EntityType="Self.auth_user_user_permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_autorizacionsri" EntityType="Self.core_autorizacionsri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_banco" EntityType="Self.core_banco" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_descuento" EntityType="Self.core_descuento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_descuentotipo" EntityType="Self.core_descuentotipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_documento" EntityType="Self.core_documento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_documentosecuencia" EntityType="Self.core_documentosecuencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_empresacredito" EntityType="Self.core_empresacredito" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_empresacreditocorte" EntityType="Self.core_empresacreditocorte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_empresacreditopago" EntityType="Self.core_empresacreditopago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_establecimiento" EntityType="Self.core_establecimiento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_factura" EntityType="Self.core_factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_facturadetalle" EntityType="Self.core_facturadetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_facturadetalle_carnicero" EntityType="Self.core_facturadetalle_carnicero" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_facturapago" EntityType="Self.core_facturapago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_giftcard" EntityType="Self.core_giftcard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_giftcard_migracion" EntityType="Self.core_giftcard_migracion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_giftcardtransaccion" EntityType="Self.core_giftcardtransaccion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_notacredito" EntityType="Self.core_notacredito" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_notacreditodetalle" EntityType="Self.core_notacreditodetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_parametro" EntityType="Self.core_parametro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_poscustomergroup" EntityType="Self.core_poscustomergroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_promocionticket" EntityType="Self.core_promocionticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_puntoemision" EntityType="Self.core_puntoemision" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_recibo" EntityType="Self.core_recibo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_retencion" EntityType="Self.core_retencion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_tarjetacredito" EntityType="Self.core_tarjetacredito" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_tarjetacreditointerno" EntityType="Self.core_tarjetacreditointerno" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_tarjetacreditointernotransaccion" EntityType="Self.core_tarjetacreditointernotransaccion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_tarjetacreditopromocionticket" EntityType="Self.core_tarjetacreditopromocionticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_TarjetaDescuento" EntityType="Self.core_TarjetaDescuento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="django_admin_log" EntityType="Self.django_admin_log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="django_content_type" EntityType="Self.django_content_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="django_session" EntityType="Self.django_session" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="django_site" EntityType="Self.django_site" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MSpeer_lsns" EntityType="Self.MSpeer_lsns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pos_customer" EntityType="Self.pos_customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pos_customer_group" EntityType="Self.pos_customer_group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sitetree_tree" EntityType="Self.sitetree_tree" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sitetree_treeitem" EntityType="Self.sitetree_treeitem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sitetree_treeitem_access_permissions" EntityType="Self.sitetree_treeitem_access_permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblDeletedProduct" EntityType="Self.TblDeletedProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblDiscountCard" EntityType="Self.TblDiscountCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblDiscountCardTrans" EntityType="Self.TblDiscountCardTrans" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblInvoiceCounter" EntityType="Self.TblInvoiceCounter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblInvoiceRandom" EntityType="Self.TblInvoiceRandom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblInvoiceWinner" EntityType="Self.TblInvoiceWinner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="core_autorizacionsri2" EntityType="Self.core_autorizacionsri2" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [core_autorizacionsri2].[autorizacion] AS [autorizacion], 
+    [core_autorizacionsri2].[fecha_creacion] AS [fecha_creacion], 
+    [core_autorizacionsri2].[fecha_modificacion] AS [fecha_modificacion], 
+    [core_autorizacionsri2].[fecha_inicio] AS [fecha_inicio], 
+    [core_autorizacionsri2].[fecha_fin] AS [fecha_fin], 
+    [core_autorizacionsri2].[activo] AS [activo]
+    FROM [dbo].[core_autorizacionsri2] AS [core_autorizacionsri2]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="core_promocionticket_items" EntityType="Self.core_promocionticket_items" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [core_promocionticket_items].[promocionticket_id] AS [promocionticket_id], 
+    [core_promocionticket_items].[itemid] AS [itemid]
+    FROM [dbo].[core_promocionticket_items] AS [core_promocionticket_items]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CORE_PROMOCIONTICKET2" EntityType="Self.CORE_PROMOCIONTICKET2" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CORE_PROMOCIONTICKET2].[id] AS [id], 
+    [CORE_PROMOCIONTICKET2].[fecha_creacion] AS [fecha_creacion], 
+    [CORE_PROMOCIONTICKET2].[fecha_modificacion] AS [fecha_modificacion], 
+    [CORE_PROMOCIONTICKET2].[fecha_desde] AS [fecha_desde], 
+    [CORE_PROMOCIONTICKET2].[fecha_hasta] AS [fecha_hasta], 
+    [CORE_PROMOCIONTICKET2].[valor] AS [valor], 
+    [CORE_PROMOCIONTICKET2].[descripcion] AS [descripcion], 
+    [CORE_PROMOCIONTICKET2].[descripcion_larga] AS [descripcion_larga], 
+    [CORE_PROMOCIONTICKET2].[establecimiento] AS [establecimiento], 
+    [CORE_PROMOCIONTICKET2].[impresion_unitario] AS [impresion_unitario], 
+    [CORE_PROMOCIONTICKET2].[division] AS [division], 
+    [CORE_PROMOCIONTICKET2].[ismoneda] AS [ismoneda]
+    FROM [dbo].[CORE_PROMOCIONTICKET2] AS [CORE_PROMOCIONTICKET2]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CORE_PROMOCIONTICKET2_items" EntityType="Self.CORE_PROMOCIONTICKET2_items" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CORE_PROMOCIONTICKET2_items].[promocionticket_id] AS [promocionticket_id], 
+    [CORE_PROMOCIONTICKET2_items].[itemid] AS [itemid]
+    FROM [dbo].[CORE_PROMOCIONTICKET2_items] AS [CORE_PROMOCIONTICKET2_items]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MSpeer_originatorid_history" EntityType="Self.MSpeer_originatorid_history" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MSpeer_originatorid_history].[originator_publication] AS [originator_publication], 
+    [MSpeer_originatorid_history].[originator_id] AS [originator_id], 
+    [MSpeer_originatorid_history].[originator_node] AS [originator_node], 
+    [MSpeer_originatorid_history].[originator_db] AS [originator_db], 
+    [MSpeer_originatorid_history].[originator_db_version] AS [originator_db_version], 
+    [MSpeer_originatorid_history].[originator_version] AS [originator_version], 
+    [MSpeer_originatorid_history].[inserted_date] AS [inserted_date]
+    FROM [dbo].[MSpeer_originatorid_history] AS [MSpeer_originatorid_history]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="mt_FacturasRezagadas" EntityType="Self.mt_FacturasRezagadas" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [mt_FacturasRezagadas].[id] AS [id], 
+    [mt_FacturasRezagadas].[fecha_creacion] AS [fecha_creacion], 
+    [mt_FacturasRezagadas].[establecimiento] AS [establecimiento], 
+    [mt_FacturasRezagadas].[punto_emision] AS [punto_emision], 
+    [mt_FacturasRezagadas].[numero] AS [numero], 
+    [mt_FacturasRezagadas].[cliente_ax] AS [cliente_ax], 
+    [mt_FacturasRezagadas].[total] AS [total], 
+    [mt_FacturasRezagadas].[estado] AS [estado], 
+    [mt_FacturasRezagadas].[fecha_deteccion] AS [fecha_deteccion], 
+    [mt_FacturasRezagadas].[fecha_correccion] AS [fecha_correccion]
+    FROM [dbo].[mt_FacturasRezagadas] AS [mt_FacturasRezagadas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="pos_autorizacionsri" EntityType="Self.pos_autorizacionsri" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [pos_autorizacionsri].[autorizacion] AS [autorizacion], 
+    [pos_autorizacionsri].[fecha_inicio] AS [fecha_inicio], 
+    [pos_autorizacionsri].[fecha_fin] AS [fecha_fin], 
+    [pos_autorizacionsri].[activo] AS [activo]
+    FROM [dbo].[pos_autorizacionsri] AS [pos_autorizacionsri]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="pos_customer2" EntityType="Self.pos_customer2" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [pos_customer2].[ACCOUNTNUM] AS [ACCOUNTNUM], 
+    [pos_customer2].[NAME] AS [NAME], 
+    [pos_customer2].[ADDRESS] AS [ADDRESS], 
+    [pos_customer2].[PHONE] AS [PHONE], 
+    [pos_customer2].[TELEFAX] AS [TELEFAX], 
+    [pos_customer2].[CUSTGROUP] AS [CUSTGROUP], 
+    [pos_customer2].[CREDITMAX] AS [CREDITMAX], 
+    [pos_customer2].[MANDATORYCREDITLIMIT] AS [MANDATORYCREDITLIMIT], 
+    [pos_customer2].[DIMENSION] AS [DIMENSION], 
+    [pos_customer2].[DIMENSION2_] AS [DIMENSION2_], 
+    [pos_customer2].[DIMENSION3_] AS [DIMENSION3_], 
+    [pos_customer2].[VATNUM] AS [VATNUM], 
+    [pos_customer2].[COUNTRYREGIONID] AS [COUNTRYREGIONID], 
+    [pos_customer2].[EMAIL] AS [EMAIL], 
+    [pos_customer2].[CELLULARPHONE] AS [CELLULARPHONE], 
+    [pos_customer2].[PHONELOCAL] AS [PHONELOCAL], 
+    [pos_customer2].[STREET] AS [STREET], 
+    [pos_customer2].[MODIFIEDDATETIME] AS [MODIFIEDDATETIME], 
+    [pos_customer2].[CREATEDDATETIME] AS [CREATEDDATETIME], 
+    [pos_customer2].[DATAAREAID] AS [DATAAREAID]
+    FROM [dbo].[pos_customer2] AS [pos_customer2]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="pos_item" EntityType="Self.pos_item" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [pos_item].[ITEMGROUPID] AS [ITEMGROUPID], 
+    [pos_item].[ITEMID] AS [ITEMID], 
+    [pos_item].[ITEMNAME] AS [ITEMNAME], 
+    [pos_item].[PRIMARYVENDORID] AS [PRIMARYVENDORID], 
+    [pos_item].[NAMEALIAS] AS [NAMEALIAS], 
+    [pos_item].[DATAAREAID] AS [DATAAREAID], 
+    [pos_item].[TAXVALUE] AS [TAXVALUE], 
+    [pos_item].[COST] AS [COST], 
+    [pos_item].[PRICE] AS [PRICE], 
+    [pos_item].[UNITID] AS [UNITID], 
+    [pos_item].[ITEMTYPE] AS [ITEMTYPE], 
+    [pos_item].[BLOQUEADOPOS] AS [BLOQUEADOPOS], 
+    [pos_item].[CATEGORIA] AS [CATEGORIA]
+    FROM [dbo].[pos_item] AS [pos_item]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="pos_itembarra" EntityType="Self.pos_itembarra" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [pos_itembarra].[RECID] AS [RECID], 
+    [pos_itembarra].[ITEMBARCODE] AS [ITEMBARCODE], 
+    [pos_itembarra].[ITEMID] AS [ITEMID], 
+    [pos_itembarra].[INVENTDIMID] AS [INVENTDIMID], 
+    [pos_itembarra].[BARCODESETUPID] AS [BARCODESETUPID], 
+    [pos_itembarra].[MODIFIEDDATETIME] AS [MODIFIEDDATETIME], 
+    [pos_itembarra].[DEL_MODIFIEDTIME] AS [DEL_MODIFIEDTIME], 
+    [pos_itembarra].[MODIFIEDBY] AS [MODIFIEDBY], 
+    [pos_itembarra].[DATAAREAID] AS [DATAAREAID]
+    FROM [dbo].[pos_itembarra] AS [pos_itembarra]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="pos_paymentmode" EntityType="Self.pos_paymentmode" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [pos_paymentmode].[NAME] AS [NAME], 
+    [pos_paymentmode].[PAYMMODE] AS [PAYMMODE], 
+    [pos_paymentmode].[DATAAREAID] AS [DATAAREAID]
+    FROM [dbo].[pos_paymentmode] AS [pos_paymentmode]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProduccionAx" EntityType="Self.ProduccionAx" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProduccionAx].[productoax] AS [productoax], 
+    [ProduccionAx].[cantidad] AS [cantidad], 
+    [ProduccionAx].[peso] AS [peso], 
+    [ProduccionAx].[fecha] AS [fecha], 
+    [ProduccionAx].[hora] AS [hora], 
+    [ProduccionAx].[articuloplanificacionax] AS [articuloplanificacionax], 
+    [ProduccionAx].[recepcionconsumo] AS [recepcionconsumo], 
+    [ProduccionAx].[estado] AS [estado], 
+    [ProduccionAx].[nivel] AS [nivel], 
+    [ProduccionAx].[diario] AS [diario], 
+    [ProduccionAx].[ordencompra] AS [ordencompra], 
+    [ProduccionAx].[almacen] AS [almacen], 
+    [ProduccionAx].[almacen_tran] AS [almacen_tran], 
+    [ProduccionAx].[numero_guia] AS [numero_guia], 
+    [ProduccionAx].[transportista] AS [transportista], 
+    [ProduccionAx].[placa] AS [placa], 
+    [ProduccionAx].[num_op] AS [num_op], 
+    [ProduccionAx].[razonsocial_transporte] AS [razonsocial_transporte]
+    FROM [dbo].[ProduccionAx] AS [ProduccionAx]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TblAuthorizeDeleteProduct" EntityType="Self.TblAuthorizeDeleteProduct" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TblAuthorizeDeleteProduct].[USERID] AS [USERID], 
+    [TblAuthorizeDeleteProduct].[CODE] AS [CODE], 
+    [TblAuthorizeDeleteProduct].[USERNAME] AS [USERNAME], 
+    [TblAuthorizeDeleteProduct].[LOCATIONID] AS [LOCATIONID], 
+    [TblAuthorizeDeleteProduct].[AUTHORIZE] AS [AUTHORIZE], 
+    [TblAuthorizeDeleteProduct].[Huella] AS [Huella]
+    FROM [dbo].[TblAuthorizeDeleteProduct] AS [TblAuthorizeDeleteProduct]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TblFeriados" EntityType="Self.TblFeriados" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TblFeriados].[id] AS [id], 
+    [TblFeriados].[descripcion] AS [descripcion], 
+    [TblFeriados].[permiteVenta] AS [permiteVenta]
+    FROM [dbo].[TblFeriados] AS [TblFeriados]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblNavidadLMAT" EntityType="Self.tblNavidadLMAT" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblNavidadLMAT].[factura_id] AS [factura_id], 
+    [tblNavidadLMAT].[Almacen] AS [Almacen], 
+    [tblNavidadLMAT].[Seleccionado] AS [Seleccionado], 
+    [tblNavidadLMAT].[Procesado] AS [Procesado], 
+    [tblNavidadLMAT].[Usuario] AS [Usuario]
+    FROM [dbo].[tblNavidadLMAT] AS [tblNavidadLMAT]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ax_viewConsumoCreditoCliente" EntityType="Self.ax_viewConsumoCreditoCliente" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ax_viewConsumoCreditoCliente].[ACCOUNTNUM] AS [ACCOUNTNUM], 
+    [ax_viewConsumoCreditoCliente].[NAME] AS [NAME], 
+    [ax_viewConsumoCreditoCliente].[MONTO] AS [MONTO], 
+    [ax_viewConsumoCreditoCliente].[CORTE] AS [CORTE]
+    FROM [dbo].[ax_viewConsumoCreditoCliente] AS [ax_viewConsumoCreditoCliente]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ax_viewCorteCredito" EntityType="Self.ax_viewCorteCredito" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ax_viewCorteCredito].[ACCOUNTNUM] AS [ACCOUNTNUM], 
+    [ax_viewCorteCredito].[NAME] AS [NAME], 
+    [ax_viewCorteCredito].[fecha_inicio] AS [fecha_inicio], 
+    [ax_viewCorteCredito].[fecha_fin] AS [fecha_fin], 
+    [ax_viewCorteCredito].[monto] AS [monto], 
+    [ax_viewCorteCredito].[corte] AS [corte]
+    FROM [dbo].[ax_viewCorteCredito] AS [ax_viewCorteCredito]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BG_Apertura" EntityType="Self.BG_Apertura" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BG_Apertura].[CEDULA] AS [CEDULA], 
+    [BG_Apertura].[CAJERA] AS [CAJERA], 
+    [BG_Apertura].[LOCAL] AS [LOCAL], 
+    [BG_Apertura].[PUNTO_VENTA] AS [PUNTO_VENTA], 
+    [BG_Apertura].[TURNO] AS [TURNO], 
+    [BG_Apertura].[VALOR_BASE] AS [VALOR_BASE], 
+    [BG_Apertura].[ESTABLECIMIENTO] AS [ESTABLECIMIENTO], 
+    [BG_Apertura].[PUNTO_EMISION] AS [PUNTO_EMISION], 
+    [BG_Apertura].[IP] AS [IP], 
+    [BG_Apertura].[FECHA] AS [FECHA], 
+    [BG_Apertura].[LEIDO] AS [LEIDO], 
+    [BG_Apertura].[NUM_CAJA] AS [NUM_CAJA], 
+    [BG_Apertura].[CERRADO] AS [CERRADO], 
+    [BG_Apertura].[PRE_CIERRE] AS [PRE_CIERRE], 
+    [BG_Apertura].[INVENTLOCATION] AS [INVENTLOCATION]
+    FROM [dbo].[BG_Apertura] AS [BG_Apertura]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BG_Lst_POS_no_sub_AX" EntityType="Self.BG_Lst_POS_no_sub_AX" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BG_Lst_POS_no_sub_AX].[establecimiento] AS [establecimiento], 
+    [BG_Lst_POS_no_sub_AX].[fecha_creacion] AS [fecha_creacion], 
+    [BG_Lst_POS_no_sub_AX].[orderID] AS [orderID], 
+    [BG_Lst_POS_no_sub_AX].[item_id] AS [item_id], 
+    [BG_Lst_POS_no_sub_AX].[item_nombre] AS [item_nombre], 
+    [BG_Lst_POS_no_sub_AX].[cantidad] AS [cantidad], 
+    [BG_Lst_POS_no_sub_AX].[unidades] AS [unidades], 
+    [BG_Lst_POS_no_sub_AX].[total] AS [total]
+    FROM [dbo].[BG_Lst_POS_no_sub_AX] AS [BG_Lst_POS_no_sub_AX]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="core_factura_view" EntityType="Self.core_factura_view" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [core_factura_view].[id] AS [id], 
+    [core_factura_view].[DateInvoice] AS [DateInvoice], 
+    [core_factura_view].[InvoiceId] AS [InvoiceId], 
+    [core_factura_view].[InvoiceAccount] AS [InvoiceAccount], 
+    [core_factura_view].[Address] AS [Address], 
+    [core_factura_view].[SalesResponsable] AS [SalesResponsable], 
+    [core_factura_view].[InventLocationId] AS [InventLocationId], 
+    [core_factura_view].[documento] AS [documento], 
+    [core_factura_view].[descuento] AS [descuento], 
+    [core_factura_view].[descuento2] AS [descuento2], 
+    [core_factura_view].[orderID] AS [orderID], 
+    [core_factura_view].[loadinvoice] AS [loadinvoice], 
+    [core_factura_view].[SalesSubtotal] AS [SalesSubtotal]
+    FROM [dbo].[core_factura_view] AS [core_factura_view]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="core_facturadetalle_view" EntityType="Self.core_facturadetalle_view" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [core_facturadetalle_view].[id] AS [id], 
+    [core_facturadetalle_view].[InvoiceId] AS [InvoiceId], 
+    [core_facturadetalle_view].[itemid] AS [itemid], 
+    [core_facturadetalle_view].[description] AS [description], 
+    [core_facturadetalle_view].[LineNum] AS [LineNum], 
+    [core_facturadetalle_view].[SalesQTY] AS [SalesQTY], 
+    [core_facturadetalle_view].[SalesPrice] AS [SalesPrice], 
+    [core_facturadetalle_view].[SalesDesc] AS [SalesDesc], 
+    [core_facturadetalle_view].[SalesUnit] AS [SalesUnit], 
+    [core_facturadetalle_view].[LineAmount] AS [LineAmount], 
+    [core_facturadetalle_view].[TAX] AS [TAX], 
+    [core_facturadetalle_view].[SalesDescUnit] AS [SalesDescUnit]
+    FROM [dbo].[core_facturadetalle_view] AS [core_facturadetalle_view]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="core_facturapago_view" EntityType="Self.core_facturapago_view" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [core_facturapago_view].[id] AS [id], 
+    [core_facturapago_view].[InvoiceId] AS [InvoiceId], 
+    [core_facturapago_view].[Paymode] AS [Paymode], 
+    [core_facturapago_view].[Voucher] AS [Voucher], 
+    [core_facturapago_view].[InvoiceAccount] AS [InvoiceAccount], 
+    [core_facturapago_view].[PayReference] AS [PayReference], 
+    [core_facturapago_view].[Amount] AS [Amount], 
+    [core_facturapago_view].[PaymDate] AS [PaymDate], 
+    [core_facturapago_view].[PaymID] AS [PaymID], 
+    [core_facturapago_view].[documento] AS [documento]
+    FROM [dbo].[core_facturapago_view] AS [core_facturapago_view]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_AlmacenProductoPeso" EntityType="Self.View_AlmacenProductoPeso" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_AlmacenProductoPeso].[ITEMID] AS [ITEMID], 
+    [View_AlmacenProductoPeso].[INVENTLOCATIONID] AS [INVENTLOCATIONID]
+    FROM [dbo].[View_AlmacenProductoPeso] AS [View_AlmacenProductoPeso]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_CarnicerosAX" EntityType="Self.View_CarnicerosAX" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_CarnicerosAX].[CODIGO] AS [CODIGO], 
+    [View_CarnicerosAX].[NOMBRE] AS [NOMBRE]
+    FROM [dbo].[View_CarnicerosAX] AS [View_CarnicerosAX]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewDetalleAcumulado" EntityType="Self.ViewDetalleAcumulado" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewDetalleAcumulado].[establecimiento] AS [establecimiento], 
+    [ViewDetalleAcumulado].[fecha] AS [fecha], 
+    [ViewDetalleAcumulado].[item_id] AS [item_id], 
+    [ViewDetalleAcumulado].[cantidad] AS [cantidad]
+    FROM [dbo].[ViewDetalleAcumulado] AS [ViewDetalleAcumulado]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewEstablecimientoTotal" EntityType="Self.ViewEstablecimientoTotal" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewEstablecimientoTotal].[establecimiento] AS [establecimiento], 
+    [ViewEstablecimientoTotal].[fecha] AS [fecha], 
+    [ViewEstablecimientoTotal].[subtotal] AS [subtotal], 
+    [ViewEstablecimientoTotal].[descuento] AS [descuento], 
+    [ViewEstablecimientoTotal].[descuento2] AS [descuento2], 
+    [ViewEstablecimientoTotal].[iva] AS [iva], 
+    [ViewEstablecimientoTotal].[total] AS [total]
+    FROM [dbo].[ViewEstablecimientoTotal] AS [ViewEstablecimientoTotal]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewFacturaPagoUsuario" EntityType="Self.ViewFacturaPagoUsuario" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewFacturaPagoUsuario].[establecimiento] AS [establecimiento], 
+    [ViewFacturaPagoUsuario].[fecha] AS [fecha], 
+    [ViewFacturaPagoUsuario].[usuario] AS [usuario], 
+    [ViewFacturaPagoUsuario].[valor] AS [valor], 
+    [ViewFacturaPagoUsuario].[PAYMMODE] AS [PAYMMODE]
+    FROM [dbo].[ViewFacturaPagoUsuario] AS [ViewFacturaPagoUsuario]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewFacturasPagoCredito" EntityType="Self.ViewFacturasPagoCredito" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewFacturasPagoCredito].[Factura] AS [Factura], 
+    [ViewFacturasPagoCredito].[fecha_creacion] AS [fecha_creacion], 
+    [ViewFacturasPagoCredito].[valor] AS [valor], 
+    [ViewFacturasPagoCredito].[cliente_ax] AS [cliente_ax], 
+    [ViewFacturasPagoCredito].[razon_social] AS [razon_social], 
+    [ViewFacturasPagoCredito].[tarjeta] AS [tarjeta], 
+    [ViewFacturasPagoCredito].[empresa] AS [empresa]
+    FROM [dbo].[ViewFacturasPagoCredito] AS [ViewFacturasPagoCredito]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewFacturasUsuarios" EntityType="Self.ViewFacturasUsuarios" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewFacturasUsuarios].[establecimiento] AS [establecimiento], 
+    [ViewFacturasUsuarios].[punto_emision] AS [punto_emision], 
+    [ViewFacturasUsuarios].[fecha] AS [fecha], 
+    [ViewFacturasUsuarios].[total] AS [total], 
+    [ViewFacturasUsuarios].[usuario] AS [usuario], 
+    [ViewFacturasUsuarios].[numerofactura] AS [numerofactura]
+    FROM [dbo].[ViewFacturasUsuarios] AS [ViewFacturasUsuarios]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewPagoDetalleUsuario" EntityType="Self.ViewPagoDetalleUsuario" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewPagoDetalleUsuario].[establecimiento] AS [establecimiento], 
+    [ViewPagoDetalleUsuario].[fecha] AS [fecha], 
+    [ViewPagoDetalleUsuario].[usuario] AS [usuario], 
+    [ViewPagoDetalleUsuario].[tipo_id] AS [tipo_id], 
+    [ViewPagoDetalleUsuario].[valor] AS [valor], 
+    [ViewPagoDetalleUsuario].[datos] AS [datos]
+    FROM [dbo].[ViewPagoDetalleUsuario] AS [ViewPagoDetalleUsuario]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewPagosCredito" EntityType="Self.ViewPagosCredito" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewPagosCredito].[fecha] AS [fecha], 
+    [ViewPagosCredito].[tarjeta] AS [tarjeta], 
+    [ViewPagosCredito].[cliente] AS [cliente], 
+    [ViewPagosCredito].[ruc] AS [ruc], 
+    [ViewPagosCredito].[valor] AS [valor], 
+    [ViewPagosCredito].[descripcion] AS [descripcion], 
+    [ViewPagosCredito].[NAME] AS [NAME], 
+    [ViewPagosCredito].[razon_social] AS [razon_social]
+    FROM [dbo].[ViewPagosCredito] AS [ViewPagosCredito]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewTicketsCarniceros" EntityType="Self.ViewTicketsCarniceros" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewTicketsCarniceros].[FECHA_CREACION] AS [FECHA_CREACION], 
+    [ViewTicketsCarniceros].[ITEMID] AS [ITEMID], 
+    [ViewTicketsCarniceros].[ITEM_NOMBRE] AS [ITEM_NOMBRE], 
+    [ViewTicketsCarniceros].[CODIGOCARNICERO] AS [CODIGOCARNICERO], 
+    [ViewTicketsCarniceros].[NOMBRECARNICERO] AS [NOMBRECARNICERO], 
+    [ViewTicketsCarniceros].[IDALMACEN] AS [IDALMACEN], 
+    [ViewTicketsCarniceros].[ALMACEN] AS [ALMACEN], 
+    [ViewTicketsCarniceros].[CANTIDAD] AS [CANTIDAD], 
+    [ViewTicketsCarniceros].[UNIDADES] AS [UNIDADES], 
+    [ViewTicketsCarniceros].[TOTAL] AS [TOTAL]
+    FROM [dbo].[ViewTicketsCarniceros] AS [ViewTicketsCarniceros]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_BLOCK_PRODUCTS" EntityType="Self.VW_BLOCK_PRODUCTS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_BLOCK_PRODUCTS].[PRODUCT] AS [PRODUCT], 
+    [VW_BLOCK_PRODUCTS].[BARCODE] AS [BARCODE], 
+    [VW_BLOCK_PRODUCTS].[QTY] AS [QTY], 
+    [VW_BLOCK_PRODUCTS].[DESCRIPTION] AS [DESCRIPTION], 
+    [VW_BLOCK_PRODUCTS].[SETPRODUCT] AS [SETPRODUCT], 
+    [VW_BLOCK_PRODUCTS].[CATEGORY] AS [CATEGORY], 
+    [VW_BLOCK_PRODUCTS].[VARIETY] AS [VARIETY], 
+    [VW_BLOCK_PRODUCTS].[GROUPS] AS [GROUPS], 
+    [VW_BLOCK_PRODUCTS].[SUBGROUP] AS [SUBGROUP], 
+    [VW_BLOCK_PRODUCTS].[VENDORID] AS [VENDORID]
+    FROM [dbo].[VW_BLOCK_PRODUCTS] AS [VW_BLOCK_PRODUCTS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_CombosCaja" EntityType="Self.VW_CombosCaja" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_CombosCaja].[ITEMRELATION] AS [ITEMRELATION], 
+    [VW_CombosCaja].[ITEMRELATIONCODE] AS [ITEMRELATIONCODE], 
+    [VW_CombosCaja].[ITEMNAME] AS [ITEMNAME], 
+    [VW_CombosCaja].[SUPPITEMID] AS [SUPPITEMID], 
+    [VW_CombosCaja].[SUPPITEMCODE] AS [SUPPITEMCODE], 
+    [VW_CombosCaja].[SUPPITEMNAME] AS [SUPPITEMNAME], 
+    [VW_CombosCaja].[UNITID] AS [UNITID], 
+    [VW_CombosCaja].[FROMDATE] AS [FROMDATE], 
+    [VW_CombosCaja].[TODATE] AS [TODATE], 
+    [VW_CombosCaja].[MULTIPLEQTY] AS [MULTIPLEQTY], 
+    [VW_CombosCaja].[SUPPITEMQTY] AS [SUPPITEMQTY], 
+    [VW_CombosCaja].[SUPPITEMFREE] AS [SUPPITEMFREE], 
+    [VW_CombosCaja].[SUPPITEMOPTIONAL] AS [SUPPITEMOPTIONAL]
+    FROM [dbo].[VW_CombosCaja] AS [VW_CombosCaja]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_CreditoLocalesCabecera" EntityType="Self.vw_CreditoLocalesCabecera" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_CreditoLocalesCabecera].[CLIENTE] AS [CLIENTE], 
+    [vw_CreditoLocalesCabecera].[CLIENTENOMBRE] AS [CLIENTENOMBRE], 
+    [vw_CreditoLocalesCabecera].[FECHACONTRATO] AS [FECHACONTRATO], 
+    [vw_CreditoLocalesCabecera].[FECHAENTREGA] AS [FECHAENTREGA], 
+    [vw_CreditoLocalesCabecera].[FECHAVENCIMIENTO] AS [FECHAVENCIMIENTO], 
+    [vw_CreditoLocalesCabecera].[LOCALENTREGA] AS [LOCALENTREGA], 
+    [vw_CreditoLocalesCabecera].[NOMBRELOCAL] AS [NOMBRELOCAL], 
+    [vw_CreditoLocalesCabecera].[ESTADO] AS [ESTADO], 
+    [vw_CreditoLocalesCabecera].[TOTAL] AS [TOTAL], 
+    [vw_CreditoLocalesCabecera].[ABONADO] AS [ABONADO], 
+    [vw_CreditoLocalesCabecera].[ENTREGADO] AS [ENTREGADO], 
+    [vw_CreditoLocalesCabecera].[LOCALCONTRATO] AS [LOCALCONTRATO], 
+    [vw_CreditoLocalesCabecera].[ANULADO] AS [ANULADO]
+    FROM [dbo].[vw_CreditoLocalesCabecera] AS [vw_CreditoLocalesCabecera]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_CreditoLocalesMensajes" EntityType="Self.vw_CreditoLocalesMensajes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_CreditoLocalesMensajes].[TIPOMENSAJE] AS [TIPOMENSAJE], 
+    [vw_CreditoLocalesMensajes].[MENSAJE] AS [MENSAJE], 
+    [vw_CreditoLocalesMensajes].[DATAAREAID] AS [DATAAREAID], 
+    [vw_CreditoLocalesMensajes].[RECVERSION] AS [RECVERSION], 
+    [vw_CreditoLocalesMensajes].[RECID] AS [RECID]
+    FROM [dbo].[vw_CreditoLocalesMensajes] AS [vw_CreditoLocalesMensajes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_CreditoLocalesPagos" EntityType="Self.vw_CreditoLocalesPagos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_CreditoLocalesPagos].[FECHA] AS [FECHA], 
+    [vw_CreditoLocalesPagos].[CLIENTE] AS [CLIENTE], 
+    [vw_CreditoLocalesPagos].[MONTO] AS [MONTO], 
+    [vw_CreditoLocalesPagos].[SALDO] AS [SALDO], 
+    [vw_CreditoLocalesPagos].[LOCAL] AS [LOCAL], 
+    [vw_CreditoLocalesPagos].[CAJERO] AS [CAJERO], 
+    [vw_CreditoLocalesPagos].[ESTABLECIMIENTO] AS [ESTABLECIMIENTO], 
+    [vw_CreditoLocalesPagos].[NOMBRELOCAL] AS [NOMBRELOCAL], 
+    [vw_CreditoLocalesPagos].[FORMAPAGO] AS [FORMAPAGO], 
+    [vw_CreditoLocalesPagos].[DETALLE] AS [DETALLE], 
+    [vw_CreditoLocalesPagos].[CREATEDDATETIME] AS [CREATEDDATETIME], 
+    [vw_CreditoLocalesPagos].[CREATEDBY] AS [CREATEDBY], 
+    [vw_CreditoLocalesPagos].[DATAAREAID] AS [DATAAREAID], 
+    [vw_CreditoLocalesPagos].[RECVERSION] AS [RECVERSION], 
+    [vw_CreditoLocalesPagos].[RECID] AS [RECID]
+    FROM [dbo].[vw_CreditoLocalesPagos] AS [vw_CreditoLocalesPagos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_DescuentosCabeceraAX" EntityType="Self.vw_DescuentosCabeceraAX" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_DescuentosCabeceraAX].[ALMACEN] AS [ALMACEN], 
+    [vw_DescuentosCabeceraAX].[TIPODESCUENTO] AS [TIPODESCUENTO], 
+    [vw_DescuentosCabeceraAX].[DESCRIPCION] AS [DESCRIPCION], 
+    [vw_DescuentosCabeceraAX].[FECHADESDE] AS [FECHADESDE], 
+    [vw_DescuentosCabeceraAX].[FECHAHASTA] AS [FECHAHASTA], 
+    [vw_DescuentosCabeceraAX].[FECHADESDETZID] AS [FECHADESDETZID], 
+    [vw_DescuentosCabeceraAX].[FECHAHASTATZID] AS [FECHAHASTATZID], 
+    [vw_DescuentosCabeceraAX].[ESTADO] AS [ESTADO], 
+    [vw_DescuentosCabeceraAX].[LUNES] AS [LUNES], 
+    [vw_DescuentosCabeceraAX].[MARTES] AS [MARTES], 
+    [vw_DescuentosCabeceraAX].[MIERCOLES] AS [MIERCOLES], 
+    [vw_DescuentosCabeceraAX].[JUEVES] AS [JUEVES], 
+    [vw_DescuentosCabeceraAX].[VIERNES] AS [VIERNES], 
+    [vw_DescuentosCabeceraAX].[SABADO] AS [SABADO], 
+    [vw_DescuentosCabeceraAX].[DOMINGO] AS [DOMINGO], 
+    [vw_DescuentosCabeceraAX].[DATAAREAID] AS [DATAAREAID], 
+    [vw_DescuentosCabeceraAX].[RECVERSION] AS [RECVERSION], 
+    [vw_DescuentosCabeceraAX].[RECID] AS [RECID]
+    FROM [dbo].[vw_DescuentosCabeceraAX] AS [vw_DescuentosCabeceraAX]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_DescuentosDetalleAX" EntityType="Self.vw_DescuentosDetalleAX" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_DescuentosDetalleAX].[REFRECID] AS [REFRECID], 
+    [vw_DescuentosDetalleAX].[ITEMID] AS [ITEMID], 
+    [vw_DescuentosDetalleAX].[ITEMBARCODE] AS [ITEMBARCODE], 
+    [vw_DescuentosDetalleAX].[CANTIDAD] AS [CANTIDAD], 
+    [vw_DescuentosDetalleAX].[DESCUENTO] AS [DESCUENTO], 
+    [vw_DescuentosDetalleAX].[TIENEDESCUENTO] AS [TIENEDESCUENTO], 
+    [vw_DescuentosDetalleAX].[DATAAREAID] AS [DATAAREAID], 
+    [vw_DescuentosDetalleAX].[RECVERSION] AS [RECVERSION], 
+    [vw_DescuentosDetalleAX].[RECID] AS [RECID]
+    FROM [dbo].[vw_DescuentosDetalleAX] AS [vw_DescuentosDetalleAX]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_ITEMBARCODEQTY" EntityType="Self.VW_ITEMBARCODEQTY" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_ITEMBARCODEQTY].[RECID] AS [RECID], 
+    [VW_ITEMBARCODEQTY].[ITEMBARCODE] AS [ITEMBARCODE], 
+    [VW_ITEMBARCODEQTY].[ITEMID] AS [ITEMID], 
+    [VW_ITEMBARCODEQTY].[INVENTDIMID] AS [INVENTDIMID], 
+    [VW_ITEMBARCODEQTY].[QTY] AS [QTY], 
+    [VW_ITEMBARCODEQTY].[BARCODESETUPID] AS [BARCODESETUPID], 
+    [VW_ITEMBARCODEQTY].[MODIFIEDDATETIME] AS [MODIFIEDDATETIME], 
+    [VW_ITEMBARCODEQTY].[DEL_MODIFIEDTIME] AS [DEL_MODIFIEDTIME], 
+    [VW_ITEMBARCODEQTY].[MODIFIEDBY] AS [MODIFIEDBY], 
+    [VW_ITEMBARCODEQTY].[DATAAREAID] AS [DATAAREAID]
+    FROM [dbo].[VW_ITEMBARCODEQTY] AS [VW_ITEMBARCODEQTY]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_NC_Motivo" EntityType="Self.VW_NC_Motivo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_NC_Motivo].[ID] AS [ID], 
+    [VW_NC_Motivo].[DESCRIPTION] AS [DESCRIPTION]
+    FROM [dbo].[VW_NC_Motivo] AS [VW_NC_Motivo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_PreciosPOS" EntityType="Self.vw_PreciosPOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_PreciosPOS].[ALMACEN] AS [ALMACEN], 
+    [vw_PreciosPOS].[ITEMID] AS [ITEMID], 
+    [vw_PreciosPOS].[ITEMNAME] AS [ITEMNAME], 
+    [vw_PreciosPOS].[PLM] AS [PLM], 
+    [vw_PreciosPOS].[DSCE] AS [DSCE], 
+    [vw_PreciosPOS].[DSCP] AS [DSCP], 
+    [vw_PreciosPOS].[DSCEP] AS [DSCEP], 
+    [vw_PreciosPOS].[TAXVALUE] AS [TAXVALUE], 
+    [vw_PreciosPOS].[PVP] AS [PVP], 
+    [vw_PreciosPOS].[UNITID] AS [UNITID], 
+    [vw_PreciosPOS].[ITEMBARCODE] AS [ITEMBARCODE]
+    FROM [dbo].[vw_PreciosPOS] AS [vw_PreciosPOS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_PromoChoose" EntityType="Self.VW_PromoChoose" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_PromoChoose].[ITEMID] AS [ITEMID], 
+    [VW_PromoChoose].[BARCODE] AS [BARCODE], 
+    [VW_PromoChoose].[DESCRIPCION] AS [DESCRIPCION], 
+    [VW_PromoChoose].[QTY] AS [QTY], 
+    [VW_PromoChoose].[P1] AS [P1], 
+    [VW_PromoChoose].[P2] AS [P2], 
+    [VW_PromoChoose].[P3] AS [P3], 
+    [VW_PromoChoose].[PRECIO_COMBO] AS [PRECIO_COMBO], 
+    [VW_PromoChoose].[PVP] AS [PVP], 
+    [VW_PromoChoose].[IVA] AS [IVA], 
+    [VW_PromoChoose].[ESTADO] AS [ESTADO]
+    FROM [dbo].[VW_PromoChoose] AS [VW_PromoChoose]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_RETIVA" EntityType="Self.vw_RETIVA" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_RETIVA].[CODE] AS [CODE], 
+    [vw_RETIVA].[CONCEPT] AS [CONCEPT], 
+    [vw_RETIVA].[RETENTION] AS [RETENTION], 
+    [vw_RETIVA].[INITDATE] AS [INITDATE], 
+    [vw_RETIVA].[ENDDATE] AS [ENDDATE]
+    FROM [dbo].[vw_RETIVA] AS [vw_RETIVA]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_SEARCHPRODUCT" EntityType="Self.VW_SEARCHPRODUCT" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_SEARCHPRODUCT].[ARTICULO] AS [ARTICULO], 
+    [VW_SEARCHPRODUCT].[BARRAS] AS [BARRAS]
+    FROM [dbo].[VW_SEARCHPRODUCT] AS [VW_SEARCHPRODUCT]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="content_type_id_refs_id_d043b34a" Association="Self.content_type_id_refs_id_d043b34a">
+      <End Role="django_content_type" EntitySet="django_content_type" />
+      <End Role="auth_permission" EntitySet="auth_permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__auth_grou__permi__0F624AF8" Association="Self.FK__auth_grou__permi__0F624AF8">
+      <End Role="auth_permission" EntitySet="auth_permission" />
+      <End Role="auth_group_permissions" EntitySet="auth_group_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__auth_user__group__04E4BC85" Association="Self.FK__auth_user__group__04E4BC85">
+      <End Role="auth_group" EntitySet="auth_group" />
+      <End Role="auth_user_groups" EntitySet="auth_user_groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__auth_user__permi__0D7A0286" Association="Self.FK__auth_user__permi__0D7A0286">
+      <End Role="auth_permission" EntitySet="auth_permission" />
+      <End Role="auth_user_user_permissions" EntitySet="auth_user_user_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_docu__docum__0B91BA14" Association="Self.FK__core_docu__docum__0B91BA14">
+      <End Role="core_documento" EntitySet="core_documento" />
+      <End Role="core_documentosecuencia" EntitySet="core_documentosecuencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_docu__punto__0C85DE4D" Association="Self.FK__core_docu__punto__0C85DE4D">
+      <End Role="core_puntoemision" EntitySet="core_puntoemision" />
+      <End Role="core_documentosecuencia" EntitySet="core_documentosecuencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_empr__codig__0A9D95DB" Association="Self.FK__core_empr__codig__0A9D95DB">
+      <End Role="core_empresacreditocorte" EntitySet="core_empresacreditocorte" />
+      <End Role="core_empresacreditopago" EntitySet="core_empresacreditopago" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_empr__codig__797309D9" Association="Self.FK__core_empr__codig__797309D9">
+      <End Role="core_empresacredito" EntitySet="core_empresacredito" />
+      <End Role="core_empresacreditocorte" EntitySet="core_empresacreditocorte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_fact__factu__4D5F7D71" Association="Self.FK__core_fact__factu__4D5F7D71">
+      <End Role="core_factura" EntitySet="core_factura" />
+      <End Role="core_facturapago" EntitySet="core_facturapago" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_fact__factu__7C4F7684" Association="Self.FK__core_fact__factu__7C4F7684">
+      <End Role="core_factura" EntitySet="core_factura" />
+      <End Role="core_facturadetalle" EntitySet="core_facturadetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_nc__nc__7C4F7684" Association="Self.FK__core_nc__nc__7C4F7684">
+      <End Role="core_notacredito" EntitySet="core_notacredito" />
+      <End Role="core_notacreditodetalle" EntitySet="core_notacreditodetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_punt__estab__02084FDA" Association="Self.FK__core_punt__estab__02084FDA">
+      <End Role="core_establecimiento" EntitySet="core_establecimiento" />
+      <End Role="core_puntoemision" EntitySet="core_puntoemision" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_retencion__factura" Association="Self.FK__core_retencion__factura">
+      <End Role="core_factura" EntitySet="core_factura" />
+      <End Role="core_retencion" EntitySet="core_retencion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_tarj__banco__7B5B524B" Association="Self.FK__core_tarj__banco__7B5B524B">
+      <End Role="core_banco" EntitySet="core_banco" />
+      <End Role="core_tarjetacredito" EntitySet="core_tarjetacredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK__core_tarj__empre__7A672E12" Association="Self.FK__core_tarj__empre__7A672E12">
+      <End Role="core_empresacredito" EntitySet="core_empresacredito" />
+      <End Role="core_tarjetacreditointerno" EntitySet="core_tarjetacreditointerno" />
+    </AssociationSet>
+    <AssociationSet Name="FK__django_ad__conte__02FC7413" Association="Self.FK__django_ad__conte__02FC7413">
+      <End Role="django_content_type" EntitySet="django_content_type" />
+      <End Role="django_admin_log" EntitySet="django_admin_log" />
+    </AssociationSet>
+    <AssociationSet Name="FK__django_ad__user___03F0984C" Association="Self.FK__django_ad__user___03F0984C">
+      <End Role="auth_user" EntitySet="auth_user" />
+      <End Role="django_admin_log" EntitySet="django_admin_log" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sitetree___permi__06CD04F7" Association="Self.FK__sitetree___permi__06CD04F7">
+      <End Role="auth_permission" EntitySet="auth_permission" />
+      <End Role="sitetree_treeitem_access_permissions" EntitySet="sitetree_treeitem_access_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sitetree___tree___00200768" Association="Self.FK__sitetree___tree___00200768">
+      <End Role="sitetree_tree" EntitySet="sitetree_tree" />
+      <End Role="sitetree_treeitem" EntitySet="sitetree_treeitem" />
+    </AssociationSet>
+    <AssociationSet Name="group_id_refs_id_f4b32aac" Association="Self.group_id_refs_id_f4b32aac">
+      <End Role="auth_group" EntitySet="auth_group" />
+      <End Role="auth_group_permissions" EntitySet="auth_group_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="parent_id_refs_id_04063ce5" Association="Self.parent_id_refs_id_04063ce5">
+      <End Role="sitetree_treeitem" EntitySet="sitetree_treeitem" />
+      <End Role="sitetree_treeitem1" EntitySet="sitetree_treeitem" />
+    </AssociationSet>
+    <AssociationSet Name="tarjeta_id_refs_id_0b442392" Association="Self.tarjeta_id_refs_id_0b442392">
+      <End Role="core_tarjetacredito" EntitySet="core_tarjetacredito" />
+      <End Role="core_tarjetacreditopromocionticket" EntitySet="core_tarjetacreditopromocionticket" />
+    </AssociationSet>
+    <AssociationSet Name="treeitem_id_refs_id_dc62ad92" Association="Self.treeitem_id_refs_id_dc62ad92">
+      <End Role="sitetree_treeitem" EntitySet="sitetree_treeitem" />
+      <End Role="sitetree_treeitem_access_permissions" EntitySet="sitetree_treeitem_access_permissions" />
+    </AssociationSet>
+    <AssociationSet Name="user_id_refs_id_40c41112" Association="Self.user_id_refs_id_40c41112">
+      <End Role="auth_user" EntitySet="auth_user" />
+      <End Role="auth_user_groups" EntitySet="auth_user_groups" />
+    </AssociationSet>
+    <AssociationSet Name="user_id_refs_id_4dc23c39" Association="Self.user_id_refs_id_4dc23c39">
+      <End Role="auth_user" EntitySet="auth_user" />
+      <End Role="auth_user_user_permissions" EntitySet="auth_user_user_permissions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

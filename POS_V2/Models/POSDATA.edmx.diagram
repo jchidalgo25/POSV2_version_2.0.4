@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8966d6c6472a49a2bb21e48279786124" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="POSModel.pos_customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSModel.pos_itembarra" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSModel.core_documento" Width="1.5" PointX="6" PointY="6.125" />
+        <EntityTypeShape EntityType="POSModel.core_documentosecuencia" Width="1.5" PointX="10.75" PointY="4.875" />
+        <AssociationConnector Association="POSModel.FK__core_docu__docum__2B0A656D" />
+        <EntityTypeShape EntityType="POSModel.core_establecimiento" Width="1.5" PointX="12.375" PointY="9.25" />
+        <EntityTypeShape EntityType="POSModel.core_puntoemision" Width="1.5" PointX="8.25" PointY="9.25" />
+        <AssociationConnector Association="POSModel.FK__core_docu__punto__2BFE89A6" />
+        <AssociationConnector Association="POSModel.FK__core_punt__estab__208CD6FA" />
+        <EntityTypeShape EntityType="POSModel.core_banco" Width="1.5" PointX="0.84104600401643936" PointY="19.465272063140418" />
+        <EntityTypeShape EntityType="POSModel.core_tarjetacredito" Width="1.75" PointX="2.25" PointY="10.875" />
+        <AssociationConnector Association="POSModel.FK__core_tarj__banco__3A4CA8FD" />
+        <EntityTypeShape EntityType="POSModel.core_giftcardtransaccion" Width="1.5" PointX="9.6626453798555971" PointY="18.40596584342698" />
+        <EntityTypeShape EntityType="POSModel.core_factura" Width="1.5" PointX="3.625" PointY="14.5" FillColor="Red" />
+        <EntityTypeShape EntityType="POSModel.core_facturadetalle" Width="2.375" PointX="5.375" PointY="14.5" FillColor="Red" />
+        <EntityTypeShape EntityType="POSModel.core_facturapago" Width="1.75" PointX="7.25" PointY="19.75" FillColor="Red" IsExpanded="true" />
+        <AssociationConnector Association="POSModel.FK__core_fact__factu__47A6A41B" />
+        <AssociationConnector Association="POSModel.FK__core_fact__factu__4D5F7D71" />
+		<EntityTypeShape EntityType="POSModel.pos_paymentmode" Width="1.5" PointX="11.375" PointY="22.125" />
+        <EntityTypeShape EntityType="POSModel.core_autorizacionsri" Width="1.5" PointX="8.246786086003663" PointY="6.365970942362198" />
+        <EntityTypeShape EntityType="POSModel.core_parametro" Width="1.5" PointX="8.0959846452325515" PointY="26.628631857516538" />
+        <EntityTypeShape EntityType="POSModel.core_recibo" Width="1.5" PointX="11.44464661713906" PointY="17.2065089574114" />
+        <EntityTypeShape EntityType="POSModel.core_tarjetacreditointerno" Width="1.5" PointX="3.7534211984618668" PointY="7.1784340474654149" />
+        <EntityTypeShape EntityType="POSModel.core_tarjetacreditointernotransaccion" Width="1.5" PointX="4.25" PointY="24.875" />
+        <EntityTypeShape EntityType="POSModel.core_promocionticket" Width="2.5" PointX="7.625" PointY="32.125" />
+        <EntityTypeShape EntityType="POSModel.core_tarjetacreditopromocionticket" Width="2.625" PointX="3" PointY="33" />
+        <AssociationConnector Association="POSModel.FK__core_tarj__promo__31B762FC" />
+        <AssociationConnector Association="POSModel.tarjeta_id_refs_id_0b442392" />
+        <EntityTypeShape EntityType="POSModel.pos_autorizacionsri" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="POSModel.ViewPagoDetalleUsuario" Width="1.5" PointX="14" PointY="26.625" FillColor="192, 0, 192" />
+        <EntityTypeShape EntityType="POSModel.ViewFacturaPagoUsuario" Width="1.5" PointX="15.75" PointY="26.625" FillColor="192, 0, 192" />
+        <EntityTypeShape EntityType="POSModel.auth_user" Width="1.5" PointX="11.75" PointY="29" FillColor="Green" />
+        <EntityTypeShape EntityType="POSModel.auth_group" Width="1.5" PointX="15.75" PointY="29.375" FillColor="Green" />
+        <EntityTypeShape EntityType="POSModel.auth_user_groups" Width="1.5" PointX="13.875" PointY="29.25" FillColor="Green" />
+        <AssociationConnector Association="POSModel.FK__auth_user__group__04E4BC85" />
+        <AssociationConnector Association="POSModel.user_id_refs_id_40c41112" />
+        <EntityTypeShape EntityType="POSModel.core_promocionticket_items" Width="2.25" PointX="7.25" PointY="30.375" />
+        <EntityTypeShape EntityType="POSModel.core_facturadetalle_carnicero" Width="2.375" PointX="3.5" PointY="22" FillColor="128, 128, 255" />
+        <EntityTypeShape EntityType="POSModel.View_CarnicerosAX" Width="1.5" PointX="17.5" PointY="26.625" FillColor="192, 0, 192" />
+        <AssociationConnector Association="POSModel.core_facturacore_facturadetalle_carnicero" />
+        <EntityTypeShape EntityType="POSModel.View_AlmacenProductoPeso" Width="1.5" PointX="19.25" PointY="26.625" FillColor="192, 0, 192" />
+        <EntityTypeShape EntityType="POSModel.ax_viewCorteCredito" Width="1.5" PointX="10.75" PointY="13.75" />
+        <EntityTypeShape EntityType="POSModel.core_factura_view" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="POSModel.core_facturadetalle_view" Width="1.5" PointX="14.75" PointY="10.75" />
+        <EntityTypeShape EntityType="POSModel.core_facturapago_view" Width="1.5" PointX="14.75" PointY="15.75" />
+        <EntityTypeShape EntityType="POSModel.ViewDetalleAcumulado" Width="1.5" PointX="4.75" PointY="11.75" />
+        <EntityTypeShape EntityType="POSModel.ViewEstablecimientoTotal" Width="1.5" PointX="12.625" PointY="1.375" />
+        <EntityTypeShape EntityType="POSModel.ViewFacturasPagoCredito" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="POSModel.ViewPagosCredito" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="POSModel.ViewTicketsCarnicero" Width="1.5" PointX="16.75" PointY="12.75" />
+        <EntityTypeShape EntityType="POSModel.vw_PreciosPOS" Width="1.5" PointX="16.75" PointY="16.75" />
+        <EntityTypeShape EntityType="POSModel.auth_group_permissions" Width="1.5" PointX="26.125" PointY="13.75" />
+        <EntityTypeShape EntityType="POSModel.auth_permission" Width="1.5" PointX="23.875" PointY="2.375" />
+        <EntityTypeShape EntityType="POSModel.auth_user_user_permissions" Width="1.5" PointX="26.125" PointY="16.625" />
+        <EntityTypeShape EntityType="POSModel.core_descuentotipo" Width="1.5" PointX="21.625" PointY="12.75" />
+        <EntityTypeShape EntityType="POSModel.core_empresacredito" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="POSModel.core_empresacreditocorte" Width="1.5" PointX="3" PointY="28.5" />
+        <EntityTypeShape EntityType="POSModel.core_empresacreditopago" Width="1.5" PointX="5.25" PointY="28.625" />
+        <EntityTypeShape EntityType="POSModel.core_giftcard_migracion" Width="1.5" PointX="18.625" PointY="20.75" />
+        <EntityTypeShape EntityType="POSModel.core_poscustomergroup" Width="1.5" PointX="20.625" PointY="20.75" />
+        <EntityTypeShape EntityType="POSModel.django_admin_log" Width="1.5" PointX="23.875" PointY="16.25" />
+        <EntityTypeShape EntityType="POSModel.django_content_type" Width="1.5" PointX="21.625" PointY="2.625" />
+        <EntityTypeShape EntityType="POSModel.django_session" Width="1.5" PointX="22.625" PointY="20.75" />
+        <EntityTypeShape EntityType="POSModel.django_site" Width="1.5" PointX="6.5" PointY="23.875" />
+        <EntityTypeShape EntityType="POSModel.pos_customer_group" Width="1.5" PointX="9.625" PointY="23.75" />
+        <EntityTypeShape EntityType="POSModel.sitetree_tree" Width="1.5" PointX="21.625" PointY="7.875" />
+        <EntityTypeShape EntityType="POSModel.sitetree_treeitem" Width="1.5" PointX="23.875" PointY="6.125" />
+        <EntityTypeShape EntityType="POSModel.sitetree_treeitem_access_permissions" Width="1.5" PointX="26.125" PointY="7.75" />
+        <EntityTypeShape EntityType="POSModel.mt_FacturasRezagadas" Width="1.5" PointX="25.625" PointY="24.75" />
+        <EntityTypeShape EntityType="POSModel.ProduccionAx" Width="1.5" PointX="28.625" PointY="5.75" />
+        <EntityTypeShape EntityType="POSModel.tblNavidadLMAT" Width="1.5" PointX="20.625" PointY="23.75" />
+        <AssociationConnector Association="POSModel.group_id_refs_id_f4b32aac" />
+        <AssociationConnector Association="POSModel.FK__auth_grou__permi__0F624AF8" />
+        <AssociationConnector Association="POSModel.content_type_id_refs_id_d043b34a" />
+        <AssociationConnector Association="POSModel.FK__auth_user__permi__0D7A0286" />
+        <AssociationConnector Association="POSModel.FK__sitetree___permi__06CD04F7" />
+        <AssociationConnector Association="POSModel.FK__django_ad__user___03F0984C" />
+        <AssociationConnector Association="POSModel.user_id_refs_id_4dc23c39" />
+        <AssociationConnector Association="POSModel.FK__core_empr__codig__797309D9" />
+        <AssociationConnector Association="POSModel.FK__core_tarj__empre__7A672E12" />
+        <AssociationConnector Association="POSModel.FK__core_empr__codig__0A9D95DB" />
+        <AssociationConnector Association="POSModel.FK__django_ad__conte__02FC7413" />
+        <AssociationConnector Association="POSModel.FK__sitetree___tree___00200768" />
+        <AssociationConnector Association="POSModel.parent_id_refs_id_04063ce5" />
+        <AssociationConnector Association="POSModel.treeitem_id_refs_id_dc62ad92" />
+        <EntityTypeShape EntityType="POSModel.VW_ITEMBARCODEQTY" Width="1.5" PointX="13.375" PointY="4.75" />
+        <EntityTypeShape EntityType="POSModel.core_descuento" Width="1.875" PointX="19.375" PointY="15.75" />
+        <EntityTypeShape EntityType="POSModel.vw_CreditoLocalesCabecera" Width="1.5" PointX="16.25" PointY="0.5" FillColor="64, 64, 0" />
+        <EntityTypeShape EntityType="POSModel.vw_CreditoLocalesMensajes" Width="1.5" PointX="14.375" PointY="0.75" FillColor="64, 64, 0" />
+        <EntityTypeShape EntityType="POSModel.vw_CreditoLocalesPagos" Width="1.5" PointX="18.125" PointY="0.5" FillColor="64, 64, 0" />
+        <EntityTypeShape EntityType="POSModel.VW_CombosCaja" Width="1.5" PointX="13.625" PointY="20.75" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="POSModel.TblAuthorizeDeleteProduct" Width="1.5" PointX="19.25" PointY="4.875" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="POSModel.TblDeletedProduct" Width="1.5" PointX="19.25" PointY="8.125" FillColor="Red" />
+        <EntityTypeShape EntityType="POSModel.VW_SEARCHPRODUCT" Width="2.375" PointX="0.75" PointY="25.75" FillColor="255, 128, 0" />
+        <EntityTypeShape EntityType="POSModel.TblFeriado" Width="1.5" PointX="21.375" PointY="28.75" FillColor="Yellow" />
+        <EntityTypeShape EntityType="POSModel.VW_BLOCK_PRODUCTS" Width="1.5" PointX="28.375" PointY="13.75" FillColor="Red" />
+        <EntityTypeShape EntityType="POSModel.TblInvoiceCounter" Width="1.5" PointX="29.375" PointY="20" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="POSModel.TblInvoiceRandom" Width="1.5" PointX="29.375" PointY="24.875" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="POSModel.TblInvoiceWinner" Width="1.5" PointX="29.375" PointY="22" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="POSModel.TblDiscountCard" Width="1.5" PointX="23.375" PointY="28.75" FillColor="Yellow" />
+        <EntityTypeShape EntityType="POSModel.TblDiscountCardTran" Width="1.5" PointX="25.375" PointY="28.75" FillColor="Yellow" />
+        <EntityTypeShape EntityType="POSModel.ax_viewConsumoCreditoCliente" Width="1.5" PointX="18.375" PointY="29.75" />
+        <EntityTypeShape EntityType="POSModel.VW_PromoChoose" Width="1.5" PointX="30.375" PointY="0.75" FillColor="Cyan" />
+        <EntityTypeShape EntityType="POSModel.BG_Apertura" Width="1.5" PointX="30.375" PointY="11.75" />
+        <EntityTypeShape EntityType="POSModel.BG_Lst_POS_no_sub_AX" Width="1.875" PointX="24.5" PointY="32.75" />
+        <EntityTypeShape EntityType="POSModel.core_TarjetaDescuento" Width="1.5" PointX="30.375" PointY="27.75" />
+        <EntityTypeShape EntityType="POSModel.vw_RETIVA" Width="1.5" PointX="0.75" PointY="22.75" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="POSModel.VW_NC_Motivo" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="POSModel.core_TarjetaDescuentoHistorico" Width="1.5" PointX="31.375" PointY="8.75" />
+        <EntityTypeShape EntityType="POSModel.cp_ordencabecera" Width="1.5" PointX="31.375" PointY="5.25" />
+        <EntityTypeShape EntityType="POSModel.cp_ordendetalle" Width="1.5" PointX="33.625" PointY="5" />
+        <EntityTypeShape EntityType="POSModel.POS_VOUCHER" Width="1.5" PointX="16.375" PointY="32.75" />
+        <EntityTypeShape EntityType="POSModel.core_EnviosArchivosVoucher" Width="1.5" PointX="31.375" PointY="21.75" />
+        <EntityTypeShape EntityType="POSModel.core_tarjetacredito_bin" Width="1.5" PointX="31.375" PointY="24.75" />
+        <EntityTypeShape EntityType="POSModel.cp_relacion" Width="1.5" PointX="32.375" PointY="0.75" />
+        <EntityTypeShape EntityType="POSModel.pos_tarjeta_tipopago" Width="1.5" PointX="32.375" PointY="11.75" />
+        <EntityTypeShape EntityType="POSModel.pos_tarjeta_transaccion" Width="1.5" PointX="32.375" PointY="14.75" />
+        <EntityTypeShape EntityType="POSModel.VW_CP_DETALLE" Width="1.5" PointX="20.5" PointY="32.75" />
+        <AssociationConnector Association="POSModel.FK_cp_ordendetalle_cp_ordencabecera" />
+        <EntityTypeShape EntityType="POSModel.pos_itembloq_est" Width="1.5" PointX="22.375" PointY="32.75" />
+        <EntityTypeShape EntityType="POSModel.pos_itembarra_desc" Width="2" PointX="4.75" PointY="3.625" FillColor="Maroon" />
+        <EntityTypeShape EntityType="POSModel.VW_CATEGORIA" Width="1.5" PointX="32.375" PointY="27.75" />
+        <EntityTypeShape EntityType="POSModel.core_promocompragratis" Width="1.5" PointX="25.375" PointY="20.75" />
+        <EntityTypeShape EntityType="POSModel.Tbl_DiferenciaPeso" Width="1.5" PointX="18.75" PointY="32.75" />
+        <EntityTypeShape EntityType="POSModel.LstEncuesta" Width="1.5" PointX="27.375" PointY="37.375" />
+        <EntityTypeShape EntityType="POSModel.LstEncuestaEstablecimiento" Width="1.5" PointX="29.625" PointY="34.625" />
+        <EntityTypeShape EntityType="POSModel.LstOpcionesRespuesta" Width="1.5" PointX="31.875" PointY="37.625" />
+        <EntityTypeShape EntityType="POSModel.LstPregunta" Width="1.5" PointX="29.625" PointY="37.375" />
+        <EntityTypeShape EntityType="POSModel.TblEncuestaDetalle" Width="1.5" PointX="31.875" PointY="41" />
+        <EntityTypeShape EntityType="POSModel.TblEncuestaRealizada" Width="1.5" PointX="29.625" PointY="40.875" />
+        <AssociationConnector Association="POSModel.FK_LstEncuestaEstablecimiento_LstEncuesta" />
+        <AssociationConnector Association="POSModel.FK_LstPregunta_LstEncuesta" />
+        <AssociationConnector Association="POSModel.FK_TblEncuestaRealizada_LstEncuesta" />
+        <AssociationConnector Association="POSModel.FK_LstOpcionesRespuesta_LstPregunta" />
+        <AssociationConnector Association="POSModel.FK_TblEncuestaDetalle_LstPregunta" />
+        <AssociationConnector Association="POSModel.FK_TblEncuestaDetalle_TblEncuestaRealizada" />
+        <EntityTypeShape EntityType="POSModel.LstCampania" Width="1.5" PointX="34.375" PointY="30.625" />
+        <EntityTypeShape EntityType="POSModel.LstCampaniaDet" Width="1.5" PointX="36.625" PointY="36.625" />
+        <EntityTypeShape EntityType="POSModel.LstCampaniaEstablecimientos" Width="1.5" PointX="36.625" PointY="33.625" FillColor="255, 192, 128" />
+        <EntityTypeShape EntityType="POSModel.LstProductosCanjear" Width="1.5" PointX="38.875" PointY="20.375" FillColor="255, 192, 128" />
+        <EntityTypeShape EntityType="POSModel.LstProductosCanjearDet" Width="1.5" PointX="41.125" PointY="19.875" FillColor="255, 192, 128" />
+        <EntityTypeShape EntityType="POSModel.TblFacturaCanjes" Width="1.5" PointX="36.625" PointY="21.25" FillColor="255, 192, 128" />
+        <EntityTypeShape EntityType="POSModel.TblFacturasCanjesDet" Width="1.5" PointX="38.875" PointY="23.25" FillColor="255, 192, 128" />
+        <EntityTypeShape EntityType="POSModel.TblPuntos" Width="1.5" PointX="39.625" PointY="27.125" />
+        <EntityTypeShape EntityType="POSModel.TblPuntosCab" Width="1.5" PointX="37.375" PointY="29.5" FillColor="255, 192, 128" />
+        <AssociationConnector Association="POSModel.FK_LstCampaniaDet_LstCampania" />
+        <AssociationConnector Association="POSModel.FK_LstCampaniaEstablecimientos_LstCampania" />
+        <AssociationConnector Association="POSModel.FK_TblPuntos_LstCampania" />
+        <AssociationConnector Association="POSModel.FK_LstProductosCanjearDet_LstProductosCanjear" />
+        <AssociationConnector Association="POSModel.FK_TblFacturasCanjesDet_TblFacturaCanjes" />
+        <AssociationConnector Association="POSModel.FK_TblPuntos_TblPuntosCab" />
+        <EntityTypeShape EntityType="POSModel.TblVentaPago" Width="1.5" PointX="27.375" PointY="28.75" />
+        <EntityTypeShape EntityType="POSModel.TblVentaTarjeta" Width="1.5" PointX="33.375" PointY="21.75" />
+        <AssociationConnector Association="POSModel.FK_TblVentaPago_TblVentaTarjeta" />
+        <EntityTypeShape EntityType="POSModel.LstGrupoCliente" Width="1.5" PointX="16.375" PointY="23.75" />
+        <EntityTypeShape EntityType="POSModel.TblRegistroParqueo" Width="1.5" PointX="34.375" PointY="0.75" />
+        <EntityTypeShape EntityType="POSModel.Core_CargaDocumento" Width="1.5" PointX="34.375" PointY="8.75" />
+        <EntityTypeShape EntityType="POSModel.TblCobroCreditoEmp" Width="1.5" PointX="36.375" PointY="1" />
+        <EntityTypeShape EntityType="POSModel.TblCobroCreditoEmpPago" Width="1.5" PointX="38.625" PointY="1.75" />
+        <AssociationConnector Association="POSModel.FK_TblCobroCreditoEmpPago_TblCobroCreditoEmp" />
+        <EntityTypeShape EntityType="POSModel.viewAperturaLogin" Width="1.5" PointX="11.375" PointY="34.75" />
+        <EntityTypeShape EntityType="POSModel.view_Tbl_Punto_Venta" Width="1.5" PointX="34.375" PointY="12.75" />
+        <EntityTypeShape EntityType="POSModel.core_facturaAPP" Width="1.5" PointX="0.75" PointY="36.75" />
+        <EntityTypeShape EntityType="POSModel.core_facturadetalleAPP" Width="1.5" PointX="13.375" PointY="34.75" />
+        <EntityTypeShape EntityType="POSModel.core_facturapagoAPP" Width="1.5" PointX="34.375" PointY="26.75" />
+        <EntityTypeShape EntityType="POSModel.Tbl_PickOrderCab" Width="1.5" PointX="36.375" PointY="5.75" />
+        <EntityTypeShape EntityType="POSModel.Tbl_PickOrderDet" Width="1.5" PointX="36.375" PointY="9.75" />
+        <EntityTypeShape EntityType="POSModel.TblPedido" Width="1.5" PointX="5.875" PointY="36.75" />
+        <AssociationConnector Association="POSModel.FK__TblPedido__factu__7C4F7684" />
+        <EntityTypeShape EntityType="POSModel.core_retencion" Width="1.5" PointX="5.875" PointY="40.875" />
+        <AssociationConnector Association="POSModel.FK__core_retencion__factura" />
+        <EntityTypeShape EntityType="POSModel.TblItemsMaxSales" Width="1.5" PointX="23.375" PointY="36.75" />
+        <EntityTypeShape EntityType="POSModel.LstDelivery" Width="1.5" PointX="38.375" PointY="6.75" />
+        <EntityTypeShape EntityType="POSModel.TblOrdenDelivery" Width="1.5" PointX="40.625" PointY="6" />
+        <EntityTypeShape EntityType="POSModel.TblOrdenDeliveryDet" Width="1.5" PointX="8.375" PointY="37.75" />
+        <AssociationConnector Association="POSModel.FK_TblOrdenDelivery_LstDelivery" />
+        <EntityTypeShape EntityType="POSModel.core_transaccion_operador" Width="1.5" PointX="8.5" PointY="41.875" />
+        <AssociationConnector Association="POSModel.FK_core_transaccion_operador_core_facturadetalle" />
+        <EntityTypeShape EntityType="POSModel.Tbl_DineroGiftCardApp" Width="1.5" PointX="18.375" PointY="37.75" />
+        <EntityTypeShape EntityType="POSModel.TblVacunacion" Width="1.5" PointX="39.375" PointY="10.75" />
+        <EntityTypeShape EntityType="POSModel.TblFlete" Width="1.5" PointX="20.375" PointY="37.75" />
+        <EntityTypeShape EntityType="POSModel.core_ClaveAccesoFE" Width="1.5" PointX="5.875" PointY="48.25" />
+        <AssociationConnector Association="POSModel.fk_factura" />
+        <EntityTypeShape EntityType="POSModel.core_notacredito" Width="1.5" PointX="39.375" PointY="33" />
+        <EntityTypeShape EntityType="POSModel.core_notacreditodetalle" Width="1.5" PointX="41.625" PointY="33.375" />
+        <AssociationConnector Association="POSModel.FK__core_nc__nc__7C4F7684" />
+        <EntityTypeShape EntityType="POSModel.ViewFacturasUsuarios" Width="1.5" PointX="31.375" PointY="17.75" />
+        <AssociationConnector Association="POSModel.FK__core_fact__factu__4D5F7D71APP" />
+        <AssociationConnector Association="POSModel.FK__core_fact__factu__7C4F7684APP" />
+        <EntityTypeShape EntityType="POSModel.TblMensaje" Width="1.5" PointX="33.375" PointY="17.75" />
+        <EntityTypeShape EntityType="POSModel.pos_item" Width="1.5" PointX="22.375" PointY="39.75" />
+        <EntityTypeShape EntityType="POSModel.vw_DescuentosCabeceraAX" Width="1.5" PointX="24.375" PointY="39.75" />
+        <EntityTypeShape EntityType="POSModel.vw_DescuentosDetalleAX" Width="1.5" PointX="26.375" PointY="0.75" />
+        <EntityTypeShape EntityType="POSModel.core_giftcard" Width="1.5" PointX="36.375" PointY="13.75" />        
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

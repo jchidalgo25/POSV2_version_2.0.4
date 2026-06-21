@@ -1,0 +1,328 @@
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csprojAssemblyReference.cache
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CopyComplete
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\jsmedina\Documents\JorgeMedina\TFS\POS_DEV\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csprojAssemblyReference.cache
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CopyComplete
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\opozo\Documents\oscar-liris\vscode\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csprojAssemblyReference.cache
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CopyComplete
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\jsmedina\Documents\GitHub\Liris_POSV2\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csprojAssemblyReference.cache
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CopyComplete
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Documents\Liris_POSV2\Liris_POSV2-main\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csprojAssemblyReference.cache
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CopyComplete
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Documents\POSv2JC\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csprojAssemblyReference.cache
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CopyComplete
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-Version220\POSV2_version_2.0.4-Version220\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csprojAssemblyReference.cache
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CopyComplete
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Downloads\version de pos 233\POSV2_version_2.0.4\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\Liris_BasePagoDLL.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\ClibSecurity.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.AWT.WinForms.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Beans.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Cldrdata.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Corba.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Jdbc.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Localedata.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Management.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Media.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Misc.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Naming.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Nashorn.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Remoting.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Security.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.SwingAWT.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Tools.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Bind.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Crypto.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Parse.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.Transform.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.WebServices.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.OpenJDK.XML.XPath.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\IKVM.Runtime.JNI.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\LirisLibLogger.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\ClibcommunicateSocket.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\bin\Debug\ClibSecurity.pdb
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.AssemblyReference.cache
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.csproj.CoreCompileInputs.cache
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\obj\Debug\Liris_Ba.A15604CB.Up2Date
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.dll
+C:\Users\jchidalgo\Downloads\POSV2_version_2.0.4-version-final288\POSV2_version_2.0.4-version-final2.0\Liris_BasePagoDLL\obj\Debug\Liris_BasePagoDLL.pdb

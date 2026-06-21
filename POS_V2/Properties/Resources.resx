@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="note" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\note.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AB1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AB1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="box_list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box-list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_9_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\9-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="accept_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\accept_check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CONECTA_AX_PLANTILLA_TEST" xml:space="preserve">
+    <value>Data Source=[ipserver];Initial Catalog=DynamicsAx1;Persist Security Info=True;User ID=svc_sql_pos;Password=a17472Ol0;App=POS</value>
+  </data>
+  <data name="btnRappi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnRappi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CONECTA_MKT_PLANTILLA" xml:space="preserve">
+    <value>Data Source=[ipserver];Initial Catalog=Marketing;Persist Security Info=True;User ID=app_pos;Password=L1r1$PO$@pp892126565V01;</value>
+  </data>
+  <data name="Logo_Intranet_DELPORTAL_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Logo_Intranet_DELPORTAL-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ok_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ok-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="headset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\headset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PROMO_HoraDelporta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PROMO_HoraDelporta.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PU.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delportal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delportal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visa3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Control\Pagos\visa3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pantalla_Cajas_DELPORTAL_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pantalla_Cajas_DELPORTAL-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sort_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sort_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logo_Intranet_DELPORTAL_011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Logo_Intranet_DELPORTAL-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROOT_URL_PLANTILLA" xml:space="preserve">
+    <value>http://[ipserver]:8000/</value>
+  </data>
+  <data name="_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back_icon32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back_icon32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnGlovo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnGlovo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tecladox64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tecladox64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="billetera_electronica_tarjeta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\billetera_electronica_tarjeta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PROTECTOR_PANTALLA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PROTECTOR-PANTALLA.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delportal_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delportal_new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visa4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Control\Pagos\visa4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="login_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IMG_5888" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IMG_5888.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_03" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL-03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Intranet_LIRIS_05" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Intranet_LIRIS-05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arroba" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arroba.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_2_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL2-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ingresos__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ingresos (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="accept_check__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\accept_check (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delportal_new1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delportal_new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Intranet_LIRIS_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Intranet_LIRIS-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="meat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\meat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shopping_cart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shopping-cart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visa2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Control\Pagos\visa2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="collaborator_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\collaborator-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Intranet_LIRIS_03" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Intranet_LIRIS-03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arroba_30x31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arroba_30x31.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="box" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CONECTA_AX_PLANTILLA" xml:space="preserve">
+    <value>Data Source=[ipserver];Initial Catalog=DynamicsAx1;Persist Security Info=True;User ID=app_pos;Password=L1r1$PO$@pp892126565V01;App=POS</value>
+  </data>
+  <data name="back_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_2_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="invoice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\invoice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_2T_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL2T-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_paviplan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_paviplan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_6_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\6-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConectaCorrBan" xml:space="preserve">
+    <value>metadata=res://*/Models.CorrBanDATA.csdl|res://*/Models.CorrBanDATA.ssdl|res://*/Models.CorrBanDATA.msl;provider=System.Data.SqlClient;provider connection string="data source=[ipserver];initial catalog=CorrBan;user id=[usrSql];password=[pswSql];MultipleActiveResultSets=True;App=POS"</value>
+  </data>
+  <data name="categories1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\categories1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_2_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL2-02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TerminosPuntos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TerminosPuntos.JPG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arroba3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arroba3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="location" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\location.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_2T_03" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL2T-03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logo_Horizontal_DELPORTAL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Logo_Horizontal_DELPORTAL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back_icon48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back_icon48x48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\heart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="recipes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\recipes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="credit_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\credit-card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_4_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="usuariogenerico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\usuariogenerico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_0_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\0-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Tarjeta_Empresarial_DELPORTAL_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Tarjeta_Empresarial_DELPORTAL-02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_3_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="order_repeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\order-repeat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1441598112_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1441598112_search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROOT_URL_GENERAL_PLANTILLA" xml:space="preserve">
+    <value>http://[ipserver]:8000/webrequests/</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_2T_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL2T-02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ds2incon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ds2icon1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_7_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\7-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_261" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PROMO_DIA_MADRE_2025" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PROMO_DIA_MADRE_2025.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sort_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sort_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_5_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wallet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wallet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loading2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loading21.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_736B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\736B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnUberEats" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnUberEats.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tecladox32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tecladox32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trophy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trophy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Retencion_Electronica_DELPORTAL_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Retencion_Electronica_DELPORTAL-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="teclado" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\teclado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnGacela" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnGacela.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnTipti" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnTipti.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PPA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PPA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visa5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Control\Pagos\visa5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TituloApp" xml:space="preserve">
+    <value>POS Dynamics AX 2025</value>
+  </data>
+  <data name="card_delportal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\card-delportal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="home" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="location_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\location-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logo_Redondo_DELPORTAL_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Logo_Redondo_DELPORTAL-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loading" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loading.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_2T_021" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL2T-02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arroba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arroba2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_24_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\24_search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="store" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\store.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LogoPrincipal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LogoPrincipal.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel-26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coin1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="billetera_electronica_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\billetera_electronica_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IMG_5887" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IMG_5887.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pantalla_Cliente_Pollo_horno" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pantalla_Cliente_Pollo_horno.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_liris" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_liris.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_8_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\8-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warning1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warning1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="questio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\questio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Western_Union_DELPORTAL_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Western_Union_DELPORTAL-02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="categories" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\categories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iconos_Retencion_Electronica_DELPORTAL_011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iconos_Retencion_Electronica_DELPORTAL-011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGO_POS_70" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LOGO_POS_70.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visa31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Control\Pagos\visa3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConectaDB" xml:space="preserve">
+    <value>metadata=res://*/Models.POSDATA.csdl|res://*/Models.POSDATA.ssdl|res://*/Models.POSDATA.msl;provider=System.Data.SqlClient;provider connection string="data source=[ipserver];initial catalog=POS;user id=app_pos;password=ppgV2M31ToUZPM8uFN6e8M81JdkwgPecgtDrS+ydsJ0=;MultipleActiveResultSets=True;Connection Timeout=60;App=POS"</value>
+  </data>
+  <data name="PROMO_TOALLA_NAUTICA_2025" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PROMO_TOALLA_NAUTICA_2025.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WallpaperClte_Pollo_horno" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WallpaperClte_Pollo_horno.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cliente_app_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cliente_app_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

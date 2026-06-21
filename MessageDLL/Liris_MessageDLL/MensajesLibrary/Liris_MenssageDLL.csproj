@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{199AA85C-1191-4A89-B319-76D64B406CD0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Liris_MenssageDLL</RootNamespace>
+    <AssemblyName>Liris_MenssageDLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.RadDock, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.RadDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.Office2007Black, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.Themes.Office2007Black.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.Office2010Black, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.Themes.Office2010Black.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetroTouch, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.Themes.TelerikMetroTouch.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.Windows7, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.Themes.Windows7.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI.Design, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Telerik.WinControls.UI.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\TelerikCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikData, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\TelerikData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Control\General.cs" />
+    <Compile Include="MensajeHelper.cs" />
+    <Compile Include="MessageBoxTemporal.cs" />
+    <Compile Include="Model\DrawingFontCtrl.cs" />
+    <Compile Include="Model\Mensajes.cs" />
+    <Compile Include="MsgBoxCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MsgBoxCtrl.Designer.cs">
+      <DependentUpon>MsgBoxCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MsgBoxCtrl_v2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MsgBoxCtrl_v2.Designer.cs">
+      <DependentUpon>MsgBoxCtrl_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MsgBoxCtrl.resx">
+      <DependentUpon>MsgBoxCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MsgBoxCtrl_v2.resx">
+      <DependentUpon>MsgBoxCtrl_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libs\Telerik.WinControls.dll" />
+    <Content Include="Libs\Telerik.WinControls.GridView.dll" />
+    <Content Include="Libs\Telerik.WinControls.RadDock.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.Office2007Black.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.Office2010Black.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.TelerikMetroTouch.dll" />
+    <Content Include="Libs\Telerik.WinControls.Themes.Windows7.dll" />
+    <Content Include="Libs\Telerik.WinControls.UI.Design.dll" />
+    <Content Include="Libs\Telerik.WinControls.UI.dll" />
+    <Content Include="Libs\TelerikCommon.dll" />
+    <Content Include="Libs\TelerikData.dll" />
+    <None Include="Resources\warning.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
