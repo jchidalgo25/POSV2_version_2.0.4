@@ -500,5 +500,9 @@ namespace POS.Control.Common
         // jchid 2026-04-14 En Common.GlobalParameters de autorizacion de huella
         public static bool VerificationInProgress { get; set; } = false;
 
+        // jchid 2026-06-21 correcion de apertura de cajon de dinero 
+        public static string NombreImpresoraCajon { get; set; }
+
+
     }
 }

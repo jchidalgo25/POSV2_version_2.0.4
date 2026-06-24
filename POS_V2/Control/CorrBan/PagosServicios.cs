@@ -874,6 +874,8 @@ namespace POS.Control.CorrBan
 
             //Enviar a imprimir
             Common.Printer.Imprimir(recibo, 3, 11);
+
+            Control.Common.Printer.OpenCashDrawer_PrinterName(new System.Drawing.Printing.PrinterSettings().PrinterName);
         }
 
         private void CalcularCambio()

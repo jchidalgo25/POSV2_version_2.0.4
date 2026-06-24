@@ -3083,6 +3083,11 @@ namespace POS.Models
             decimal retencionSubtotalBase175 = 0;
             decimal granTotalAhorradoApp = 0;
             Dictionary<string, decimal> dsctoAppPorProducto = new Dictionary<string, decimal>();
+            decimal totalCuponImpresoFactura = 0M;
+            bool esCuponImpresoFactura =
+                EsUsoCuponPromocional &&
+                !string.IsNullOrEmpty(this.CuponPromocionalCodigo) &&
+                this.CuponPromocionalCodigo.StartsWith("CP");
 
             if (this.ObjCuponAppModerno != null && !string.IsNullOrEmpty(this.ObjCuponAppModerno.Codigo) && this.ObjCuponAppModerno.Codigo.Contains(";"))
             {
@@ -3153,28 +3158,83 @@ namespace POS.Models
                         }
                     }
 
-                    // CONDICIONAL PARA IMPRIMIR EN LA LISTA VIEJA
-                    if ((valorDescSoloTienda > 0 && !EsUsoCuponPromocional) || (valorDescSoloTienda > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
+                    
+                    // CONDICIONAL PARA IMPRIMIR EN LA LISTA DE DESCUENTOS
+                    if (valorDescSoloTienda > 0)
                     {
-                        // ✅ Etiqueta con PadLeft para que siempre ocupe 7 chars ("25.00% ")
-                        string etiquetaMostrar = ((porcDescuento).ToString("N2") + "% ").PadLeft(7);
+                        decimal valorCuponImpresoProducto = 0M;
 
-                        // ✅ Nombre recortado — ahora puede ser más corto porque la etiqueta ya ocupa 7 chars
-                        string nombreProductoCorto = item.Nombre;
-                        if (nombreProductoCorto.Length > 11)
-                            nombreProductoCorto = nombreProductoCorto.Substring(0, 11);
+                        if (item.DescuentosCupon != null)
+                        {
+                            valorCuponImpresoProducto = item.DescuentosCupon
+                                .Where(d =>
+                                    !string.IsNullOrEmpty(d.codigo) &&
+                                    d.codigo.StartsWith("CP"))
+                                .Sum(d => d.valor);
+                        }
+
+                        bool tieneCuponImpresoProducto = valorCuponImpresoProducto > 0;
+
+                        // 1. Caso cupón impreso por producto/categoría/subcategoría/proveedor
+                        // Aunque venga configurado por categoría o proveedor, el descuento termina aplicado al producto.
+                        if (tieneCuponImpresoProducto)
+                        {
+                            string nombreProductoCorto = item.Nombre;
+
+                            if (nombreProductoCorto.Length > 18)
+                                nombreProductoCorto = nombreProductoCorto.Substring(0, 18).TrimEnd();
+
+                            itemsDsctos.AppendLine(String.Concat(
+                                "<bcol>",
+                                "CUPON PRODUCTO " + nombreProductoCorto,
+                                "|",
+                                valorCuponImpresoProducto.ToString("N2"),
+                                "</bcol>"
+                            ));
+                        }
+
+                        // 2. Caso cupón impreso por factura
+                        // No imprimimos aquí por producto. Solo acumulamos para imprimir una sola línea al final.
+                        if (esCuponImpresoFactura)
+                        {
+                            totalCuponImpresoFactura += valorDescSoloTienda;
+                        }
                         else
-                            nombreProductoCorto = nombreProductoCorto.PadRight(11, ' ');
+                        {
+                            // 3. Descuentos normales o descuentos mixtos
+                            // Si el producto tiene cupón impreso y además otro descuento normal,
+                            // imprimimos solo el sobrante como descuento normal.
+                            decimal valorNormalParaImprimir = valorDescSoloTienda - valorCuponImpresoProducto;
 
-                        // ✅ ARMAR LÍNEA CON <bcol> — el "|" separa lo que va antes y después del ":"
-                        itemsDsctos.AppendLine(String.Concat(
-                            "<bcol>",
-                            etiquetaMostrar,        // 7 chars  → "25.00% "
-                            nombreProductoCorto,    // 11 chars → "CERVEZA CLUB"
-                            "|",                    // separador bcol (7+11 = 18 chars antes del ":")
-                            valorDescSoloTienda.ToString("N2"),
-                            "</bcol>"
-                        ));
+                            if (valorNormalParaImprimir < 0)
+                                valorNormalParaImprimir = 0;
+
+                            if (valorNormalParaImprimir > 0)
+                            {
+                                if ((valorNormalParaImprimir > 0 && !EsUsoCuponPromocional) ||
+                                    (valorNormalParaImprimir > 0 && EsUsoCuponPromocional && item.DescuentosCupon == null))
+                                {
+                                    decimal porcNormal = (valorNormalParaImprimir / item.SubtotalSinDescuento) * 100;
+
+                                    string etiquetaMostrar = ((porcNormal).ToString("N2") + "% ").PadLeft(7);
+
+                                    string nombreProductoCorto = item.Nombre;
+                                    if (nombreProductoCorto.Length > 11)
+                                        nombreProductoCorto = nombreProductoCorto.Substring(0, 11);
+                                    else
+                                        nombreProductoCorto = nombreProductoCorto.PadRight(11, ' ');
+
+                                    itemsDsctos.AppendLine(String.Concat(
+                                        "<bcol>",
+                                        etiquetaMostrar,
+                                        nombreProductoCorto,
+                                        "|",
+                                        valorNormalParaImprimir.ToString("N2"),
+                                        "</bcol>"
+                                    ));
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -3220,6 +3280,18 @@ namespace POS.Models
                     if (item.RetencionPorcentaje > 1)
                         retencionSubtotalBase175 = retencionSubtotalBase175 + item.Subtotal;
                 }
+            }
+
+            // Cupón impreso por factura: se imprime una sola línea totalizada
+            if (esCuponImpresoFactura && totalCuponImpresoFactura > 0)
+            {
+                itemsDsctos.AppendLine(String.Concat(
+                    "<bcol>",
+                    "CUPON FACTURA",
+                    "|",
+                    totalCuponImpresoFactura.ToString("N2"),
+                    "</bcol>"
+                ));
             }
 
             // =========================================================================
@@ -3281,8 +3353,15 @@ namespace POS.Models
                 this.Recibo = this.Recibo.Replace("<<BLOQUE_CUPONES>>", "");
             }
 
+            bool tieneCuponImpresoEnFactura =
+                esCuponImpresoFactura ||
+                this.Productos.Any(p =>
+                    p.DescuentosCupon != null &&
+                    p.DescuentosCupon.Any(d =>
+                        !string.IsNullOrEmpty(d.codigo) &&
+                        d.codigo.StartsWith("CP")));
             //*****
-            if (EsUsoCuponPromocional && valorDsctosCuponPromocional > 0)
+            if (EsUsoCuponPromocional && valorDsctosCuponPromocional > 0 && !tieneCuponImpresoEnFactura)
             {
                 if (porcDsctosCuponPromocional == 0)
                 {

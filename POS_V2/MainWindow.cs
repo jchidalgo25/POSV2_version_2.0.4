@@ -6118,14 +6118,14 @@ namespace POS
 
 
             bool encontroCupon = false;
-            bool aplicadoExitosamente = AplicarDescuentoCupon(codigo, ref encontroCupon);
+            //bool aplicadoExitosamente = AplicarDescuentoCupon(codigo, ref encontroCupon);
 
-            //bool aplicadoExitosamente;
+            bool aplicadoExitosamente;
 
-            //if (codigo.StartsWith("CP"))
-            //    aplicadoExitosamente = AplicarDescuentoCuponImpreso(codigo, ref encontroCupon);
-            //else
-            //    aplicadoExitosamente = AplicarDescuentoCupon(codigo, ref encontroCupon);
+            if (codigo.StartsWith("CP"))
+                aplicadoExitosamente = AplicarDescuentoCuponImpreso(codigo, ref encontroCupon);
+            else
+                aplicadoExitosamente = AplicarDescuentoCupon(codigo, ref encontroCupon);
 
 
 
@@ -10516,12 +10516,13 @@ namespace POS
                 if (!productoEncontrado)
                 {
                     bool iniciaCon30 = codigo.StartsWith("30");
+                    bool iniciaConCP = codigo.StartsWith("CP");
                     Control.Common.Logger.LogMessage(
                         Control.Common.Enum.LogTypes.Warning,
                         "MainWindows", "ManejarNuevoProducto",
                         $"Producto NO encontrado. Codigo: '{codigo}', IniciaCon30: {iniciaCon30} → ERROR 123: {!iniciaCon30}");
 
-                    if (!iniciaCon30)
+                    if (!iniciaCon30 && !iniciaConCP)
                     {
                         var parametros = new List<ParametrosMensajes>
                 {
@@ -16022,6 +16023,7 @@ namespace POS
 
                             st8 = stopwatch.ElapsedMilliseconds;
                             Task.Run(() => ImprimirSeguro(reciboAImprimir, 3, 11)); // usa variable local
+                            Control.Common.Printer.AbrirCajonSiEsEfectivo(_factura.Pagos);
                             st9 = stopwatch.ElapsedMilliseconds;
                             Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Debug, "Ejecutar grabar", "Imprimir", st8.ToString() + " " + st9.ToString() + ":" + (st9 - st8).ToString());
 
@@ -16624,47 +16626,47 @@ namespace POS
 
                 //jchid registro de cupones impresos 10/01/2026
                 // Registrar uso de cupones impresos únicos
-                //if (_cuponesImpresosPendientes != null && _cuponesImpresosPendientes.Count > 0)
-                //{
-                //    string connStringMarketing = POS.Control.Common.GlobalParameters.ConServerMarketing;
-                //    string almacenActual = Control.Common.GlobalParameters.Establecimiento;
-                //    string numeroFactura = _factura.Secuencia.ToString();
+                if (_cuponesImpresosPendientes != null && _cuponesImpresosPendientes.Count > 0)
+                {
+                    string connStringMarketing = POS.Control.Common.GlobalParameters.ConServerMarketing;
+                    string almacenActual = Control.Common.GlobalParameters.Establecimiento;
+                    string numeroFactura = _factura.Secuencia.ToString();
 
-                //    foreach (string codigoCupon in _cuponesImpresosPendientes)
-                //    {
-                //        try
-                //        {
-                //            using (var cnUso = new System.Data.SqlClient.SqlConnection(connStringMarketing))
-                //            {
-                //                cnUso.Open();
-                //                var cmdUso = new System.Data.SqlClient.SqlCommand(@"
-                //    INSERT INTO [Marketing].[dbo].[lotes_cupones_impresos_uso]
-                //        (codigo, almacen, numero_factura, fecha_uso)
-                //    VALUES
-                //        (@codigo, @almacen, @factura, GETDATE())", cnUso);
+                    foreach (string codigoCupon in _cuponesImpresosPendientes)
+                    {
+                        try
+                        {
+                            using (var cnUso = new System.Data.SqlClient.SqlConnection(connStringMarketing))
+                            {
+                                cnUso.Open();
+                                var cmdUso = new System.Data.SqlClient.SqlCommand(@"
+                    INSERT INTO [Marketing].[dbo].[lotes_cupones_impresos_uso]
+                        (codigo, almacen, numero_factura, fecha_uso)
+                    VALUES
+                        (@codigo, @almacen, @factura, GETDATE())", cnUso);
 
-                //                cmdUso.Parameters.AddWithValue("@codigo", codigoCupon);
-                //                cmdUso.Parameters.AddWithValue("@almacen", almacenActual);
-                //                cmdUso.Parameters.AddWithValue("@factura", numeroFactura);
-                //                cmdUso.ExecuteNonQuery();
+                                cmdUso.Parameters.AddWithValue("@codigo", codigoCupon);
+                                cmdUso.Parameters.AddWithValue("@almacen", almacenActual);
+                                cmdUso.Parameters.AddWithValue("@factura", numeroFactura);
+                                cmdUso.ExecuteNonQuery();
 
-                //                Control.Common.Logger.LogMessage(
-                //                    Control.Common.Enum.LogTypes.Info,
-                //                    "MainWindow", "ejecutaGrabar",
-                //                    $"Cupón impreso '{codigoCupon}' registrado como usado en factura {numeroFactura}");
-                //            }
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //            Control.Common.Logger.LogMessage(
-                //                Control.Common.Enum.LogTypes.Error,
-                //                "MainWindow", "ejecutaGrabar",
-                //                $"Error registrando uso cupón impreso '{codigoCupon}': {ex.Message}");
-                //        }
-                //    }
+                                Control.Common.Logger.LogMessage(
+                                    Control.Common.Enum.LogTypes.Info,
+                                    "MainWindow", "ejecutaGrabar",
+                                    $"Cupón impreso '{codigoCupon}' registrado como usado en factura {numeroFactura}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Control.Common.Logger.LogMessage(
+                                Control.Common.Enum.LogTypes.Error,
+                                "MainWindow", "ejecutaGrabar",
+                                $"Error registrando uso cupón impreso '{codigoCupon}': {ex.Message}");
+                        }
+                    }
 
-                //    _cuponesImpresosPendientes.Clear();
-                //}
+                    _cuponesImpresosPendientes.Clear();
+                }
 
                 //end jchid
 
@@ -20222,6 +20224,10 @@ namespace POS
                                     this.imprimir(texto);
                                     this.imprimir(texto);
 
+                                    // jchid apertura de cajon cuando hacen avance de caja
+                                    Control.Common.Printer.OpenCashDrawer_PrinterName(new System.Drawing.Printing.PrinterSettings().PrinterName);
+                                    // jchid end
+
                                 }
                                 catch (Exception ex)
                                 {
@@ -21768,6 +21774,9 @@ namespace POS
                                 comandoupd.CommandTimeout = 5000;
                                 conexion2.Close();
                                 imprimir("Caja Cerrada\nUsuario: " + _current_user.nombres);
+                                //jchid apertura de caja cuando hagan el cierre de caja
+                                Control.Common.Printer.OpenCashDrawer_PrinterName(new System.Drawing.Printing.PrinterSettings().PrinterName);
+                                // jchid end
                             }
                         }
                         catch (Exception ex)
@@ -21878,6 +21887,10 @@ namespace POS
                                     comandoupd.ExecuteNonQuery();
                                     conexion2.Close();
                                     imprimir("Caja Cerrada\nUsuario: " + _current_user.nombres);
+                                    // jchid apertura de caja cuando hagan el cierre de caja
+                                    Control.Common.Printer.OpenCashDrawer_PrinterName(new System.Drawing.Printing.PrinterSettings().PrinterName);
+                                    // jchid end
+
                                 }
                             }
                             catch (Exception ex)

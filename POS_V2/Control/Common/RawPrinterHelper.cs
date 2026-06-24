@@ -31,7 +31,7 @@ namespace POS.Control.Common
         public static extern bool WritePrinter(IntPtr hPrinter, IntPtr pBytes, int dwCount, out int dwWritten);
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct DOCINFOA
+        public class DOCINFOA
         {
             [MarshalAs(UnmanagedType.LPStr)] public string DocName;
             [MarshalAs(UnmanagedType.LPStr)] public string OutputFile;

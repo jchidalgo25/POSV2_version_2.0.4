@@ -410,6 +410,11 @@ namespace POS
 
                         comando = new SqlCommand(Query, conexion);
                         comando.ExecuteNonQuery();
+
+                        // jchid apertura de caja en TBL_montoapertura, se actualiza el campo leido=1 y FECHALEIDO con la fecha y hora de la aceptacion de la apertura de caja.
+                        Control.Common.Printer.OpenCashDrawer_PrinterName(new System.Drawing.Printing.PrinterSettings().PrinterName);
+                        // jchid end
+
                     }
                     catch (Exception ex)
                     {

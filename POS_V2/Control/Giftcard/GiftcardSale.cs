@@ -750,7 +750,8 @@ namespace POS.Control.Giftcard
 
                             //Control.Common.WinForm.ShowMessage(_objGiftcardSale.MsgError);
                         }
-                            
+                        Control.Common.Printer.AbrirCajonSiEsEfectivo(_objGiftcardSale.Pagos);
+
 
                         //Control.Common.WinForm.ShowMessage("Saldo Giftcard grabado exitosamente. Gracias por su compra");
                         Control.Common.General.GetMensajeToList(393);

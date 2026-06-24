@@ -13,7 +13,6 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using System.Drawing.Imaging;
-using System.IO.Ports;
 
 namespace POS.Control.Common
 {
@@ -102,21 +101,53 @@ namespace POS.Control.Common
 
             }
         }
+
         public static void OpenCashDrawer_PrinterName(string printerName)
         {
+            Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info,
+                "Printer", "OpenCashDrawer_PrinterName",
+                "Intentando abrir cajón. Impresora: '" + printerName + "'");
             try
             {
-                byte[] openDrawerCommand = new byte[] { 0x1B, 0x70, 0x00, 0x19, 0xFA }; // Comando ESC/POS para abrir cajón
+                byte[] openDrawerCommand = new byte[] { 0x1B, 0x70, 0x00, 0x19, 0xFA };
                 string command = Encoding.Default.GetString(openDrawerCommand);
                 RawPrinterHelper.SendStringToPrinter(printerName, command);
+
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info,
+                    "Printer", "OpenCashDrawer_PrinterName",
+                    "Cajón abierto correctamente. Impresora: '" + printerName + "'");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error abriendo cajón: " + ex.Message);
-                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "MainWindow", "OpenCashDrawer", "Error opening cash drawer: " + ex.Message);
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error,
+                    "Printer", "OpenCashDrawer_PrinterName",
+                    "Error al abrir cajón. Impresora: '" + printerName + "' | " +
+                    "Message: " + ex.Message + " | " +
+                    "InnerException: " + (ex.InnerException != null ? ex.InnerException.Message : "ninguna") + " | " +
+                    "StackTrace: " + ex.StackTrace);
             }
         }
 
+        public static void AbrirCajonSiEsEfectivo(System.ComponentModel.BindingList<Pago> pagos)
+        {
+            try
+            {
+                bool tieneEfectivo = pagos != null && pagos.Any(x => x.Descripcion == "EFECTIVO");
+                if (!tieneEfectivo) return;
+
+                string nombreImpresora = Control.Common.GlobalParameters.NombreImpresoraCajon;
+                if (string.IsNullOrWhiteSpace(nombreImpresora))
+                    nombreImpresora = new System.Drawing.Printing.PrinterSettings().PrinterName;
+
+                OpenCashDrawer_PrinterName(nombreImpresora);
+
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Info, "Printer", "AbrirCajonSiEsEfectivo", "Cajón abierto por pago en efectivo. Impresora: " + nombreImpresora);
+            }
+            catch (Exception ex)
+            {
+                Control.Common.Logger.LogMessage(Control.Common.Enum.LogTypes.Error, "Printer", "AbrirCajonSiEsEfectivo", "Error: " + ex.Message);
+            }
+        }
         //public static void Imprimir(string texto, int tipo = 1, int ptosInterlineado = 15)
         //{
 
